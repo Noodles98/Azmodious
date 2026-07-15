@@ -1,6 +1,6 @@
 namespace RoleCommandDelay {
 
-const int DEFAULT_DELAY = 2 * SECOND;
+const int DEFAULT_DELAY = 1 * SECOND;
 
 dictionary nextFrameByKey;
 dictionary pendingByKey;

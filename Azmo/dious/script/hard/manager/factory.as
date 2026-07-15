@@ -42,15 +42,15 @@ string corasy  ("corasy");
 string corap   ("corap");
 string coraap  ("coraap");
 string corgant ("corgant");
-
-const int FIRST_FACTORY_FORCE_FRAME = 45 * SECOND;
+string leglab  ("leglab");
+string legalab ("legalab");
+string legvp   ("legvp");
+string legavp  ("legavp");
+string legap   ("legap");
+string legaap  ("legaap");
+string leggant ("leggant");
 
 int switchInterval = TeamRole::MakeSwitchInterval();
-
-bool NeedsOpeningFactory()
-{
-	return aiFactoryMgr.GetFactoryCount() == 0;
-}
 
 bool EnqueueRoleIfAvailable(const CCircuitDef@ facDef, const AIFloat3& in pos,
 		Type role, Task::RecruitType recruit, Task::Priority priority, uint count)
@@ -67,16 +67,16 @@ bool EnqueueRoleIfAvailable(const CCircuitDef@ facDef, const AIFloat3& in pos,
 void EnqueueFallbackOpeners(const CCircuitDef@ facDef, const AIFloat3& in pos)
 {
 	bool hasBuilder = EnqueueRoleIfAvailable(facDef, pos,
-		RT::BUILDER, Task::RecruitType::BUILDPOWER, Task::Priority::NORMAL, 1);
+		RT::BUILDER, Task::RecruitType::BUILDPOWER, Task::Priority::LOW, 1);
 
 	bool hasCombat = EnqueueRoleIfAvailable(facDef, pos,
 		RT::RAIDER, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 2)
 		|| EnqueueRoleIfAvailable(facDef, pos,
 			RT::SKIRM, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 2)
 		|| EnqueueRoleIfAvailable(facDef, pos,
-			RT::AA, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 1)
+			RT::RAIDER, Task::RecruitType::FIREPOWER, Task::Priority::NORMAL, 1)
 		|| EnqueueRoleIfAvailable(facDef, pos,
-			RT::BOMBER, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 1)
+			RT::BOMBER, Task::RecruitType::FIREPOWER, Task::Priority::LOW, 1)
 		|| EnqueueRoleIfAvailable(facDef, pos,
 			RT::SCOUT, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 1);
 
@@ -106,6 +106,7 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 
 	TeamRole::EnsureLogged();
 	TeamRole::OnFactoryAdded(unit);
+	TeamRole::ApplyEconomyBias();
 
 	const CCircuitDef@ facDef = unit.circuitDef;
 	if (userData[facDef.id].attr & Attr::T3 != 0) {
@@ -149,6 +150,8 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 
 void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 {
+	if (usage == Unit::UseAs::FACTORY)
+		TeamRole::ApplyEconomyBias();
 }
 
 void AiLoad(IStream& istream)
@@ -185,11 +188,6 @@ bool AiIsSwitchAllowed(CCircuitDef@ facDef)
 CCircuitDef@ AiGetFactoryToBuild(const AIFloat3& in pos, bool isStart, bool isReset)
 {
 	TeamRole::EnsureLogged();
-	if (!isStart && NeedsOpeningFactory() && (ai.frame >= FIRST_FACTORY_FORCE_FRAME))
-		return TeamRole::FilterFactory(null, false);
-
-	if (!isStart && (ai.frame >= 50 * SECOND))
-		return TeamRole::FilterFactory(null, false);
 
 	CCircuitDef@ facDef = aiFactoryMgr.DefaultGetFactoryToBuild(pos, isStart, isReset);
 	return TeamRole::FilterFactory(facDef, isStart);

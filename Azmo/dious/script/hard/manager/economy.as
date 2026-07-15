@@ -58,7 +58,7 @@ void AiUpdateEconomy()
 			|| ((energyBalance < 0.f) && (energyRatio < TeamRole::GetEnergyStallRatioDefault()));
 	}
 	// NOTE: Default energy-to-metal conversion TeamRulesParam "mmLevel" = 0.75
-	aiEconomyMgr.isEnergyFull = energyRatio > 0.88f;
+	aiEconomyMgr.isEnergyFull = energyRatio > 0.85f;
 
 	isSwitchAssist = isSwitchAssist && aiFactoryMgr.isAssistRequired;
 	if (aiFactoryMgr.GetFactoryCount() == 0) {

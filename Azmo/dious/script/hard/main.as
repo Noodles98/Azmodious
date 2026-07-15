@@ -7,15 +7,43 @@
 
 namespace Main {
 
+namespace UnitHelpers {
+
+array<string> GetAllT1CombatUnits()
+{
+	return {
+		// Armada T1 bot/veh combat
+		"armflea", "armpw", "armrock", "armham", "armwar", "armjeth",
+		"armfav", "armflash", "armpincer", "armstump", "armart", "armjanus", "armsam",
+
+		// Cortex T1 bot/veh combat
+		"corak", "corstorm", "corthud", "corcrash",
+		"corfav", "corgator", "corgarp", "corraid", "corlevlr", "corwolv", "cormist",
+
+		// Legion T1 bot/veh combat
+		"leggob", "leglob", "legcen", "legbal", "legkark",
+		"legscout", "leghades", "leghelios", "leggat", "legbar", "legrail", "legamphtank"
+	};
+}
+
+}  // namespace UnitHelpers
+
 bool IsBaseEconomyStructure(const string& in name)
 {
 	return (name == "armwin") || (name == "corwin")
+		|| (name == "legwin")
 		|| (name == "armsolar") || (name == "corsolar")
+		|| (name == "legsolar")
 		|| (name == "armadvsol") || (name == "coradvsol")
+		|| (name == "legadvsol")
 		|| (name == "armfus") || (name == "corfus")
+		|| (name == "legfus")
 		|| (name == "armafus") || (name == "corafus")
+		|| (name == "legafus")
 		|| (name == "armmakr") || (name == "cormakr")
-		|| (name == "armmmkr") || (name == "cormmkr");
+		|| (name == "legeconv")
+		|| (name == "armmmkr") || (name == "cormmkr")
+		|| (name == "legadveconv");
 }
 
 void AiMain()
@@ -23,6 +51,15 @@ void AiMain()
 	TerrainRuntime::Init();
 	TeamRole::Init();
 	TeamRole::ApplyEconomyBias();
+
+	array<string> t1Combat = UnitHelpers::GetAllT1CombatUnits();
+	for (uint i = 0; i < t1Combat.length(); ++i) {
+		CCircuitDef@ d = ai.GetCircuitDef(t1Combat[i]);
+		if (d is null)
+			continue;
+		// Best-effort profile override for early combat stance.
+		d.SetFireState(3);
+	}
 
 	// NOTE: Initialize config params
 // 	aiTerrainMgr.SetAllyZoneRange(600);  // returns 576: (multiples of 128) div 2
@@ -57,10 +94,11 @@ void AiMain()
 
 	// Example of user-assigned custom attributes
 	array<string> names = {Factory::armalab, Factory::coralab, Factory::armavp, Factory::coravp,
-		Factory::armaap, Factory::coraap, Factory::armasy, Factory::corasy};
+		Factory::armaap, Factory::coraap, Factory::armasy, Factory::corasy,
+		Factory::legalab, Factory::legavp, Factory::legaap};
 	for (uint i = 0; i < names.length(); ++i)
 		Factory::userData[ai.GetCircuitDef(names[i]).id].attr |= Factory::Attr::T2;
-	names = {Factory::armshltx, Factory::corgant};
+	names = {Factory::armshltx, Factory::corgant, Factory::leggant};
 	for (uint i = 0; i < names.length(); ++i)
 		Factory::userData[ai.GetCircuitDef(names[i]).id].attr |= Factory::Attr::T3;
 }

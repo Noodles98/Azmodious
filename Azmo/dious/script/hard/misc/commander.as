@@ -5,6 +5,7 @@ namespace Commander {
 
 string armcom("armcom");
 string corcom("corcom");
+string legcom("legcom");
 
 }
 
@@ -44,47 +45,66 @@ SOpener@ GetOpenInfo()
 {
 	return SOpener({
 		{Factory::armlab, array<SQueue> = {
-			SQueue(0.9f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER, 4)}),
-			SQueue(0.1f, {SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RIOT), SO(RT::BUILDER), SO(RT::RAIDER, 4), SO(RT::BUILDER)})
+			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER, 4)}),
+			SQueue(0.2f, {SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::BUILDER), SO(RT::RAIDER, 4), SO(RT::BUILDER)})
 		}},
 		{Factory::armalab, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 3), SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::AA), SO(RT::BUILDER2)})
+			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 3), SO(RT::RAIDER), SO(RT::SKIRM, 2), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::armavp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
+			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::RAIDER), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::armvp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::BUILDER), SO(RT::SKIRM), SO(RT::AA)})
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::SCOUT), SO(RT::SKIRM), SO(RT::BUILDER)})
 		}},
 		{Factory::armasy, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::armap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::SCOUT)})
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT)})
 		}},
 		{Factory::armaap, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}},
 		{Factory::corlab, array<SQueue> = {
-			SQueue(0.9f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER, 3), SO(RT::BUILDER), SO(RT::RAIDER, 2)}),
-			SQueue(0.1f, {SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RIOT), SO(RT::BUILDER), SO(RT::RAIDER, 4), SO(RT::BUILDER), SO(RT::RAIDER, 2)})
+			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER, 3), SO(RT::BUILDER), SO(RT::RAIDER, 2)}),
+			SQueue(0.2f, {SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::SKIRM), SO(RT::RAIDER, 4), SO(RT::BUILDER), SO(RT::RAIDER, 2)})
 		}},
 		{Factory::coralab, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::BUILDER2), SO(RT::ARTY, 2), SO(RT::ASSAULT), SO(RT::BUILDER2), SO(RT::AA)})
+			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::SKIRM), SO(RT::ARTY, 2), SO(RT::ASSAULT), SO(RT::BUILDER2), SO(RT::RAIDER)})
 		}},
 		{Factory::coravp, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 3), SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::ASSAULT), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::corvp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::BUILDER), SO(RT::SKIRM), SO(RT::AA)})
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::RAIDER), SO(RT::SKIRM), SO(RT::SCOUT)})
 		}},
 		{Factory::corasy, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::corap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::SCOUT)})
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT)})
 		}},
 		{Factory::coraap, array<SQueue> = {
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
+		}},
+		{Factory::leglab, array<SQueue> = {
+			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER, 3), SO(RT::BUILDER), SO(RT::RAIDER, 2)}),
+			SQueue(0.2f, {SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::SKIRM), SO(RT::RAIDER, 4), SO(RT::BUILDER), SO(RT::RAIDER, 2)})
+		}},
+		{Factory::legalab, array<SQueue> = {
+			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::RAIDER), SO(RT::ARTY, 2), SO(RT::ASSAULT), SO(RT::BUILDER2), SO(RT::SKIRM)})
+		}},
+		{Factory::legavp, array<SQueue> = {
+			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 3), SO(RT::RAIDER), SO(RT::SKIRM, 2), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::BUILDER2)})
+		}},
+		{Factory::legvp, array<SQueue> = {
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::SCOUT), SO(RT::SKIRM), SO(RT::BUILDER)})
+		}},
+		{Factory::legap, array<SQueue> = {
+			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::SCOUT)})
+		}},
+		{Factory::legaap, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}}
 		}, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER, 3), SO(RT::BUILDER), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER)}

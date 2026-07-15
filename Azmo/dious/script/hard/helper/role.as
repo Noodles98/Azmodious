@@ -8,6 +8,9 @@
 
 namespace TeamRole {
 
+const float PRE_FACTORY_CONVERT_EFF = 0.60f;
+const float PRE_FACTORY_CONVERT_ENERGY_EFF = 4.f;
+
 enum Kind {
 	AIR = 0,
 	TECH,
@@ -110,6 +113,7 @@ void OnSlowUpdate()
 		case Kind::AIR: TeamRoleAir::OnSlowUpdate(); break;
 		default: break;
 	}
+	ApplyEconomyBias();
 }
 
 void OnMessage(const string& in data)
@@ -121,6 +125,12 @@ void OnMessage(const string& in data)
 
 void ApplyEconomyBias()
 {
+	if (aiFactoryMgr.GetFactoryCount() == 0) {
+		aiEconomyMgr.reclConvertEff = PRE_FACTORY_CONVERT_EFF;
+		aiEconomyMgr.reclEnergyEff = PRE_FACTORY_CONVERT_ENERGY_EFF;
+		return;
+	}
+
 	Refresh();
 	switch (kind) {
 		case Kind::AIR: TeamRoleAir::ApplyEconomyBias(); break;
@@ -246,7 +256,7 @@ bool IsAllowedFactory(const string& in name)
 {
 	Refresh();
 	array<string> allowed;
-	FillAllowedFactories(allowed, IsArmadaFactory(name));
+	FillAllowedFactories(allowed, GetFactorySidePrefix(name));
 	for (uint i = 0; i < allowed.length(); ++i) {
 		if (allowed[i] == name)
 			return true;
@@ -282,20 +292,20 @@ CCircuitDef@ FilterFactory(CCircuitDef@ facDef, bool isStart)
 	if ((facDef !is null) && IsAllowedFactory(facDef.GetName()))
 		return facDef;
 
-	const bool isArmada = (facDef !is null) ? IsArmadaFactory(facDef.GetName()) : IsArmadaSide();
+	const string sidePrefix = (facDef !is null) ? GetFactorySidePrefix(facDef.GetName()) : DetectSidePrefix();
 	array<string> allowed;
-	FillAllowedFactories(allowed, isArmada);
+	FillAllowedFactories(allowed, sidePrefix);
 	CCircuitDef@ fallback = PickFactory(allowed, isStart);
 	return (fallback !is null) ? fallback : facDef;
 }
 
-void FillAllowedFactories(array<string>& out allowed, bool isArmada)
+void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
 {
 	Refresh();
 	switch (kind) {
-		case Kind::AIR: TeamRoleAir::FillAllowedFactories(allowed, isArmada); break;
-		case Kind::TECH: TeamRoleTech::FillAllowedFactories(allowed, isArmada); break;
-		default: TeamRoleFront::FillAllowedFactories(allowed, isArmada); break;
+		case Kind::AIR: TeamRoleAir::FillAllowedFactories(allowed, sidePrefix); break;
+		case Kind::TECH: TeamRoleTech::FillAllowedFactories(allowed, sidePrefix); break;
+		default: TeamRoleFront::FillAllowedFactories(allowed, sidePrefix); break;
 	}
 }
 
@@ -321,20 +331,29 @@ CCircuitDef@ PickFactory(const array<string>& in allowed, bool isStart)
 	return ai.GetCircuitDef(allowed[0]);
 }
 
-bool IsArmadaSide()
+string DetectSidePrefix()
 {
 	CCircuitDef@ armLab = ai.GetCircuitDef("armlab");
 	if ((armLab !is null) && armLab.IsAvailable(ai.frame))
-		return true;
+		return "arm";
 	CCircuitDef@ corLab = ai.GetCircuitDef("corlab");
 	if ((corLab !is null) && corLab.IsAvailable(ai.frame))
-		return false;
-	return ai.teamId <= ai.GetLeadTeamId();
+		return "cor";
+	CCircuitDef@ legLab = ai.GetCircuitDef("leglab");
+	if ((legLab !is null) && legLab.IsAvailable(ai.frame))
+		return "leg";
+	return (ai.teamId <= ai.GetLeadTeamId()) ? "arm" : "cor";
 }
 
-bool IsArmadaFactory(const string& in name)
+string GetFactorySidePrefix(const string& in name)
 {
-	return name.findFirst("arm") == 0;
+	if (name.findFirst("arm") == 0)
+		return "arm";
+	if (name.findFirst("cor") == 0)
+		return "cor";
+	if (name.findFirst("leg") == 0)
+		return "leg";
+	return DetectSidePrefix();
 }
 
 }  // namespace TeamRole

@@ -1,14 +1,14 @@
 namespace TeamRoleFront {
 
 const string CONTROL_KEY = "front_role_control";
-const int MID_GAME_FRAME = 12 * MINUTE;
-const int LATE_GAME_FRAME = 24 * MINUTE;
-const float EARLY_CONVERT_EFF = 1.20f;
-const float MID_CONVERT_EFF = 1.70f;
-const float LATE_CONVERT_EFF = 1.95f;
-const float EARLY_CONVERT_ENERGY_EFF = 10.f;
-const float MID_CONVERT_ENERGY_EFF = 16.f;
-const float LATE_CONVERT_ENERGY_EFF = 19.f;
+const int MID_GAME_FRAME = 11 * MINUTE;
+const int LATE_GAME_FRAME = 21 * MINUTE;
+const float EARLY_CONVERT_EFF = 0.80f;
+const float MID_CONVERT_EFF = 1.25f;
+const float LATE_CONVERT_EFF = 2.52f;
+const float EARLY_CONVERT_ENERGY_EFF = 15.0f;
+const float MID_CONVERT_ENERGY_EFF = 20.0f;
+const float LATE_CONVERT_ENERGY_EFF = 25.0f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.53f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.57f;
@@ -16,28 +16,28 @@ const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.61f;
 const float MID_ENERGY_STALL_DEFAULT = 0.65f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.68f;
-const float EARLY_ASSIST_METAL_RATIO = 0.06f;
-const float MID_ASSIST_METAL_RATIO = 0.13f;
-const float LATE_ASSIST_METAL_RATIO = 0.16f;
-const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.22f;
-const float MID_FACTORY_SWITCH_ARMY_MULT = 1.28f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.36f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 1.10f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 1.16f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 1.24f;
+const float EARLY_ASSIST_METAL_RATIO = 0.15f;
+const float MID_ASSIST_METAL_RATIO = 0.28f;
+const float LATE_ASSIST_METAL_RATIO = 0.36f;
+const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
+const float MID_FACTORY_SWITCH_ARMY_MULT = 1.55f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.75f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.85f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.95f;
 
 const float EARLY_DEFENCE_THREAT_MIN = 2.5f;
-const float MID_DEFENCE_THREAT_MIN = 1.2f;
-const float LATE_DEFENCE_THREAT_MIN = 0.4f;
+const float MID_DEFENCE_THREAT_MIN = 6.0f;
+const float LATE_DEFENCE_THREAT_MIN = 10.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 16.f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 22.f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 28.f;
 const float EARLY_DEFENCE_LANE_SPREAD = 260.f;
 const float MID_DEFENCE_LANE_SPREAD = 220.f;
 const float LATE_DEFENCE_LANE_SPREAD = 180.f;
-const uint FRONTLINE_CONFIRM_HITS = 2;
+const uint FRONTLINE_CONFIRM_HITS = 3;
 const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 75 * SECOND;
 
 enum EconomyStage {
 	EARLY = 0,
@@ -117,11 +117,14 @@ void ApplyEconomyBias()
 	}
 }
 
-void FillAllowedFactories(array<string>& out allowed, bool isArmada)
+void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
 {
-	if (isArmada) {
+	if (sidePrefix == "arm") {
 		allowed.insertLast("armlab");
 		allowed.insertLast("armalab");
+	} else if (sidePrefix == "leg") {
+		allowed.insertLast("leglab");
+		allowed.insertLast("legalab");
 	} else {
 		allowed.insertLast("corlab");
 		allowed.insertLast("coralab");
@@ -130,7 +133,7 @@ void FillAllowedFactories(array<string>& out allowed, bool isArmada)
 
 int MakeSwitchInterval()
 {
-	return AiRandom(700, 1080) * SECOND;
+	return AiRandom(600, 780) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)

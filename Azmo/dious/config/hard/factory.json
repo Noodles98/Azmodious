@@ -2,6 +2,7 @@
 // Factory.json is shared between allyTeam
 {
 // Factory selection parameters
+
 "select": {
 	"air_map": 100,
 	"offset": [-20, 20],
@@ -12,70 +13,43 @@
 	"min_land": 40.0
 },
 
-// Utility param: warning on unit's total probability not equal to 100%
 "warn_probability": true,
 
-// Define factories
 "factory": {
-	// ARMADA factories
 	"armlab": {
-		// Adjusts the priority of factory choice (factories with map_percent < 20 are ignored)
-		// map_percent is [20..100]
-		// On start:
-		//   if factory has available builder in current frame: priority ~= map_percent * importance0 + random(-20..+20)
-		//   if factory's builder unavailable in current frame: priority ~= map_percent * importance0 / 10 + random(-20..+20)
-		// During game: priority ~= map_percent * importance1 + random(-20..+20)
-		// importanceN = 1.0 by default if not set
-		"importance": [1.0, 0.0],
-
-		// 'require_energy' adds energy requirement for tierN (N>0): fallback to lowest tier on low energy
+		"importance": [0.8, 0.0],
 		"require_energy": false,
-
-		// If income*ecoFactor < income_tier[N] then 'tierN' probability will be used
-		"income_tier": [20, 30, 40],
-
-		"unit":      ["armck", "armpw", "armrectr", "armrock", "armham", "armjeth", "armwar", "armflea"],
-
-		"land": {
-			"tier0": [ 0.04,    0.52,    0.10,       0.00,      0.09,     0.00,      0.00,     0.25],
-			"tier1": [ 0.03,    0.27,    0.10,       0.35,      0.15,     0.00,      0.06,     0.04],
-			"tier2": [ 0.02,    0.04,    0.10,       0.35,      0.20,     0.00,      0.27,     0.02],
-			"tier3": [ 0.01,    0.01,    0.10,       0.03,      0.03,     0.01,      0.80,     0.01]
-		},
-		"air": {
-			"tier0": [ 0.04,    0.49,    0.07,       0.00,      0.05,     0.20,      0.00,     0.15],
-			"tier1": [ 0.03,    0.25,    0.10,       0.25,      0.13,     0.17,      0.05,     0.02],
-			"tier2": [ 0.02,    0.05,    0.08,       0.16,      0.33,     0.18,      0.16,     0.02],
-			"tier3": [ 0.01,    0.01,    0.08,       0.01,      0.01,     0.37,      0.50,     0.01]
-		},
-
-		// maxiumum amount of nanos: #caretake x #factories | actual max total amount gets limited by income/nanobuilspeed (behaviour.json)| e.g. 3rd factory 4 caretaker => 3x4=12
-		"caretaker": 3
-	},
-
-	"armalab": {
-		"importance": [0.0, 1.0],
-		"require_energy": true,
-		"income_tier": [40],
-		"unit":      ["armack", "armfast", "armzeus", "armfboy", "armfark", "armmav", "armfido", "armaak", "armmark", "armspid",
-					  "armsptk", "armsnipe", "armvader", "armamph", "armspy"],
-		"land": {
-			"tier0": [ 0.44,     0.25,      0.08,      0.03,      0.02,      0.03,     0.04,      0.01,     0.01,      0.02,
-					   0.02,      0.02,       0.01,       0.01,      0.01],
-			"tier1": [ 0.30,     0.13,      0.12,      0.11,      0.01,      0.03,     0.08,      0.01,     0.01,      0.03,
-					   0.05,      0.05,       0.01,       0.01,      0.05]
-		},
-		"air": {
-			"tier0": [ 0.43,     0.22,      0.05,      0.01,      0.02,      0.01,     0.03,      0.08,     0.01,      0.02,
-					   0.02,      0.04,       0.00,       0.05,      0.01],
-			"tier1": [ 0.25,     0.09,      0.09,      0.07,      0.03,      0.02,     0.06,      0.15,     0.01,      0.03,
-					   0.05,      0.04,       0.00,       0.06,      0.05]
+		"income_tier": [10, 20, 30, 40, 50],
+//Metal Cost		    110		 130			21		  	54			120			130			270		  125
+		"unit":      [	"armck", "armrectr", 	"armflea", 	"armpw", 	"armrock", 	"armham", 	"armwar", "armjeth"],
+		"land": {					// 10
+			"tier0": [ 	0.05,    0.05,    		0.30,       0.60,      	0.00,     	0.00,      	0.00,     0.00],
+			"tier1": [ 	0.05,    0.05,    		0.10,       0.60,      	0.10,     	0.05,      	0.05,     0.00],
+			"tier2": [ 	0.05,    0.05,    		0.05,       0.50,      	0.20,     	0.10,      	0.05,     0.00],
+			"tier3": [ 	0.05,    0.05,    		0.00,       0.30,      	0.25,     	0.20,      	0.15,     0.00],
+			"tier4": [ 	0.05,    0.05,    		0.00,       0.10,      	0.30,     	0.30,      	0.20,     0.00],
+			"tier5": [ 	0.05,    0.05,    		0.00,       0.00,      	0.30,     	0.30,      	0.30,     0.00]
 		},
 		"caretaker": 6
 	},
-
+	"armalab": {
+		"importance": [0.0, 1.0],
+		"require_energy": false,
+		"income_tier": [55, 75, 100, 125, 150],
+//Metal Cost		    430		    210			770		    135		  100		 78	        250		   190		  350		 650	   285		  400		 1400		680		    65          260        520       1150
+		"unit":      [	"armack", 	"armfark", 	"armdecom", "armspy", "armmark", "armaser", "armspid", "armfast", "armzeus", "armmav", "armfido", "armsptk", "armfboy", "armsnipe", "armvader", "armamph", "armaak", "armscab"],
+		"land": {																				// 30
+			"tier0": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.30,      0.10,      0.10,     0.20,      0.00,      0.00,      0.00,       0.00,       0.00,      0.00,     0.00],
+			"tier1": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.00,      0.20,      0.20,     0.20,      0.00,      0.00,      0.10,       0.00,       0.00,      0.00,     0.00],
+			"tier2": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.00,      0.10,      0.20,     0.10,      0.10,      0.10,      0.10,       0.00,       0.00,      0.00,     0.00],
+			"tier3": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.00,      0.00,      0.10,     0.20,      0.10,      0.10,      0.10,       0.00,       0.00,      0.05,     0.05],
+			"tier4": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.00,      0.00,      0.10,     0.10,      0.10,      0.30,      0.10,       0.00,       0.00,      0.00,     0.00],
+			"tier5": [ 	0.05,     	0.05,      	0.00,       0.05,     0.05,      0.05,      0.05,      0.00,      0.00,      0.00,     0.20,      0.10,      0.20,      0.20,       0.00,       0.00,      0.00,     0.00]
+		},
+		"caretaker": 6
+	},
 	"armvp": {
-		"importance": [1.0, 0.0],
+		"importance": [0.8, 0.0],
 		"require_energy": false,
 		"income_tier": [20, 30, 40],
 		"unit":      ["armcv", "armbeaver", "armmlv", "armfav", "armflash", "armpincer", "armstump", "armart", "armjanus", "armsam"],
@@ -99,10 +73,9 @@
 		},
 		"caretaker": 4
 	},
-
 	"armavp": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["armacv", "armlatnk", "armbull", "armmanni", "armmart", "armmerl", "armyork", "armseer", "armgremlin"],
 		"land": {
@@ -115,8 +88,6 @@
 		},
 		"caretaker": 6
 	},
-
-	//T3 factory
 	"armshltx": {
 		"importance": [0.0, 1.0],
 		"require_energy": true,
@@ -134,43 +105,38 @@
 		},
 		"caretaker": 16
 	},
-
-	// ARMADA Aircraft
 	"armap": {
-		"importance": [1.0, 0.1],
+		"importance": [0.1, 0.0],
 		"require_energy": false,
 		"income_tier": [30],
 		"unit":      ["armca", "armfig", "armpeep", "armthund", "armkam"],
 		"land": {
-			"tier0": [ 0.07,    0.42,     0.05,      0.32,       0.14],
-			"tier1": [ 0.04,    0.39,     0.06,      0.51,       0.00]
+			"tier0": [ 0.05,    0.90,     0.05,      0.00,       0.00],
+			"tier1": [ 0.03,    0.57,     0.00,      0.20,       0.20]
 		},
 		"air": {
-			"tier0": [ 0.07,    0.70,     0.05,      0.13,       0.05],
-			"tier1": [ 0.04,    0.77,     0.05,      0.14,       0.00]
+			"tier0": [ 0.05,    0.90,     0.05,      0.00,       0.00],
+			"tier1": [ 0.03,    0.57,     0.00,      0.20,       0.20]
 		},
 		"caretaker": 2
 	},
-	
 	"armaap": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [50],
 		"unit":      ["armaca", "armhawk", "armawac", "armpnix", "armbrawl", "armblade", "armstil", "armliche"],
 		"land": {
-			"tier0": [ 0.62,     0.07,      0.03,      0.14,      0.14,       0.00,       0.00,      0.00],
-			"tier1": [ 0.41,     0.07,      0.04,      0.21,      0.00,       0.17,       0.08,      0.02]
+			"tier0": [ 0.05,     0.90,      0.05,      0.00,      0.00,       0.00,       0.00,      0.00],
+			"tier1": [ 0.03,     0.37,      0.00,      0.15,      0.15,       0.10,       0.10,      0.10]
 		},
 		"air": {
-			"tier0": [ 0.53,     0.36,       0.02,     0.06,      0.03,       0.00,       0.00,      0.00],
-			"tier1": [ 0.38,     0.45,       0.02,     0.08,      0.00,       0.04,       0.02,      0.01]
+			"tier0": [ 0.05,     0.90,      0.05,      0.00,      0.00,       0.00,       0.00,      0.00],
+			"tier1": [ 0.03,     0.37,      0.00,      0.15,      0.15,       0.10,       0.10,      0.10]
 		},
 		"caretaker": 4
 	},
-
-	// ARMADA Ships
 	"armsy": {
-		"importance": [5.5, 5.5],
+		"importance": [0.8, 0.0],
 		"require_energy": false,
 		"income_tier": [20],
 		"unit":      ["armcs", "armrecl", "armpt", "armdecade", "armpship", "armsub", "armroy"],
@@ -184,10 +150,9 @@
 		},
 		"caretaker": 3
 	},
-
 	"armasy": {
-		"importance": [0.0, 0.6],
-		"require_energy": true,
+		"importance": [0.0, 1.0],
+		"require_energy": false,
 		"income_tier": [70],
 		"unit":      ["armacsub", "armsubk", "armaas", "armcrus", "armcarry", "armmship", "armbats", "armepoch"],
 		"land": {
@@ -200,10 +165,8 @@
 		},
 		"caretaker": 6
 	},
-
-	// ARMADA hovers
-	"armhp": {
-		"importance": [0.2, 0.1],
+	"armhp": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
 		"income_tier": [20, 30, 40],
 		"unit":      ["armch", "armsh", "armanac", "armmh", "armah"],
@@ -221,10 +184,8 @@
 		},
 		"caretaker": 2
 	},
-
-	// ARMADA sea factories
-	"armamsub": {
-		"importance": [0.2, 0.2],
+	"armamsub": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["armbeaver", "armpincer", "armcroc", "armjeth", "armaak", "armdecom"],
@@ -234,9 +195,8 @@
 		},
 		"caretaker": 2
 	},
-
-	"armfhp": {
-		"importance": [0.2, 0.2],
+	"armfhp": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
 		"income_tier": [20, 30, 40],
 		"unit":      ["armch", "armsh", "armanac", "armmh", "armah"],
@@ -254,9 +214,8 @@
 		},
 		"caretaker": 2
 	},
-
 	"armplat": {
-		"importance": [1.0, 1.0],
+		"importance": [0.2, 0.0],
 		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["armcsa", "armsaber", "armsb", "armseap", "armsfig", "armsehak"],
@@ -266,7 +225,6 @@
 		},
 		"caretaker": 2
 	},
-
 	"armshltxuw": {
 		"importance": [0.0, 1.0],
 		"require_energy": true,
@@ -278,31 +236,24 @@
 		},
 		"caretaker": 9
 	},
-
-	// CORTEX factories
 	"corlab": {
-		"importance": [1.0, 0.0],
+		"importance": [0.8, 0.0],
 		"require_energy": false,
-		"income_tier": [20, 30, 40],
+		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corck", "corak", "cornecro", "corstorm", "corthud", "corcrash"],
 		"land": {
-			"tier0": [ 0.04,    0.76,    0.10,       0.01,       0.09,      0.00],
-			"tier1": [ 0.03,    0.35,    0.10,       0.35,       0.17,      0.00],
-			"tier2": [ 0.02,    0.12,    0.10,       0.42,       0.34,      0.00],
-			"tier3": [ 0.01,    0.05,    0.10,       0.40,       0.43,      0.01]
-		},
-		"air": {
-			"tier0": [ 0.04,    0.49,    0.07,       0.04,       0.08,      0.28],
-			"tier1": [ 0.03,    0.29,    0.10,       0.27,       0.13,      0.18],
-			"tier2": [ 0.02,    0.01,    0.08,       0.33,       0.38,      0.18],
-			"tier3": [ 0.01,    0.05,    0.08,       0.20,       0.28,      0.38]
+			"tier0": [ 0.05,    0.90,    0.05,       0.00,       0.00,      0.00],
+			"tier1": [ 0.05,    0.60,    0.05,       0.30,       0.00,      0.00],
+			"tier2": [ 0.05,    0.30,    0.05,       0.30,       0.30,      0.00],
+			"tier3": [ 0.05,    0.00,    0.05,       0.40,       0.50,      0.00],
+			"tier4": [ 0.05,    0.00,    0.05,       0.30,       0.60,      0.00],
+			"tier5": [ 0.05,    0.00,    0.05,       0.20,       0.70,      0.00]
 		},
 		"caretaker": 3
 	},
-
 	"coralab": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["corack", "cortermite", "corpyro", "corsumo", "corcan", "corfast", "cormort", "corhrk", "coraak", "cormando", "corsktl", "corvoyr", "coramph", "corspy"],
 		"land": {
@@ -315,11 +266,10 @@
 		},
 		"caretaker": 6
 	},
-
 	"corvp": {
-		"importance": [1.0, 0.0],
+		"importance": [0.8, 0.0],
 		"require_energy": false,
-		"income_tier": [20, 30, 40],
+		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corcv", "cormuskrat", "cormlv", "corfav", "corgator", "corgarp", "corraid", "corlevlr", "corwolv", "cormist"],
 		"land": {
 			"tier0": [ 0.16,    0.04,         0.00,     0.23,     0.52,       0.00,      0.00,      0.05,       0.00,      0.00],
@@ -341,10 +291,9 @@
 		},
 		"caretaker": 4
 	},
-
 	"coravp": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["coracv", "correap", "corgol", "cormart", "corsent", "corvroc", "corban", "cortrem", "corvrad"],
 		"land": {
@@ -357,31 +306,9 @@
 		},
 		"caretaker": 6
 	},
-
-	"corhp": {
-		"importance": [0.2, 0.1],
-		"require_energy": false,
-		"income_tier": [20, 30, 40],
-		"unit":      ["corch", "corsh", "corsnap", "cormh", "corah", "corhal"],
-		"land": {
-			"tier0": [ 0.26,    0.36,    0.26,      0.08,    0.04,    0.00],
-			"tier1": [ 0.13,    0.12,    0.56,      0.14,    0.05,    0.00],
-			"tier2": [ 0.13,    0.10,    0.52,      0.17,    0.04,    0.04],
-			"tier3": [ 0.09,    0.08,    0.52,      0.15,    0.01,    0.15]
-		},
-		"air": {
-			"tier0": [ 0.27,    0.25,    0.27,      0.08,    0.13,    0.00],
-			"tier1": [ 0.14,    0.12,    0.50,      0.15,    0.09,    0.00],
-			"tier2": [ 0.12,    0.10,    0.48,      0.18,    0.08,    0.04],
-			"tier3": [ 0.07,    0.07,    0.38,      0.13,    0.26,    0.09]
-		},
-		"caretaker": 2
-	},
-
-	//T3 factory
 	"corgant": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [100, 200],
 		"unit":      ["corsok", "corshiva", "corkarg", "corcat", "corkorg", "corjugg"],
 		"land": {
@@ -396,43 +323,49 @@
 		},
 		"caretaker": 16
 	},
-
-	// CORTEX Aircraft
 	"corap": {
-		"importance": [1.0, 0.1],
+		"importance": [0.1, 0.0],
 		"require_energy": false,
 		"income_tier": [30],
 		"unit":      ["corca", "corveng", "corfink", "corshad", "corbw"],
 		"land": {
-			"tier0": [ 0.08,    0.38,      0.08,      0.34,      0.12],
-			"tier1": [ 0.04,    0.33,      0.05,      0.38,      0.20]
+			"tier0": [ 0.05,    0.90,      0.00,      0.00,      0.05],
+			"tier1": [ 0.05,    0.55,      0.00,      0.20,      0.20]
 		},
 		"air": {
-			"tier0": [ 0.07,    0.68,      0.11,      0.14,      0.00],
-			"tier1": [ 0.04,    0.68,      0.09,      0.14,      0.05]
+			"tier0": [ 0.05,    0.90,      0.00,      0.00,      0.05],
+			"tier1": [ 0.05,    0.55,      0.00,      0.20,      0.20]
 		},
 		"caretaker": 2
 	},
-	
 	"coraap": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [50],
-		"unit":      ["coraca", "corvamp", "corawac", "corhurc", "corape", "corcrw"],
+		"unit":      ["coraca", "corvamp", "corawac", "corhurc", "corape", "corcrwh"],
 		"land": {
-			"tier0": [ 0.01,     0.59,      0.17,      0.06,      0.17,     0.00],
-			"tier1": [ 0.02,     0.35,      0.10,      0.28,      0.22,     0.03]
+			"tier0": [ 0.05,     0.90,      0.00,      0.05,      0.00,     0.00],
+			"tier1": [ 0.03,     0.32,      0.05,      0.20,      0.20,     0.20]
 		},
 		"air": {
-			"tier0": [ 0.01,     0.90,      0.05,      0.00,      0.04,     0.00],
-			"tier1": [ 0.02,     0.81,      0.04,      0.05,      0.05,     0.03]
+			"tier0": [ 0.05,     0.95,      0.00,      0.00,      0.00,     0.00],
+			"tier1": [ 0.05,     0.95,      0.00,      0.00,      0.00,     0.00]
 		},
 		"caretaker": 4
 	},
-
-	// CORTEX Ships
+	"corplat": {
+		"importance": [0.2, 0.0],
+		"require_energy": false,
+		"income_tier": [40],
+		"unit":      ["corcsa", "corcut", "corsb", "corseap", "corsfig", "corhunt"],
+		"land": {
+			"tier0": [ 0.17,     0.17,     0.17,    0.17,      0.16,      0.16],
+			"tier1": [ 0.01,     0.01,     0.95,    0.01,      0.01,      0.01]
+		},
+		"caretaker": 2
+	},
 	"corsy": {
-		"importance": [5.5, 5.5],
+		"importance": [0.8, 0.0],
 		"require_energy": false,
 		"income_tier": [20],
 		"unit":      ["corcs", "correcl", "corpt", "coresupp", "corpship", "corsub", "corroy"],
@@ -446,10 +379,9 @@
 		},
 		"caretaker": 3
 	},
-	
 	"corasy": {
-		"importance": [0.0, 0.6],
-		"require_energy": true,
+		"importance": [0.0, 1.0],
+		"require_energy": false,
 		"income_tier": [70],
 		"unit":      ["coracsub", "corshark", "corarch", "corcrus", "corcarry", "cormship", "corbats", "corblackhy"],
 		"land": {
@@ -462,10 +394,8 @@
 		},
 		"caretaker": 6
 	},
-
-	// CORTEX sea factories
-	"coramsub": {
-		"importance": [0.2, 0.2],
+	"coramsub": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
 		"income_tier": [40],
 		"unit":      ["cormuskrat", "corgarp", "corseal", "corparrow", "corcrash", "coraak", "cordecom"],
@@ -475,9 +405,8 @@
 		},
 		"caretaker": 2
 	},
-
-	"corfhp": {
-		"importance": [0.2, 0.2],
+	"corhp": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
 		"income_tier": [20, 30, 40],
 		"unit":      ["corch", "corsh", "corsnap", "cormh", "corah", "corhal"],
@@ -495,22 +424,28 @@
 		},
 		"caretaker": 2
 	},
-
-	"corplat": {
-		"importance": [1.0, 1.0],
+	"corfhp": { //Unused
+		"importance": [0.0, 0.0],
 		"require_energy": false,
-		"income_tier": [40],
-		"unit":      ["corcsa", "corcut", "corsb", "corseap", "corsfig", "corhunt"],
+		"income_tier": [20, 30, 40],
+		"unit":      ["corch", "corsh", "corsnap", "cormh", "corah", "corhal"],
 		"land": {
-			"tier0": [ 0.17,     0.17,     0.17,    0.17,      0.16,      0.16],
-			"tier1": [ 0.01,     0.01,     0.95,    0.01,      0.01,      0.01]
+			"tier0": [ 0.26,    0.36,    0.26,      0.08,    0.04,    0.00],
+			"tier1": [ 0.13,    0.12,    0.56,      0.14,    0.05,    0.00],
+			"tier2": [ 0.13,    0.10,    0.52,      0.17,    0.04,    0.04],
+			"tier3": [ 0.09,    0.08,    0.52,      0.15,    0.01,    0.15]
+		},
+		"air": {
+			"tier0": [ 0.27,    0.25,    0.27,      0.08,    0.13,    0.00],
+			"tier1": [ 0.14,    0.12,    0.50,      0.15,    0.09,    0.00],
+			"tier2": [ 0.12,    0.10,    0.48,      0.18,    0.08,    0.04],
+			"tier3": [ 0.07,    0.07,    0.38,      0.13,    0.26,    0.09]
 		},
 		"caretaker": 2
 	},
-
 	"corgantuw": {
 		"importance": [0.0, 1.0],
-		"require_energy": true,
+		"require_energy": false,
 		"income_tier": [100],
 		"unit":      ["corshiva", "corseal", "corkorg", "corparrow"],
 		"land": {
@@ -518,6 +453,171 @@
 			"tier1": [ 0.16,       0.00,      0.57,      0.27]
 		},
 		"caretaker": 9
+	},
+	"leglab": {
+		"importance": [0.8, 0.0],	
+		"require_energy": false,	
+		"income_tier": [10, 20, 30, 40, 50],
+//Metal Cost		    100			130			25		  	60			150			160			310			125
+		"unit":      [	"legck", 	"cornecro", "leggob", 	"leglob",	"legcen",  	"legbal",  	"legkark",  "corcrash"],	
+		"land": {			// 10	
+			"tier0": [ 	0.05,    	0.05,		0.60,    	0.30,    	0.00,     	0.00,     	0.00,     	0.00],
+			"tier1": [ 	0.05,    	0.05,		0.40,    	0.40,    	0.10,     	0.00,     	0.00,     	0.00],
+			"tier2": [ 	0.05,    	0.05,		0.20,    	0.30,    	0.30,     	0.10,     	0.00,     	0.00],
+			"tier3": [ 	0.05,    	0.05,		0.00,    	0.10,    	0.20,     	0.30,     	0.30,     	0.00],
+			"tier4": [ 	0.05,    	0.05,		0.00,    	0.00,    	0.10,     	0.40,     	0.40,     	0.00],
+			"tier5": [ 	0.05,    	0.05,		0.00,    	0.00,    	0.00,     	0.20,     	0.60,     	0.00]
+		},
+
+		"caretaker": 8
+	},
+	"legalab": {
+		"importance": [0.0, 1.0],		
+		"require_energy": false,	
+		"income_tier": [55, 75, 100, 125, 150],
+//Metal Cost		   410			310			750		  	165			99			75			360			600			550			300				900			450			2300		60				755			330			650
+		"unit":      [ "legack",  	"legaceb", 	"legdecom", "corspy", 	"corvoyr", 	"corspec",  "legstr", 	"corhrk", 	"legbart", 	"leginfestor", 	"legsrail", "legshot", 	"leginc",	"legsnapper", 	"corsktl", 	"coramph", 	"coraak"],																														
+		"land": {                                                                      // 10                                                        
+			"tier0": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.60,     	0.00,     	0.00,		0.00,       	0.00,		0.30,		0.00,      	0.00,			0.00,   	0.00,		0.00],   
+			"tier1": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.30,     	0.20,     	0.10,		0.00,       	0.00,		0.30,		0.00,      	0.00,			0.00,   	0.00,		0.00],   
+			"tier2": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.10,     	0.30,     	0.10,		0.00,       	0.10,		0.30,		0.00,      	0.00,			0.00,   	0.00,		0.00],   
+			"tier3": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.00,     	0.20,     	0.00,		0.00,       	0.30,		0.00,		0.40,      	0.00,			0.00,   	0.00,		0.00],   
+			"tier4": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.00,     	0.20,     	0.00,		0.00,       	0.20,		0.00,		0.50,      	0.00,			0.00,   	0.00,		0.00],   
+			"tier5": [ 0.05,     	0.02,      	0.00,      	0.01,     	0.01,      	0.01,      	0.00,     	0.20,     	0.00,		0.00,       	0.30,		0.00,		0.40,      	0.00,			0.00,   	0.00,		0.00]   
+		},
+		"caretaker": 12
+	},
+	"legvp": {
+		"importance": [0.8, 0.0],
+		"require_energy": false,	
+		"income_tier": [10, 20, 30, 40, 50],
+//Metal Cost		   125		150			52		  25			65			160				300		   250			260		   200
+		"unit":      [ "legcv", "legotter", "legmlv", "legscout", 	"leghades", "leghelios",	"leggat",  "legbar", 	"legrail", "legamphtank"],
+		"land": {		  // 5
+			"tier0": [ 0.05,    0.00,       0.00,     0.65,     	0.30,       0.00,      		0.00,      0.00,       	0.00,      0.00],
+			"tier1": [ 0.05,    0.00,       0.00,     0.50,     	0.45,       0.00,      		0.00,      0.00,       	0.00,      0.00],
+			"tier2": [ 0.05,    0.00,       0.00,     0.10,     	0.60,       0.25,      		0.00,      0.00,       	0.00,      0.00],
+			"tier3": [ 0.05,    0.00,       0.00,     0.00,     	0.30,       0.40,      		0.25,      0.00,       	0.00,      0.00],
+			"tier4": [ 0.05,    0.00,       0.00,     0.00,     	0.10,       0.30,      		0.55,      0.00,       	0.00,      0.00],
+			"tier5": [ 0.05,    0.00,       0.00,     0.00,     	0.00,       0.00,      		0.60,      0.00,       	0.35,      0.00]
+		},
+		"caretaker": 8
+	},
+	"legavp": {
+		"importance": [0.0, 1.0],
+		"require_energy": false,
+		"income_tier": [55, 75, 100, 125, 150],
+//Metal Cost		   	530			200			125			105			250			450					920			1500		400				460				1700		1250			470			1250
+		"unit":      [ 	"legacv",	"legafcv",	"legavrad",	"legavjam", "legmrv",	"legaskirmtank",	"legavroc",	"legmed",	"legvcarry",	"legamcluster",	"leginf",	"legaheattank",	"legvflak",	"legfloat"],
+		"land": {												// 8
+			"tier0": [ 	0.05,		0.01,		0.01,		0.01,		0.32,		0.45,				0.10,		0.00,		0.00,			0.00,			0.00,		0.00,			0.05,		0.00],
+			"tier1": [ 	0.05,		0.01,		0.01,		0.01,		0.10,		0.55,				0.10,		0.00,		0.00,			0.10,			0.00,		0.00,			0.05,		0.00],
+			"tier2": [ 	0.05,		0.01,		0.01,		0.01,		0.00,		0.47,				0.10,		0.00,		0.00,			0.30,			0.00,		0.00,			0.05,		0.00],
+			"tier3": [ 	0.05,		0.01,		0.01,		0.01,		0.00,		0.27,				0.15,		0.10,		0.10,			0.10,			0.15,		0.00,			0.05,		0.00],
+			"tier4": [ 	0.05,		0.01,		0.01,		0.01,		0.00,		0.00,				0.12,		0.15,		0.10,			0.20,			0.05,		0.20,			0.05,		0.00],
+			"tier5": [ 	0.05,		0.01,		0.01,		0.01,		0.00,		0.00,				0.12,		0.15,		0.00,			0.20,			0.00,		0.35,			0.05,		0.00]
+		},
+	
+		"caretaker": 12
+	},
+	"leggant": {
+		"importance": [0.0, 1.0],
+		"require_energy": true,
+		"income_tier": [100, 150, 200, 250, 300],
+//Metal Cost		   	1200		2500		11000			2600		8000			7000				23500				20000		950
+		"unit":      [ 	"legjav", 	"corkarg", "legelrpcmech", 	"legkeres", "legerailtank", "legeshotgunmech", 	"legeheatraymech", 	"corjugg", 	"corsok"],	
+		"land": {
+			"tier0": [ 	0.80, 		0.10,      0.00,      		0.10,     	0.00,      		0.00,				0.00,				0.00,		0.00],
+			"tier1": [ 	0.50,		0.20,      0.00,      		0.30,     	0.00,      		0.00,				0.00,				0.00,		0.00],
+			"tier2": [ 	0.20,		0.10,      0.00,      		0.50,     	0.00,      		0.20,				0.00,				0.00,		0.00],
+			"tier3": [ 	0.00,		0.00,      0.20,      		0.30,     	0.30,      		0.20,				0.00,				0.00,		0.00],
+			"tier4": [ 	0.00,		0.00,      0.40,      		0.10,     	0.20,      		0.20,				0.10,				0.00,		0.00],
+			"tier5": [ 	0.00,		0.00,      0.40,      		0.00,     	0.00,      		0.00,				0.30,				0.30,		0.00]
+		},
+
+		"caretaker": 24
+	},
+	"legap": {
+		"importance": [0.1, 0.0],
+		"require_energy": false,	
+		"income_tier": [10, 20, 30, 40, 50],
+//Metal Cost		   	105			40			110			100			65			68			150
+		"unit":      [	"legca", 	"legfig", 	"legmos", 	"legcib", 	"legkam", 	"leglts", 	"legatrans"],	
+		"land": {
+			"tier0": [ 	0.05,    	0.95,     	0.00,      	0.00,       0.00,       0.00,       0.00],
+			"tier1": [ 	0.05,    	0.95,     	0.00,      	0.00,       0.00,       0.00,       0.00],
+			"tier2": [ 	0.05,    	0.95,     	0.00,      	0.00,       0.00,       0.00,       0.00],
+			"tier3": [ 	0.05,    	0.95,     	0.00,      	0.00,       0.00,       0.00,       0.00],
+			"tier4": [ 	0.05,    	0.95,     	0.00,      	0.00,       0.00,       0.00,       0.00],
+			"tier5": [ 	0.05,    	0.65,     	0.30,      	0.00,       0.00,       0.00,       0.00]
+		},
+
+		"caretaker": 6
+	},
+	"legaap": {
+		"importance": [0.0, 1.0],
+		"require_energy": false,	
+		"income_tier": [55, 75, 100, 125, 150],
+//Metal Cost		   	105			40			110			100			65			68			150
+		"unit":      [ 	"legaca", "legionnaire", "legvenator", 	"legstronghold", 	"legfort",  	"legnap", 	"legmineb", "legphoenix",  	"legwhisper"],
+		"land": {
+			"tier0": [ 	0.05,     0.75,     		0.00,       	0.20,      			0.00,      		0.00,       0.00,      	0.00,      		0.00],
+			"tier1": [ 	0.05,     0.75,     		0.00,       	0.20,      			0.00,      		0.00,       0.00,      	0.00,      		0.00],
+			"tier2": [ 	0.05,     0.65,     		0.00,       	0.30,      			0.00,      		0.00,       0.00,      	0.00,      		0.00],
+			"tier3": [ 	0.05,     0.65,     		0.00,       	0.20,      			0.10,      		0.00,       0.00,      	0.00,      		0.00],
+			"tier4": [ 	0.05,     0.60,     		0.00,       	0.00,      			0.10,      		0.10,       0.00,      	0.10,      		0.05],
+			"tier5": [ 	0.05,     0.50,     		0.00,       	0.00,      			0.30,      		0.05,       0.00,      	0.05,      		0.05]
+		},
+
+		"caretaker": 24
+	},
+	"leghp": { //Unused
+		"importance": [0.0, 0.0],	
+		"require_energy": false,	
+		"income_tier": [20, 30, 40],	
+		"unit":      ["legch",  "legsh", "legner", "legmh", "legah", "legcar"],	
+		"land": {
+			"tier0": [ 0.10,      1.00,     0.00,       0.00,     0.01,	    0.00],
+			"tier1": [ 0.10,      0.30,     0.40,       0.05,     0.01,	    0.10],
+			"tier2": [ 0.10,      0.10,     0.50,       0.05,     0.01,	    0.20],
+			"tier3": [ 0.10,      0.10,     0.50,       0.05,     0.01,	    0.30]
+		},
+
+		"caretaker": 6
+	},	
+	"legfhp": { //Unused
+		"importance": [0.0, 0.0],	
+		"require_energy": false,	
+		"income_tier": [20, 30, 40],	
+		"unit":      ["legch", "legsh", "legner", "legmh", "legah", "legcar"],	
+		"land": {
+			"tier0": [ 0.01,     1.00,     0.00,       0.00,     0.01,	    0.00],
+			"tier1": [ 0.01,     0.30,     0.40,       0.05,     0.01,	    0.10],
+			"tier2": [ 0.01,     0.10,     0.50,       0.05,     0.01,	    0.20],
+			"tier3": [ 0.01,     0.10,     0.50,       0.05,     0.01,	    0.30]
+		},
+
+		"caretaker": 6
+	},
+	"legamsub": { //Unused
+		"importance": [0.0, 0.0],	
+		"require_energy": false,		
+		"income_tier": [30],	
+		"unit":      ["legotter", "legamphtank", "legfloat", "corcrash", "coraak"],	
+		"land": {
+			"tier0": [ 0.10,        0.00,       0.30,       0.00,       0.00],
+			"tier1": [ 0.10,        0.00,       0.30,       0.00,       0.00]		
+		},
+		"air": {
+			"tier0": [ 0.10,        0.00,       0.20,       0.10,       0.10],
+			"tier1": [ 0.10,        0.00,       0.20,       0.10,       0.10]
+		},
+		"water": {
+			"tier0": [ 0.10,        0.00,       0.30,       0.00,       0.00],
+			"tier1": [ 0.10,        0.00,       0.30,       0.00,       0.00]	
+		},
+	
+		"caretaker": 6
 	}
 }
 }
