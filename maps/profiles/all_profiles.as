@@ -12,7 +12,6 @@
 #include "desolation_v1_0_1.as"
 #include "ditched_v1.as"
 #include "dworld_v4.as"
-#include "eight_horses_1_2.as"
 #include "emainmacha_remake_2_1_1.as"
 #include "entrenched_plains_v2.as"
 #include "erebos_lakes_v1_0.as"
@@ -21,15 +20,12 @@
 #include "failed_negotiations_1_0.as"
 #include "fallendell_v4.as"
 #include "faster_than_light_1_1.as"
-#include "flats_and_forests_v2_2.as"
 #include "flooded_valley_v5.as"
 #include "folsomdamr_1_17.as"
-#include "forge_v2_3.as"
 #include "full_metal_plate_1_7.as"
 #include "gasbag_grabens_1_1_1.as"
 #include "gecko_isle_remake_v1_2_1.as"
 #include "ghenna_rising_4_0_1.as"
-#include "glacial_gap_v1_1.as"
 #include "greenest_fields_1_3_1.as"
 #include "greenhaven_bar_v1_2.as"
 #include "hades_ponds_1_1.as"
@@ -39,8 +35,6 @@
 #include "houses_of_tripolis_1_3.as"
 #include "kings_assault_v1_3.as"
 #include "knockoutr_1_5.as"
-#include "koom_valley_3_3_1.as"
-#include "mediterraneum_v1.as"
 #include "melting_glacier_v1_1_2.as"
 #include "moonshine_run_v1_0_1.as"
 #include "neurope_remake_4_2_1.as"
@@ -61,13 +55,10 @@
 #include "salt_reef_1_1.as"
 #include "scylla_and_charybdis_1_1.as"
 #include "sector_318c_v1_0.as"
-#include "serene_caldera_v1_3.as"
 #include "sertagatta_v6_0_1.as"
 #include "seven_rivers_v1_21.as"
 #include "shallow_straits_v1_0_1.as"
-#include "shore_to_shore_v3.as"
 #include "silveridge_v1_0_1.as"
-#include "sinkhole_network_v1_1.as"
 #include "special_creek_1_0.as"
 #include "special_reef_1_0.as"
 #include "speedmetal_bar_v2.as"
@@ -75,12 +66,8 @@
 #include "stronghold_v5_0_1.as"
 #include "sulphur_springs_v1_1.as"
 #include "sunderance_v1_3.as"
-#include "supreme_isthmus_v1_7.as"
-#include "supreme_isthmus_v2_1.as"
-#include "swirly_rock_v1_1.as"
 #include "taldarim_v3.as"
 #include "tau12.as"
-#include "tempest_v3.as"
 #include "the_barrier_reef_remake_v1_0.as"
 #include "the_halite_maze_v1_4.as"
 #include "the_rock_3_0_1.as"
@@ -91,7 +78,6 @@
 #include "throne_v8.as"
 #include "titanduel_v3.as"
 #include "tropical_assault_v3_0.as"
-#include "tundra_continents_v2_3_1.as"
 #include "twin_lakes_park_redux_1_2_2.as"
 #include "white_fire_remake_1_3.as"
 #include "world_in_flames_v1_8.as"
@@ -112,7 +98,6 @@ void RegisterAll()
     TeamMapProfileData_desolation_v1_0_1::Register();
     TeamMapProfileData_ditched_v1::Register();
     TeamMapProfileData_dworld_v4::Register();
-    TeamMapProfileData_eight_horses_1_2::Register();
     TeamMapProfileData_emainmacha_remake_2_1_1::Register();
     TeamMapProfileData_entrenched_plains_v2::Register();
     TeamMapProfileData_erebos_lakes_v1_0::Register();
@@ -121,15 +106,12 @@ void RegisterAll()
     TeamMapProfileData_failed_negotiations_1_0::Register();
     TeamMapProfileData_fallendell_v4::Register();
     TeamMapProfileData_faster_than_light_1_1::Register();
-    TeamMapProfileData_flats_and_forests_v2_2::Register();
     TeamMapProfileData_flooded_valley_v5::Register();
     TeamMapProfileData_folsomdamr_1_17::Register();
-    TeamMapProfileData_forge_v2_3::Register();
     TeamMapProfileData_full_metal_plate_1_7::Register();
     TeamMapProfileData_gasbag_grabens_1_1_1::Register();
     TeamMapProfileData_gecko_isle_remake_v1_2_1::Register();
     TeamMapProfileData_ghenna_rising_4_0_1::Register();
-    TeamMapProfileData_glacial_gap_v1_1::Register();
     TeamMapProfileData_greenest_fields_1_3_1::Register();
     TeamMapProfileData_greenhaven_bar_v1_2::Register();
     TeamMapProfileData_hades_ponds_1_1::Register();
@@ -139,8 +121,6 @@ void RegisterAll()
     TeamMapProfileData_houses_of_tripolis_1_3::Register();
     TeamMapProfileData_kings_assault_v1_3::Register();
     TeamMapProfileData_knockoutr_1_5::Register();
-    TeamMapProfileData_koom_valley_3_3_1::Register();
-    TeamMapProfileData_mediterraneum_v1::Register();
     TeamMapProfileData_melting_glacier_v1_1_2::Register();
     TeamMapProfileData_moonshine_run_v1_0_1::Register();
     TeamMapProfileData_neurope_remake_4_2_1::Register();
@@ -161,13 +141,10 @@ void RegisterAll()
     TeamMapProfileData_salt_reef_1_1::Register();
     TeamMapProfileData_scylla_and_charybdis_1_1::Register();
     TeamMapProfileData_sector_318c_v1_0::Register();
-    TeamMapProfileData_serene_caldera_v1_3::Register();
     TeamMapProfileData_sertagatta_v6_0_1::Register();
     TeamMapProfileData_seven_rivers_v1_21::Register();
     TeamMapProfileData_shallow_straits_v1_0_1::Register();
-    TeamMapProfileData_shore_to_shore_v3::Register();
     TeamMapProfileData_silveridge_v1_0_1::Register();
-    TeamMapProfileData_sinkhole_network_v1_1::Register();
     TeamMapProfileData_special_creek_1_0::Register();
     TeamMapProfileData_special_reef_1_0::Register();
     TeamMapProfileData_speedmetal_bar_v2::Register();
@@ -175,12 +152,8 @@ void RegisterAll()
     TeamMapProfileData_stronghold_v5_0_1::Register();
     TeamMapProfileData_sulphur_springs_v1_1::Register();
     TeamMapProfileData_sunderance_v1_3::Register();
-    TeamMapProfileData_supreme_isthmus_v1_7::Register();
-    TeamMapProfileData_supreme_isthmus_v2_1::Register();
-    TeamMapProfileData_swirly_rock_v1_1::Register();
     TeamMapProfileData_taldarim_v3::Register();
     TeamMapProfileData_tau12::Register();
-    TeamMapProfileData_tempest_v3::Register();
     TeamMapProfileData_the_barrier_reef_remake_v1_0::Register();
     TeamMapProfileData_the_halite_maze_v1_4::Register();
     TeamMapProfileData_the_rock_3_0_1::Register();
@@ -191,7 +164,6 @@ void RegisterAll()
     TeamMapProfileData_throne_v8::Register();
     TeamMapProfileData_titanduel_v3::Register();
     TeamMapProfileData_tropical_assault_v3_0::Register();
-    TeamMapProfileData_tundra_continents_v2_3_1::Register();
     TeamMapProfileData_twin_lakes_park_redux_1_2_2::Register();
     TeamMapProfileData_white_fire_remake_1_3::Register();
     TeamMapProfileData_world_in_flames_v1_8::Register();
