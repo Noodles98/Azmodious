@@ -79,7 +79,7 @@ local options = {
  			{
  				key  = 'hard',
  				name = 'Hard | Balanced',
- 				desc = 'Difficulty: Hard |Playstyle: Balanced |Made by Flaka',
+ 				desc = 'Difficulty: Hard |Playstyle: Balanced |Developed by N00DLES',
  			},
 		},
 	},

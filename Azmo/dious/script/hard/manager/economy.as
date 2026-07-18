@@ -1,6 +1,6 @@
 #include "../../define.as"
 #include "../helper/economy_smooth.as"
-#include "../helper/role.as"
+#include "../helper/role/role.as"
 
 
 namespace Economy {
@@ -58,15 +58,19 @@ void AiUpdateEconomy()
 			|| ((energyBalance < 0.f) && (energyRatio < TeamRole::GetEnergyStallRatioDefault()));
 	}
 	// NOTE: Default energy-to-metal conversion TeamRulesParam "mmLevel" = 0.75
-	aiEconomyMgr.isEnergyFull = energyRatio > 0.88f;
+	// Require real surplus, not just a briefly full battery, before requesting converters.
+	aiEconomyMgr.isEnergyFull = (energyRatio > 0.92f) && (energyBalance > 0.f);
 
-	isSwitchAssist = isSwitchAssist && aiFactoryMgr.isAssistRequired;
+	// Consume switch-assist as a one-update signal; Factory::AiIsSwitchAllowed
+	// will re-assert it on subsequent failed switch checks.
+	const bool switchAssist = isSwitchAssist;
+	isSwitchAssist = false;
 	if (aiFactoryMgr.GetFactoryCount() == 0) {
 		aiFactoryMgr.isAssistRequired = false;
 		return;
 	}
 
-	aiFactoryMgr.isAssistRequired = isSwitchAssist
+	aiFactoryMgr.isAssistRequired = switchAssist
 		|| ((metalRatio > TeamRole::GetAssistMetalRatio()) && !aiEconomyMgr.isEnergyStalling);
 }
 

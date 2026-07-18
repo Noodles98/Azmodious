@@ -4,6 +4,7 @@
 namespace TeamLane {
 
 const int LANE_COUNT = 4;
+bool isAirRoleUnrestricted = true;
 
 int ResolveSlot()
 {
@@ -15,10 +16,36 @@ int ResolveLane()
 	return ResolveSlot() % LANE_COUNT;
 }
 
+int ResolveBiasLane(const AIFloat3& in pos, float spread)
+{
+	const float cellSize = (spread > 0.f) ? (spread * 2.f) : 512.f;
+	const int cellX = int(pos.x / cellSize);
+	const int cellZ = int(pos.z / cellSize);
+	int lane = (cellX * 31) + (cellZ * 17) + ai.teamId;
+	if (lane < 0)
+		lane = -lane;
+	return lane % LANE_COUNT;
+}
+
 bool IsRestricted()
 {
-	// Team role mapping reserves slots 0-1 for AIR; those should stay flexible.
-	return ResolveSlot() >= 2;
+	// Restriction is tied to resolved role.
+	return !isAirRoleUnrestricted;
+}
+
+bool IsAirRoleUnrestricted()
+{
+	return isAirRoleUnrestricted;
+}
+
+string GetRestrictionName()
+{
+	return IsRestricted() ? "biased" : "unrestricted";
+}
+
+void SetAirRoleUnrestricted(bool isUnrestricted)
+{
+	isAirRoleUnrestricted = isUnrestricted;
 }
 
 string GetName()
@@ -47,7 +74,27 @@ AIFloat3 BiasPosition(const AIFloat3& in pos, float spread)
 		return pos;
 
 	AIFloat3 lanePos = pos;
-	lanePos.x += GetOffset(spread);
+	switch (ResolveBiasLane(pos, spread)) {
+		case 0: lanePos.x += -1.5f * spread; break;
+		case 1: lanePos.x += -0.5f * spread; break;
+		case 2: lanePos.x += 0.5f * spread; break;
+		default: lanePos.x += 1.5f * spread; break;
+	}
+	return lanePos;
+}
+
+AIFloat3 BiasMovePosition(const AIFloat3& in pos, float spread)
+{
+	if (!IsRestricted())
+		return pos;
+
+	AIFloat3 lanePos = pos;
+	switch (ResolveBiasLane(pos, spread)) {
+		case 0: lanePos.x += -0.45f * spread; break;
+		case 1: lanePos.x += -0.15f * spread; break;
+		case 2: lanePos.x += 0.15f * spread; break;
+		default: lanePos.x += 0.45f * spread; break;
+	}
 	return lanePos;
 }
 

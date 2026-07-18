@@ -6,7 +6,7 @@
 	"unit": {
 		"armcom": {
 			// Choice importance, 0 by default
-			"importance": 0.5,
+			"importance": 0.7,
 
 			// Morph params
 			"upgrade": {
@@ -17,9 +17,9 @@
 			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
 			"hide": {
 				"time": 600,  // seconds
-				"threat": 200,
+				"threat": 50,
 				"air": false,
-				"task_rad": [3300.0, 1000.0]  // [<peace_radius>, <danger_radius>]
+				"task_rad": [3500.0, 650.0]  // [<peace_radius>, <danger_radius>]
 			},
 
 			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
@@ -27,7 +27,7 @@
 		},
 		"corcom": {
 			// Choice importance, 0 by default
-			"importance": 0.5,
+			"importance": 0.7,
 
 			// Morph params
 			"upgrade": {
@@ -38,13 +38,34 @@
 			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
 			"hide": {
 				"time": 600,  // seconds
-				"threat": 200,
+				"threat": 50,
 				"air": false,
-				"task_rad": [3300.0, 1000.0]  // [<peace_radius>, <danger_radius>]
+				"task_rad": [3500.0, 650.0]  // [<peace_radius>, <danger_radius>]
 			},
 
-			"assist_fac": 3,  // commander assists factory with high priority till number of constructors reached
+			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
 			"side": "cortex"
+		},
+		"legcom": {
+			// Choice importance, 0 by default
+			"importance": 0.7,
+
+			// Morph params
+			"upgrade": {
+//				"time": 120,  // Force-morph delay, in seconds
+				"module": []
+			},
+
+			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
+			"hide": {
+				"time": 600,  // seconds
+				"threat": 50,
+				"air": false,
+				"task_rad": [3500.0, 650.0]  // [<peace_radius>, <danger_radius>]
+			},
+
+			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
+			"side": "legion"
 		}
 	}
 }

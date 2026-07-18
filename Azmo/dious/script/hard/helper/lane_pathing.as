@@ -1,5 +1,5 @@
 #include "lane.as"
-#include "terrain_data.as"
+#include "terrain/terrain_data.as"
 
 
 namespace LanePathing {
@@ -13,7 +13,7 @@ AIFloat3 BiasBuildPos(const AIFloat3& in pos, float baseSpread)
 AIFloat3 BiasMovePos(const AIFloat3& in pos, float baseSpread)
 {
 	const float spread = baseSpread * TerrainData::GetPathSpreadScale(pos);
-	return TeamLane::BiasPosition(pos, spread);
+	return TeamLane::BiasMovePosition(pos, spread);
 }
 
 }  // namespace LanePathing

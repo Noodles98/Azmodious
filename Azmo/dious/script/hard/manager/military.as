@@ -1,6 +1,7 @@
 #include "../../define.as"
 #include "../../unit.as"
-#include "../helper/role.as"
+#include "../helper/role/role.as"
+#include "../helper/defense.as"
 #include "../helper/frontline_cluster.as"
 
 
@@ -39,7 +40,8 @@ void AiSave(OStream& ostream)
 
 void AiMakeDefence(int cluster, const AIFloat3& in pos)
 {
-	if (!TeamRole::ShouldMakeDefence())
+	const string side = TeamRole::DetectSidePrefix();
+	if (!TeamRole::ShouldMakeDefence() && !DefenseHelpers::ShouldMakeAnyDefence(side))
 		return;
 
 	const AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());

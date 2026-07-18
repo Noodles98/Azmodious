@@ -1,10 +1,10 @@
 #include "../../unit.as"
+#include "../helper/role/role.as"
 
 
 namespace Builder {
 
-CCircuitUnit@ energizer1 = null;
-CCircuitUnit@ energizer2 = null;
+array<Id> baseBuilderIds;
 
 // AIFloat3 lastPos;
 // int gPauseCnt = 0;
@@ -125,46 +125,82 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 	if (usage != Unit::UseAs::BUILDER || cdef.IsRoleAny(Unit::Role::COMM.mask))
 		return;
 
-	// constructor with BASE attribute is assigned to tasks near base
-	if (cdef.costM < 200.f) {
-		if (energizer1 is null
-			&& (uint(cdef.count) > aiMilitaryMgr.GetGuardTaskNum() || cdef.IsAbleToFly()))
-		{
-			@energizer1 = unit;
-			unit.AddAttribute(Unit::Attr::BASE.type);
-		}
-	} else {
-		if (energizer2 is null) {
-			@energizer2 = unit;
+	AssignBaseConstructor(unit);
+}
+
+void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
+{
+	RemoveBaseConstructor(unit.id);
+}
+
+void AiLoad(IStream& istream)
+{
+	baseBuilderIds.resize(0);
+	for (uint i = 0; i < 6; ++i) {
+		Id unitId = -1;
+		istream >> unitId;
+		CCircuitUnit@ unit = ai.GetTeamUnit(unitId);
+		if (unit !is null) {
+			baseBuilderIds.insertLast(unitId);
 			unit.AddAttribute(Unit::Attr::BASE.type);
 		}
 	}
 }
 
-void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
-{
-	if (energizer1 is unit)
-		@energizer1 = null;
-	else if (energizer2 is unit)
-		@energizer2 = null;
-}
-
-void AiLoad(IStream& istream)
-{
-	Id e1id = -1, e2id = -1;
-	istream >> e1id >> e2id;
-	@energizer1 = ai.GetTeamUnit(e1id);
-	@energizer2 = ai.GetTeamUnit(e2id);
-	if (energizer1 !is null)
-		energizer1.AddAttribute(Unit::Attr::BASE.type);
-	if (energizer2 !is null)
-		energizer2.AddAttribute(Unit::Attr::BASE.type);
-}
-
 void AiSave(OStream& ostream)
 {
-	ostream << Id(energizer1 !is null ? energizer1.id : -1)
-			<< Id(energizer2 !is null ? energizer2.id : -1);
+	CleanBaseConstructors();
+	for (uint i = 0; i < 6; ++i) {
+		ostream << Id((i < baseBuilderIds.length()) ? baseBuilderIds[i] : -1);
+	}
+}
+
+bool ContainsBaseConstructor(Id unitId)
+{
+	for (uint i = 0; i < baseBuilderIds.length(); ++i) {
+		if (baseBuilderIds[i] == unitId)
+			return true;
+	}
+	return false;
+}
+
+void RemoveBaseConstructor(Id unitId)
+{
+	for (uint i = 0; i < baseBuilderIds.length(); ++i) {
+		if (baseBuilderIds[i] == unitId) {
+			baseBuilderIds.removeAt(i);
+			return;
+		}
+	}
+}
+
+void CleanBaseConstructors()
+{
+	for (int i = int(baseBuilderIds.length()) - 1; i >= 0; --i) {
+		if (ai.GetTeamUnit(baseBuilderIds[i]) is null)
+			baseBuilderIds.removeAt(uint(i));
+	}
+}
+
+bool IsBaseConstructorCandidate(const CCircuitDef@ cdef)
+{
+	if (cdef.costM >= 200.f)
+		return true;
+	return (uint(cdef.count) > aiMilitaryMgr.GetGuardTaskNum()) || cdef.IsAbleToFly();
+}
+
+void AssignBaseConstructor(CCircuitUnit@ unit)
+{
+	CleanBaseConstructors();
+	const uint target = TeamRole::GetBaseConstructorCount();
+	if (baseBuilderIds.length() >= target || ContainsBaseConstructor(unit.id))
+		return;
+
+	if (!IsBaseConstructorCandidate(unit.circuitDef))
+		return;
+
+	baseBuilderIds.insertLast(unit.id);
+	unit.AddAttribute(Unit::Attr::BASE.type);
 }
 
 }  // namespace Builder

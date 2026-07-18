@@ -3,8 +3,11 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 520.f;
-const float ANCHOR_RADIUS = 640.f;
+const float CONFIRM_RADIUS = 600.f;
+const float ANCHOR_RADIUS = 1000.f;
+const float PUSH_START_RADIUS = 180.f;
+const float PUSH_MAX_RADIUS = 460.f;
+const float PUSH_RATIO = 0.65f;
 
 bool hasCandidate = false;
 AIFloat3 candidatePos;
@@ -32,6 +35,32 @@ AIFloat3 BlendTowards(const AIFloat3& in into, const AIFloat3& in pos, uint coun
 	return blended;
 }
 
+AIFloat3 PushTowardsPressure(const AIFloat3& in anchor, const AIFloat3& in pressure)
+{
+	const float dx = pressure.x - anchor.x;
+	const float dz = pressure.z - anchor.z;
+	const float distSq = dx * dx + dz * dz;
+	const float startSq = PUSH_START_RADIUS * PUSH_START_RADIUS;
+	if (distSq <= startSq)
+		return anchor;
+
+	AIFloat3 pushed = anchor;
+	float pushX = dx * PUSH_RATIO;
+	float pushZ = dz * PUSH_RATIO;
+	if (pushX > PUSH_MAX_RADIUS)
+		pushX = PUSH_MAX_RADIUS;
+	else if (pushX < -PUSH_MAX_RADIUS)
+		pushX = -PUSH_MAX_RADIUS;
+	if (pushZ > PUSH_MAX_RADIUS)
+		pushZ = PUSH_MAX_RADIUS;
+	else if (pushZ < -PUSH_MAX_RADIUS)
+		pushZ = -PUSH_MAX_RADIUS;
+	pushed.x += pushX;
+	pushed.z += pushZ;
+	pushed.y = pressure.y;
+	return pushed;
+}
+
 void ResetCandidate(const AIFloat3& in pos)
 {
 	hasCandidate = true;
@@ -47,7 +76,8 @@ void SetAnchor(const AIFloat3& in pos)
 	} else {
 		anchorPos = pos;
 		hasAnchor = true;
-		AiLog("Frontline anchor established at lane " + TeamLane::GetName());
+		AiLog("Frontline anchor established at lane " + TeamLane::GetName()
+			+ " (restriction=" + TeamLane::GetRestrictionName() + ")");
 	}
 	anchorFrame = ai.frame;
 	hasCandidate = false;
@@ -75,7 +105,7 @@ AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 	if (HasStableAnchor() && DistSq2D(pos, anchorPos) <= anchorRadiusSq) {
 		anchorPos = BlendTowards(anchorPos, pos, 4);
 		anchorFrame = ai.frame;
-		return LanePathing::BiasMovePos(anchorPos, laneSpread);
+		return LanePathing::BiasMovePos(PushTowardsPressure(anchorPos, pos), laneSpread);
 	}
 
 	if (!hasCandidate
