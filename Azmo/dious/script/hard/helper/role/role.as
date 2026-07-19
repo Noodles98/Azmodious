@@ -12,8 +12,9 @@
 
 namespace TeamRole {
 
-const float PRE_FACTORY_CONVERT_EFF = 0.60f;
-const float PRE_FACTORY_CONVERT_ENERGY_EFF = 4.0f;
+// Dispatcher defaults
+const float PRE_FACTORY_CONVERT_EFF = 1.15f;
+const float PRE_FACTORY_CONVERT_ENERGY_EFF = 10.0f;
 
 enum Kind {
 	AIR = 0,
@@ -26,6 +27,7 @@ Kind kind = Kind::AIR;
 bool isLogged = false;
 bool isInitialized = false;
 
+// Role resolution and initialization
 Kind Resolve()
 {
 	if (TeamMapProfile::HasPreferredRole()) {
@@ -120,6 +122,7 @@ int MakeSwitchInterval()
 	}
 }
 
+// Role-facing event hooks
 void OnFactoryAdded(CCircuitUnit@ unit)
 {
 	Refresh();
@@ -190,6 +193,9 @@ void OnSlowUpdate()
 	Refresh();
 	switch (kind) {
 		case Kind::AIR: TeamRoleAir::OnSlowUpdate(); break;
+		case Kind::TECH: TeamRoleTech::OnSlowUpdate(); break;
+		case Kind::SEA: TeamRoleSea::OnSlowUpdate(); break;
+		case Kind::FRONT: TeamRoleFront::OnSlowUpdate(); break;
 		default: break;
 	}
 	ApplyEconomyBias();
@@ -202,6 +208,7 @@ void OnMessage(const string& in data)
 	isLogged = false;
 }
 
+// Economy, factory, and military dispatch
 void ApplyEconomyBias()
 {
 	if (aiFactoryMgr.GetFactoryCount() == 0) {
@@ -280,6 +287,7 @@ float GetFactorySwitchMetalMultiplier()
 	}
 }
 
+// Defence and frontline dispatch
 bool ShouldMakeDefence()
 {
 	Refresh();
@@ -342,6 +350,7 @@ int GetFrontlineAnchorExpire()
 	}
 }
 
+// Command timing and factory filtering
 bool IsAllowedFactory(const string& in name)
 {
 	Refresh();

@@ -1,5 +1,6 @@
 namespace TeamRoleAir {
 
+// Role tuning constants
 const uint MIN_BOMBER_SWARM = 5;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
@@ -7,13 +8,13 @@ const int MID_GAME_FRAME = 8 * MINUTE;
 const int LATE_GAME_FRAME = 17 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 16.f;
-const float ADV_AIR_MIN_METAL_RATIO = 0.25f;
-const float EARLY_CONVERT_EFF = 0.76f;
-const float MID_CONVERT_EFF = 0.79f;
-const float LATE_CONVERT_EFF = 0.83f;
-const float EARLY_CONVERT_ENERGY_EFF = 14.8f;
-const float MID_CONVERT_ENERGY_EFF = 19.3f;
-const float LATE_CONVERT_ENERGY_EFF = 21.5f;
+const float ADV_AIR_MIN_METAL_RATIO = 0.19f;
+const float EARLY_CONVERT_EFF = 2.1f;
+const float MID_CONVERT_EFF = 3.63f;
+const float LATE_CONVERT_EFF = 5.66f;
+const float EARLY_CONVERT_ENERGY_EFF = 21.1f;
+const float MID_CONVERT_ENERGY_EFF = 24.4f;
+const float LATE_CONVERT_ENERGY_EFF = 28.2f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.73f;
@@ -54,6 +55,7 @@ array<Id> bomberIds;
 array<Id> escortIds;
 bool isBomberReleased = true;
 
+// Economy stage helpers
 enum EconomyStage {
 	EARLY = 0,
 	MID,
@@ -114,6 +116,7 @@ float GetFactorySwitchMetalMultiplier()
 	}
 }
 
+// Economy, factory, and military policy
 void ApplyEconomyBias()
 {
 	switch (GetEconomyStage()) {
@@ -149,6 +152,8 @@ uint GetFactoryMinBuilder2Count()
 {
 	return FACTORY_MIN_BUILDER2_COUNT;
 }
+
+// Bomber swarm control
 bool IsEscortFighter(const CCircuitUnit@ unit)
 {
 	const CCircuitDef@ cdef = unit.circuitDef;
@@ -217,6 +222,7 @@ void RecomputeBomberControl()
 	}
 }
 
+// Role lifecycle hooks
 void OnMilitaryUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 {
 	if (usage != Unit::UseAs::COMBAT)
@@ -259,6 +265,7 @@ void OnSlowUpdate()
 		RecomputeBomberControl();
 }
 
+// Command timing and factory selection
 bool IsCommandReady(const string& in keySuffix = "")
 {
 	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
@@ -302,6 +309,7 @@ void OnFactoryAdded(CCircuitUnit@ unit)
 {
 }
 
+// Defence and frontline shaping
 bool ShouldMakeDefence()
 {
 	switch (GetEconomyStage()) {

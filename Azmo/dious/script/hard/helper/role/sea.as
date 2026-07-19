@@ -1,14 +1,15 @@
 namespace TeamRoleSea {
 
+// Role tuning constants
 const string CONTROL_KEY = "sea_role_control";
 const int MID_GAME_FRAME = 11 * MINUTE;
 const int LATE_GAME_FRAME = 19 * MINUTE;
-const float EARLY_CONVERT_EFF = 0.78f;
-const float MID_CONVERT_EFF = 0.80f;
-const float LATE_CONVERT_EFF = 0.83f;
-const float EARLY_CONVERT_ENERGY_EFF = 16.3f;
-const float MID_CONVERT_ENERGY_EFF = 19.4f;
-const float LATE_CONVERT_ENERGY_EFF = 22.7f;
+const float EARLY_CONVERT_EFF = 2.0f;
+const float MID_CONVERT_EFF = 3.3f;
+const float LATE_CONVERT_EFF = 5.3f;
+const float EARLY_CONVERT_ENERGY_EFF = 20.1f;
+const float MID_CONVERT_ENERGY_EFF = 22.1f;
+const float LATE_CONVERT_ENERGY_EFF = 24.4f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.74f;
@@ -45,6 +46,7 @@ const uint FRONTLINE_CONFIRM_HITS = 8;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
+// Economy stage helpers
 enum EconomyStage {
 	EARLY = 0,
 	MID,
@@ -60,6 +62,7 @@ EconomyStage GetEconomyStage()
 	return EconomyStage::EARLY;
 }
 
+// Factory selection and lifecycle hooks
 void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
 {
 	if (sidePrefix == "arm") {
@@ -80,6 +83,11 @@ void OnFactoryAdded(CCircuitUnit@ unit)
 {
 }
 
+void OnSlowUpdate()
+{
+}
+
+// Economy and military policy
 void ApplyEconomyBias()
 {
 	switch (GetEconomyStage()) {
@@ -161,6 +169,7 @@ float GetFactorySwitchMetalMultiplier()
 	}
 }
 
+// Defence and frontline shaping
 bool ShouldMakeDefence()
 {
 	switch (GetEconomyStage()) {
@@ -200,6 +209,7 @@ int GetFrontlineAnchorExpire()
 	return FRONTLINE_ANCHOR_EXPIRE;
 }
 
+// Command timing
 bool IsCommandReady(const string& in keySuffix = "")
 {
 	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
