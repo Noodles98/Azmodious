@@ -2,6 +2,8 @@
 
 Most future behavior changes should start in `config/hard/*.json`; the AngelScript layer mainly wires profile loading, startup behavior, and manager overrides.
 
+Keep this guide updated when adding major helpers, manager overrides, config domains, or behavior changes that future maintenance will need to find quickly.
+
 ## Load Path
 
 1. `AIInfo.lua` and `AIOptions.lua` expose the AI identity and selectable options to the engine.
@@ -36,6 +38,7 @@ Most future behavior changes should start in `config/hard/*.json`; the AngelScri
 - `script/hard/helper/resource_bonus.as`: normalizes engine-reported resource income for planning thresholds when the in-game AI bonus is set around +35%.
 - `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior.
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
+- `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super.
 - `script/hard/helper/terrain/terrain_data.as`: terrain class and spread scaling for placement/pathing context.
 - `script/hard/helper/terrain/terrain_runtime.as`: startup terrain manager setup.
 - `script/hard/helper/terrain/terrain_bridge.as`: Lua message parser for runtime terrain hints.
@@ -45,7 +48,7 @@ Most future behavior changes should start in `config/hard/*.json`; the AngelScri
 - `script/hard/manager/builder.as`: mostly defaults to engine behavior; assigns role-based constructor counts the `BASE` attribute and persists those IDs. Current targets are AIR 6, TECH 4, FRONT 2, and SEA/default 2.
 - `script/hard/manager/economy.as`: computes stall/full flags and decides whether factories should require assistants.
 - `script/hard/manager/factory.as`: factory task delegation, opener queue seeding, factory switch timing, and T2/T3 metadata.
-- `script/hard/manager/military.as`: mostly default behavior; only overrides defence creation gating.
+- `script/hard/manager/military.as`: role-aware combat task assignment plus defence creation gating; unhandled combat units still fall back to engine defaults.
 - `script/hard/misc/commander.as`: commander names plus opener definitions used when factories come online.
 
 ### Hard Profile Config
@@ -81,6 +84,7 @@ Start from the narrowest owner for the behavior you want:
 - Change ally-team discovery, slot ordering, or slot broadcast timing: `script/hard/helper/ally_slot.as`
 - Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated fallback data)
 - Change role resolution, slot fallback, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
+- Change custom military fight-task assignment by role/attribute: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`
 - Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`
 - Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in `config/hard/build_chain.json` unless a direct script selector is added.
 - Change shared command throttling behavior for role command bursts: `script/hard/helper/command_delay.as`
@@ -126,6 +130,16 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming still comes from ally slot for diagnostics.
 6. If role commands are bursty, use role wrappers `IsCommandReady(...)` and `CommitCommandDelay(...)` with role/channel keys.
 
+### Military Task Editing
+
+Use this when combat units are joining the wrong fight task, defending when they should attack, raiding when they should hold, or falling through to default military behavior.
+
+1. Check the unit's roles and attributes in `config/hard/behaviour.json` first. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
+2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery, support, raiders, and mainline combat units.
+3. Keep role-specific defensive posture in `GetPreferredFightType()` and `GetDefendPromotePower()`. TECH currently defends more aggressively, AIR defends mainline ground units, SEA has its own defend promotion power, and FRONT defaults to lower promote power.
+4. Keep `script/hard/manager/military.as` as the owner that calls `MilitaryTaskPolicy` before falling back to `aiMilitaryMgr.DefaultMakeTask(...)`. Do not scatter task-selection calls into role helpers unless the manager ownership changes.
+5. If a new unit category needs a new task behavior, add the role/attribute registration and config assignment alongside the `military_task.as` mapping so future role edits can find the full chain.
+
 ### Structure and Placement Editing
 
 Use this when structures are built too close together, too far from base, or with the wrong clearance.
@@ -170,6 +184,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Role helper files live under `script/hard/helper/role/`; manager includes should usually target `script/hard/helper/role/role.as`, not individual role files.
 - Terrain tuning now combines static block-map tuning, heuristic terrain scales, and optional Lua hint overrides via `AiLuaMessage`.
 - Adaptive defence gating lives in `script/hard/helper/defense.as`, while actual default defence selection still comes from `config/hard/build_chain.json` and `aiMilitaryMgr.DefaultMakeDefence(...)`.
+- Military combat task assignment first checks `script/hard/helper/military_task.as` for role/attribute-specific intents such as scout, raid, artillery, support, AA, bomber, and super; unknown or generic units still use `aiMilitaryMgr.DefaultMakeTask(...)`.
 - Resource bonus planning normalization lives in `script/hard/helper/resource_bonus.as`; keep it included through `script/hard/helper/role/role.as` to avoid duplicate symbol definitions.
 - Economy manager now relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
 - Shared role command throttling is provided by `script/hard/helper/command_delay.as` and consumed via role wrappers.
@@ -188,6 +203,7 @@ To keep future changes easy to audit:
 - Prefix commit or patch notes with the owning domain, for example: `[behaviour]`, `[factory]`, `[economy]`, `[builder]`.
 - If a change crosses config and script, note which script hook consumes the config and why config alone was insufficient.
 - When adding a new tuning concept, document the owner file here so future searches stay short.
+- When adding a major helper, manager override, persisted state, or config domain, update the Folder Map, Where To Edit, and any relevant editing playbook in this file as part of the same change.
 
 ## Safe First Checks
 
