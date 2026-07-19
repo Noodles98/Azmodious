@@ -133,7 +133,7 @@ Use this when structures are built too close together, too far from base, or wit
 1. Classify or adjust a structure's footprint in `config/hard/block_map.json`. `building.instance` maps unit names to a class; `class_land` supplies the shape, structure type, offset, yard/radius, and collision exceptions. Add water-specific overrides under `class_water` only when water behavior must differ.
 2. Treat `yard` and `radius` as placement-clearance tuning, not cosmetic values. The documented unit is 16 elmos; `ignore` and `not_ignore` decide which structure types may overlap the blocker's clearance.
 3. For static economy structures that should stay near the base core, add their exact unit names to `Main::IsBaseEconomyStructure()` in `script/hard/main.as`; startup adds the `BASE` attribute to those non-mobile defs.
-4. For mobile constructors that should favor base-local jobs, tune the role target returned by `TeamRole::GetBaseConstructorCount()` and the candidate filter in `script/hard/manager/builder.as`. Preserve `AiLoad`/`AiSave` compatibility if the persisted ID list changes.
+4. For mobile constructors that should favor base-local jobs, tune the role target returned by `TeamRole::GetBaseConstructorCount()` and the candidate filter in `script/hard/manager/builder.as`. Current candidates are constructors costing at least 200 metal, constructors beyond the active guard-task count, or flying constructors. Preserve the six-ID `AiLoad`/`AiSave` format if the persisted list changes.
 5. Retune `economy.cluster_range` in `config/hard/economy.json` alongside `BASE` and footprint changes: it controls economy clustering, while the attributes and block map control task affinity and physical clearance.
 
 ### Custom Editing (New Helpers and Overrides)
@@ -173,7 +173,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Resource bonus planning normalization lives in `script/hard/helper/resource_bonus.as`; keep it included through `script/hard/helper/role/role.as` to avoid duplicate symbol definitions.
 - Economy manager now relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
 - Shared role command throttling is provided by `script/hard/helper/command_delay.as` and consumed via role wrappers.
-- `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns it to up to two constructors. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
+- `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns `BASE` to a role-sized persisted pool of mobile constructors. AIR keeps up to 6, TECH up to 4, and FRONT/SEA/default up to 2. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
 - `Factory::userData` tier flags are assigned in `main.as`, then consumed in `factory.as`; if you add a new factory tier concept, both places must change.
 - The profile generator seeds roles from extracted start spots plus metadata heuristics (`minHeight`, `tidalStrength`, and map-name water hints), while `imported_profiles.as` preserves curated pre-existing role labels. Generation must not silently overwrite curated imported assignments.
 - `build_chain.json` explicitly warns against recursive chains; treat chain additions as potentially unsafe until checked.
