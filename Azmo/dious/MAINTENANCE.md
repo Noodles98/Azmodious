@@ -212,6 +212,6 @@ The fastest path for most future edits is:
 - Resolution for map profiles lives in `script/hard/helper/map_profile.as`.
 - `Resolve()` finds the first registered map-name prefix match, chooses its nearest start spot, and records that spot's preferred role plus land-lock state.
 - `default_profiles.as` registers `imported_profiles.as` before `profiles/all_profiles.as`; first-match lookup means imported data overrides generated data for the same map prefix.
-- The profile files under `script/hard/helper/maps/profiles/` are generated from metadata JSON and may be hand-edited, but the authoritative curated overrides belong in `imported_profiles.as`.
+- The profile files under `script/hard/helper/maps/profiles/` are generated from metadata JSON and are hand-edited, but the authoritative curated overrides belong in `imported_profiles.as`.
 - A profile entry is `StartSpot(AIFloat3(x, 0, z), "role", landLocked)`. Keep spot coordinates aligned with the map's real start positions because selection is nearest-position, not array-index based.
 - `landLocked` is currently retained for diagnostics only. It does not alter role selection, lanes, factory selection, or pathing.
