@@ -14,7 +14,7 @@ namespace TeamRole {
 
 // Dispatcher defaults
 const float PRE_FACTORY_CONVERT_EFF = 1.15f;
-const float PRE_FACTORY_CONVERT_ENERGY_EFF = 10.0f;
+const float PRE_FACTORY_CONVERT_ENERGY_EFF = 12.3f;
 
 enum Kind {
 	AIR = 0,
