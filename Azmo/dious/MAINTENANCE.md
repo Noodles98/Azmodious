@@ -53,15 +53,15 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 ### Hard Profile Config
 
-- `config/hard/ArmadaBehaviour.json`, `config/hard/CortexBehaviour.json`, `config/hard/LegionBehaviour.json`: faction-specific unit roles, attributes, retreat thresholds, per-unit overrides, and global combat/defence knobs. The old shared `config/hard/behaviour.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaBehaviour.json`, `config/hard/CortexBehaviour.json`, `config/hard/LegionBehaviour.json`: faction-specific unit roles, attributes, retreat thresholds, per-unit overrides, and global combat/defence knobs. The old shared `config/hard/unused/behaviour.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 - `config/hard/extraunits.json`: optional extra-unit behaviour overlay loaded when `experimentalextraunits=1`.
 - `config/hard/extrascavunits.json`: optional player scav-unit behaviour overlay loaded when `scavunitsforplayers=1`.
 - `config/hard/block_map.json`: terrain analysis and building footprint/blocking classes.
 - `config/hard/build_chain.json`: build-finished follow-up chains, porc rules, and side-specific defence/build helpers.
 - `config/hard/commander.json`: commander hide/assist/morph policy.
-- `config/hard/ArmadaEconomy.json`, `config/hard/CortexEconomy.json`, `config/hard/LegionEconomy.json`: faction-specific energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds. The old shared `config/hard/economy.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
-- `config/hard/ArmadaFactory.json`, `config/hard/CortexFactory.json`, `config/hard/LegionFactory.json`: faction-specific factory selection and unit production probability tables. The old shared `config/hard/factory.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
-- `config/hard/ArmadaResponse.json`, `config/hard/CortexResponse.json`, `config/hard/LegionResponse.json`: faction response overlays. They currently mirror the shared response policy; if they diverge, remember the response domain is role-based and overlapping keys are merge/override-sensitive. The old shared `config/hard/response.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaEconomy.json`, `config/hard/CortexEconomy.json`, `config/hard/LegionEconomy.json`: faction-specific energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds. The old shared `config/hard/unused/economy.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaFactory.json`, `config/hard/CortexFactory.json`, `config/hard/LegionFactory.json`: faction-specific factory selection and unit production probability tables. The old shared `config/hard/unused/factory.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaResponse.json`, `config/hard/CortexResponse.json`, `config/hard/LegionResponse.json`: faction response overlays. They currently mirror the shared response policy; if they diverge, remember the response domain is role-based and overlapping keys are merge/override-sensitive. The old shared `config/hard/unused/response.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 
 ## Where To Edit
 
@@ -115,7 +115,7 @@ Expected Lua hint format for bridge updates:
 
 Use this when economy decisions are too noisy, too passive, or too aggressive.
 
-1. Tune thresholds and production pacing in `config/hard/economy.json`.
+1. Tune thresholds and production pacing in the relevant `config/hard/*Economy.json` faction overlay.
 2. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
 3. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
 4. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
@@ -136,7 +136,7 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 
 Use this when combat units are joining the wrong fight task, defending when they should attack, raiding when they should hold, or falling through to default military behavior.
 
-1. Check the unit's roles and attributes in `config/hard/behaviour.json` first. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
+1. Check the unit's roles and attributes in the relevant `config/hard/*Behaviour.json` faction overlay first. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
 2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery/support, skirmish backline, melee, raiders, and brawler attack units.
 3. Keep role-specific defensive posture in `GetPreferredFightType()` and `GetDefendPromotePower()`. TECH currently defends more aggressively, AIR defends mainline ground units, SEA has its own defend promotion power, and FRONT defaults to lower promote power.
 4. Keep `script/hard/manager/military.as` as the owner that calls `MilitaryTaskPolicy` before falling back to `aiMilitaryMgr.DefaultMakeTask(...)`. Do not scatter task-selection calls into role helpers unless the manager ownership changes.
@@ -150,7 +150,7 @@ Use this when structures are built too close together, too far from base, or wit
 2. Treat `yard` and `radius` as placement-clearance tuning, not cosmetic values. The documented unit is 16 elmos; `ignore` and `not_ignore` decide which structure types may overlap the blocker's clearance.
 3. For static economy structures that should stay near the base core, add their exact unit names to `Main::IsBaseEconomyStructure()` in `script/hard/main.as`; startup adds the `BASE` attribute to those non-mobile defs.
 4. For mobile constructors that should favor base-local jobs, tune the role target returned by `TeamRole::GetBaseConstructorCount()` and the candidate filter in `script/hard/manager/builder.as`. Current candidates are constructors costing at least 200 metal, constructors beyond the active guard-task count, or flying constructors. Preserve the six-ID `AiLoad`/`AiSave` format if the persisted list changes.
-5. Retune `economy.cluster_range` in `config/hard/economy.json` alongside `BASE` and footprint changes: it controls economy clustering, while the attributes and block map control task affinity and physical clearance.
+5. Retune `economy.cluster_range` in the relevant `config/hard/*Economy.json` faction overlay alongside `BASE` and footprint changes: it controls economy clustering, while the attributes and block map control task affinity and physical clearance.
 
 ### Custom Editing (New Helpers and Overrides)
 
@@ -166,7 +166,7 @@ Use this when JSON tuning is not enough and a script helper/override is required
 
 Use this when the AI is building too little, too much, or the wrong tier of static defence.
 
-1. Tune unit availability, roles, and threat values for static defences in `config/hard/behaviour.json`.
+1. Tune unit availability, roles, and threat values for static defences in the relevant `config/hard/*Behaviour.json` faction overlay.
 2. Tune the porcupine defence order, base defence schedule, superweapon list, and side-specific defence units in `config/hard/build_chain.json`.
 3. Tune adaptive build permission in `script/hard/helper/defense.as`. It exposes `ShouldBuildT1LightAA`, `ShouldBuildT1LightTurret`, `ShouldBuildT2FlakAA`, `ShouldBuildLRPC`, and related helpers.
 4. Keep `script/hard/manager/military.as` as the owner that combines role defence policy, adaptive defence pressure, lane-biased placement, and `aiMilitaryMgr.DefaultMakeDefence(...)`.
@@ -211,7 +211,7 @@ To keep future changes easy to audit:
 
 When behavior looks wrong, check these first before deeper changes:
 
-- The relevant unit role/attribute exists in `config/hard/behaviour.json`.
+- The relevant unit role/attribute exists in the active `config/hard/*Behaviour.json` faction overlay or optional extra/scav overlay.
 - The role name matches `script/unit.as` exactly.
 - The intended config file is actually listed by `script/hard/init.as`.
 - The behavior is not still delegated to `Default*` logic in the manager hook you are inspecting.
