@@ -1,0 +1,31 @@
+{
+	"behaviour": {
+		// ===== Scavenger economy units =====
+		"armmmkrt3": {
+			"role": ["static"],
+			"since": 1800
+		},
+		"cormmkrt3": {
+			"role": ["static"],
+			"since": 1800
+		},
+		"legmmkrt3": {
+			"role": ["static"],
+			"since": 1800
+		},
+
+		// ===== Scavenger advanced energy units =====
+		"armafust3": {
+			"role": ["static"],
+			"since": 1800
+		},
+		"corafust3": {
+			"role": ["static"],
+			"since": 1800
+		},
+		"legadveconvt3": {
+			"role": ["static"],
+			"since": 1800
+		}
+	}
+}

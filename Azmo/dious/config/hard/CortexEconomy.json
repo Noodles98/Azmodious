@@ -1,0 +1,73 @@
+// Mono-space font required
+{
+"economy": {
+	"energy": {
+		"side": {
+"cortex": {
+				"land": {
+					// "<energy_def>": [<lower limit>, <upper limit>]
+					// limit = random(<lower limit>..<upper limit>)
+					"corwin": [300, 500],
+					"corsolar": [80, 160],
+					"coradvsol": [80, 160],
+					"corfus": [70, 130],
+					"corafus": [420, 700]
+				},
+				"water": {
+					"cortide": [150, 200],
+					"corwin": [120, 180],
+					"corsolar": [80, 110],
+					"coradvsol": [80, 120],
+					"coruwfus": [320, 480]
+				}
+			}
+		},
+		"factor": [[1.0, 300], [10.0, 3600], [30.0, 7200]],
+		"min_income": 5,
+		"cost_ratio": 0.06,
+		"em_ratio": 0.08,
+		"link_inc": 12.0,
+		"pylon": []
+	},
+
+	"cluster_range": 460.0,
+
+	"geo": {
+		"cortex": "corgeo"
+	},
+
+	"mex": {
+		"cortex": "cormex"
+	},
+
+	"mex_up": 3,
+
+	"calc_mex": true,
+
+	"goal_exec": 42.0,
+
+	"build_mod": 1000.0,
+
+	"eps_step": 0.2,
+
+	"buildpower": 1.15,
+
+	"excess": -1.0,
+
+	"ms_pull": [[0.56, 0.0], [0.63, 0.34]],
+
+	"mex_max": [1.0, true],
+
+	"build_delay": [[-1.0, 0], [-1.0, 0]],
+
+	"production": [0.9, 0.7, 0.8, 0.8],
+
+	"assist": {
+		"cortex": "cornanotc"
+	},
+
+	"default": {
+		"cortex": "corwin"
+	}
+}
+}

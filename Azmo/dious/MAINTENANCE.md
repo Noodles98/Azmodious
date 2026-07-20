@@ -27,7 +27,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 ### Hard Profile Runtime Hooks
 
-- `script/hard/init.as`: declares the loaded config files. If you add or rename a config domain, update this array.
+- `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
 - `script/hard/helper/ally_slot.as`: discovers allied AI team IDs through `AiSendMessage`, keeps them sorted, and exposes the repeating eight-slot assignment used by roles and lanes.
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise from the shared ally slot; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
@@ -53,23 +53,25 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 ### Hard Profile Config
 
-- `config/hard/behaviour.json`: unit roles, attributes, retreat thresholds, per-unit overrides, and global combat/defence knobs.
+- `config/hard/ArmadaBehaviour.json`, `config/hard/CortexBehaviour.json`, `config/hard/LegionBehaviour.json`: faction-specific unit roles, attributes, retreat thresholds, per-unit overrides, and global combat/defence knobs. The old shared `config/hard/behaviour.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/extraunits.json`: optional extra-unit behaviour overlay loaded when `experimentalextraunits=1`.
+- `config/hard/extrascavunits.json`: optional player scav-unit behaviour overlay loaded when `scavunitsforplayers=1`.
 - `config/hard/block_map.json`: terrain analysis and building footprint/blocking classes.
 - `config/hard/build_chain.json`: build-finished follow-up chains, porc rules, and side-specific defence/build helpers.
 - `config/hard/commander.json`: commander hide/assist/morph policy.
-- `config/hard/economy.json`: energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds.
-- `config/hard/factory.json`: factory selection and unit production probability tables.
-- `config/hard/response.json`: role-vs-role counter logic and response weights.
+- `config/hard/ArmadaEconomy.json`, `config/hard/CortexEconomy.json`, `config/hard/LegionEconomy.json`: faction-specific energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds. The old shared `config/hard/economy.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaFactory.json`, `config/hard/CortexFactory.json`, `config/hard/LegionFactory.json`: faction-specific factory selection and unit production probability tables. The old shared `config/hard/factory.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
+- `config/hard/ArmadaResponse.json`, `config/hard/CortexResponse.json`, `config/hard/LegionResponse.json`: faction response overlays. They currently mirror the shared response policy; if they diverge, remember the response domain is role-based and overlapping keys are merge/override-sensitive. The old shared `config/hard/response.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 
 ## Where To Edit
 
 Start from the narrowest owner for the behavior you want:
 
-- Change what role or attribute a unit has: `config/hard/behaviour.json`
-- Change retreat, target threat, fire state, or per-unit combat overrides: `config/hard/behaviour.json`
-- Change production mix inside a factory: `config/hard/factory.json`
-- Change which enemy roles trigger a counter-response: `config/hard/response.json`
-- Change economic pacing, assistant logic, or energy thresholds: `config/hard/economy.json`
+- Change what role or attribute a unit has: the faction-specific `config/hard/*Behaviour.json` file, or optional `extraunits.json` / `extrascavunits.json` overlays.
+- Change retreat, target threat, fire state, or per-unit combat overrides: the faction-specific `config/hard/*Behaviour.json` file.
+- Change production mix inside a factory: the faction-specific `config/hard/*Factory.json` file.
+- Change which enemy roles trigger a counter-response: the faction-specific `config/hard/*Response.json` file, keeping in mind response keys are role-based and overlapping keys can override each other when multiple profiles load.
+- Change economic pacing, assistant logic, or energy thresholds: the faction-specific `config/hard/*Economy.json` file.
 - Change smoothed economy signal behavior (EMA/noise dampening): `script/hard/helper/economy_smooth.as`
 - Change in-game resource bonus planning normalization: `script/hard/helper/resource_bonus.as`; JSON `income_tier` values still need direct config edits.
 - Change post-build follow-ups like porc, pylon, or hub chains: `config/hard/build_chain.json`

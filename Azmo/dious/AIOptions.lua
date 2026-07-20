@@ -69,6 +69,27 @@ local options = {
 		type    = 'bool',
 		def     = true,
 	},
+	{ -- bool
+		key     = 'experimentallegionfaction',
+		name    = 'Enable Legion configs',
+		desc    = 'Load Legion-specific behaviour, economy, factory, and response config overlays.',
+		type    = 'bool',
+		def     = false,
+	},
+	{ -- bool
+		key     = 'scavunitsforplayers',
+		name    = 'Enable player scav units',
+		desc    = 'Load additional behaviour entries for player-usable scav unit definitions.',
+		type    = 'bool',
+		def     = false,
+	},
+	{ -- bool
+		key     = 'experimentalextraunits',
+		name    = 'Enable extra units',
+		desc    = 'Load additional behaviour entries for experimental extra unit definitions.',
+		type    = 'bool',
+		def     = false,
+	},
 	{ -- list
 		key     = 'profile',
 		name    = 'Difficulty profile',
