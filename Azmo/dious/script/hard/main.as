@@ -3,6 +3,7 @@
 #include "manager/factory.as"
 #include "manager/economy.as"
 #include "helper/terrain/terrain_runtime.as"
+#include "../common.as"
 
 
 namespace Main {
@@ -51,6 +52,7 @@ void AiMain()
 	TerrainRuntime::Init();
 	TeamRole::Init();
 	TeamRole::ApplyEconomyBias();
+	Init::EnableWallTargets();
 
 	array<string> t1Combat = UnitHelpers::GetAllT1CombatUnits();
 	for (uint i = 0; i < t1Combat.length(); ++i) {

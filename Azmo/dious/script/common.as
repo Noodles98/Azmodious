@@ -11,6 +11,8 @@ TypeMask LEGION = aiSideMasker.GetTypeMask("legion");  // requires proper defaul
 
 namespace Init {
 
+const float WALL_THREAT_KERNEL = 0.01f;
+
 SCategoryInfo InitCategories()
 {
 	SCategoryInfo category;
@@ -67,6 +69,192 @@ SArmorInfo InitArmordef()
 		armor.AddWater(int(armorTypes[waterTypes[i]]));
 	}
 	return armor;
+}
+
+void SetFireStateForUnits(const array<string>& in units, int fireState)
+{
+	for (uint i = 0; i < units.length(); ++i) {
+		CCircuitDef@ cdef = ai.GetCircuitDef(units[i]);
+		if (cdef is null) {
+			@cdef = ai.GetCircuitDef(units[i].toLower());
+		}
+		if (cdef !is null) {
+			cdef.SetFireState(fireState);
+		}
+	}
+}
+
+void AddAttributeForUnits(const array<string>& in units, int attr)
+{
+	for (uint i = 0; i < units.length(); ++i) {
+		CCircuitDef@ cdef = ai.GetCircuitDef(units[i]);
+		if (cdef is null) {
+			@cdef = ai.GetCircuitDef(units[i].toLower());
+		}
+		if (cdef !is null) {
+			cdef.AddAttribute(attr);
+		}
+	}
+}
+
+void EnableStaticWallPressure()
+{
+	const uint staticPressureRolesMask = Unit::Role::RAIDER.mask
+		| Unit::Role::RIOT.mask
+		| Unit::Role::ASSAULT.mask
+		| Unit::Role::SKIRM.mask
+		| Unit::Role::ARTY.mask
+		| Unit::Role::AA.mask
+		| Unit::Role::AH.mask
+		| Unit::Role::SUPER.mask
+		| Unit::Role::STATIC.mask;
+
+	int staticDefsTuned = 0;
+	for (Id defId = 1, count = ai.GetDefCount(); defId <= count; ++defId) {
+		CCircuitDef@ def = ai.GetCircuitDef(defId);
+		if (def is null)
+			continue;
+		if (def.IsMobile())
+			continue;
+		if (def.IsRoleAny(Unit::Role::AIR.mask))
+			continue;
+		if (!def.IsRoleAny(staticPressureRolesMask))
+			continue;
+
+		if (!def.IsAttrAny(Unit::Attr::ANTI_STAT.mask)) {
+			def.AddAttribute(Unit::Attr::ANTI_STAT.type);
+		}
+		def.SetFireState(3);
+		++staticDefsTuned;
+	}
+
+	AiLog("[WallTargets] static pressure tuned defs=" + staticDefsTuned);
+}
+
+void EnableGlobalWallPressure()
+{
+	const uint pressureRolesMask = Unit::Role::RAIDER.mask
+		| Unit::Role::RIOT.mask
+		| Unit::Role::ASSAULT.mask
+		| Unit::Role::SKIRM.mask
+		| Unit::Role::ARTY.mask
+		| Unit::Role::AH.mask
+		| Unit::Role::AA.mask;
+
+	for (Id defId = 1, count = ai.GetDefCount(); defId <= count; ++defId) {
+		CCircuitDef@ def = ai.GetCircuitDef(defId);
+		if (def is null)
+			continue;
+		if (!def.IsMobile())
+			continue;
+		if (def.IsRoleAny(Unit::Role::AIR.mask))
+			continue;
+		if (!def.IsRoleAny(pressureRolesMask))
+			continue;
+
+		if (!def.IsAttrAny(Unit::Attr::ANTI_STAT.mask)) {
+			def.AddAttribute(Unit::Attr::ANTI_STAT.type);
+		}
+		def.SetFireState(3);
+	}
+}
+
+bool IsRuinsEnabled()
+{
+	string ruins = string(aiSetupMgr.GetModOptions()["ruins"]);
+	ruins = ruins.toLower();
+	return (ruins == "enabled") || (ruins == "1") || (ruins == "true");
+}
+
+void EnableWallBreakingFireState()
+{
+	array<string> units = {
+		"armfav", "armpw", "armrock", "armham", "armjeth", "armflash", "armstump", "armart", "armwar",
+		"armflea", "armfboy", "armaser", "armmark", "armfast", "armsptk", "armscab",
+		"corak", "corstorm", "corthud", "corcrash", "corraid", "cormist", "cormart", "coraak",
+		"legkoda", "legshot", "legaa", "legraider", "leginf", "legart", "legcen", "legbal",
+		"legkark", "leglob", "leggob",
+
+		"armpt", "armsub", "armroy", "armpship",
+		"corpt", "corsub", "corroy", "corpship",
+		"legnavyscout", "legnavyfrigate", "legnavydestro", "legnavysub", "legnavyaaship", "legnavyartyship",
+
+		"armsh", "armmh", "armanac", "armah",
+		"corsh", "cormh", "corsnap", "corah",
+		"legsh", "legmh", "legner", "legah"
+	};
+
+	SetFireStateForUnits(units, 3);
+	AddAttributeForUnits(units, Unit::Attr::ANTI_STAT.type);
+}
+
+void EnableDefenceFireState()
+{
+	array<string> units = {
+		"armllt", "armtl", "armrl", "armbeamer", "armhlt", "armclaw", "armcir", "armferret",
+		"armpb", "armatl", "armflak", "armamb", "armanni", "armguard", "armamd", "armtarg",
+		"armbrtha", "armvulc",
+		"armgate", "armemp", "armfhlt",
+
+		"corllt", "cortl", "corrl", "corhllt", "corhlt", "cormaw", "cormadsam", "corvipe",
+		"coratl", "corflak", "cortoast", "cordoom", "corpun", "corfmd", "cortarg", "corgate",
+		"corint", "corbuzz",
+		"cortron", "corfhlt",
+
+		"leglht", "legtl", "legrl", "legmg", "leghive", "legdtr", "legrhapsis", "leglupara",
+		"legapopupdef", "legflak", "legacluster", "legbastion", "legcluster", "legabm", "legtarg",
+		"legfmg", "legperdition", "leglrpc", "leganavalaaturret", "leganavalatorpturret", "leganavaldefturret"
+	};
+
+	SetFireStateForUnits(units, 3);
+	AddAttributeForUnits(units, Unit::Attr::ANTI_STAT.type);
+}
+
+void EnableWallTargets()
+{
+	string ruins = string(aiSetupMgr.GetModOptions()["ruins"]);
+	string ruinsNormalized = ruins.toLower();
+	const bool ruinsEnabled = (ruinsNormalized == "enabled") || (ruinsNormalized == "1") || (ruinsNormalized == "true");
+
+	AiLog("[WallTargets] ruins modoption raw='" + ruins + "' normalized='" + ruinsNormalized + "'");
+	if (ruinsEnabled) {
+		AiLog("[WallTargets] skipped: ruins modoption is enabled (wall pressure disabled)");
+		return;
+	}
+	AiLog("[WallTargets] enabled: ruins modoption is disabled (wall pressure enabled)");
+
+	int explicitWallsFound = 0;
+	int explicitWallsMissing = 0;
+
+	array<string> walls = {
+		"armdrag", "armfdrag", "armfort",
+		"cordrag", "corfdrag", "corfort",
+		"legdrag", "legfdrag", "legforti", "legrwall",
+		"armdrag_scav", "armfdrag_scav", "armfort_scav",
+		"cordrag_scav", "corfdrag_scav", "corfort_scav",
+		"corscavdrag", "corscavdrag_scav", "corscavfort", "corscavfort_scav"
+	};
+
+	for (uint i = 0; i < walls.length(); ++i) {
+		CCircuitDef@ cdef = ai.GetCircuitDef(walls[i]);
+		if (cdef is null) {
+			@cdef = ai.GetCircuitDef(walls[i].toLower());
+		}
+		if (cdef !is null) {
+			cdef.SetIgnore(false);
+			cdef.SetThreatKernel(WALL_THREAT_KERNEL);
+			++explicitWallsFound;
+		} else {
+			++explicitWallsMissing;
+		}
+	}
+
+	AiLog("[WallTargets] explicit wall defs: found=" + explicitWallsFound + " missing=" + explicitWallsMissing);
+
+	EnableWallBreakingFireState();
+	EnableDefenceFireState();
+	EnableGlobalWallPressure();
+	EnableStaticWallPressure();
 }
 
 }  // namespace Init

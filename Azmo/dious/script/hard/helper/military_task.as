@@ -8,9 +8,17 @@ namespace MilitaryTaskPolicy {
 bool IsMainlineCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
-		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
-		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
-		|| cdef.IsAttrAny(Unit::Attr::MELEE.mask);
+		|| cdef.IsRoleAny(Unit::Role::RIOT.mask);
+}
+
+bool IsMeleeCombat(const CCircuitDef@ cdef)
+{
+	return cdef.IsAttrAny(Unit::Attr::MELEE.mask);
+}
+
+bool IsBacklineCombat(const CCircuitDef@ cdef)
+{
+	return cdef.IsRoleAny(Unit::Role::SKIRM.mask);
 }
 
 float GetDefendPromotePower()
@@ -44,6 +52,10 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 		return Task::FightType::ARTY;
 	if (cdef.IsRoleAny(Unit::Role::SUPPORT.mask))
 		return Task::FightType::SUPPORT;
+	if (IsBacklineCombat(cdef))
+		return Task::FightType::ARTY;
+	if (IsMeleeCombat(cdef))
+		return Task::FightType::MELEE;
 
 	const string role = TeamRole::GetName();
 	if (cdef.IsRoleAny(Unit::Role::RAIDER.mask))

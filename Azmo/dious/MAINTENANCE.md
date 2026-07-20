@@ -135,7 +135,7 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 Use this when combat units are joining the wrong fight task, defending when they should attack, raiding when they should hold, or falling through to default military behavior.
 
 1. Check the unit's roles and attributes in `config/hard/behaviour.json` first. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
-2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery, support, raiders, and mainline combat units.
+2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery/support, skirmish backline, melee, raiders, and brawler attack units.
 3. Keep role-specific defensive posture in `GetPreferredFightType()` and `GetDefendPromotePower()`. TECH currently defends more aggressively, AIR defends mainline ground units, SEA has its own defend promotion power, and FRONT defaults to lower promote power.
 4. Keep `script/hard/manager/military.as` as the owner that calls `MilitaryTaskPolicy` before falling back to `aiMilitaryMgr.DefaultMakeTask(...)`. Do not scatter task-selection calls into role helpers unless the manager ownership changes.
 5. If a new unit category needs a new task behavior, add the role/attribute registration and config assignment alongside the `military_task.as` mapping so future role edits can find the full chain.
