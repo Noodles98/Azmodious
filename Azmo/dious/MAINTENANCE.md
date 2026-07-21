@@ -27,7 +27,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 ### Hard Profile Runtime Hooks
 
-- `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
+- `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, build-chain, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
 - `script/hard/helper/ally_slot.as`: discovers allied AI team IDs through `AiSendMessage`, keeps them sorted, and exposes the repeating eight-slot assignment used by roles and lanes.
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise from the shared ally slot; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
@@ -57,7 +57,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `config/hard/extraunits.json`: optional extra-unit behaviour overlay loaded when `experimentalextraunits=1`.
 - `config/hard/extrascavunits.json`: optional player scav-unit behaviour overlay loaded when `scavunitsforplayers=1`.
 - `config/hard/block_map.json`: terrain analysis and building footprint/blocking classes.
-- `config/hard/build_chain.json`: build-finished follow-up chains, porc rules, and side-specific defence/build helpers.
+- `config/hard/ArmadaBuildChain.json`, `config/hard/CortexBuildChain.json`, `config/hard/LegionBuildChain.json`: faction-specific build-finished follow-up chains, porc rules, and side-specific defence/build helpers. The old shared `config/hard/build_chain.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 - `config/hard/commander.json`: commander hide/assist/morph policy.
 - `config/hard/ArmadaEconomy.json`, `config/hard/CortexEconomy.json`, `config/hard/LegionEconomy.json`: faction-specific energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds. The old shared `config/hard/unused/economy.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 - `config/hard/ArmadaFactory.json`, `config/hard/CortexFactory.json`, `config/hard/LegionFactory.json`: faction-specific factory selection and unit production probability tables. The old shared `config/hard/unused/factory.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
@@ -67,14 +67,14 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 Start from the narrowest owner for the behavior you want:
 
-- Change what role or attribute a unit has: the faction-specific `config/hard/*Behaviour.json` file, or optional `extraunits.json` / `extrascavunits.json` overlays.
-- Change retreat, target threat, fire state, or per-unit combat overrides: the faction-specific `config/hard/*Behaviour.json` file.
-- Change production mix inside a factory: the faction-specific `config/hard/*Factory.json` file.
+- Change what role or attribute a unit has: the faction-specific `config/hard/*Behaviour.json` files, or optional `extraunits.json` / `extrascavunits.json` overlays.
+- Change retreat, target threat, fire state, or per-unit combat overrides: the faction-specific `config/hard/*Behaviour.json` files.
+- Change production mix inside a factory: the faction-specific `config/hard/*Factory.json` files.
 - Change which enemy roles trigger a counter-response: the faction-specific `config/hard/*Response.json` file, keeping in mind response keys are role-based and overlapping keys can override each other when multiple profiles load.
-- Change economic pacing, assistant logic, or energy thresholds: the faction-specific `config/hard/*Economy.json` file.
+- Change economic pacing, assistant logic, or energy thresholds: the faction-specific `config/hard/*Economy.json` files.
 - Change smoothed economy signal behavior (EMA/noise dampening): `script/hard/helper/economy_smooth.as`
 - Change in-game resource bonus planning normalization: `script/hard/helper/resource_bonus.as`; JSON `income_tier` values still need direct config edits.
-- Change post-build follow-ups like porc, pylon, or hub chains: `config/hard/build_chain.json`
+- Change post-build follow-ups like porc, pylon, or hub chains: the faction-specific `config/hard/*BuildChain.json` files.
 - Change build footprint spacing or terrain/build blocking rules: `config/hard/block_map.json`
 - Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`
 - Change terrain-aware lane/path spread behavior: `script/hard/helper/lane_pathing.as`, `script/hard/helper/terrain/terrain_data.as`
@@ -84,11 +84,11 @@ Start from the narrowest owner for the behavior you want:
 - Change commander hide radius, assist behavior, or morph config: `config/hard/commander.json`
 - Change the first units queued from a new factory: `script/hard/misc/commander.as`
 - Change ally-team discovery, slot ordering, or slot broadcast timing: `script/hard/helper/ally_slot.as`
-- Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated fallback data)
+- Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated data)
 - Change role resolution, slot fallback, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
 - Change custom military fight-task assignment by role/attribute: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`
 - Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`
-- Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in `config/hard/build_chain.json` unless a direct script selector is added.
+- Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in the faction-specific `config/hard/*BuildChain.json` files unless a direct script selector is added.
 - Change shared command throttling behavior for role command bursts: `script/hard/helper/command_delay.as`
 - Change factory switch timing or custom factory-side logic: `script/hard/manager/factory.as`
 - Change builder-specific custom behavior or base constructor retention: `script/hard/manager/builder.as`; role targets are exposed by `TeamRole::GetBaseConstructorCount()` in `script/hard/helper/role/role.as`.
@@ -167,7 +167,7 @@ Use this when JSON tuning is not enough and a script helper/override is required
 Use this when the AI is building too little, too much, or the wrong tier of static defence.
 
 1. Tune unit availability, roles, and threat values for static defences in the relevant `config/hard/*Behaviour.json` faction overlay.
-2. Tune the porcupine defence order, base defence schedule, superweapon list, and side-specific defence units in `config/hard/build_chain.json`.
+2. Tune the porcupine defence order, base defence schedule, superweapon list, and side-specific defence units in the faction-specific `config/hard/*BuildChain.json` files.
 3. Tune adaptive build permission in `script/hard/helper/defense.as`. It exposes `ShouldBuildT1LightAA`, `ShouldBuildT1LightTurret`, `ShouldBuildT2FlakAA`, `ShouldBuildLRPC`, and related helpers.
 4. Keep `script/hard/manager/military.as` as the owner that combines role defence policy, adaptive defence pressure, lane-biased placement, and `aiMilitaryMgr.DefaultMakeDefence(...)`.
 5. If future work needs exact turret selection from script, add or verify a direct build API before bypassing `DefaultMakeDefence`; currently the helper only gates whether defence creation is allowed.
@@ -185,7 +185,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Terrain helper files live under `script/hard/helper/terrain/`; update include paths when moving terrain parsing, runtime setup, or classification helpers.
 - Role helper files live under `script/hard/helper/role/`; manager includes should usually target `script/hard/helper/role/role.as`, not individual role files.
 - Terrain tuning now combines static block-map tuning, heuristic terrain scales, and optional Lua hint overrides via `AiLuaMessage`.
-- Adaptive defence gating lives in `script/hard/helper/defense.as`, while actual default defence selection still comes from `config/hard/build_chain.json` and `aiMilitaryMgr.DefaultMakeDefence(...)`.
+- Adaptive defence gating lives in `script/hard/helper/defense.as`, while actual default defence selection still comes from the faction-specific `config/hard/*BuildChain.json` files and `aiMilitaryMgr.DefaultMakeDefence(...)`.
 - Military combat task assignment first checks `script/hard/helper/military_task.as` for role/attribute-specific intents such as scout, raid, artillery, support, AA, bomber, and super; unknown or generic units still use `aiMilitaryMgr.DefaultMakeTask(...)`.
 - Resource bonus planning normalization lives in `script/hard/helper/resource_bonus.as`; keep it included through `script/hard/helper/role/role.as` to avoid duplicate symbol definitions.
 - Economy manager now relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
@@ -193,7 +193,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns `BASE` to a role-sized persisted pool of mobile constructors. AIR keeps up to 6, TECH up to 4, and FRONT/SEA/default up to 2. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
 - `Factory::userData` tier flags are assigned in `main.as`, then consumed in `factory.as`; if you add a new factory tier concept, both places must change.
 - The profile generator seeds roles from extracted start spots plus metadata heuristics (`minHeight`, `tidalStrength`, and map-name water hints), while `imported_profiles.as` preserves curated pre-existing role labels. Generation must not silently overwrite curated imported assignments.
-- `build_chain.json` explicitly warns against recursive chains; treat chain additions as potentially unsafe until checked.
+- The `config/hard/*BuildChain.json` files explicitly warn against recursive chains; treat chain additions as potentially unsafe until checked.
 - `factory.json` is shared across the allyTeam, so changes there can affect multiple allied AI instances together.
 - `builder.as` persists role-based base constructor IDs; AIR currently keeps 6 constructors at base, TECH keeps 4, FRONT keeps 2, and SEA/default keeps 2.
 

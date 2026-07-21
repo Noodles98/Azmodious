@@ -15,7 +15,8 @@ SInitInfo AiInit()
 		"ArmadaBehaviour",
 		"CortexBehaviour",
 		"block_map",
-		"build_chain",
+		"ArmadaBuildChain",
+		"CortexBuildChain",
 		"commander",
 		"ArmadaEconomy",
 		"CortexEconomy",
@@ -28,6 +29,7 @@ SInitInfo AiInit()
 	if (string(aiSetupMgr.GetModOptions()["experimentallegionfaction"]) == "1") {
 		AiLog("Inserting Legion");
 		data.profile.insertLast("LegionBehaviour");
+		data.profile.insertLast("LegionBuildChain");
 		data.profile.insertLast("LegionEconomy");
 		data.profile.insertLast("LegionFactory");
 		data.profile.insertLast("LegionResponse");
