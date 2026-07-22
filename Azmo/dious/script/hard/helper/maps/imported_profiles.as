@@ -17,16 +17,16 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(2801, 0, 775), "air", false),  // P2
 		TeamMapProfileTypes::StartSpot(AIFloat3(4211, 0, 609), "tech", false),  // P3
 		TeamMapProfileTypes::StartSpot(AIFloat3(5762, 0, 600), "front", false),  // P4
-		TeamMapProfileTypes::StartSpot(AIFloat3(1159, 0, 1943), "front", false),  // P5
-		TeamMapProfileTypes::StartSpot(AIFloat3(3061, 0, 1967), "front", false),  // P6
+		TeamMapProfileTypes::StartSpot(AIFloat3(1159, 0, 1943), "tech", false),  // P5
+		TeamMapProfileTypes::StartSpot(AIFloat3(3061, 0, 1967), "air", false),  // P6
 		TeamMapProfileTypes::StartSpot(AIFloat3(4298, 0, 1996), "front", false),  // P7
 		TeamMapProfileTypes::StartSpot(AIFloat3(5472, 0, 2030), "front", false),  // P8
 		TeamMapProfileTypes::StartSpot(AIFloat3(5475, 0, 9444), "front", false),  // P9
 		TeamMapProfileTypes::StartSpot(AIFloat3(3452, 0, 9689), "air", false),  // P10
 		TeamMapProfileTypes::StartSpot(AIFloat3(1943, 0, 9622), "tech", false),  // P11
 		TeamMapProfileTypes::StartSpot(AIFloat3(408, 0, 9640), "front", false),  // P12
-		TeamMapProfileTypes::StartSpot(AIFloat3(5166, 0, 8246), "front", false),  // P13
-		TeamMapProfileTypes::StartSpot(AIFloat3(3212, 0, 8249), "front", false),  // P14
+		TeamMapProfileTypes::StartSpot(AIFloat3(5166, 0, 8246), "tech", false),  // P13
+		TeamMapProfileTypes::StartSpot(AIFloat3(3212, 0, 8249), "air", false),  // P14
 		TeamMapProfileTypes::StartSpot(AIFloat3(1859, 0, 8256), "front", false),  // P15
 		TeamMapProfileTypes::StartSpot(AIFloat3(697, 0, 8224), "front", false),  // P16
 	};
@@ -129,14 +129,14 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(410, 0, 730), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(2100, 0, 2400), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(1400, 0, 4100), "tech", false),
-		TeamMapProfileTypes::StartSpot(AIFloat3(300, 0, 2800), "tech", false),
+		TeamMapProfileTypes::StartSpot(AIFloat3(300, 0, 2800), "air", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(3200, 0, 4000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(2000, 0, 6000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(2050, 0, 7500), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10600, 0, 730), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10300, 0, 2400), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10700, 0, 4100), "tech", false),
-		TeamMapProfileTypes::StartSpot(AIFloat3(12000, 0, 5600), "tech", false),
+		TeamMapProfileTypes::StartSpot(AIFloat3(12000, 0, 5600), "air", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(9000, 0, 4000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10700, 0, 6000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10400, 0, 7500), "front", false),
