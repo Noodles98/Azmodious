@@ -114,7 +114,7 @@
 		},
 		"mex2": {
 			"type": ["rectangle", "mex"],
-			"ignore": ["none"]
+			"ignore": ["all"]
 		},
 		"converter": {
 			"type": ["rectangle", "convert"],
@@ -183,8 +183,8 @@
 		"fusion": ["armadvsol", "coradvsol", "legadvsol"],
 		"singu": ["armfus", "armuwfus", "armckfus", "armafus", "corfus", "coruwfus", "corafus", "legfus", "legafus"],
 		"store": ["armmstor", "armestor", "cormstor", "corestor", "legmstor", "legestor"],
-		"mex": ["armmex", "cormex", "legmex", "armuwmex", "coruwmex"],
-		"mex2": ["armmoho", "cormoho", "legmoho", "armuwmme", "coruwmme", "legmohoconct"],
+		"mex": ["armmex", "cormex", "legmex", "armuwmex", "coruwmex", "leganavalmex"],
+		"mex2": ["armmoho", "cormoho", "legmoho", "armuwmme", "coruwmme", "legmohoconct", "legmext15"],
 		"converter": ["armmakr", "cormakr", "legeconv", "armmmkr", "cormmkr", "legadveconv", "armfmkr", "corfmkr", "armuwmmm", "coruwmmm"],
 		"def_low": ["armllt", "armclaw", "corllt", "cormaw", "leglht", "legdtr"],
 		"caretaker": ["armnanotc", "armnanotcplat", "cornanotc", "cornanotcplat", "legnanotc", "legnanotcplat"],

@@ -7,9 +7,9 @@
 				"land": {
 					// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 					// limit = random(<lower limit>..<upper limit>)
-					"armwin": [300, 500],
-					"armsolar": [80, 160],
-					"armadvsol": [80, 160],
+					"armwin": [200, 300],
+					"armsolar": [80, 120],
+					"armadvsol": [80, 120],
 					"armfus": [70, 130],
 					"armafus": [420, 700]
 				},
@@ -44,11 +44,11 @@
 
 	"calc_mex": true,
 
-	"goal_exec": 42.0,
+	"goal_exec": 48.0,
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.2,
+	"eps_step": 0.35,
 
 	"buildpower": 1.15,
 
@@ -56,7 +56,7 @@
 
 	"ms_pull": [[0.56, 0.0], [0.63, 0.34]],
 
-	"mex_max": [1.0, false],
+	"mex_max": [1.0, true],
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 

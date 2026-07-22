@@ -124,18 +124,21 @@ void AiLuaMessage(const string& in data)  // Spring.SendSkirmishAIMessage(teamID
 void AiMessage(const string& in data, int fromTeamId)  // AiSendMessage(msg, toTeamId = -1)
 {
 	TeamRole::OnMessage(data);
+	Builder::OnMessage(data);
 }
 
 void AiUnitFinished(CCircuitUnit@ unit)
 {
 	// NOTE: Experimental. May be deprecated.
 	// Duplicates module's AiUnitAdded, but for any unit.
+	Builder::AiUnitFinished(unit);
 }
 
 void AiUnitDestroyed(CCircuitUnit@ unit)
 {
 	// NOTE: Experimental. May be deprecated
 	// Duplicates module's AiUnitRemoved, but for any unit.
+	Builder::AiUnitDestroyed(unit);
 }
 
 }  // namespace Main

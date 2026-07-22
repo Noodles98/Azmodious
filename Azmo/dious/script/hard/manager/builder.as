@@ -1,4 +1,4 @@
-#include "../../unit.as"
+#include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
 
 
@@ -12,7 +12,7 @@ array<Id> baseBuilderIds;
 void AiTaskAssigned(CCircuitUnit@ unit)
 {
 // 	if (unit.task.GetType() == Task::Type::BUILDER)
-// 		AiLog("build-task for "unit.circuitDef.GetName() + ", buildType=" + unit.task.GetBuildType());
+// 		AiLog("build-task for "unit.circuitDef.GetName() + "let's, buildType=" + unit.task.GetBuildType());
 // 	else
 // 		AiLog("Not a build-task for " + unit.circuitDef.GetName() + ", type=" + unit.task.GetType());
 }
@@ -36,8 +36,14 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 // 			break;
 // 		}
 // 	}
-// 	return task;
-	return aiBuilderMgr.DefaultMakeTask(unit);
+//  return task;
+	IUnitTask@ task = aiBuilderMgr.DefaultMakeTask(unit);
+	if (LegionMexUpgradeFilter::ShouldReject(task)) {
+		AIFloat3 buildPos = task.GetBuildPos();
+		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
+		return null;
+	}
+	return task;
 }
 
 void AiTaskAdded(IUnitTask@ task)
@@ -126,6 +132,20 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 		return;
 
 	AssignBaseConstructor(unit);
+}
+
+void OnMessage(const string& in data)
+{
+}
+
+void AiUnitFinished(CCircuitUnit@ unit)
+{
+	LegionMexUpgradeFilter::OnUnitFinished(unit);
+}
+
+void AiUnitDestroyed(CCircuitUnit@ unit)
+{
+	LegionMexUpgradeFilter::OnUnitDestroyed(unit);
 }
 
 void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)

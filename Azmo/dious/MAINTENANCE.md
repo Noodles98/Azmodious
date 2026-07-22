@@ -91,7 +91,7 @@ Start from the narrowest owner for the behavior you want:
 - Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in the faction-specific `config/hard/*BuildChain.json` files unless a direct script selector is added.
 - Change shared command throttling behavior for role command bursts: `script/hard/helper/command_delay.as`
 - Change factory switch timing or custom factory-side logic: `script/hard/manager/factory.as`
-- Change builder-specific custom behavior or base constructor retention: `script/hard/manager/builder.as`; role targets are exposed by `TeamRole::GetBaseConstructorCount()` in `script/hard/helper/role/role.as`.
+- Change builder-specific custom behavior, allied mex-claim rejection, or base constructor retention: `script/hard/manager/builder.as`; role targets are exposed by `TeamRole::GetBaseConstructorCount()` in `script/hard/helper/role/role.as`.
 - Change startup `BASE` tagging for static economy structures: `script/hard/main.as`
 - Change constructor `BASE` tagging and its save/load state: `script/hard/manager/builder.as`
 
@@ -119,7 +119,9 @@ Use this when economy decisions are too noisy, too passive, or too aggressive.
 2. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
 3. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
 4. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
-5. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
+5. For allied mex conflicts, keep `calc_mex` and ally-shared `mex_max` aligned across all loaded `config/hard/*Economy.json` faction overlays, and verify every faction's mex variants are listed in `config/hard/block_map.json`.
+6. Arm/Cortex cross-upgrading Legion mexes is filtered in `script/hard/helper/legion_mex_upgrade.as`, with `script/hard/manager/builder.as` only forwarding unit-finished/destroyed events and rejected returned `MEXUP` tasks.
+7. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
 
 ### Role Selection and Tuning
 
@@ -148,9 +150,10 @@ Use this when structures are built too close together, too far from base, or wit
 
 1. Classify or adjust a structure's footprint in `config/hard/block_map.json`. `building.instance` maps unit names to a class; `class_land` supplies the shape, structure type, offset, yard/radius, and collision exceptions. Add water-specific overrides under `class_water` only when water behavior must differ.
 2. Treat `yard` and `radius` as placement-clearance tuning, not cosmetic values. The documented unit is 16 elmos; `ignore` and `not_ignore` decide which structure types may overlap the blocker's clearance.
-3. For static economy structures that should stay near the base core, add their exact unit names to `Main::IsBaseEconomyStructure()` in `script/hard/main.as`; startup adds the `BASE` attribute to those non-mobile defs.
-4. For mobile constructors that should favor base-local jobs, tune the role target returned by `TeamRole::GetBaseConstructorCount()` and the candidate filter in `script/hard/manager/builder.as`. Current candidates are constructors costing at least 200 metal, constructors beyond the active guard-task count, or flying constructors. Preserve the six-ID `AiLoad`/`AiSave` format if the persisted list changes.
-5. Retune `economy.cluster_range` in the relevant `config/hard/*Economy.json` faction overlay alongside `BASE` and footprint changes: it controls economy clustering, while the attributes and block map control task affinity and physical clearance.
+3. Include every faction's mex variants in the `mex` and `mex2` instance lists; Legion variants such as `leganavalmex` and `legmext15` are needed for placement and upgrade filtering.
+4. For static economy structures that should stay near the base core, add their exact unit names to `Main::IsBaseEconomyStructure()` in `script/hard/main.as`; startup adds the `BASE` attribute to those non-mobile defs.
+5. For mobile constructors that should favor base-local jobs, tune the role target returned by `TeamRole::GetBaseConstructorCount()` and the candidate filter in `script/hard/manager/builder.as`. Current candidates are constructors costing at least 200 metal, constructors beyond the active guard-task count, or flying constructors. Preserve the six-ID `AiLoad`/`AiSave` format if the persisted list changes.
+6. Retune `economy.cluster_range` in the relevant `config/hard/*Economy.json` faction overlay alongside `BASE` and footprint changes: it controls economy clustering, while the attributes and block map control task affinity and physical clearance.
 
 ### Custom Editing (New Helpers and Overrides)
 
