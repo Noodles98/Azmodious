@@ -7,11 +7,11 @@
 	
 		"quota": {
 			"scout": 1,  // max scout units out of raiders
-			"raid": [15.0, 85.0],  // [<min>, <avg>] power of raider squad 2.5,48
+			"raid": [20.0, 85.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 160.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
 				"attack": [0.65, 1.25],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
-				"defence": [0.35, 0.55],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
+				"defence": [0.40, 0.60],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
 				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
 				"static": 1.1,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
 				"comm": 0.05   // because of power of dgun
@@ -19,8 +19,8 @@
 			// anti-air threat threshold, air factories will stop production when AA threat exceeds
 			"aa_threat": [[8, 50000.0], [24, 50000.0]],  // [[<map_start>, <threat_start>], [<map_end>, <threat_end>]]
 			"slack_mod": {
-				"all": 0.05,  // threat map 64-elmos slack multiplier for all units
-				"static": 0.05,  // additional 64-elmo-cells for static units
+				"all": 0.25,  // threat map 64-elmos slack multiplier for all units
+				"static": 0.15,  // additional 64-elmo-cells for static units
 				"speed": [0.5, 2.0]  // [<64elmo_cells_speed_mod>, <max_64elmo_cells>]
 			},
 			"num_batch": 5, //repeat unit build if response factory build is called
@@ -37,10 +37,10 @@
 	
 		// following block is all about defense
 		"defence": {
-			"infl_rad": 4,  // radius in influenece cells for defendAlly map
-			"base_rad": [600.0, 800.0],  // defend if enemy within clamp(distance(lane_pos, base_pos), 1000, 2000) radius
+			"infl_rad": 5,  // radius in influenece cells for defendAlly map
+			"base_rad": [750.0, 850.0],  // defend if enemy within clamp(distance(lane_pos, base_pos), 1000, 2000) radius
 			"comm_rad": [800.0, 500.0],  // 0 distance from base ~ 1000, base_rad ~ 500.0
-			"escort": [0, 0, 0]  // [<builders_count>, <defenders_count>, <constraint_seconds>]
+			"escort": [3, 1, 300]  // [<builders_count>, <defenders_count>, <constraint_seconds>]
 		},
 		// read of "escort":  [number of builders with defenders, number of defenders for each builder, timeframe were only escorted builders are able to expand (=build mex, porc)]
 		// base radius: ai checks if is withing base_rad. if there is enemy it checks if it is withing comm radius which is variable and depend on distance from base

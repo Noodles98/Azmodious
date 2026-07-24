@@ -27,22 +27,22 @@ void OnUnitDestroyed(CCircuitUnit@ unit)
 	ForgetLegionMexNear(unit.GetPos(ai.frame));
 }
 
-bool ShouldReject(IUnitTask@ task)
+bool ShouldReject(IUnitTask@ task, const CCircuitDef@ builderDef)
 {
-	if (task is null || task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEXUP)
+	if (task is null || task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEX)
 		return false;
-
-	const CCircuitDef@ buildDef = task.GetBuildDef();
-	if (buildDef is null || !IsArmadaOrCortexMexUpgradeDef(buildDef))
+	if (IsLegionDef(builderDef))
 		return false;
 
 	return HasLegionMexNear(task.GetBuildPos());
 }
 
-bool IsArmadaOrCortexMexUpgradeDef(const CCircuitDef@ cdef)
+bool IsLegionDef(const CCircuitDef@ cdef)
 {
-	const string name = cdef.GetName();
-	return (name == "armmoho") || (name == "cormoho") || (name == "armuwmme") || (name == "coruwmme");
+	if (cdef is null)
+		return false;
+
+	return cdef.GetName().findFirst("leg") == 0;
 }
 
 bool IsLegionMexDef(const CCircuitDef@ cdef)
