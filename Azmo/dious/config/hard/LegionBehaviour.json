@@ -201,8 +201,7 @@
 "legaap": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"since": 420,
-				"limit": 1,
+				"limit": 2,
 				"build_mod": 1000.0,
 				"build_speed": 10.0 //bp 200
 			},
