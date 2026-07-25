@@ -1,49 +1,61 @@
 namespace TeamRoleAir {
 
-const uint MIN_BOMBER_SWARM = 3;
+// Role tuning constants
+const uint MIN_BOMBER_SWARM = 5;
+const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
-const int MID_GAME_FRAME = 12 * MINUTE;
-const int LATE_GAME_FRAME = 24 * MINUTE;
-const float EARLY_CONVERT_EFF = 1.50f;
-const float MID_CONVERT_EFF = 2.70f;
-const float LATE_CONVERT_EFF = 2.90f;
-const float EARLY_CONVERT_ENERGY_EFF = 24.f;
-const float MID_CONVERT_ENERGY_EFF = 27.f;
-const float LATE_CONVERT_ENERGY_EFF = 30.f;
+const int MID_GAME_FRAME = 10 * MINUTE;
+const int LATE_GAME_FRAME = 18 * MINUTE;
+const int ADV_AIR_MIN_FRAME = 8 * MINUTE;
+const float ADV_AIR_MIN_METAL_INCOME = 15.0f;
+const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
+const float EARLY_CONVERT_EFF = 1.97f;
+const float MID_CONVERT_EFF = 2.0f;
+const float LATE_CONVERT_EFF = 2.33f;
+const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
+const float MID_CONVERT_ENERGY_EFF = 23.13f;
+const float LATE_CONVERT_ENERGY_EFF = 24.11f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.73f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.76f;
-const float EARLY_ENERGY_STALL_DEFAULT = 0.80f;
-const float MID_ENERGY_STALL_DEFAULT = 0.83f;
-const float LATE_ENERGY_STALL_DEFAULT = 0.86f;
-const float EARLY_ASSIST_METAL_RATIO = 0.28f;
-const float MID_ASSIST_METAL_RATIO = 0.31f;
-const float LATE_ASSIST_METAL_RATIO = 0.34f;
-const float EARLY_FACTORY_SWITCH_ARMY_MULT = 0.92f;
-const float MID_FACTORY_SWITCH_ARMY_MULT = 0.98f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.06f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.84f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 0.98f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.86f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.83f;
+const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
+const float MID_ENERGY_STALL_DEFAULT = 0.85f;
+const float LATE_ENERGY_STALL_DEFAULT = 0.81f;
+const float EARLY_ASSIST_METAL_RATIO = 0.35f;
+const float MID_ASSIST_METAL_RATIO = 0.42f;
+const float LATE_ASSIST_METAL_RATIO = 0.55f;
+const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
+const float MID_FACTORY_SWITCH_ARMY_MULT = 1.15f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 0.8f;
-const float MID_DEFENCE_THREAT_MIN = 0.5f;
-const float LATE_DEFENCE_THREAT_MIN = 0.2f;
-const float EARLY_DEFENCE_METAL_INCOME_MIN = 9.f;
-const float MID_DEFENCE_METAL_INCOME_MIN = 12.f;
-const float LATE_DEFENCE_METAL_INCOME_MIN = 16.f;
-const float EARLY_DEFENCE_LANE_SPREAD = 160.f;
-const float MID_DEFENCE_LANE_SPREAD = 150.f;
-const float LATE_DEFENCE_LANE_SPREAD = 140.f;
-const uint FRONTLINE_CONFIRM_HITS = 5;
-const int FRONTLINE_CONFIRM_WINDOW = 120 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 270 * SECOND;
+const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
+const float MID_DEFENCE_THREAT_MIN = 35.0f;
+const float LATE_DEFENCE_THREAT_MIN = 64.0f;
+const float EARLY_DEFENCE_METAL_INCOME_MIN = 10.f;
+const float MID_DEFENCE_METAL_INCOME_MIN = 16.f;
+const float LATE_DEFENCE_METAL_INCOME_MIN = 20.f;
+const float EARLY_DEFENCE_LANE_SPREAD = 1200.f;
+const float MID_DEFENCE_LANE_SPREAD = 1500.f;
+const float LATE_DEFENCE_LANE_SPREAD = 1800.f;
+const uint MILITARY_SCOUT_CAP = 1;
+const float MILITARY_ATTACK_THRESHOLD = 55.f;
+const float MILITARY_RAID_MIN_POWER = 25.f;
+const float MILITARY_RAID_AVG_POWER = 80.f;
+const uint FACTORY_MIN_BUILDER_COUNT = 2;
+const uint FACTORY_MIN_BUILDER2_COUNT = 1;
+const uint FRONTLINE_CONFIRM_HITS = 20;
+const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 240 * SECOND;
 
 array<Id> bomberIds;
 array<Id> escortIds;
 bool isBomberReleased = true;
 
+// Economy stage helpers
 enum EconomyStage {
 	EARLY = 0,
 	MID,
@@ -104,6 +116,7 @@ float GetFactorySwitchMetalMultiplier()
 	}
 }
 
+// Economy, factory, and military policy
 void ApplyEconomyBias()
 {
 	switch (GetEconomyStage()) {
@@ -121,11 +134,29 @@ void ApplyEconomyBias()
 			break;
 	}
 }
+
+void ApplyMilitaryQuota()
+{
+	aiMilitaryMgr.quota.scout = MILITARY_SCOUT_CAP;
+	aiMilitaryMgr.quota.attack = MILITARY_ATTACK_THRESHOLD;
+	aiMilitaryMgr.quota.raid.min = MILITARY_RAID_MIN_POWER;
+	aiMilitaryMgr.quota.raid.avg = MILITARY_RAID_AVG_POWER;
+}
+
+uint GetFactoryMinBuilderCount()
+{
+	return FACTORY_MIN_BUILDER_COUNT;
+}
+
+uint GetFactoryMinBuilder2Count()
+{
+	return FACTORY_MIN_BUILDER2_COUNT;
+}
+
+// Bomber swarm control
 bool IsEscortFighter(const CCircuitUnit@ unit)
 {
 	const CCircuitDef@ cdef = unit.circuitDef;
-	if (!cdef.IsAbleToFly())
-		return false;
 	if (cdef.IsRoleAny(Unit::Role::BOMBER.mask))
 		return false;
 	return cdef.IsRoleAny(Unit::Role::AA.mask);
@@ -168,6 +199,8 @@ void RecomputeBomberControl()
 	RefreshAlive(escortIds);
 
 	const bool isRelease = bomberIds.length() >= MIN_BOMBER_SWARM;
+	const uint escortLimit = bomberIds.length() * MAX_ESCORTS_PER_BOMBER;
+	const uint activeEscorts = (escortIds.length() < escortLimit) ? escortIds.length() : escortLimit;
 	if (!RoleCommandDelay::IsReady(CONTROL_KEY)) {
 		return;
 	}
@@ -175,18 +208,19 @@ void RecomputeBomberControl()
 	for (uint i = 0; i < bomberIds.length(); ++i)
 		ai.UnitControl(bomberIds[i], isRelease);
 	for (uint i = 0; i < escortIds.length(); ++i)
-		ai.UnitControl(escortIds[i], isRelease);
+		ai.UnitControl(escortIds[i], (i < activeEscorts) ? isRelease : true);
 	RoleCommandDelay::Commit(CONTROL_KEY);
 
 	if (isRelease != isBomberReleased) {
 		isBomberReleased = isRelease;
 		AiLog("Air bomber hold " + (isRelease ? "released" : "active")
 			+ " (bombers=" + bomberIds.length()
-			+ ", escorts=" + escortIds.length()
+			+ ", escorts=" + activeEscorts + "/" + escortIds.length()
 			+ ", min=" + MIN_BOMBER_SWARM + ")");
 	}
 }
 
+// Role lifecycle hooks
 void OnMilitaryUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 {
 	if (usage != Unit::UseAs::COMBAT)
@@ -229,6 +263,7 @@ void OnSlowUpdate()
 		RecomputeBomberControl();
 }
 
+// Command timing and factory selection
 bool IsCommandReady(const string& in keySuffix = "")
 {
 	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
@@ -241,26 +276,78 @@ void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommand
 	RoleCommandDelay::Commit(key, delay);
 }
 
-void FillAllowedFactories(array<string>& out allowed, bool isArmada)
+bool ShouldAllowAdvancedAir()
 {
-	if (isArmada) {
+	return (ai.frame >= ADV_AIR_MIN_FRAME)
+		&& (aiEconomyMgr.metal.income >= ADV_AIR_MIN_METAL_INCOME)
+		&& (EconomySmooth::GetMetalRatio() >= ADV_AIR_MIN_METAL_RATIO)
+		&& !aiEconomyMgr.isEnergyStalling;
+}
+
+string GetBasicFactoryName(const string& in sidePrefix)
+{
+	if (sidePrefix == "arm")
+		return "armap";
+	if (sidePrefix == "cor")
+		return "corap";
+	return "legap";
+}
+
+string GetAdvancedFactoryName(const string& in sidePrefix)
+{
+	if (sidePrefix == "arm")
+		return "armaap";
+	if (sidePrefix == "cor")
+		return "coraap";
+	return "legaap";
+}
+
+CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facDef, bool isStart)
+{
+	if (isStart || !ShouldAllowAdvancedAir())
+		return facDef;
+
+	CCircuitDef@ basicDef = ai.GetCircuitDef(GetBasicFactoryName(sidePrefix));
+	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
+	if ((basicDef !is null) && (advancedDef !is null)
+		&& (basicDef.count > 0) && (advancedDef.count == 0)
+		&& advancedDef.IsAvailable(ai.frame))
+	{
+		return advancedDef;
+	}
+
+	return facDef;
+}
+
+void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
+{
+	const bool allowAdvancedAir = ShouldAllowAdvancedAir();
+
+	if (sidePrefix == "arm") {
 		allowed.insertLast("armap");
-		allowed.insertLast("armaap");
-	} else {
+		if (allowAdvancedAir)
+			allowed.insertLast("armaap");
+	} else if (sidePrefix == "cor") {
 		allowed.insertLast("corap");
-		allowed.insertLast("coraap");
+		if (allowAdvancedAir)
+			allowed.insertLast("coraap");
+	} else {
+		allowed.insertLast("legap");
+		if (allowAdvancedAir)
+			allowed.insertLast("legaap");
 	}
 }
 
 int MakeSwitchInterval()
 {
-	return AiRandom(420, 680) * SECOND;
+	return AiRandom(520, 720) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)
 {
 }
 
+// Defence and frontline shaping
 bool ShouldMakeDefence()
 {
 	switch (GetEconomyStage()) {
