@@ -13,16 +13,16 @@ void RegisterAll()
 	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("AcidicQuarry", acidic_quarrySpots));
 
 	array<TeamMapProfileTypes::StartSpot> all_that_glittersSpots = {
-		TeamMapProfileTypes::StartSpot(AIFloat3(668, 0, 755), "air", false),  // P1
-		TeamMapProfileTypes::StartSpot(AIFloat3(2801, 0, 775), "front", false),  // P2
+		TeamMapProfileTypes::StartSpot(AIFloat3(668, 0, 755), "front", false), // P1
+		TeamMapProfileTypes::StartSpot(AIFloat3(2801, 0, 775), "air", false),  // P2
 		TeamMapProfileTypes::StartSpot(AIFloat3(4211, 0, 609), "tech", false),  // P3
-		TeamMapProfileTypes::StartSpot(AIFloat3(5762, 0, 600), "air", false),  // P4
+		TeamMapProfileTypes::StartSpot(AIFloat3(5762, 0, 600), "front", false),  // P4
 		TeamMapProfileTypes::StartSpot(AIFloat3(1159, 0, 1943), "front", false),  // P5
 		TeamMapProfileTypes::StartSpot(AIFloat3(3061, 0, 1967), "tech", false),  // P6
 		TeamMapProfileTypes::StartSpot(AIFloat3(4298, 0, 1996), "front", false),  // P7
 		TeamMapProfileTypes::StartSpot(AIFloat3(5472, 0, 2030), "front", false),  // P8
 		TeamMapProfileTypes::StartSpot(AIFloat3(5475, 0, 9444), "front", false),  // P9
-		TeamMapProfileTypes::StartSpot(AIFloat3(3452, 0, 9689), "front", false),  // P10
+		TeamMapProfileTypes::StartSpot(AIFloat3(3452, 0, 9689), "air", false),  // P10
 		TeamMapProfileTypes::StartSpot(AIFloat3(1943, 0, 9622), "tech", false),  // P11
 		TeamMapProfileTypes::StartSpot(AIFloat3(408, 0, 9640), "air", false),  // P12
 		TeamMapProfileTypes::StartSpot(AIFloat3(5166, 0, 8246), "front", false),  // P13
