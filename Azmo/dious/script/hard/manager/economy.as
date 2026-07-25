@@ -52,14 +52,14 @@ void AiUpdateEconomy()
 	aiEconomyMgr.isEnergyEmpty = energyRatio < 0.2f;
 	if (aiEconomyMgr.isMetalEmpty) {
 		aiEconomyMgr.isEnergyStalling = aiEconomyMgr.isEnergyEmpty
-			|| ((energyBalance < 0.2f) && (energyRatio < TeamRole::GetEnergyStallRatioWhenMetalEmpty()));
+			|| ((energyBalance < 0.f) && (energyRatio < TeamRole::GetEnergyStallRatioWhenMetalEmpty()));
 	} else {
 		aiEconomyMgr.isEnergyStalling = aiEconomyMgr.isEnergyEmpty
-			|| ((energyBalance < 0.2f) && (energyRatio < TeamRole::GetEnergyStallRatioDefault()));
+			|| ((energyBalance < 0.f) && (energyRatio < TeamRole::GetEnergyStallRatioDefault()));
 	}
 	// NOTE: Default energy-to-metal conversion TeamRulesParam "mmLevel" = 0.75
 	// Require real surplus, not just a briefly full battery, before requesting converters.
-	aiEconomyMgr.isEnergyFull = (energyRatio > 0.88f) && (energyBalance > 0.2f);
+	aiEconomyMgr.isEnergyFull = (energyRatio > 0.88f) && (energyBalance > 0.f);
 
 	// Consume switch-assist as a one-update signal; Factory::AiIsSwitchAllowed
 	// will re-assert it on subsequent failed switch checks.

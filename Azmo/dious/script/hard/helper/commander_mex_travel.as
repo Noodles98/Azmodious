@@ -4,7 +4,7 @@
 
 namespace CommanderMexTravel {
 
-const float PRE_FACTORY_MAX_TRAVEL_SECONDS = 6.f;
+const float PRE_FACTORY_MAX_TRAVEL_SECONDS = 9.f;
 const float COMMANDER_TRAVEL_DISTANCE_PER_SECOND = 75.f;
 
 bool ShouldReject(IUnitTask@ task, CCircuitUnit@ unit)
