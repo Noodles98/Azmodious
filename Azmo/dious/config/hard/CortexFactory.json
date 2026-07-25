@@ -19,7 +19,7 @@
 
 	// ===== Cortex bot labs =====
 "corlab": {
-		"importance": [0.8, 0.0],
+		"importance": [0.8, 0.1],
 		"require_energy": false,
 		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corck", "corak", "cornecro", "corstorm", "corthud", "corcrash"],
@@ -51,7 +51,7 @@
 
 	// ===== Cortex vehicle plants =====
 "corvp": {
-		"importance": [0.8, 0.0],
+		"importance": [0.8, 0.1],
 		"require_energy": false,
 		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corcv", "cormuskrat", "cormlv", "corfav", "corgator", "corgarp", "corraid", "corlevlr", "corwolv", "cormist"],
@@ -112,13 +112,13 @@
 
 	// ===== Cortex air plants =====
 "corap": {
-		"importance": [0.1, 0.0],
+		"importance": [0.8, 0.1],
 		"require_energy": false,
 		"income_tier": [30],
 		"unit":      ["corca", "corveng", "corfink", "corshad", "corbw"],
 		"land": {
-			"tier0": [ 0.05,    0.80,      0.05,      0.05,      0.05],
-			"tier1": [ 0.05,    0.55,      0.00,      0.20,      0.20]
+			"tier0": [ 0.05,    0.70,      0.05,      0.10,      0.10],
+			"tier1": [ 0.05,    0.50,      0.00,      0.25,      0.20]
 		},
 		"air": {
 			"tier0": [ 0.05,    0.90,      0.00,      0.00,      0.05],
@@ -132,8 +132,8 @@
 		"income_tier": [50],
 		"unit":      ["coraca", "corvamp", "corawac", "corhurc", "corape", "corcrwh"],
 		"land": {
-			"tier0": [ 0.05,     0.90,      0.00,      0.05,      0.00,     0.00],
-			"tier1": [ 0.03,     0.32,      0.05,      0.20,      0.20,     0.20]
+			"tier0": [ 0.05,     0.70,      0.00,      0.15,      0.05,     0.00],
+			"tier1": [ 0.03,     0.27,      0.05,      0.25,      0.20,     0.20]
 		},
 		"air": {
 			"tier0": [ 0.05,     0.95,      0.00,      0.00,      0.00,     0.00],

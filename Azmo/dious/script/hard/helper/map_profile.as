@@ -6,6 +6,7 @@ bool isResolved = false;
 string mapName = "";
 string preferredRole = "";
 bool isLandLocked = false;
+int matchedSpotIndex = -1;
 
 void Resolve(const AIFloat3& in startPos)
 {
@@ -19,6 +20,7 @@ void Resolve(const AIFloat3& in startPos)
 	if (profile !is null) {
 		const int idx = TeamMapProfileRegistry::FindNearestSpotIndex(startPos, profile.spots);
 		if ((idx >= 0) && (uint(idx) < profile.spots.length())) {
+			matchedSpotIndex = idx;
 			preferredRole = profile.spots[idx].role;
 			isLandLocked = profile.spots[idx].landLocked;
 			AiLog("Map profile resolved: map='" + mapName + "', match='" + profile.mapNameMatch
@@ -43,6 +45,16 @@ bool IsResolved()
 bool HasPreferredRole()
 {
 	return preferredRole.length() > 0;
+}
+
+bool HasMatchedSpot()
+{
+	return matchedSpotIndex >= 0;
+}
+
+int GetMatchedSpotIndex()
+{
+	return matchedSpotIndex;
 }
 
 string GetPreferredRole()

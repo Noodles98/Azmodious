@@ -4,12 +4,12 @@ namespace TeamRoleTech {
 const string CONTROL_KEY = "tech_role_control";
 const int MID_GAME_FRAME = 8 * MINUTE;
 const int LATE_GAME_FRAME = 18 * MINUTE;
-const float EARLY_CONVERT_EFF = 2.25f;
-const float MID_CONVERT_EFF = 3.90f;
-const float LATE_CONVERT_EFF = 5.81f;
-const float EARLY_CONVERT_ENERGY_EFF = 22.1f;
-const float MID_CONVERT_ENERGY_EFF = 25.3f;
-const float LATE_CONVERT_ENERGY_EFF = 28.0f;
+const float EARLY_CONVERT_EFF = 1.95f;
+const float MID_CONVERT_EFF = 2.0f;
+const float LATE_CONVERT_EFF = 2.25f;
+const float EARLY_CONVERT_ENERGY_EFF = 23.21f;
+const float MID_CONVERT_ENERGY_EFF = 25.64f;
+const float LATE_CONVERT_ENERGY_EFF = 28.47f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.74f;
@@ -17,15 +17,15 @@ const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.78f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.70f;
 const float MID_ENERGY_STALL_DEFAULT = 0.88f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.92f;
-const float EARLY_ASSIST_METAL_RATIO = 0.20f;
-const float MID_ASSIST_METAL_RATIO = 0.31f;
-const float LATE_ASSIST_METAL_RATIO = 0.38f;
+const float EARLY_ASSIST_METAL_RATIO = 0.25f;
+const float MID_ASSIST_METAL_RATIO = 0.40f;
+const float LATE_ASSIST_METAL_RATIO = 0.55f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.15f;
-const float MID_FACTORY_SWITCH_ARMY_MULT = 1.35f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.55f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.80f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 0.86f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float MID_FACTORY_SWITCH_ARMY_MULT = 1.20f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.25f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.92f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.94f;
 
 const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
 const float MID_DEFENCE_THREAT_MIN = 35.0f;
@@ -37,14 +37,14 @@ const float EARLY_DEFENCE_LANE_SPREAD = 800.f;
 const float MID_DEFENCE_LANE_SPREAD = 660.f;
 const float LATE_DEFENCE_LANE_SPREAD = 536.f;
 const uint MILITARY_SCOUT_CAP = 1;
-const float MILITARY_ATTACK_THRESHOLD = 100.f;
-const float MILITARY_RAID_MIN_POWER = 50.f;
-const float MILITARY_RAID_AVG_POWER = 125.f;
-const uint FACTORY_MIN_BUILDER_COUNT = 3;
-const uint FACTORY_MIN_BUILDER2_COUNT = 2;
+const float MILITARY_ATTACK_THRESHOLD = 80.f;
+const float MILITARY_RAID_MIN_POWER = 45.f;
+const float MILITARY_RAID_AVG_POWER = 100.f;
+const uint FACTORY_MIN_BUILDER_COUNT = 2;
+const uint FACTORY_MIN_BUILDER2_COUNT = 1;
 const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 180 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 90 * SECOND;
 
 // Economy stage helpers
 enum EconomyStage {

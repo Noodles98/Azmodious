@@ -204,7 +204,8 @@
 "corap": {
 				"role": ["builder"],
 				"attribute": ["support"],
-				"build_speed": 5.0
+				"build_speed": 5.0,
+				"limit": 1
 			},
 "coraap": {
 				"role": ["static"],
@@ -440,7 +441,7 @@
 			},
 "cormstor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 900,
 				"limit": 1
 			},
 "cormakr": {
@@ -455,7 +456,7 @@
 			},
 "coradvsol" : {
 				"role": ["static"],
-				"since": 900
+				"since": 600
 			},
 "corgeo" : {
 				"role": ["static"]
@@ -463,7 +464,7 @@
 "corestor" : {
 				"role": ["static"],
 				"since": 600,
-				"limit": 1
+				"limit": 2
 			},
 "cormoho" : {
 				"role": ["static"]

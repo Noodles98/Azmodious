@@ -188,7 +188,8 @@
 "armap": {
 				"role": ["builder"],
 				"attribute": ["support"],
-				"build_speed": 5.0
+				"build_speed": 5.0,
+				"limit": 1
 			},
 "armaap": {
 				"role": ["static"],
@@ -415,19 +416,18 @@
 			},
 "armmstor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 900,
 				"limit": 1
 			},
 "armwin": {
 				"role": ["static"]
 			},
 "armsolar" : {
-				"role": ["static"],
-				"limit": 4
+				"role": ["static"]
 			},
 "armadvsol" : {
 				"role": ["static"],
-				"since": 900
+				"since": 600
 			},
 "armgeo": {
 				"role": ["static"],
@@ -436,7 +436,7 @@
 "armestor" : {
 				"role": ["static"],
 				"since": 600,
-				"limit": 1
+				"limit": 2
 			},
 "armmoho" : {
 				"role": ["static"]

@@ -1,7 +1,7 @@
 namespace ResourceBonus {
 
-const float PLANNING_BONUS_FACTOR = 1.35f;
-
+const float PLANNING_BONUS_FACTOR = 1.0f; //set to 1.0 to prevent inconsistency.
+ 
 float NormalizeIncome(float income)
 {
 	return income / PLANNING_BONUS_FACTOR;

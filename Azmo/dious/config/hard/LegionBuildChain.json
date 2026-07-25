@@ -44,9 +44,7 @@
 		// <category>: factory, nano, store, pylon, energy, geo, defence, bunker, big_gun, radar, sonar, convert, mex, mexup
 		"energy": {
 			"legtide": {
-				"hub": [[
-					{"unit": "legfmkr", "category": "convert", "offset": [80, 80], "condition": {"energy": true}}
-				]]
+				"hub": [[]]
 			},
 			"legfus": {
 				"hub": [[
@@ -70,7 +68,7 @@
 		"defence": {
 			"leglht": {
 				"hub": [[
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"legbastion" : {
@@ -94,7 +92,10 @@
 		"factory": {
 			"leglab": {
 				"hub": [[
-					{"unit": "leglht", "category": "defence", "offset": {"front": 5}, "priority": "normal"}
+					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"legalab": {
@@ -103,13 +104,15 @@
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 10}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "legfus", "category": "energy", "offset": {"back": 40}, "priority": "normal"},
-					{"unit": "legadvestore", "category": "store", "offset": {"back": 40}, "priority": "normal"}
+					{"unit": "legfus", "category": "energy", "offset": {"back": 40}, "priority": "normal"}
 				]]
 			},
 			"legvp": {
 				"hub": [[
-					{"unit": "leglht", "category": "defence", "offset": {"front": 5}, "priority": "normal"}
+					{"unit": "leglht", "category": "defence", "offset": {"front": 5}, "priority": "normal"},
+					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"legavp": {
@@ -125,7 +128,9 @@
 			"legap": {
 				"hub": [[
 					{"unit": "leglht", "category": "defence", "offset": {"front": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
+					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
+					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"legaap": {

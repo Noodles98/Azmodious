@@ -69,7 +69,7 @@
 		},
 		"solar": {
 			"type": ["rectangle", "engy_low"],
-			"ignore": ["engy_low", "def_low", "nano"]
+			"ignore": ["engy_low", "def_low", "nano", "wind"]
 		},
 		"wind": {
 //			"type": ["circle", "engy_low"],
@@ -77,7 +77,7 @@
 //			"not_ignore": ["factory", "engy_low", "convert", "nano", "terra"]
 			"type": ["rectangle", "engy_low"],
 			"yard": [6, 6],
-			"ignore": ["engy_low"]
+			"ignore": ["engy_low", "mex", "solar", "nano"]
 		},
 		"geo": {
 			"type": ["rectangle", "geo"],
@@ -90,13 +90,13 @@
 		},
 		"fusion": {
 			"type": ["circle", "engy_mid"],
-			"radius": 6,
-			"ignore": ["mex", "engy_mid", "def_low"]
+			"radius": 3,
+			"ignore": ["mex", "engy_mid", "def_low", "nano", "wind", "solar"]
 		},
 		"singu": {
 			"type": ["circle", "engy_high"],
-			"radius": 8,
-			"ignore": ["mex", "engy_high", "def_low"]
+			"radius": 5,
+			"ignore": ["mex", "engy_high", "def_low", "nano", "wind", "solar"]
 		},
 		"pylon": {
 			"type": ["circle", "pylon"],
@@ -184,7 +184,7 @@
 		"singu": ["armfus", "armuwfus", "armckfus", "armafus", "corfus", "coruwfus", "corafus", "legfus", "legafus"],
 		"store": ["armmstor", "armestor", "cormstor", "corestor", "legmstor", "legestor"],
 		"mex": ["armmex", "cormex", "legmex", "armuwmex", "coruwmex", "leganavalmex"],
-		"mex2": ["armmoho", "cormoho", "legmoho", "armuwmme", "coruwmme", "legmohoconct", "legmext15"],
+		"mex2": ["armmoho", "cormoho", "legmoho", "armuwmme", "coruwmme", "legmohoconct"],
 		"converter": ["armmakr", "cormakr", "legeconv", "armmmkr", "cormmkr", "legadveconv", "armfmkr", "corfmkr", "armuwmmm", "coruwmmm"],
 		"def_low": ["armllt", "armclaw", "corllt", "cormaw", "leglht", "legdtr"],
 		"caretaker": ["armnanotc", "armnanotcplat", "cornanotc", "cornanotcplat", "legnanotc", "legnanotcplat"],

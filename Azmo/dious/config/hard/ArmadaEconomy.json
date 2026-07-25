@@ -7,10 +7,10 @@
 				"land": {
 					// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 					// limit = random(<lower limit>..<upper limit>)
-					"armwin": [200, 300],
-					"armsolar": [80, 120],
-					"armadvsol": [80, 120],
-					"armfus": [70, 130],
+					"armsolar": [140, 210],
+					"armwin": [70, 110],
+					"armadvsol": [180, 280],
+					"armfus": [260, 420],
 					"armafus": [420, 700]
 				},
 				"water": {
@@ -22,10 +22,10 @@
 				}
 			}
 		},
-		"factor": [[1.0, 300], [10.0, 3600], [30.0, 7200]],
-		"min_income": 5,
-		"cost_ratio": 0.06,
-		"em_ratio": 0.08,
+		"factor": [[1.0, 60], [30.0, 600], [120.0, 2400]],
+		"min_income": 6,
+		"cost_ratio": 0.05,
+		"em_ratio": 0.07,
 		"link_inc": 12.0,
 		"pylon": []
 	},
@@ -48,13 +48,13 @@
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.35,
+	"eps_step": 0.45,
 
-	"buildpower": 1.15,
+	"buildpower": 1.25,
 
 	"excess": -1.0,
 
-	"ms_pull": [[0.56, 0.0], [0.63, 0.34]],
+	"ms_pull": [[0.43, 0.0], [0.52, 0.34]],
 
 	"mex_max": [1.0, false],
 

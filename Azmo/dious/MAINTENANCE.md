@@ -29,14 +29,14 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 - `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, build-chain, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
-- `script/hard/helper/ally_slot.as`: discovers allied AI team IDs through `AiSendMessage`, keeps them sorted, and exposes the repeating eight-slot assignment used by roles and lanes.
+- `script/hard/helper/ally_slot.as`: discovers allied AI team IDs through `AiSendMessage`, keeps them sorted, and exposes the repeating eight-slot assignment used by role/lane fallbacks.
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise from the shared ally slot; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
 - `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes.
 - `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
 - `script/hard/helper/command_delay.as`: shared command-throttle helper keyed by role/channel.
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
 - `script/hard/helper/resource_bonus.as`: normalizes engine-reported resource income for planning thresholds when the in-game AI bonus is set around +35%.
-- `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior.
+- `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise ally slots are the fallback.
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
 - `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super.
 - `script/hard/helper/terrain/terrain_data.as`: terrain class and spread scaling for placement/pathing context.
@@ -76,7 +76,7 @@ Start from the narrowest owner for the behavior you want:
 - Change in-game resource bonus planning normalization: `script/hard/helper/resource_bonus.as`; JSON `income_tier` values still need direct config edits.
 - Change post-build follow-ups like porc, pylon, or hub chains: the faction-specific `config/hard/*BuildChain.json` files.
 - Change build footprint spacing or terrain/build blocking rules: `config/hard/block_map.json`
-- Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`
+- Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`; profile-resolved maps use matched start-spot index modulo the lane count before falling back to ally slots.
 - Change terrain-aware lane/path spread behavior: `script/hard/helper/lane_pathing.as`, `script/hard/helper/terrain/terrain_data.as`
 - Change how lane bias is spread across positions instead of a single team slot: `script/hard/helper/lane.as`
 - Change startup terrain manager setup: `script/hard/helper/terrain/terrain_runtime.as`
@@ -115,13 +115,14 @@ Expected Lua hint format for bridge updates:
 
 Use this when economy decisions are too noisy, too passive, or too aggressive.
 
-1. Tune thresholds and production pacing in the relevant `config/hard/*Economy.json` faction overlay.
-2. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
-3. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
-4. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
-5. For allied mex conflicts, keep `calc_mex` and ally-shared `mex_max` aligned across all loaded `config/hard/*Economy.json` faction overlays, and verify every faction's mex variants are listed in `config/hard/block_map.json`.
-6. Arm/Cortex cross-upgrading Legion mexes is filtered in `script/hard/helper/legion_mex_upgrade.as`, with `script/hard/manager/builder.as` only forwarding unit-finished/destroyed events and rejected returned `MEXUP` tasks.
-7. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
+1. Tune thresholds and production pacing in the relevant `config/hard/*Economy.json` faction overlays.
+2. For energy-generator mix changes, also check `config/hard/*Behaviour.json` caps and `since` gates; a unit limit or delay can override otherwise valid economy thresholds.
+3. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
+4. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
+5. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
+6. For allied mex conflicts, keep `calc_mex` and ally-shared `mex_max` aligned across all loaded `config/hard/*Economy.json` faction overlays, and verify every faction's mex variants are listed in `config/hard/block_map.json`.
+7. Arm/Cortex cross-upgrading Legion mexes is filtered in `script/hard/helper/legion_mex_upgrade.as`, with `script/hard/manager/builder.as` only forwarding unit-finished/destroyed events and rejected returned `MEXUP` tasks.
+8. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
 
 ### Role Selection and Tuning
 
@@ -131,7 +132,7 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 2. A non-empty profile role overrides ally-slot assignment. `TeamRole::Resolve()` maps exactly `air` to AIR, `tech` to TECH, `sea` to SEA and `front` to FRONT; `landLocked` is recorded and logged but has no runtime consumer yet.
 3. When no profile matches, edit ally-slot discovery only in `script/hard/helper/ally_slot.as`. Every AI broadcasts `ALLY_SLOT:<teamId>` every five seconds until ten seconds; IDs are sorted numerically and the local index is reduced modulo 8. Fallback slots 0-1 are AIR, 2-3 are TECH, slot 4 is SEA only when the terrain bridge reports a water map, and all remaining slots are FRONT.
 4. Tune per-role, per-stage constants in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`. Stages are Early (<12 min), Mid (12-24 min), and Late (>=24 min). These files own reclaim conversion/energy efficiency, energy-stall thresholds, assistant threshold, factory-switch thresholds and interval, defence gates/spread, and frontline confirmation lifetime.
-5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming still comes from ally slot for diagnostics.
+5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming comes from the matched map-profile start spot when available, falling back to ally slot diagnostics on unprofiled maps.
 6. If role commands are bursty, use role wrappers `IsCommandReady(...)` and `CommitCommandDelay(...)` with role/channel keys.
 
 ### Military Task Editing
@@ -184,7 +185,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - The only map role labels currently interpreted as distinct runtime roles are `air`, `tech`, and `sea`. Any other non-empty label resolves as FRONT, unless `TeamRole::Resolve()` is extended.
 - Without a profile role, team role assignment uses each AI's index in the numerically sorted list of discovered allied AI team IDs, then repeats in blocks of 8: slots 0-1 AIR, 2-3 TECH, slot 4 SEA only on a terrain-flagged water map, and slots 4-7 otherwise FRONT. It is not derived from `GetLeadTeamId()`; that value is only retained in diagnostic/fallback side detection.
 - Ally-slot discovery broadcasts for the opening ten seconds. The local team ID is always included, and received messages are still accepted afterward, so role/lane assignment can refresh if a previously unseen lower team ID is reported late.
-- Lane assignment is position-biased for ground movement, so units do not all inherit the same team-slot lane offset. AIR restriction is resolved by role (including map-profile role), not by slot.
+- Lane assignment prefers the resolved map-profile start spot, falling back to ally-slot order only when no profile spot is known. Ground movement still uses position-biased lane spreading, and AIR restriction is resolved by role (including map-profile role), not by slot.
 - Terrain helper files live under `script/hard/helper/terrain/`; update include paths when moving terrain parsing, runtime setup, or classification helpers.
 - Role helper files live under `script/hard/helper/role/`; manager includes should usually target `script/hard/helper/role/role.as`, not individual role files.
 - Terrain tuning now combines static block-map tuning, heuristic terrain scales, and optional Lua hint overrides via `AiLuaMessage`.

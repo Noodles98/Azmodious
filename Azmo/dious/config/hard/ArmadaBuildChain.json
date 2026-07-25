@@ -49,9 +49,7 @@
 		// <category>: factory, nano, store, pylon, energy, geo, defence, bunker, big_gun, radar, sonar, convert, mex, mexup
 		"energy": {
 			"armsolar": {
-				"hub": [[
-					{"unit": "armmakr", "category": "convert", "offset": [80, 80], "condition": {"energy": true}}
-				]]
+				"hub": [[]]
 			},
 			"armadvsol": {
 				"hub": [[
@@ -98,7 +96,7 @@
 		"defence": {
 			"armllt": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"armanni": {
@@ -117,18 +115,27 @@
 			}
 		},
 		"factory": {
+			"armlab": {
+				"hub": [[
+					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}}
+				]]
+			},
 			"armalab": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"armvp": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armllt", "category": "defence", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"armavp": {
@@ -141,8 +148,10 @@
 			},
 			"armap": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
+					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"armaap": {

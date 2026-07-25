@@ -3,9 +3,9 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 600.f;
-const float ANCHOR_RADIUS = 800.f;
-const float PUSH_START_RADIUS = 630.f;
+const float CONFIRM_RADIUS = 300.f;
+const float ANCHOR_RADIUS = 500.f;
+const float PUSH_START_RADIUS = 520.f;
 const float PUSH_MAX_RADIUS = 950.f;
 const float PUSH_RATIO = 0.75f;
 

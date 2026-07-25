@@ -3,9 +3,9 @@ namespace DefenseHelpers {
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 20 * MINUTE;
 
-const float EARLY_PRESSURE = 10.0f;
-const float MEDIUM_PRESSURE = 25.0f;
-const float HEAVY_PRESSURE = 55.0f;
+const float EARLY_PRESSURE = 15.0f;
+const float MEDIUM_PRESSURE = 35.0f;
+const float HEAVY_PRESSURE = 75.0f;
 
 bool IsMidGame()
 {

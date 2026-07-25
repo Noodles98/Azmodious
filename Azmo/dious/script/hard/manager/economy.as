@@ -47,7 +47,7 @@ void AiUpdateEconomy()
 	const float energyRatio = EconomySmooth::GetEnergyRatio();
 	const float energyBalance = EconomySmooth::GetEnergyBalance();
 
-	aiEconomyMgr.isMetalEmpty = metalRatio < 0.2f;
+	aiEconomyMgr.isMetalEmpty = metalRatio < 0.1f;
 	aiEconomyMgr.isMetalFull = metalRatio > 0.8f;
 	aiEconomyMgr.isEnergyEmpty = energyRatio < 0.2f;
 	if (aiEconomyMgr.isMetalEmpty) {
@@ -59,7 +59,7 @@ void AiUpdateEconomy()
 	}
 	// NOTE: Default energy-to-metal conversion TeamRulesParam "mmLevel" = 0.75
 	// Require real surplus, not just a briefly full battery, before requesting converters.
-	aiEconomyMgr.isEnergyFull = (energyRatio > 0.92f) && (energyBalance > 0.f);
+	aiEconomyMgr.isEnergyFull = (energyRatio > 0.88f) && (energyBalance > 0.f);
 
 	// Consume switch-assist as a one-update signal; Factory::AiIsSwitchAllowed
 	// will re-assert it on subsequent failed switch checks.

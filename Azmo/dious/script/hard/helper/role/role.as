@@ -103,6 +103,7 @@ void EnsureLogged()
 		AiLog("Assigned team role: " + GetName()
 			+ ", source: " + GetRoleSourceName()
 			+ ", lane: " + TeamLane::GetName()
+			+ ", laneSource: " + TeamLane::GetSourceName()
 			+ ", laneRestriction: " + TeamLane::GetRestrictionName()
 			+ ", mapRole='" + TeamMapProfile::GetPreferredRole() + "'"
 			+ " (teamId=" + ai.teamId + ", leadTeamId=" + ai.GetLeadTeamId()

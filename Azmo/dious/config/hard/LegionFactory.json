@@ -19,7 +19,7 @@
 
 	// ===== Legion bot labs =====
 "leglab": {
-		"importance": [0.8, 0.0],	
+		"importance": [0.8, 0.1],	
 		"require_energy": false,	
 		"income_tier": [10, 20, 30, 40, 50],
 //Metal Cost		    100			130			25		  	60			150			160			310			125
@@ -54,7 +54,7 @@
 
 	// ===== Legion vehicle plants =====
 "legvp": {
-		"importance": [0.8, 0.0],
+		"importance": [0.8, 0.1],
 		"require_energy": false,	
 		"income_tier": [10, 20, 30, 40, 50],
 //Metal Cost		   125		150			52		  25			65			160				300		   250			260		   200
@@ -108,7 +108,7 @@
 
 	// ===== Legion air plants =====
 "legap": {
-		"importance": [0.1, 0.0],
+		"importance": [0.8, 0.1],
 		"require_energy": false,	
 		"income_tier": [10, 20, 30, 40, 50],
 //Metal Cost		   	105			40			110			100			65			68			150

@@ -392,20 +392,18 @@
 			},
 "legmstor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 900,
 				"limit": 1
 			},
 "legwin": {
 				"role": ["static"]
 			},
 "legsolar" : {
-				"role": ["static"],
-				"limit": 4
+				"role": ["static"]
 			},
 "legadvsol" : {
 				"role": ["static"],
-				"since": 900,
-				"limit": 6
+				"since": 600
 			},
 "leggeo" : {
 				"role": ["static"]
@@ -413,7 +411,7 @@
 "legestor" : {
 				"role": ["static"],
 				"since": 600,
-				"limit": 1
+				"limit": 2
 			},
 "legmoho" : {
 				"role": ["static"]

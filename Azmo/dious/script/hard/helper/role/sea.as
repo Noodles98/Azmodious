@@ -4,12 +4,12 @@ namespace TeamRoleSea {
 const string CONTROL_KEY = "sea_role_control";
 const int MID_GAME_FRAME = 11 * MINUTE;
 const int LATE_GAME_FRAME = 19 * MINUTE;
-const float EARLY_CONVERT_EFF = 2.0f;
-const float MID_CONVERT_EFF = 3.3f;
-const float LATE_CONVERT_EFF = 5.3f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.1f;
-const float MID_CONVERT_ENERGY_EFF = 22.1f;
-const float LATE_CONVERT_ENERGY_EFF = 24.4f;
+const float EARLY_CONVERT_EFF = 1.90f;
+const float MID_CONVERT_EFF = 2.0f;
+const float LATE_CONVERT_EFF = 2.35f;
+const float EARLY_CONVERT_ENERGY_EFF = 18.5f;
+const float MID_CONVERT_ENERGY_EFF = 20.1f;
+const float LATE_CONVERT_ENERGY_EFF = 22.3f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.74f;
