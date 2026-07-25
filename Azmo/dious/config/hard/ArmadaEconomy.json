@@ -7,9 +7,9 @@
 				"land": {
 					// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 					// limit = random(<lower limit>..<upper limit>)
-					"armsolar": [140, 210],
+					"armsolar": [180, 280],
 					"armwin": [70, 110],
-					"armadvsol": [180, 280],
+					"armadvsol": [200, 310, 20, 800, 3.5],
 					"armfus": [260, 420],
 					"armafus": [420, 700]
 				},
@@ -22,15 +22,15 @@
 				}
 			}
 		},
-		"factor": [[1.0, 60], [30.0, 600], [120.0, 2400]],
+		"factor": [[1.0, 75], [30.0, 600], [120.0, 2400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.07,
-		"link_inc": 12.0,
+		"link_inc": 16.0,
 		"pylon": []
 	},
 
-	"cluster_range": 460.0,
+	"cluster_range": 500.0,
 
 	"geo": {
 		"armada": "armgeo"
@@ -40,27 +40,27 @@
 		"armada": "armmex"
 	},
 
-	"mex_up": 3,
+	"mex_up": 2,
 
-	"calc_mex": true,
+	"calc_mex": false,
 
-	"goal_exec": 48.0,
+	"goal_exec": 42.0,
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.45,
+	"eps_step": 0.40,
 
 	"buildpower": 1.25,
 
 	"excess": -1.0,
 
-	"ms_pull": [[0.43, 0.0], [0.52, 0.34]],
+	"ms_pull": [[0.53, 0.0], [0.64, 0.34]],
 
 	"mex_max": [1.0, false],
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 
-	"production": [0.9, 0.7, 0.8, 0.8],
+	"production": [0.9, 0.8, 0.8, 0.8],
 
 	"assist": {
 		"armada": "armnanotc"

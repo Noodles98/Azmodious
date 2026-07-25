@@ -7,29 +7,37 @@ namespace MilitaryTaskPolicy {
 
 bool IsMainlineCombat(const CCircuitDef@ cdef)
 {
-	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
-		|| cdef.IsRoleAny(Unit::Role::RIOT.mask);
+	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)	
+		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
+		|| cdef.IsRoleAny(Unit::Role::AH.mask);
 }
 
 bool IsMeleeCombat(const CCircuitDef@ cdef)
 {
-	return cdef.IsAttrAny(Unit::Attr::MELEE.mask);
+	return cdef.IsAttrAny(Unit::Attr::MELEE.mask)
+		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask);
 }
 
 bool IsBacklineCombat(const CCircuitDef@ cdef)
 {
-	return cdef.IsRoleAny(Unit::Role::SKIRM.mask);
+	return cdef.IsRoleAny(Unit::Role::SKIRM.mask)
+		|| cdef.IsRoleAny(Unit::Role::ARTY.mask);
+}
+
+bool IsSupportCombat(const CCircuitDef@ cdef)
+{
+	return cdef.IsRoleAny(Unit::Role::SUPPORT.mask);
 }
 
 float GetDefendPromotePower()
 {
 	const string role = TeamRole::GetName();
 	if (role == "tech")
-		return 120.f;
+		return 140.f;
 	if (role == "air")
 		return 80.f;
 	if (role == "sea")
-		return 75.f;
+		return 60.f;
 	return 45.f;
 }
 
@@ -48,21 +56,22 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 		return Task::FightType::AA;
 	if (cdef.IsRoleAny(Unit::Role::AH.mask))
 		return Task::FightType::AH;
+	if (cdef.IsRoleAny(Unit::Role::RAIDER.mask))
+		return Task::FightType::RAID;
 	if (cdef.IsRoleAny(Unit::Role::ARTY.mask))
 		return Task::FightType::ARTY;
 	if (cdef.IsRoleAny(Unit::Role::SUPPORT.mask))
 		return Task::FightType::SUPPORT;
-	if (IsBacklineCombat(cdef))
-		return Task::FightType::ARTY;
-	if (IsMeleeCombat(cdef))
-		return Task::FightType::MELEE;
 
 	const string role = TeamRole::GetName();
-	if (cdef.IsRoleAny(Unit::Role::RAIDER.mask))
-		return (role == "tech") ? Task::FightType::DEFEND : Task::FightType::RAID;
 	if (IsMainlineCombat(cdef))
-		return ((role == "tech") || (role == "air")) ? Task::FightType::DEFEND : Task::FightType::ATTACK;
-
+		return ((role == "tech") || (role == "front")) ? Task::FightType::DEFEND : Task::FightType::ATTACK;
+	if (IsMeleeCombat(cdef))
+		return ((role == "tech") || (role == "front")) ? Task::FightType::RAID : Task::FightType::ATTACK;
+	if (IsBacklineCombat(cdef))
+		return ((role == "tech") || (role == "front")) ? Task::FightType::ARTY : Task::FightType::ATTACK;
+	if (IsSupportCombat(cdef))
+		return ((role == "tech") || (role == "front")) ? Task::FightType::SUPPORT : Task::FightType::SUPPORT;
 	return Task::FightType::_SIZE_;
 }
 

@@ -4,7 +4,7 @@
 
 namespace LegionMexUpgradeFilter {
 
-const float LEGION_MEX_RADIUS = 24.f;
+const float LEGION_MEX_RADIUS = 8.f;
 const float LEGION_MEX_RADIUS_SQ = LEGION_MEX_RADIUS * LEGION_MEX_RADIUS;
 
 array<float> legionMexX;

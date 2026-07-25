@@ -8,10 +8,10 @@
 	"lake_width_tiles": 10,  // 32,
 
 	// At least area_min_tiles connected Tiles are necessary for an Area to be created.
-	"area_min_tiles": 32,  // 64,
+	"area_min_tiles": 64,  // 64,
 
 	"areas_merge_size": 64,  // 80,
-	"areas_merge_altitude": 40  // 80  // 10 * altitude_scale
+	"areas_merge_altitude": 30  // 80  // 10 * altitude_scale
 },
 
 "building": {
@@ -24,13 +24,13 @@
 
 			// Unit of measurement: 1 size/yard/radius = SQUARE_SIZE * 2 = 16 elmos, integer.
 			// Offset in South facing
-			"offset": [0, 1],  // default: [0, 0]
+			"offset": [-5, 5],  // default: [0, 0]
 
 			// Size of a blocker without yard
 //			"size": [7, 7],  // default: size of a unit
 
 			// Spacer, blocker_size = size + yard
-			"yard": [12, 18],  // default: [0, 0]
+			"yard": [12, 16]  // default: [0, 0]
 
 			// Integer radius of a blocker or description string.
 			// Available string values: explosion, expl_ally = [radius ~ 1 player .. radius/2 ~ 4+ players]
@@ -39,22 +39,22 @@
 			// "ignore": [<structure_type>, <structure_type>, ...]
 			// Ignore specified structures.
 			// Additional values: none, all
-			"ignore": ["def_low"]  // default: ["none"]
+//			"ignore": ["none"]  // default: ["none"]
 //			"not_ignore": ["all"]  // default: ["all"]
 		},
 		"fac_bot": {
 			"type": ["rectangle", "factory"],
-			"offset": [0, 1],
+			"offset": [-5, 5],
 			"yard": [12, 16]
 		},
 		"fac_bot_pass": {
 			"type": ["rectangle", "factory"],
-			"offset": [0, 2],
+			"offset": [-5, 5],
 			"yard": [12, 16]
 		},
 		"fac_air": {
 			"type": ["rectangle", "factory"],
-			"yard": [-4, 42]
+			"yard": [-4, 16]
 		},
 		"fac_water": {
 			"type": ["rectangle", "factory"],
@@ -63,21 +63,21 @@
 		},
 		"fac_strider": {
 			"type": ["rectangle", "factory"],
-			"offset": [0, 24],
-			"yard": [10, 10],
-			"size": [10, 10]
+			"offset": [-10, 24],
+			"yard": [10, 10]
 		},
 		"solar": {
 			"type": ["rectangle", "engy_low"],
-			"ignore": ["engy_low", "def_low", "nano", "wind"]
+			"yard": [8, 8],
+			"ignore": ["engy_low", "nano"]
 		},
 		"wind": {
 //			"type": ["circle", "engy_low"],
 //			"radius": 4,  // default: "explosion"
 //			"not_ignore": ["factory", "engy_low", "convert", "nano", "terra"]
 			"type": ["rectangle", "engy_low"],
-			"yard": [6, 6],
-			"ignore": ["engy_low", "mex", "solar", "nano"]
+			"yard": [4, 4],
+			"ignore": ["engy_low", "nano"]
 		},
 		"geo": {
 			"type": ["rectangle", "geo"],
@@ -89,14 +89,14 @@
 			"ignore": ["all"]
 		},
 		"fusion": {
-			"type": ["circle", "engy_mid"],
-			"radius": 3,
-			"ignore": ["mex", "engy_mid", "def_low", "nano", "wind", "solar"]
+			"type": ["rectangle", "engy_mid"],
+			"yard": [3, 3],
+			"ignore": ["engy_mid", "engy_low", "def_low", "nano"]
 		},
 		"singu": {
-			"type": ["circle", "engy_high"],
-			"radius": 5,
-			"ignore": ["mex", "engy_high", "def_low", "nano", "wind", "solar"]
+			"type": ["rectangle", "engy_high"],
+			"yard": [5, 5],
+			"ignore": ["engy_high", "engy_mid", "engy_low", "def_low", "nano"]
 		},
 		"pylon": {
 			"type": ["circle", "pylon"],
@@ -119,7 +119,7 @@
 		"converter": {
 			"type": ["rectangle", "convert"],
 			"yard": [8, 8],
-			"ignore": ["convert"]
+			"ignore": ["convert", "engy_mid"]
 		},
 		"def_low": {
 			"type": ["circle", "def_low"],

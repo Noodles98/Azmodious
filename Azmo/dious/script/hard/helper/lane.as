@@ -26,7 +26,7 @@ string GetSourceName()
 
 int ResolveBiasLane(const AIFloat3& in pos, float spread)
 {
-	const float cellSize = (spread > 0.f) ? (spread * 2.f) : 512.f;
+	const float cellSize = (spread > 0.f) ? (spread * 1.f) : 256.f;
 	const int cellX = int(pos.x / cellSize);
 	const int cellZ = int(pos.z / cellSize);
 	int lane = (cellX * 31) + (cellZ * 17) + ai.teamId;

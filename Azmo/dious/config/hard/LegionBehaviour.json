@@ -259,123 +259,96 @@
 				"build_speed": 8.0
 			},
 "legrad":{
-				"role":["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role":["static"]
 			},
 "legjam":{
-				"role":["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role":["static"]
 			},
 "legdtr": {
 				"role": ["static"]
 			},
 "leglht": {
 				"role": ["static"],
-				"midposoffset": [0, 0, 2.38],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"midposoffset": [0, 0, 2.38]
 			},
 "leghive": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legcluster": {
 				"role": ["static"],
 				"on": false,
-				"limit": 3,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"limit": 3
 			},
 "legmg": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legrl": {
-				"role": ["anti_air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["anti_air"]
 			},
 "legrhapsis": {
-				"role": ["anti_air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["anti_air"]
 			},
 "leglupara": {
-				"role": ["anti_air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["anti_air"]
 			},
 "legarad":{
-				"role":["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role":["static"]
 			},
 "legajam":{
-				"role":["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role":["static"]
 			},
 "legsd":{
 				"role":["static"],
-				"limit": 3,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"limit": 3
 			},
 "legtarg": {
 				"role": ["static"],
-				"limit": 3,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"limit": 3
 			},
 "legdeflector": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "leggatet3": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legrwall": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legbombard": {
 				"role": ["static"],
-				"on": false,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"on": false
 			},
 "legacluster": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legbastion": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "leglrpc": {
-				"role": ["static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["static"]
 			},
 "legministarfall": {
-				"role": ["super", "static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["super", "static"]
 			},
 "legstarfall": {
-				"role": ["super", "static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["super", "static"]
 			},
 "legflak": {
-				"role": ["anti_air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["anti_air"]
 			},
 "leglraa": {
-				"role": ["anti_air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["anti_air"]
 			},
 "legperdition":{
 				"role":	["super", "static"],
-				"limit":1,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"limit":1
 			},
 "legabm":{
 				"role":	["super", "static"],
-				"limit": 5,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"limit": 5
 			},
 "legsilo":{
-				"role":	["super", "static"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role":	["super", "static"]
 			},
 
 			// ===== Legion economy and storage =====
@@ -403,7 +376,7 @@
 			},
 "legadvsol" : {
 				"role": ["static"],
-				"since": 600
+				"since": 900
 			},
 "leggeo" : {
 				"role": ["static"]
@@ -515,22 +488,18 @@
 			},
 "legcen": {
 				"role": ["assault"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legbal": {
 				"role": ["artillery"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leglob": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legkark": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 
@@ -538,193 +507,156 @@
 "leggob": {
 				"role": ["scout"],
 				"attribute": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leginfestor": {
 				"role": ["Builder"],
 				"attribute": ["support"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legstr": {
 				"role": ["raider"],
 				"attribute":["melee"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "leginc": {
 				"role": ["heavy", "assault"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legshot": {
 				"role": ["riot"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legbart": {
 				"role": ["artillery"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legdecom": {
 				"role": ["builder"],
 				"buildspeed": 6.0,
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legsnapper": {
 				"role": ["scout"],
 				"attribute": ["melee"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legsrail": {
 				"role": ["anti_heavy"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legamph": {
 				"role": ["assault"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "leegmech": {
-				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["skirmish"]
 			},
 "legkeres": {
-				"role": ["assault", "heavy"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["assault", "heavy"]
 			},
 
 			// ===== Legion striders and experimental combat =====
 "legjav": {
-				"role": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["raider"]
 			},
 "legelrpcmech": {
-				"role": ["artillery"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"role": ["artillery"]
 			},
 "legerailtank": {
 				"role": ["assault"],
-				"attribute": ["melee"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"attribute": ["melee"]
 			},
 "legeshotgunmech": {
 				"role": ["riot"],
-				"attribute": ["melee"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"attribute": ["melee"]
 			},
 "legeheatraymech": {
 				"role": ["heavy"],
-				"attribute": ["melee"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}}
+				"attribute": ["melee"]
 			},
 "legscout": {
 				"role": ["scout"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leghades": {
 				"role": ["raider"],
 				"attribute": ["scout"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legamphtank": {
 				"role": ["assault"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leggat": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leghelios": {
 				"role": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legbar": {
 				"role": ["artillery"],
 				"attribute": ["support"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legrail": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legfloat": {
 				"role": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legskirmtank": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legmrv": {
 				"role": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legaheattank": {
 				"role": ["heavy"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legmcluster": {
 				"role": ["artillery"],
 				"attribute": ["support"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legavroc": {
 				"role": ["artillery"],
 				"attribute": ["support"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legmed": {
 				"role":	["assault"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legvcarry": {
 				"role":	["riot"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "leginf": {
 				"role": ["artillery"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legcib": {
 				"role": ["super", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legfig": {
 				"role": ["anti_air", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legkam": {
 				"role": ["bomber", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legmos": {
 				"role": ["skirmish", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "leglts": {
@@ -735,63 +667,51 @@
 			},
 "legwhisper": {
 				"role": ["scout", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legionnaire": {
 				"role": ["anti_air", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legvenator": {
 				"role": ["anti_air", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legphoenix": {
 				"role": ["bomber", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legnap": {
 				"role": ["bomber", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legstronghold": {
 				"role": ["assault", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legfort": {
 				"role": ["heavy", "air"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 10
 			},
 "legsh": {
 				"role": ["raider"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legner": {
 				"role": ["skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legmh": {
 				"role": ["artillery"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legah": {
 				"role": ["anti_air"],
 				"attribute":["support"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "legcar": {
 				"role": ["heavy", "skirmish"],
-				"threat": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0, "vs": {"air": 0.0, "surf": 0.0, "water": 0.0, "default": 5.0}},
 				"power": 5
 			},
 "raptor_queen_epiq": {

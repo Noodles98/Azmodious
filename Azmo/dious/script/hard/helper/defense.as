@@ -1,11 +1,11 @@
 namespace DefenseHelpers {
 
-const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 20 * MINUTE;
+const int MID_GAME_FRAME = 12 * MINUTE;
+const int LATE_GAME_FRAME = 25 * MINUTE;
 
 const float EARLY_PRESSURE = 15.0f;
-const float MEDIUM_PRESSURE = 35.0f;
-const float HEAVY_PRESSURE = 75.0f;
+const float MEDIUM_PRESSURE = 50.0f;
+const float HEAVY_PRESSURE = 90.0f;
 
 bool IsMidGame()
 {
@@ -19,7 +19,7 @@ bool IsLateGame()
 
 float GetMetalIncome()
 {
-	return ResourceBonus::GetPlanningMetalIncome();
+	return aiEconomyMgr.metal.income;
 }
 
 float GetMobileThreat()
@@ -39,14 +39,14 @@ bool CanAfford(float metalIncome)
 
 bool ShouldBuildT1LightAA(const string& in side)
 {
-	return (ai.frame >= 5 * MINUTE && CanAfford(8.0f))
-		|| HasPressure(MEDIUM_PRESSURE);
+	return (ai.frame >= 5 * MINUTE && CanAfford(10.0f))
+		|| HasPressure(EARLY_PRESSURE);
 }
 
 bool ShouldBuildT1MediumAA(const string& in side)
 {
-	return (IsMidGame() && CanAfford(15.0f))
-		|| HasPressure(HEAVY_PRESSURE);
+	return (IsMidGame() && CanAfford(18.0f))
+		|| HasPressure(MEDIUM_PRESSURE);
 }
 
 bool ShouldBuildT1LightTurret(const string& in side)
@@ -57,14 +57,14 @@ bool ShouldBuildT1LightTurret(const string& in side)
 
 bool ShouldBuildT1MediumTurret(const string& in side)
 {
-	return (IsMidGame() && CanAfford(15.0f))
+	return (IsMidGame() && CanAfford(18.0f))
 		|| HasPressure(MEDIUM_PRESSURE);
 }
 
 bool ShouldBuildT1Arty(const string& in side)
 {
 	return (IsMidGame() && CanAfford(18.0f))
-		|| HasPressure(HEAVY_PRESSURE);
+		|| HasPressure(MEDIUM_PRESSURE);
 }
 
 bool ShouldBuildT1Torp(const string& in side)
@@ -86,7 +86,7 @@ bool ShouldBuildT2RangeAA(const string& in side)
 
 bool ShouldBuildT2MediumTurret(const string& in side)
 {
-	return (IsMidGame() && CanAfford(20.0f))
+	return (IsMidGame() && CanAfford(18.0f))
 		|| HasPressure(HEAVY_PRESSURE);
 }
 
@@ -98,12 +98,12 @@ bool ShouldBuildT2Arty(const string& in side)
 
 bool ShouldBuildLRPC(const string& in side)
 {
-	return IsLateGame() && CanAfford(45.0f);
+	return IsLateGame() && CanAfford(35.0f);
 }
 
 bool ShouldBuildLRPCHeavy(const string& in side)
 {
-	return IsLateGame() && CanAfford(60.0f);
+	return IsLateGame() && CanAfford(45.0f);
 }
 
 bool ShouldMakeAnyDefence(const string& in side)

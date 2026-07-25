@@ -2,30 +2,30 @@ namespace TeamRoleFront {
 
 // Role tuning constants
 const string CONTROL_KEY = "front_role_control";
-const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 20 * MINUTE;
+const int MID_GAME_FRAME = 11 * MINUTE;
+const int LATE_GAME_FRAME = 22 * MINUTE;
 const float EARLY_CONVERT_EFF = 1.88f;
 const float MID_CONVERT_EFF = 2.0f;
 const float LATE_CONVERT_EFF = 2.35f;
 const float EARLY_CONVERT_ENERGY_EFF = 20.25f;
 const float MID_CONVERT_ENERGY_EFF = 22.35f;
-const float LATE_CONVERT_ENERGY_EFF = 24.02f;
+const float LATE_CONVERT_ENERGY_EFF = 23.02f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.53f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.57f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
-const float EARLY_ENERGY_STALL_DEFAULT = 0.68f;
-const float MID_ENERGY_STALL_DEFAULT = 0.76f;
-const float LATE_ENERGY_STALL_DEFAULT = 0.88f;
-const float EARLY_ASSIST_METAL_RATIO = 0.25f;
-const float MID_ASSIST_METAL_RATIO = 0.34f;
-const float LATE_ASSIST_METAL_RATIO = 0.44f;
-const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
-const float MID_FACTORY_SWITCH_ARMY_MULT = 1.30f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.35f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.95f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 1.05f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 1.10f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.85f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.82f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.79f;
+const float EARLY_ENERGY_STALL_DEFAULT = 0.86f;
+const float MID_ENERGY_STALL_DEFAULT = 0.82f;
+const float LATE_ENERGY_STALL_DEFAULT = 0.78f;
+const float EARLY_ASSIST_METAL_RATIO = 0.30f;
+const float MID_ASSIST_METAL_RATIO = 0.40f;
+const float LATE_ASSIST_METAL_RATIO = 0.53f;
+const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.15f;
+const float MID_FACTORY_SWITCH_ARMY_MULT = 1.20f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.25f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.86f;
 
 const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
 const float MID_DEFENCE_THREAT_MIN = 35.0f;
@@ -33,18 +33,18 @@ const float LATE_DEFENCE_THREAT_MIN = 90.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 8.f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 22.f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 28.f;
-const float EARLY_DEFENCE_LANE_SPREAD = 600.f;
-const float MID_DEFENCE_LANE_SPREAD = 524.f;
-const float LATE_DEFENCE_LANE_SPREAD = 465.f;
+const float EARLY_DEFENCE_LANE_SPREAD = 350.f;
+const float MID_DEFENCE_LANE_SPREAD = 460.f;
+const float LATE_DEFENCE_LANE_SPREAD = 610.f;
 const uint MILITARY_SCOUT_CAP = 2;
-const float MILITARY_ATTACK_THRESHOLD = 40.f;
-const float MILITARY_RAID_MIN_POWER = 20.f;
-const float MILITARY_RAID_AVG_POWER = 75.f;
+const float MILITARY_ATTACK_THRESHOLD = 75.f;
+const float MILITARY_RAID_MIN_POWER = 50.f;
+const float MILITARY_RAID_AVG_POWER = 90.f;
 const uint FACTORY_MIN_BUILDER_COUNT = 1;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
-const uint FRONTLINE_CONFIRM_HITS = 8;
+const uint FRONTLINE_CONFIRM_HITS = 15;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 60 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
 // Economy stage helpers
 enum EconomyStage {
@@ -149,18 +149,18 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 	if (sidePrefix == "arm") {
 		allowed.insertLast("armlab");
 		allowed.insertLast("armalab");
-	} else if (sidePrefix == "leg") {
-		allowed.insertLast("leglab");
-		allowed.insertLast("legalab");
-	} else {
+	} else if (sidePrefix == "cor") {
 		allowed.insertLast("corlab");
 		allowed.insertLast("coralab");
+	} else {
+		allowed.insertLast("leglab");
+		allowed.insertLast("legalab");
 	}
 }
 
 int MakeSwitchInterval()
 {
-	return AiRandom(600, 780) * SECOND;
+	return AiRandom(520, 720) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)
@@ -177,13 +177,13 @@ bool ShouldMakeDefence()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			return (aiEnemyMgr.mobileThreat > EARLY_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > EARLY_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > EARLY_DEFENCE_METAL_INCOME_MIN);
 		case EconomyStage::MID:
 			return (aiEnemyMgr.mobileThreat > MID_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > MID_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > MID_DEFENCE_METAL_INCOME_MIN);
 		default:
 			return (aiEnemyMgr.mobileThreat > LATE_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > LATE_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > LATE_DEFENCE_METAL_INCOME_MIN);
 	}
 }
 

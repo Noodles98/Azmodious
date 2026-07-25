@@ -45,52 +45,69 @@ SOpener@ GetOpenInfo()
 {
 	return SOpener({
 		{Factory::armlab, array<SQueue> = {
-			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER, 3), SO(RT::SKIRM)}),
-			SQueue(0.2f, {SO(RT::RAIDER, 2), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 3)})
+			SQueue(0.5f, {SO(RT::SKIRM), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER, 3), SO(RT::SKIRM)}),
+			SQueue(0.3f, {SO(RT::RAIDER), SO(RT::ASSAULT, 2), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 2)}),
+			SQueue(0.2f, {SO(RT::ASSAULT), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::SKIRM, 2), SO(RT::RAIDER, 2)})
 		}},
 		{Factory::armalab, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SKIRM, 2), SO(RT::AA), SO(RT::SKIRM), SO(RT::BUILDER2)})
+			SQueue(0.4f, {SO(RT::BUILDER2), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SKIRM, 2), SO(RT::RAIDER), SO(RT::SKIRM), SO(RT::BUILDER2)}),
+			SQueue(0.4f, {SO(RT::RAIDER, 2), SO(RT::ASSAULT, 2), SO(RT::BUILDER2), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::BUILDER2), SO(RT::RAIDER)}),
+			SQueue(0.3f, {SO(RT::ASSAULT, 2), SO(RT::SKIRM, 2), SO(RT::RAIDER), SO(RT::ASSAULT, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::RAIDER)})
 		}},
 		{Factory::armavp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::ARTY), SO(RT::SKIRM), SO(RT::AA), SO(RT::BUILDER2)})
+			SQueue(0.5f, {SO(RT::BUILDER2), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SKIRM, 2), SO(RT::RAIDER), SO(RT::SKIRM), SO(RT::ASSAULT, 2), SO(RT::BUILDER2)}),
+			SQueue(0.3f, {SO(RT::RAIDER), SO(RT::ASSAULT, 2), SO(RT::BUILDER2), SO(RT::ASSAULT), SO(RT::RAIDER, 2), SO(RT::SKIRM), SO(RT::RAIDER), SO(RT::BUILDER2)}),
+			SQueue(0.2f, {SO(RT::ASSAULT, 2), SO(RT::SKIRM), SO(RT::RAIDER), SO(RT::SKIRM, 2), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::BUILDER2), SO(RT::ASSAULT)})
 		}},
 		{Factory::armvp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::ARTY), SO(RT::SCOUT), SO(RT::SKIRM)})
+			SQueue(0.6f, {SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::SCOUT), SO(RT::SKIRM)}),
+			SQueue(0.3f, {SO(RT::RAIDER, 2), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::SKIRM), SO(RT::SCOUT), SO(RT::SKIRM, 2)}),
+			SQueue(0.1f, {SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::ASSAULT, 2), SO(RT::SKIRM), SO(RT::SCOUT), SO(RT::SKIRM)})
 		}},
 		{Factory::armasy, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::armap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT)})
+			SQueue(0.8f, {SO(RT::AIR), SO(RT::BUILDER), SO(RT::RAIDER), SO(RT::AIR), SO(RT::SCOUT)}),
+			SQueue(0.2f, {SO(RT::SCOUT, 2), SO(RT::AA), SO(RT::AIR), SO(RT::RAIDER, 2), SO(RT::BUILDER)})
 		}},
 		{Factory::armaap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
+			SQueue(0.5f, {SO(RT::BUILDER2), SO(RT::AIR), SO(RT::RAIDER, 2), SO(RT::AA), SO(RT::BUILDER2)}),
+			SQueue(0.3f, {SO(RT::AIR, 2), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BUILDER2), SO(RT::AA)}),
+			SQueue(0.2f, {SO(RT::RAIDER), SO(RT::BUILDER2), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::BUILDER2)})
 		}},
 		{Factory::corlab, array<SQueue> = {
-			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER, 3), SO(RT::SKIRM)}),
-			SQueue(0.2f, {SO(RT::RAIDER, 2), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 3)})
+			SQueue(0.8f, {SO(RT::ASSAULT), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT, 2), SO(RT::RAIDER), SO(RT::SKIRM)}),
+			SQueue(0.2f, {SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 3)})
 		}},
 		{Factory::coralab, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::ARTY), SO(RT::BUILDER2), SO(RT::RAIDER)})
+			SQueue(0.4f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::RAIDER, 2), SO(RT::BUILDER2), SO(RT::RAIDER)}),
+			SQueue(0.3f, {SO(RT::ASSAULT, 2), SO(RT::SKIRM), SO(RT::ASSAULT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::BUILDER2)}),
+			SQueue(0.3f, {SO(RT::SKIRM), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SKIRM, 2), SO(RT::RAIDER), SO(RT::BUILDER2), SO(RT::RAIDER)})
 		}},
 		{Factory::coravp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::ARTY), SO(RT::SKIRM), SO(RT::AA), SO(RT::BUILDER2)})
+			SQueue(0.4f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::RAIDER, 2), SO(RT::BUILDER2), SO(RT::RAIDER)}),
+			SQueue(0.4f, {SO(RT::RAIDER, 2), SO(RT::SKIRM), SO(RT::ASSAULT), SO(RT::SKIRM, 2), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::BUILDER2)}),
+			SQueue(0.2f, {SO(RT::SKIRM), SO(RT::ASSAULT, 2), SO(RT::SKIRM), SO(RT::RAIDER, 2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::RAIDER)})
 		}},
 		{Factory::corvp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::ARTY), SO(RT::SCOUT), SO(RT::SKIRM)})
+			SQueue(0.7f, {SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::SCOUT), SO(RT::SKIRM)}),
+			SQueue(0.3f, {SO(RT::ASSAULT, 2), SO(RT::RAIDER), SO(RT::SCOUT), SO(RT::RAIDER), SO(RT::ASSAULT, 2), SO(RT::SKIRM)})
 		}},
 		{Factory::corasy, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::SKIRM, 2), SO(RT::BUILDER2), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::ARTY), SO(RT::AA), SO(RT::BUILDER2)})
 		}},
 		{Factory::corap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::SCOUT)})
+			SQueue(0.5f, {SO(RT::AIR, 2), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::RAIDER, 2)}),
+			SQueue(0.3f, {SO(RT::SCOUT, 2), SO(RT::AIR), SO(RT::AIR), SO(RT::AA, 2), SO(RT::BOMBER)}),
+			SQueue(0.2f, {SO(RT::AA), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}},
 		{Factory::coraap, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}},
 		{Factory::leglab, array<SQueue> = {
-			SQueue(0.8f, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER, 3), SO(RT::SKIRM)}),
-			SQueue(0.2f, {SO(RT::RAIDER, 2), SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 3)})
+			SQueue(0.7f, {SO(RT::ASSAULT), SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER, 3), SO(RT::SKIRM)}),
+			SQueue(0.3f, {SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::SCOUT), SO(RT::ASSAULT), SO(RT::RAIDER, 3)})
 		}},
 		{Factory::legalab, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER, 3), SO(RT::ASSAULT), SO(RT::ARTY), SO(RT::SKIRM), SO(RT::BUILDER2), SO(RT::RAIDER)})
@@ -99,15 +116,15 @@ SOpener@ GetOpenInfo()
 			SQueue(1.0f, {SO(RT::BUILDER2), SO(RT::RAIDER), SO(RT::ASSAULT), SO(RT::SKIRM), SO(RT::ARTY), SO(RT::SKIRM), SO(RT::RAIDER), SO(RT::BUILDER2)})
 		}},
 		{Factory::legvp, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::ARTY), SO(RT::SCOUT), SO(RT::SKIRM)})
+			SQueue(1.0f, {SO(RT::SCOUT), SO(RT::RAIDER, 2), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::SCOUT), SO(RT::SKIRM)})
 		}},
 		{Factory::legap, array<SQueue> = {
-			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::SCOUT)})
+			SQueue(1.0f, {SO(RT::AA), SO(RT::AA), SO(RT::RAIDER), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}},
 		{Factory::legaap, array<SQueue> = {
 			SQueue(1.0f, {SO(RT::BUILDER), SO(RT::AA), SO(RT::RAIDER, 2), SO(RT::BOMBER), SO(RT::SCOUT)})
 		}}
-		}, {SO(RT::BUILDER), SO(RT::SCOUT), SO(RT::RAIDER, 3), SO(RT::BUILDER), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER)}
+		}, {SO(RT::ASSAULT), SO(RT::SCOUT, 2), SO(RT::RAIDER, 3), SO(RT::ASSAULT), SO(RT::RAIDER), SO(RT::BUILDER), SO(RT::RAIDER)}
 	);
 }
 

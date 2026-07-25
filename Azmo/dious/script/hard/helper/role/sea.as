@@ -3,8 +3,8 @@ namespace TeamRoleSea {
 // Role tuning constants
 const string CONTROL_KEY = "sea_role_control";
 const int MID_GAME_FRAME = 11 * MINUTE;
-const int LATE_GAME_FRAME = 19 * MINUTE;
-const float EARLY_CONVERT_EFF = 1.90f;
+const int LATE_GAME_FRAME = 22 * MINUTE;
+const float EARLY_CONVERT_EFF = 1.95f;
 const float MID_CONVERT_EFF = 2.0f;
 const float LATE_CONVERT_EFF = 2.35f;
 const float EARLY_CONVERT_ENERGY_EFF = 18.5f;
@@ -68,9 +68,12 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 	if (sidePrefix == "arm") {
 		allowed.insertLast("armsy");
 		allowed.insertLast("armasy");
-	} else {
+	} else if (sidePrefix == "cor") {
 		allowed.insertLast("corsy");
 		allowed.insertLast("corasy");
+	} else {
+		allowed.insertLast("legsy");
+		allowed.insertLast("legasy");
 	}
 }
 
@@ -175,13 +178,13 @@ bool ShouldMakeDefence()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			return (aiEnemyMgr.mobileThreat > EARLY_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > EARLY_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > EARLY_DEFENCE_METAL_INCOME_MIN);
 		case EconomyStage::MID:
 			return (aiEnemyMgr.mobileThreat > MID_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > MID_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > MID_DEFENCE_METAL_INCOME_MIN);
 		default:
 			return (aiEnemyMgr.mobileThreat > LATE_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > LATE_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > LATE_DEFENCE_METAL_INCOME_MIN);
 	}
 }
 

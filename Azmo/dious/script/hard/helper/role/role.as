@@ -1,6 +1,5 @@
 #include "../ally_slot.as"
 #include "../command_delay.as"
-#include "../resource_bonus.as"
 #include "air.as"
 #include "tech.as"
 #include "front.as"
@@ -13,8 +12,8 @@
 namespace TeamRole {
 
 // Dispatcher defaults
-const float PRE_FACTORY_CONVERT_EFF = 1.15f;
-const float PRE_FACTORY_CONVERT_ENERGY_EFF = 12.3f;
+const float PRE_FACTORY_CONVERT_EFF = 1.50f;
+const float PRE_FACTORY_CONVERT_ENERGY_EFF = 16.42f;
 
 enum Kind {
 	AIR = 0,
@@ -298,7 +297,7 @@ bool ShouldMakeDefence()
 		case Kind::SEA: return TeamRoleSea::ShouldMakeDefence();
 		case Kind::FRONT: return TeamRoleFront::ShouldMakeDefence();
 		default: return (ai.frame > 5 * MINUTE)
-			|| (ResourceBonus::GetPlanningMetalIncome() > 10.f)
+			|| (aiEconomyMgr.metal.income > 10.f)
 			|| (aiEnemyMgr.mobileThreat > 0.f);
 	}
 }
@@ -391,10 +390,16 @@ void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommand
 CCircuitDef@ FilterFactory(CCircuitDef@ facDef, bool isStart)
 {
 	Refresh();
+	const string sidePrefix = (facDef !is null) ? GetFactorySidePrefix(facDef.GetName()) : DetectSidePrefix();
+	if (kind == Kind::AIR) {
+		CCircuitDef@ preferred = TeamRoleAir::PickPreferredFactory(sidePrefix, facDef, isStart);
+		if ((preferred !is null) && IsAllowedFactory(preferred.GetName()))
+			return preferred;
+	}
+
 	if ((facDef !is null) && IsAllowedFactory(facDef.GetName()))
 		return facDef;
 
-	const string sidePrefix = (facDef !is null) ? GetFactorySidePrefix(facDef.GetName()) : DetectSidePrefix();
 	array<string> allowed;
 	FillAllowedFactories(allowed, sidePrefix);
 	CCircuitDef@ fallback = PickFactory(allowed, isStart);

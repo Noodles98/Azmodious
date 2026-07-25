@@ -4,33 +4,33 @@ namespace TeamRoleAir {
 const uint MIN_BOMBER_SWARM = 5;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
-const int MID_GAME_FRAME = 8 * MINUTE;
-const int LATE_GAME_FRAME = 17 * MINUTE;
-const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
-const float ADV_AIR_MIN_METAL_INCOME = 12.f;
-const float ADV_AIR_MIN_METAL_RATIO = 0.15f;
+const int MID_GAME_FRAME = 10 * MINUTE;
+const int LATE_GAME_FRAME = 18 * MINUTE;
+const int ADV_AIR_MIN_FRAME = 8 * MINUTE;
+const float ADV_AIR_MIN_METAL_INCOME = 15.0f;
+const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
 const float EARLY_CONVERT_EFF = 1.97f;
 const float MID_CONVERT_EFF = 2.0f;
 const float LATE_CONVERT_EFF = 2.33f;
-const float EARLY_CONVERT_ENERGY_EFF = 25.55f;
-const float MID_CONVERT_ENERGY_EFF = 28.43f;
-const float LATE_CONVERT_ENERGY_EFF = 31.21f;
+const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
+const float MID_CONVERT_ENERGY_EFF = 23.13f;
+const float LATE_CONVERT_ENERGY_EFF = 24.11f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.55f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.67f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.76f;
-const float EARLY_ENERGY_STALL_DEFAULT = 0.57f;
-const float MID_ENERGY_STALL_DEFAULT = 0.62f;
-const float LATE_ENERGY_STALL_DEFAULT = 0.73f;
-const float EARLY_ASSIST_METAL_RATIO = 0.25f;
-const float MID_ASSIST_METAL_RATIO = 0.31f;
-const float LATE_ASSIST_METAL_RATIO = 0.34f;
-const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.10f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.86f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.83f;
+const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
+const float MID_ENERGY_STALL_DEFAULT = 0.85f;
+const float LATE_ENERGY_STALL_DEFAULT = 0.81f;
+const float EARLY_ASSIST_METAL_RATIO = 0.35f;
+const float MID_ASSIST_METAL_RATIO = 0.42f;
+const float LATE_ASSIST_METAL_RATIO = 0.55f;
+const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.15f;
 const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.95f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 0.97f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 0.98f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
 const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
 const float MID_DEFENCE_THREAT_MIN = 35.0f;
@@ -38,18 +38,18 @@ const float LATE_DEFENCE_THREAT_MIN = 64.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 10.f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 16.f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 20.f;
-const float EARLY_DEFENCE_LANE_SPREAD = 525.f;
-const float MID_DEFENCE_LANE_SPREAD = 400.f;
-const float LATE_DEFENCE_LANE_SPREAD = 315.f;
+const float EARLY_DEFENCE_LANE_SPREAD = 1200.f;
+const float MID_DEFENCE_LANE_SPREAD = 1500.f;
+const float LATE_DEFENCE_LANE_SPREAD = 1800.f;
 const uint MILITARY_SCOUT_CAP = 1;
 const float MILITARY_ATTACK_THRESHOLD = 55.f;
 const float MILITARY_RAID_MIN_POWER = 25.f;
 const float MILITARY_RAID_AVG_POWER = 80.f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
-const uint FRONTLINE_CONFIRM_HITS = 10;
+const uint FRONTLINE_CONFIRM_HITS = 20;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 240 * SECOND;
 
 array<Id> bomberIds;
 array<Id> escortIds;
@@ -278,31 +278,71 @@ void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommand
 	RoleCommandDelay::Commit(key, delay);
 }
 
-void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
+bool ShouldAllowAdvancedAir()
 {
-	const bool allowAdvancedAir = (ai.frame >= ADV_AIR_MIN_FRAME)
-		&& (ResourceBonus::GetPlanningMetalIncome() >= ADV_AIR_MIN_METAL_INCOME)
+	return (ai.frame >= ADV_AIR_MIN_FRAME)
+		&& (aiEconomyMgr.metal.income >= ADV_AIR_MIN_METAL_INCOME)
 		&& (EconomySmooth::GetMetalRatio() >= ADV_AIR_MIN_METAL_RATIO)
 		&& !aiEconomyMgr.isEnergyStalling;
+}
+
+string GetBasicFactoryName(const string& in sidePrefix)
+{
+	if (sidePrefix == "arm")
+		return "armap";
+	if (sidePrefix == "cor")
+		return "corap";
+	return "legap";
+}
+
+string GetAdvancedFactoryName(const string& in sidePrefix)
+{
+	if (sidePrefix == "arm")
+		return "armaap";
+	if (sidePrefix == "cor")
+		return "coraap";
+	return "legaap";
+}
+
+CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facDef, bool isStart)
+{
+	if (isStart || !ShouldAllowAdvancedAir())
+		return facDef;
+
+	CCircuitDef@ basicDef = ai.GetCircuitDef(GetBasicFactoryName(sidePrefix));
+	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
+	if ((basicDef !is null) && (advancedDef !is null)
+		&& (basicDef.count > 0) && (advancedDef.count == 0)
+		&& advancedDef.IsAvailable(ai.frame))
+	{
+		return advancedDef;
+	}
+
+	return facDef;
+}
+
+void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
+{
+	const bool allowAdvancedAir = ShouldAllowAdvancedAir();
 
 	if (sidePrefix == "arm") {
 		allowed.insertLast("armap");
 		if (allowAdvancedAir)
 			allowed.insertLast("armaap");
-	} else if (sidePrefix == "leg") {
-		allowed.insertLast("legap");
-		if (allowAdvancedAir)
-			allowed.insertLast("legaap");
-	} else {
+	} else if (sidePrefix == "cor") {
 		allowed.insertLast("corap");
 		if (allowAdvancedAir)
 			allowed.insertLast("coraap");
+	} else {
+		allowed.insertLast("legap");
+		if (allowAdvancedAir)
+			allowed.insertLast("legaap");
 	}
 }
 
 int MakeSwitchInterval()
 {
-	return AiRandom(480, 680) * SECOND;
+	return AiRandom(520, 720) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)
@@ -315,13 +355,13 @@ bool ShouldMakeDefence()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			return (aiEnemyMgr.mobileThreat > EARLY_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > EARLY_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > EARLY_DEFENCE_METAL_INCOME_MIN);
 		case EconomyStage::MID:
 			return (aiEnemyMgr.mobileThreat > MID_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > MID_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > MID_DEFENCE_METAL_INCOME_MIN);
 		default:
 			return (aiEnemyMgr.mobileThreat > LATE_DEFENCE_THREAT_MIN)
-				|| (ResourceBonus::GetPlanningMetalIncome() > LATE_DEFENCE_METAL_INCOME_MIN);
+				|| (aiEconomyMgr.metal.income > LATE_DEFENCE_METAL_INCOME_MIN);
 	}
 }
 

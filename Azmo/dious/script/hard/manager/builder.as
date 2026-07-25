@@ -1,3 +1,4 @@
+#include "../helper/commander_mex_travel.as"
 #include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
 
@@ -38,6 +39,9 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 // 	}
 //  return task;
 	IUnitTask@ task = aiBuilderMgr.DefaultMakeTask(unit);
+	if (CommanderMexTravel::ShouldReject(task, unit))
+		return null;
+
 	if (LegionMexUpgradeFilter::ShouldReject(task, unit.circuitDef)) {
 		AIFloat3 buildPos = task.GetBuildPos();
 		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
