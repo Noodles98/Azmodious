@@ -157,8 +157,6 @@ uint GetFactoryMinBuilder2Count()
 bool IsEscortFighter(const CCircuitUnit@ unit)
 {
 	const CCircuitDef@ cdef = unit.circuitDef;
-	if (!cdef.IsAbleToFly())
-		return false;
 	if (cdef.IsRoleAny(Unit::Role::BOMBER.mask))
 		return false;
 	return cdef.IsRoleAny(Unit::Role::AA.mask);
