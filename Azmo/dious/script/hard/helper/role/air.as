@@ -47,9 +47,9 @@ const float MILITARY_RAID_MIN_POWER = 80.0f;
 const float MILITARY_RAID_AVG_POWER = 135.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
-const uint FRONTLINE_CONFIRM_HITS = 20;
+const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 240 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
 array<Id> bomberIds;
 array<Id> escortIds;

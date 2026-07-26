@@ -42,9 +42,9 @@ const float MILITARY_RAID_MIN_POWER = 90.0f;
 const float MILITARY_RAID_AVG_POWER = 150.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
-const uint FRONTLINE_CONFIRM_HITS = 20;
+const uint FRONTLINE_CONFIRM_HITS = 12;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 180 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
 // Economy stage helpers
 enum EconomyStage {
