@@ -1,20 +1,20 @@
 namespace TeamRoleAir {
 
 // Role tuning constants
-const uint MIN_BOMBER_SWARM = 5;
-const uint MAX_ESCORTS_PER_BOMBER = 1;
+const uint MIN_BOMBER_SWARM = 10;
+const uint MAX_ESCORTS_PER_BOMBER = 2;
 const string CONTROL_KEY = "air_bomber_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 18 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 8 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 15.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
-const float EARLY_CONVERT_EFF = 1.97f;
-const float MID_CONVERT_EFF = 2.0f;
-const float LATE_CONVERT_EFF = 2.33f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
-const float MID_CONVERT_ENERGY_EFF = 23.13f;
-const float LATE_CONVERT_ENERGY_EFF = 24.11f;
+const float EARLY_CONVERT_EFF = 2.5f;
+const float MID_CONVERT_EFF = 3.2f;
+const float LATE_CONVERT_EFF = 4.4f;
+const float EARLY_CONVERT_ENERGY_EFF = 22.5f;
+const float MID_CONVERT_ENERGY_EFF = 24.53f;
+const float LATE_CONVERT_ENERGY_EFF = 26.31f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.86f;
@@ -22,9 +22,9 @@ const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.83f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
 const float MID_ENERGY_STALL_DEFAULT = 0.85f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.81f;
-const float EARLY_ASSIST_METAL_RATIO = 0.35f;
-const float MID_ASSIST_METAL_RATIO = 0.42f;
-const float LATE_ASSIST_METAL_RATIO = 0.55f;
+const float EARLY_ASSIST_METAL_RATIO = 0.20f;
+const float MID_ASSIST_METAL_RATIO = 0.31f;
+const float LATE_ASSIST_METAL_RATIO = 0.43f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.15f;
 const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;

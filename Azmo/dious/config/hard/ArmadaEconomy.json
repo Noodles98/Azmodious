@@ -7,9 +7,9 @@
 				"land": {
 					// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 					// limit = random(<lower limit>..<upper limit>)
-					"armsolar": [180, 280],
+					"armsolar": [200, 300],
 					"armwin": [70, 110],
-					"armadvsol": [200, 310, 20, 800, 3.5],
+					"armadvsol": [200, 310, 24, 1600, 6.0],
 					"armfus": [260, 420],
 					"armafus": [420, 700]
 				},
@@ -25,8 +25,8 @@
 		"factor": [[1.0, 75], [30.0, 600], [120.0, 2400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
-		"em_ratio": 0.07,
-		"link_inc": 16.0,
+		"em_ratio": 0.12,
+		"link_inc": 14.0,
 		"pylon": []
 	},
 
@@ -48,7 +48,7 @@
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.40,
+	"eps_step": 0.50,
 
 	"buildpower": 1.25,
 
@@ -60,7 +60,7 @@
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 
-	"production": [0.9, 0.8, 0.8, 0.8],
+	"production": [0.9, 0.7, 0.8, 0.8],
 
 	"assist": {
 		"armada": "armnanotc"

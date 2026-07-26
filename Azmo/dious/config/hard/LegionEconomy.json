@@ -9,7 +9,7 @@
 					// limit = random(<lower limit>..<upper limit>)
 					"legsolar": [180, 280],
 					"legwin": [70, 110],
-					"legadvsol": [200, 300, 20, 800, 3.5],
+					"legadvsol": [200, 300, 24, 1500, 6.0],
 					"legfus": [260, 420],
 					"legafus": [420, 700]
 				},
@@ -25,8 +25,8 @@
 		"factor": [[2.0, 120], [30.0, 600], [120.0, 2400]],
 		"min_income": 6,
 		"cost_ratio": 0.06,
-		"em_ratio": 0.08,
-		"link_inc": 14.0,
+		"em_ratio": 0.15,
+		"link_inc": 12.0,
 		"pylon": []
 	},
 
@@ -60,7 +60,7 @@
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 
-	"production": [0.9, 0.8, 0.8, 0.8],
+	"production": [0.9, 0.7, 0.8, 0.8],
 
 	"assist": {
 		"legion": "legnanotc"

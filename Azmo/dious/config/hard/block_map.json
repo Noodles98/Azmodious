@@ -54,7 +54,7 @@
 		},
 		"fac_air": {
 			"type": ["rectangle", "factory"],
-			"yard": [-4, 16]
+			"yard": [6, 18]
 		},
 		"fac_water": {
 			"type": ["rectangle", "factory"],
@@ -67,8 +67,8 @@
 			"yard": [10, 10]
 		},
 		"solar": {
-			"type": ["rectangle", "engy_low"],
-			"yard": [8, 8],
+			"type": ["rectangle", "engy_low", "engy_mid"],
+			"yard": [2, 2],
 			"ignore": ["engy_low", "nano"]
 		},
 		"wind": {
