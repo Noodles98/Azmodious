@@ -3,7 +3,7 @@ namespace TeamRoleTech {
 // Role tuning constants
 const string CONTROL_KEY = "tech_role_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 20 * MINUTE;
+const int LATE_GAME_FRAME = 25 * MINUTE;
 const float EARLY_CONVERT_EFF = 4.6f;
 const float MID_CONVERT_EFF = 6.6f;
 const float LATE_CONVERT_EFF = 7.2;

@@ -5,20 +5,20 @@ const uint MIN_BOMBER_SWARM = 20;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 18 * MINUTE;
-const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
+const int LATE_GAME_FRAME = 25 * MINUTE;
+const int ADV_AIR_MIN_FRAME = 6 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 15.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.05f;
-const float EARLY_CONVERT_EFF = 5.5f;
-const float MID_CONVERT_EFF = 7.2f;
-const float LATE_CONVERT_EFF = 8.8f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
-const float MID_CONVERT_ENERGY_EFF = 22.54f;
-const float LATE_CONVERT_ENERGY_EFF = 22.34f;
+const float EARLY_CONVERT_EFF = 1.35f;
+const float MID_CONVERT_EFF = 4.5f;
+const float LATE_CONVERT_EFF = 7.6f;
+const float EARLY_CONVERT_ENERGY_EFF = 10.35f;
+const float MID_CONVERT_ENERGY_EFF = 14.52f;
+const float LATE_CONVERT_ENERGY_EFF = 19.67f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.86f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.83f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.65f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.68f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
 const float MID_ENERGY_STALL_DEFAULT = 0.85f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.81f;
@@ -28,8 +28,8 @@ const float LATE_ASSIST_METAL_RATIO = 0.43f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.15f;
 const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.93f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
 const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
@@ -340,7 +340,7 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 
 int MakeSwitchInterval()
 {
-	return AiRandom(520, 720) * SECOND;
+	return AiRandom(360, 420) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)

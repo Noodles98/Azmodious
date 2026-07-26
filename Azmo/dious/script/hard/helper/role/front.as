@@ -3,7 +3,7 @@ namespace TeamRoleFront {
 // Role tuning constants
 const string CONTROL_KEY = "front_role_control";
 const int MID_GAME_FRAME = 11 * MINUTE;
-const int LATE_GAME_FRAME = 22 * MINUTE;
+const int LATE_GAME_FRAME = 25 * MINUTE;
 const float EARLY_CONVERT_EFF = 3.52f;
 const float MID_CONVERT_EFF = 4.52f;
 const float LATE_CONVERT_EFF = 6.12f;
@@ -11,9 +11,9 @@ const float EARLY_CONVERT_ENERGY_EFF = 20.25f;
 const float MID_CONVERT_ENERGY_EFF = 22.35f;
 const float LATE_CONVERT_ENERGY_EFF = 23.02f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.85f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.82f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.79f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.62f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.65f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.86f;
 const float MID_ENERGY_STALL_DEFAULT = 0.82f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.78f;
