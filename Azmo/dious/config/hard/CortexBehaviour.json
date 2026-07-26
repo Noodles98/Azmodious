@@ -784,7 +784,8 @@
 				"role": ["scout", "air"]
 			},
 "corveng": {
-				"role": ["anti_air", "air"]
+				"role": ["anti_air", "air"],
+				"limit": 300
 			},
 "corshad": {
 				"role": ["bomber", "air"]

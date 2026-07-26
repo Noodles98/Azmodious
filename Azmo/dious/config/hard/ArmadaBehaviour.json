@@ -684,10 +684,11 @@
 				"role": ["scout", "air"]
 			},
 "armfig": {
-				"role": ["anti_air", "air"]
+				"role": ["anti_air", "air"],
+				"limit": 300
 			},
 "armthund": {
-				"role": ["bomber", "assault", "anti_air"]
+				"role": ["bomber", "assault"]
 			},
 "armkam": {
 				"role": ["raider", "air"],
@@ -697,7 +698,7 @@
 				"role": ["scout", "air"]
 			},
 "armhawk": {
-				"role": ["anti_air", "air"]
+				"role": ["anti_air", "assault", "air"]
 			},
 "armpnix": {
 				"role": ["bomber", "assault", "air"]
