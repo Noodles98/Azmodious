@@ -7,9 +7,9 @@ float smoothedEnergyRatio = 0.f;
 float smoothedEnergyBalance = 0.f;
 float smoothedMetalCurrent = 0.f;
 
-const float RATIO_ALPHA = 0.40f;
+const float RATIO_ALPHA = 0.25f;
 const float BALANCE_ALPHA = 0.35f;
-const float CURRENT_ALPHA = 0.60f;
+const float CURRENT_ALPHA = 0.50f;
 
 float Clamp01(float value)
 {

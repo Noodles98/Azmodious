@@ -88,7 +88,7 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 	if (IsAirCombat(cdef))
 		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::BOMB;
 	if (IsAirDefenceCombat(cdef))
-		return (role == "air") ? Task::FightType::DEFEND : Task::FightType::AA;
+		return (role == "air") ? Task::FightType::DEFEND : Task::FightType::ATTACK;
 	return Task::FightType::_SIZE_;
 }
 

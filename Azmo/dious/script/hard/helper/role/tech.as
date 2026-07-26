@@ -4,12 +4,12 @@ namespace TeamRoleTech {
 const string CONTROL_KEY = "tech_role_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 20 * MINUTE;
-const float EARLY_CONVERT_EFF = 2.4f;
-const float MID_CONVERT_EFF = 3.3f;
-const float LATE_CONVERT_EFF = 4.3f;
-const float EARLY_CONVERT_ENERGY_EFF = 23.21f;
-const float MID_CONVERT_ENERGY_EFF = 25.64f;
-const float LATE_CONVERT_ENERGY_EFF = 28.47f;
+const float EARLY_CONVERT_EFF = 4.6f;
+const float MID_CONVERT_EFF = 6.6f;
+const float LATE_CONVERT_EFF = 7.2;
+const float EARLY_CONVERT_ENERGY_EFF = 20.21f;
+const float MID_CONVERT_ENERGY_EFF = 23.24f;
+const float LATE_CONVERT_ENERGY_EFF = 30.25f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.85f;
