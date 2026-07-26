@@ -8,9 +8,9 @@
 	"lake_width_tiles": 10,  // 32,
 
 	// At least area_min_tiles connected Tiles are necessary for an Area to be created.
-	"area_min_tiles": 64,  // 64,
+	"area_min_tiles": 32,  // 64,
 
-	"areas_merge_size": 64,  // 80,
+	"areas_merge_size": 32,  // 80,
 	"areas_merge_altitude": 30  // 80  // 10 * altitude_scale
 },
 
@@ -118,7 +118,7 @@
 		},
 		"converter": {
 			"type": ["rectangle", "convert"],
-			"yard": [8, 8],
+			"yard": [4, 4],
 			"ignore": ["convert", "engy_mid"]
 		},
 		"def_low": {

@@ -22,7 +22,7 @@
 				}
 			}
 		},
-		"factor": [[1.0, 75], [30.0, 600], [120.0, 2400]],
+		"factor": [[1.0, 75], [5.0, 600], [15.0, 2400], [30.0, 4800], [60, 7200], [120, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.12,
@@ -30,7 +30,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 500.0,
+	"cluster_range": 460.0,
 
 	"geo": {
 		"cortex": "corgeo"
@@ -60,7 +60,7 @@
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 
-	"production": [0.9, 0.7, 0.8, 0.8],
+	"production": [0.8, 0.7, 0.8, 0.8],
 
 	"assist": {
 		"cortex": "cornanotc"

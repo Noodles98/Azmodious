@@ -10,8 +10,7 @@
 			"raid": [25.0, 95.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 130.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
-				"attack": [0.65, 1.25],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
-				"defence": [0.40, 0.60],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
+				"attack": [0.65, 3.0],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
 				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
 				"static": 1.1,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
 				"comm": 0.05   // because of power of dgun
@@ -75,70 +74,70 @@
 				"attribute": ["commander"],
 				"build_speed": 5.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl2": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 10.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl3": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 15.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl4": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 20.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl5": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 25.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl6": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 30.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl7": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 35.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl8": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 40.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl9": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 45.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl10": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 50.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 
 			// ===== Cortex factories and mobile factory units =====
@@ -399,7 +398,7 @@
 			},
 "cormstor" : {
 				"role": ["static"],
-				"since": 900,
+				"since": 9000,
 				"limit": 1
 			},
 "cormakr": {
@@ -421,7 +420,7 @@
 			},
 "corestor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 9000,
 				"limit": 2
 			},
 "cormoho" : {
@@ -528,7 +527,6 @@
 				"retreat": 0.6,
 				"limit": 25,
 				"build_speed": 5.0,
-				"power": 5
 			},
 "coraca": {
 				"role": ["builder", "air"],
@@ -564,97 +562,77 @@
 			// ===== Cortex T1 bot lab combat =====
 "corak": {
 				"role": ["raider"],
-				"attribute": ["scout"],
-				"power": 5
+				"attribute": ["scout"]
 			},
 "cornecro": {
 				"role": ["rezzer"],
 				"attribute": ["rare"],
-				"limit": 20,
-				"power": 5
+				"limit": 20
 			},
 "corstorm": {
-				"role": ["skirmish"],
-				"power": 5
+				"role": ["skirmish"]
 			},
 "corthud": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "corcrash": {
-				"role": ["anti_air"],
-				"power": 5
+				"role": ["anti_air"]
 			},
 "cortermite": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "corpyro": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "corsumo": {
-				"role": ["heavy"],
-				"power": 10
+				"role": ["heavy"]
 			},
 "corcan": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "cormort": {
 				"role": ["artillery"],
-				"attribute":["skirmish"],
-				"power": 10
+				"attribute":["skirmish"]
 			},
 "corhrk": {
-				"role": ["artillery"],
-				"power": 10
+				"role": ["artillery"]
 			},
 "coraak": {
-				"role": ["anti_air"],
-				"power": 10
+				"role": ["anti_air"]
 			},
 "cormando": {
 				"role": ["builder"],
 				"limit": 2,
-				"build_speed": 10.0,
-				"power": 10
+				"build_speed": 10.0
 			},
 "cordecom": {
 				"role": ["builder"],
 				"limit": 2,
-				"build_speed": 10.0,
-				"power": 10
+				"build_speed": 10.0
 			},
 "corroach": {
 				"role": ["assault"],
-				"attribute": ["melee"],
-				"power": 10
+				"attribute": ["melee"]
 			},
 "corsktl": {
 				"role": ["assault"],
-				"attribute": ["melee"],
-				"power": 10
+				"attribute": ["melee"]
 			},
 "corvoyr": {
 				"role": ["assault"],
 				"attribute": ["support"],
-				"limit": 1,
-				"power": 10
+				"limit": 1
 			},
 "corspec": {
 				"role": ["assault"],
 				"attribute": ["support"],
-				"limit": 1,
-				"power": 10
+				"limit": 1
 			},
 "coramph": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "corspy": {
-				"role": ["scout"],
-				"power": 10
+				"role": ["scout"]
 			},
 
 			// ===== Cortex striders and experimental combat =====
@@ -679,234 +657,180 @@
 				"attribute": ["melee"]
 			},
 "corfav": {
-				"role": ["scout"],
-				"power": 5
+				"role": ["scout"]
 			},
 "corgator": {
 				"role": ["raider"],
-				"attribute": ["scout"],
-				"power": 5
+				"attribute": ["scout"]
 			},
 "corgarp": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "corraid": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "corlevlr": {
-				"role": ["riot"],
-				"power": 5
+				"role": ["riot"]
 			},
 "corwolv": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 5
+				"attribute": ["support"]
 			},
 "cormist": {
 				"role": ["anti_air"],
-				"attribute": ["skirmish"],
-				"power": 5
+				"attribute": ["skirmish"]
 			},
 "corseal": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "corparrow": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "correap": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "corgol": {
-				"role": ["heavy"],
-				"power": 10
+				"role": ["heavy"]
 			},
 "cormart": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "corsent": {
-				"role": ["anti_air"],
-				"power": 10
+				"role": ["anti_air"]
 			},
 "corvroc": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "corban": {
-				"role":	["skirmish"],
-				"power": 10
+				"role":	["skirmish"]
 			},
 "cortrem": {
 				"role": ["artillery", "heavy"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "corvrad": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "coreter": {
 				"role": ["support"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "cormabm": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "correcl": {
-				"role": ["support"],
-				"power": 5
+				"role": ["support"]
 			},
 "corpt": {
 				"role": ["anti_air"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "coresupp": {
-				"role": ["scout"],
-				"power": 5
+				"role": ["scout"]
 			},
 "corpship": {
-				"role": ["riot"],
-				"power": 5
+				"role": ["riot"]
 			},
 "corroy": {
 				"role": ["anti_sub"], 				//assault
-				"attribute": ["siege", "support"],
-				"power": 5
+				"attribute": ["siege", "support"]
 			},
 "corsub": {
-				"role": ["raider", "sub"],
-				"power": 5
+				"role": ["raider", "sub"]
 			},
 "corshark": {
 				"role": ["anti_sub", "sub"],
-				"attribute": ["anti_sub"],
-				"power": 10
+				"attribute": ["anti_sub"]
 			},
 "corssub": {
 				"role": ["sub"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "corarch": {
 				"role": ["anti_air"],
-				"limit": 5,
-				"power": 10
+				"limit": 5
 			},
 "corcrus": {
-				"role": ["skirmish"],
-				"power": 10
+				"role": ["skirmish"]
 			},
 "corsjam": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "corcarry": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "cormship": {
 				"role": ["artillery"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "corbats": {
 				"role": ["heavy"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "corblackhy": {
 				"role": ["super"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "corfink": {
-				"role": ["scout", "air"],
-				"power": 5
+				"role": ["scout", "air"]
 			},
 "corveng": {
-				"role": ["anti_air", "air"],
-				"power": 5
+				"role": ["anti_air", "air"]
 			},
 "corshad": {
-				"role": ["bomber", "air"],
-				"power": 5
+				"role": ["bomber", "air"]
 			},
 "corbw": {
 				"role": ["assault", "air"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "corawac": {
-				"role": ["scout", "air"],
-				"power": 10
+				"role": ["scout", "air"]
 			},
 "corvamp": {
-				"role": ["anti_air", "air"],
-				"power": 10
+				"role": ["anti_air", "air"]
 			},
 "corhurc": {
-				"role": ["bomber", "air"],
-				"power": 10
+				"role": ["bomber", "air"]
 			},
 "corape": {
 				"role": ["assault", "air"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "corcrwh": {
 				"role": ["heavy", "air"],
-				"attribute": ["anti_heavy"],
-				"power": 10
+				"attribute": ["anti_heavy"]
 			},
 "corcut": {
-				"role": ["raider", "air"],
-				"power": 5
+				"role": ["raider", "air"]
 			},
 "corcsa": {
-				"power": 5
 			},
 "corhunt": {
-				"power": 5
 			},
 "corsb": {
-				"power": 5
 			},
 "corseap": {
-				"power": 5
 			},
 "corsfig": {
-				"power": 5
 			},
 "corsh": {
-				"role": ["raider"],
-				"power": 5
+				"role": ["raider"]
 			},
 "corsnap": {
-				"role": ["skirmish"],
-				"power": 5
+				"role": ["skirmish"]
 			},
 "cormh": {
-				"role": ["artillery"],
-				"power": 5
+				"role": ["artillery"]
 			},
 "corah": {
 				"role": ["anti_air"],
-				"attribute":["support"],
-				"power": 5
+				"attribute":["support"]
 			},
 "corhal": {
-				"role": ["heavy", "skirmish"],
-				"power": 5
+				"role": ["heavy", "skirmish"]
 			},
 "leegmech": {
 				"role": ["skirmish"]

@@ -6,11 +6,11 @@
 		//But there's possibility that AI will just run from enemy till it has big enough group, but it may loose its base. So if with attack=0.8..1.0 AI is not loosing base then everything is ok and i think this range is optimal.
 	
 		"quota": {
-			"scout": 1,  // max scout units out of raiders
+			"scout": 2,  // max scout units out of raiders
 			"raid": [30, 105.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 185.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
-				"attack": [0.55, 1.5],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
+				"attack": [0.55, 3.0],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
 				"defence": [0.35, 0.60],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
 				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
 				"static": 1.1,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
@@ -21,7 +21,7 @@
 			"slack_mod": {
 				"all": 0.05,  // threat map 64-elmos slack multiplier for all units
 				"static": 0.05,  // additional 64-elmo-cells for static units
-				"speed": [0.5, 2.0]  // [<64elmo_cells_speed_mod>, <max_64elmo_cells>]
+				"speed": [0.1, 0.1]  // [<64elmo_cells_speed_mod>, <max_64elmo_cells>]
 			},
 			"num_batch": 5, //repeat unit build if response factory build is called
 			"anti_cap": 2.0  // probability 0.0~1.0 of AntiCapture action
@@ -364,7 +364,7 @@
 			},
 "legmstor" : {
 				"role": ["static"],
-				"since": 900,
+				"since": 9000,
 				"limit": 1
 			},
 "legwin": {
@@ -382,7 +382,7 @@
 			},
 "legestor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 9000,
 				"limit": 2
 			},
 "legmoho" : {
@@ -393,8 +393,8 @@
 			},
 "legamstor" : {
 				"role": ["static"],
-				"limit": 1,
-				"since": 1200
+				"since": 9000,
+				"limit": 1
 			},
 "legageo" : {
 				"role": ["static"]

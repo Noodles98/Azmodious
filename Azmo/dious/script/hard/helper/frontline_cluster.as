@@ -3,11 +3,11 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 300.f;
-const float ANCHOR_RADIUS = 350.f;
-const float PUSH_START_RADIUS = 250.f;
-const float PUSH_MAX_RADIUS = 500.f;
-const float PUSH_RATIO = 1.35f;
+const float CONFIRM_RADIUS = 500.f;
+const float ANCHOR_RADIUS = 500.f;
+const float PUSH_START_RADIUS = 325.f;
+const float PUSH_MAX_RADIUS = 800.f;
+const float PUSH_RATIO = 2.5f;
 
 bool hasCandidate = false;
 AIFloat3 candidatePos;

@@ -2,7 +2,7 @@ namespace TeamRoleAir {
 
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
-const uint MAX_ESCORTS_PER_BOMBER = 2;
+const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 18 * MINUTE;
@@ -42,9 +42,9 @@ const float EARLY_DEFENCE_LANE_SPREAD = 1200.0f;
 const float MID_DEFENCE_LANE_SPREAD = 1500.0f;
 const float LATE_DEFENCE_LANE_SPREAD = 1800.0f;
 const uint MILITARY_SCOUT_CAP = 2;
-const float MILITARY_ATTACK_THRESHOLD = 15.0f;
-const float MILITARY_RAID_MIN_POWER = 6.0f;
-const float MILITARY_RAID_AVG_POWER = 45.0f;
+const float MILITARY_ATTACK_THRESHOLD = 150.0f;
+const float MILITARY_RAID_MIN_POWER = 80.0f;
+const float MILITARY_RAID_AVG_POWER = 135.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
 const uint FRONTLINE_CONFIRM_HITS = 20;

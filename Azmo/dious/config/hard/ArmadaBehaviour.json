@@ -10,7 +10,7 @@
 			"raid": [20.0, 85.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 160.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
-				"attack": [0.65, 1.25],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
+				"attack": [0.65, 3.0],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | org=0.25, 0.3
 				"defence": [0.40, 0.60],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
 				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
 				"static": 1.1,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
@@ -75,70 +75,70 @@
 				"attribute": ["commander"],
 				"build_speed": 5.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl2": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 10.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl3": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 15.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl4": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 20.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl5": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 25.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl6": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 30.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl7": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 35.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl8": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 40.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl9": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 45.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "armcomlvl10": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 50.0,
 				"retreat": 0.6,
-				"threat": {"air": 1000.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 100.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 
 			// ===== Armada factories and mobile factory units =====
@@ -372,7 +372,7 @@
 			},
 "armmstor" : {
 				"role": ["static"],
-				"since": 900,
+				"since": 9000,
 				"limit": 1
 			},
 "armwin": {
@@ -391,7 +391,7 @@
 			},
 "armestor" : {
 				"role": ["static"],
-				"since": 600,
+				"since": 900,
 				"limit": 2
 			},
 "armmoho" : {
@@ -405,7 +405,7 @@
 			},
 "armuwadvms" : {
 				"role": ["static"],
-				"since": 1200
+				"since": 9000
 			},
 "armgmm" : {
 				"role": ["static"]
@@ -520,100 +520,78 @@
 			// ===== Armada T1 bot lab combat =====
 "armpw": {
 				"role": ["raider"],
-				"ignore": true,
-				"power": 5
+				"ignore": true
 			},
 "armrectr": {
 				"role": ["support"],
-				"attribute": ["rare"],
-				"power": 5
+				"attribute": ["rare"]
 			},
 "armrock": {
-				"role": ["skirmish"],
-				"power": 5
+				"role": ["skirmish"]
 			},
 "armham": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "armjeth": {
-				"role": ["anti_air"],
-				"power": 5
+				"role": ["anti_air"]
 			},
 "armwar": {
 				"role": ["riot"],
-				"attribute": ["skirmish"],
-				"power": 5
+				"attribute": ["skirmish"]
 			},
 "armflea": {
 				"role": ["scout"],
-				"ignore": true,
-				"power": 5
+				"ignore": true
 			},
 "armfast": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "armamph": {
-				"role": ["raider", "anti_air"],
-				"power": 10
+				"role": ["raider", "anti_air"]
 			},
 "armzeus": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "armfboy": {
-				"role": ["assault", "heavy"],
-				"power": 10
+				"role": ["assault", "heavy"]
 			},
 "armmav": {
 				"role": ["riot"],
-				"attribute": ["skirmish"],
-				"power": 10
+				"attribute": ["skirmish"]
 			},
 "armfido": {
-				"role": ["skirmish"],
-				"power": 10
+				"role": ["skirmish"]
 			},
 "armvader": {
 				"role": ["raider"],
-				"attribute": ["melee"],
-				"power": 10
+				"attribute": ["melee"]
 			},
 "armaak": {
-				"role": ["anti_air"],
-				"power": 10
+				"role": ["anti_air"]
 			},
 "armmark": {
 				"role": ["assault"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "armaser": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armspid": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armsptk": {
 				"role": ["raider"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armsnipe": {
 				"role": ["anti_heavy"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armscab": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armspy": {
-				"role": ["scout"],
-				"power": 10
+				"role": ["scout"]
 			},
 
 			// ===== Armada striders and experimental combat =====
@@ -639,248 +617,193 @@
 				"role":["super"]
 			},
 "armmlv": {
-				"role": ["support"],
-				"power": 5
+				"role": ["support"]
 			},
 "armfav": {
-				"role": ["scout"],
-				"power": 5
+				"role": ["scout"]
 			},
 "armflash": {
-				"role": ["raider"],
-				"power": 5
+				"role": ["raider"]
 			},
 "armpincer": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "armstump": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "armart": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 5
+				"attribute": ["support"]
 			},
 "armjanus": {
-				"role": ["skirmish"],
-				"power": 5
+				"role": ["skirmish"]
 			},
 "armsam": {
 				"role": ["anti_air"],
-				"attribute": ["skirmish"],
-				"power": 5
+				"attribute": ["skirmish"]
 			},
 "armlatnk": {
-				"role": ["raider"],
-				"power": 10
+				"role": ["raider"]
 			},
 "armgremlin": {
-				"role": ["scout"],
-				"power": 10
+				"role": ["scout"]
 			},
 "armbull": {
-				"role": ["assault"],
-				"power": 10
+				"role": ["assault"]
 			},
 "armmanni": {
 				"role": ["anti_heavy"],
-				"attribute": ["artillery"],
-				"power": 10
+				"attribute": ["artillery"]
 			},
 "armmart": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "armmerl": {
 				"role": ["artillery"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "armyork": {
 				"role": ["anti_air"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "armseer": {
 				"role": ["assault"],
 				"attribute": ["support"],
-				"limit": 1,
-				"power": 10
+				"limit": 1
 			},
 "armjam": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armpeep": {
-				"role": ["scout", "air"],
-				"power": 5
+				"role": ["scout", "air"]
 			},
 "armfig": {
-				"role": ["anti_air", "air"],
-				"power": 5
+				"role": ["anti_air", "air"]
 			},
 "armthund": {
-				"role": ["bomber", "static", "assault", "anti_air"],
-				"power": 5
+				"role": ["bomber", "static", "assault", "anti_air"]
 			},
 "armkam": {
 				"role": ["raider", "air"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "armawac": {
-				"role": ["scout", "air"],
-				"power": 10
+				"role": ["scout", "air"]
 			},
 "armhawk": {
-				"role": ["anti_air", "air"],
-				"power": 10
+				"role": ["anti_air", "air"]
 			},
 "armpnix": {
-				"role": ["bomber", "air"],
-				"power": 10
+				"role": ["bomber", "air"]
 			},
 "armbrawl": {
 				"role": ["raider", "air"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armblade": {
 				"role": ["heavy", "air"],
-				"attribute": ["support"],
-				"power": 10
+				"attribute": ["support"]
 			},
 "armstil": {
-				"role": ["bomber", "air"],
-				"power": 10
+				"role": ["bomber", "air"]
 			},
 "armliche": {
 				"role": ["bomber", "air"],
-				"attribute": ["heavy"],
-				"power": 10
+				"attribute": ["heavy"]
 			},
 "armsaber": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armcsa": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armsb": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armseap": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armsehak": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armsfig": {
-				"role": ["skirmish", "air"],
-				"power": 5
+				"role": ["skirmish", "air"]
 			},
 "armrecl": {
 				"role": ["support"]
 			},
 "armpt": {
-				"role": ["scout", "anti_ai`r"],
-				"power": 5
+				"role": ["scout", "anti_ai`r"]
 			},
 "armdecade": {
-				"role": ["raider"],
-				"power": 5
+				"role": ["raider"]
 			},
 "armpship": {
 				"role": ["riot"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "armsub": {
 				"role": ["sub"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "armroy": {
 				"role": ["anti_sub"],
-				"attribute": ["siege"],
-				"power": 5
+				"attribute": ["siege"]
 			},
 "armcroc": {
-				"role": ["anti_sub"],
-				"power": 5
+				"role": ["anti_sub"]
 			},
 "armdecom": {
-				"power": 5
 			},
 "armsubk": {
-				"role": ["anti_sub", "sub"]	,
-				"power": 10
+				"role": ["anti_sub", "sub"]
 			},
 "armserp": {
 				"role":["sub"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armaas": {
-				"role": ["anti_air"],
-				"power": 10
+				"role": ["anti_air"]
 			},
 "armcrus": {
 				"role": ["skirmish"],
-				"attribute": ["anti_sub"],
-				"power": 10
+				"attribute": ["anti_sub"]
 			},
 "armsjam": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armcarry": {
-				"role": ["support"],
-				"power": 10
+				"role": ["support"]
 			},
 "armmship": {
 				"role": ["artillery"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armbats": {
 				"role": ["heavy"],
-				"attribute": ["siege"],
-				"power": 10
+				"attribute": ["siege"]
 			},
 "armepoch": {
 				"role": ["artillery"],
-				"attribute": ["super"],
-				"power": 10
+				"attribute": ["super"]
 			},
 "armsh": {
-				"role": ["raider"],
-				"power": 5
+				"role": ["raider"]
 			},
 "armanac": {
-				"role": ["assault"],
-				"power": 5
+				"role": ["assault"]
 			},
 "armmh": {
 				"role": ["artillery"],
-				"limit": 6,
-				"power": 5
+				"limit": 6
 			},
 "armah": {
 				"role": ["anti_air"],
-				"attribute": ["skirmish"],
-				"power": 5
+				"attribute": ["skirmish"]
 			},
 "leegmech": {
-				"role": ["skirmish"],
-				"power": 5
+				"role": ["skirmish"]
 			},
 "raptor_queen_epiq": {
 				"role": ["super"],
