@@ -33,7 +33,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::BOMBER.mask)
 		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
-		|| cdef.IsRoleAny(Unit::Role::SKIRMISH.mask)
+		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::AA.mask)
 		;
@@ -42,7 +42,7 @@ bool IsAirDefenceCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
-		|| cdef.IsRoleAny(Unit::Role::SKIRMISH.mask);
+		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask);
 }
 
 float GetDefendPromotePower()
@@ -70,6 +70,8 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 		return Task::FightType::ATTACK;
 	if (cdef.IsRoleAny(Unit::Role::RIOT.mask))
 		return Task::FightType::ATTACK;
+	if (cdef.IsRoleAny(Unit::Role::SKIRM.mask))
+		return Task::FightType::ATTACK;
 	if (cdef.IsRoleAny(Unit::Role::HEAVY.mask))
 		return Task::FightType::ATTACK;
 	if (cdef.IsRoleAny(Unit::Role::SUPER.mask))
@@ -93,7 +95,7 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 	if (IsBacklineCombat(cdef))
 		return ((role == "tech") || (role == "front")) ? Task::FightType::ARTY : Task::FightType::ATTACK;
 	if (IsSupportCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::SUPPORT : Task::FightType::SUPPORT;
+		return ((role == "tech") || (role == "front")) || (role == "air") ? Task::FightType::SUPPORT : Task::FightType::SUPPORT;
 	if (IsAirCombat(cdef))
 		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::BOMB;
 	if (IsAirDefenceCombat(cdef))

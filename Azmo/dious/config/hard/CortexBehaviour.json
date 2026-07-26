@@ -533,7 +533,7 @@
 				"role": ["builder", "air"],
 				"retreat": 0.6,
 				"limit": 25,
-				"build_speed": 5.0,
+				"build_speed": 5.0
 			},
 "coraca": {
 				"role": ["builder", "air"],
