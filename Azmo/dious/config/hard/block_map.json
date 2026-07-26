@@ -67,8 +67,8 @@
 			"yard": [10, 10]
 		},
 		"solar": {
-			"type": ["rectangle", "engy_low", "engy_mid"],
-			"yard": [2, 2],
+			"type": ["rectangle", "engy_low"],
+			"yard": [4, 4],
 			"ignore": ["engy_low", "nano"]
 		},
 		"wind": {

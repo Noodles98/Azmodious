@@ -74,70 +74,70 @@
 				"attribute": ["commander"],
 				"build_speed": 5.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl2": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 10.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl3": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 15.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl4": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 20.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl5": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 25.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl6": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 30.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl7": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 35.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl8": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 40.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl9": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 45.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 "corcomlvl10": {
 				"role": ["builder"],
 				"attribute": ["commander"],
 				"build_speed": 50.0,
 				"retreat": 0.6,
-				"threat": {"air": 50.0, "surf": 55.0, "water": 55.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
+				"threat": {"air": 10.0, "surf": 10.0, "water": 10.0, "default": 5.0, "vs": {"air": 1.0, "surf": 1.0, "water": 1.0, "default": 5.0}}
 			},
 
 			// ===== Cortex factories and mobile factory units =====
@@ -289,13 +289,16 @@
 				"limit": 3
 			},
 "corrl": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "cormadsam": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "corerad": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "corarad":{
 				"role":["static"]
@@ -340,10 +343,12 @@
 				"role": ["super", "static"]
 			},
 "corflak": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "corscreamer": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "cortron":{
 				"role":	["super", "static"],
@@ -367,7 +372,8 @@
 				"limit": 3
 			},
 "corfrt": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "cortl": {
 				"role": ["static"]
@@ -383,7 +389,8 @@
 				"role": ["static"]
 			},
 "corenaa": {
-				"role": ["anti_air"]
+				"role": ["anti_air"],
+				"threat": [0.2]
 			},
 "coratl": {
 				"role": ["static"]
