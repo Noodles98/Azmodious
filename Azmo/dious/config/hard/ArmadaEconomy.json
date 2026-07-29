@@ -2,25 +2,21 @@
 {
 "economy": {
 	"energy": {
-		"side": {
-"armada": {
-				"land": {
-					// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
-					// limit = random(<lower limit>..<upper limit>)
-					"armsolar": [200, 350],
-					"armwin": [70, 110],
-					"armadvsol": [200, 310, 24, 1600, 4.5],
-					"armfus": [350, 600],
-					"armafus": [600, 1200, 50, 5000, 4.5]
-				},
-				"water": {
-					"armtide": [150, 200],
-					"armwin": [120, 180],
-					"armsolar": [80, 110],
-					"armadvsol": [80, 120],
-					"armuwfus": [320, 480]
-				}
-			}
+		"land": {
+			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
+			// limit = random(<lower limit>..<upper limit>)
+			"armsolar": [200, 350],
+			"armwin": [70, 110],
+			"armadvsol": [200, 310, 24, 1600, 4.5],
+			"armfus": [350, 600],
+			"armafus": [600, 1200, 50, 5000, 4.5]
+		},
+		"water": {
+			"armtide": [150, 200],
+			"armwin": [120, 180],
+			"armsolar": [80, 110],
+			"armadvsol": [80, 120],
+			"armuwfus": [320, 480]
 		},
 		"factor": [[1.0, 300], [10.0, 600], [25, 1200], [45.0, 2400], [90, 7200], [500, 14400]],
 		"min_income": 6,

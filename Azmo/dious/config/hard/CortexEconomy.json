@@ -2,25 +2,21 @@
 {
 "economy": {
 	"energy": {
-		"side": {
-"cortex": {
-				"land": {
-					// "<energy_def>": [<lower limit>, <upper limit>]
-					// limit = random(<lower limit>..<upper limit>)
-					"corsolar": [200, 350],
-					"corwin": [70, 110],
-					"coradvsol": [210, 300, 24, 1500, 4.5],
-					"corfus": [350, 600],
-					"corafus": [600, 1200, 50, 5000, 4.5]
-				},
-				"water": {
-					"cortide": [150, 200],
-					"corwin": [120, 180],
-					"corsolar": [80, 110],
-					"coradvsol": [80, 120],
-					"coruwfus": [320, 480]
-				}
-			}
+		"land": {
+			// "<energy_def>": [<lower limit>, <upper limit>]
+			// limit = random(<lower limit>..<upper limit>)
+			"corsolar": [200, 350],
+			"corwin": [70, 110],
+			"coradvsol": [210, 300, 24, 1500, 4.5],
+			"corfus": [350, 600],
+			"corafus": [600, 1200, 50, 5000, 4.5]
+		},
+		"water": {
+			"cortide": [150, 200],
+			"corwin": [120, 180],
+			"corsolar": [80, 110],
+			"coradvsol": [80, 120],
+			"coruwfus": [320, 480]
 		},
 		"factor": [[1.0, 75], [15.0, 600], [25.0, 2400], [45.0, 4800], [90, 7200], [500, 14400]],
 		"min_income": 6,
