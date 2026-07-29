@@ -66,14 +66,6 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 		return Task::FightType::SCOUT;
 	if (cdef.IsRoleAny(Unit::Role::BOMBER.mask))
 		return Task::FightType::BOMB;
-	if (cdef.IsRoleAny(Unit::Role::ASSAULT.mask))
-		return Task::FightType::ATTACK;
-	if (cdef.IsRoleAny(Unit::Role::RIOT.mask))
-		return Task::FightType::ATTACK;
-	if (cdef.IsRoleAny(Unit::Role::SKIRM.mask))
-		return Task::FightType::ATTACK;
-	if (cdef.IsRoleAny(Unit::Role::HEAVY.mask))
-		return Task::FightType::ATTACK;
 	if (cdef.IsRoleAny(Unit::Role::SUPER.mask))
 		return Task::FightType::SUPER;
 	if (cdef.IsRoleAny(Unit::Role::AA.mask))

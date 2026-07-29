@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 			// limit = random(<lower limit>..<upper limit>)
-			"armsolar": [200, 350],
 			"armwin": [70, 110],
-			"armadvsol": [200, 310, 24, 1600, 4.5],
+			"armsolar": [200, 350],
+			"armadvsol": [200, 350],
 			"armfus": [350, 600],
-			"armafus": [600, 1200, 50, 5000, 4.5]
+			"armafus": [600, 1200]
 		},
 		"water": {
 			"armtide": [150, 200],
@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 460.0,
+	"cluster_range": 600.0,
 
 	"geo": {
 		"armada": "armgeo"
@@ -44,7 +44,7 @@
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.50,
+	"eps_step": 0.35,
 
 	"buildpower": 1.25,
 
