@@ -6,7 +6,7 @@ namespace Init {
 
 SInitInfo AiInit()
 {
-	AiLog("dev AngelScript Rules!");
+	AiLog("dious AngelScript Rules!");
 
 	SInitInfo data;
 	data.armor = InitArmordef();
@@ -28,6 +28,7 @@ SInitInfo AiInit()
 
 	if (string(aiSetupMgr.GetModOptions()["experimentallegionfaction"]) == "1") {
 		AiLog("Inserting Legion");
+		Side::LEGION = aiSideMasker.GetTypeMask("legion");  // Register legion side
 		data.profile.insertLast("LegionBehaviour");
 		data.profile.insertLast("LegionBuildChain");
 		data.profile.insertLast("LegionEconomy");

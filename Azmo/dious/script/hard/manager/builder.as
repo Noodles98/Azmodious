@@ -43,7 +43,7 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 		return null;
 
 	if (LegionMexUpgradeFilter::ShouldReject(task, unit.circuitDef)) {
-		AIFloat3 buildPos = task.GetBuildPos();
+		AIFloat3 buildPos = cast<IBuilderTask>(task).GetBuildPos();
 		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
 		return null;
 	}
@@ -142,12 +142,12 @@ void OnMessage(const string& in data)
 {
 }
 
-void AiUnitFinished(CCircuitUnit@ unit)
+void UnitFinished(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitFinished(unit);
 }
 
-void AiUnitDestroyed(CCircuitUnit@ unit)
+void UnitDestroyed(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitDestroyed(unit);
 }
