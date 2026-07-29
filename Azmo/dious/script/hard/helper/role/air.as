@@ -1,7 +1,7 @@
 namespace TeamRoleAir {
 
 // Role tuning constants
-const uint MIN_BOMBER_SWARM = 20;
+const uint MIN_BOMBER_SWARM = 10;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
 const string CONTROL_KEY = "air_bomber_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
