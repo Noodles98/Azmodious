@@ -10,7 +10,7 @@
 			"cortex": ["corllt",  "cortl", "corrl", "corhllt", "corhlt", "corjuno", "cormaw", "cormadsam", "corerad", "corvipe", "coratl",
 					   "corflak", "cortoast", "cordoom", "corpun", "corfmd", "cortarg", "corgate", "corscreamer", "cornanotc", "corint", "corbuzz", "cortron"]
 		},
-		"land":  [0, 2, 3, 3, 4, 3, 7, 5, 12, 12, 15, 13, 18, 17, 18, 20, 22, 20, 19, 19, 20, 20, 18, 17, 17, 22, 12, 12, 21, 12, 12, 12],
+		"land":  [0, 2, 3, 3, 4, 3, 7, 12, 12, 15, 13, 18, 17, 18, 20, 22, 20, 19, 19, 20, 20, 18, 17, 17, 22, 12, 12, 21, 12, 12, 12],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
 		"prevent": 1,
 		"amount": {
@@ -24,7 +24,7 @@
 			"unit": {
 				"cortex": ["corfmd", "corsilo"]
 			},
-			"weight": [0.10, 0.60],
+			"weight": [0.40, 0.60],
 			"condition": [200, 500]
 		},
 		"wall": {

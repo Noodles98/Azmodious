@@ -19,15 +19,15 @@ const float LATE_CONVERT_ENERGY_EFF = 22.01f;
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.65f;
 const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.68f;
-const float EARLY_ENERGY_STALL_DEFAULT = 0.60f;
-const float MID_ENERGY_STALL_DEFAULT = 0.65f;
-const float LATE_ENERGY_STALL_DEFAULT = 0.68f;
+const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
+const float MID_ENERGY_STALL_DEFAULT = 0.85f;
+const float LATE_ENERGY_STALL_DEFAULT = 0.82f;
 const float EARLY_ASSIST_METAL_RATIO = 0.20f;
 const float MID_ASSIST_METAL_RATIO = 0.31f;
 const float LATE_ASSIST_METAL_RATIO = 0.43f;
-const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
-const float MID_FACTORY_SWITCH_ARMY_MULT = 1.15f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;
+const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.20f;
+const float MID_FACTORY_SWITCH_ARMY_MULT = 1.25f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.30f;
 const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.93f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
@@ -42,14 +42,14 @@ const float EARLY_DEFENCE_LANE_SPREAD = 1200.0f;
 const float MID_DEFENCE_LANE_SPREAD = 1500.0f;
 const float LATE_DEFENCE_LANE_SPREAD = 1800.0f;
 const uint MILITARY_SCOUT_CAP = 2;
-const float MILITARY_ATTACK_THRESHOLD = 300.0f;
+const float MILITARY_ATTACK_THRESHOLD = 250.0f;
 const float MILITARY_RAID_MIN_POWER = 150.0f;
 const float MILITARY_RAID_AVG_POWER = 225.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint FACTORY_MIN_BUILDER2_COUNT = 1;
 const uint FRONTLINE_CONFIRM_HITS = 10;
-const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
-const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
+const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
+const int FRONTLINE_ANCHOR_EXPIRE = 60 * SECOND;
 
 array<Id> bomberIds;
 array<Id> escortIds;
@@ -340,7 +340,7 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 
 int MakeSwitchInterval()
 {
-	return AiRandom(360, 420) * SECOND;
+	return AiRandom(480, 600) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)

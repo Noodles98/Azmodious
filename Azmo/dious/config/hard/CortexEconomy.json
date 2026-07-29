@@ -6,10 +6,10 @@
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
 			"corwin": [70, 110],
-			"corsolar": [200, 350],
-			"coradvsol": [200, 350],
-			"corfus": [350, 600],
-			"corafus": [600, 1200]
+			"corsolar": [200, 300],
+			"coradvsol": [200, 300],
+			"corfus": [250, 600],
+			"corafus": [500, 1800]
 		},
 		"water": {
 			"cortide": [150, 200],
@@ -18,7 +18,7 @@
 			"coradvsol": [80, 120],
 			"coruwfus": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [25.0, 2400], [45.0, 4800], [90, 7200], [500, 14400]],
+		"factor": [[1.0, 75], [15.0, 600], [40.0, 2400], [80.0, 4800], [300.0, 7200], [1200.0, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,
