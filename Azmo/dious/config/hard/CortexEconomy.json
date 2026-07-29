@@ -9,7 +9,7 @@
 			"corsolar": [200, 300],
 			"coradvsol": [200, 300],
 			"corfus": [250, 600],
-			"corafus": [500, 1800]
+			"corafus": [600, 1800]
 		},
 		"water": {
 			"cortide": [150, 200],
@@ -46,7 +46,7 @@
 
 	"eps_step": 0.35,
 
-	"buildpower": 1.25,
+	"buildpower": 1.35,
 
 	"excess": -1.0,
 

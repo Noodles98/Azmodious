@@ -9,7 +9,7 @@
 			"legsolar": [200, 300],
 			"legadvsol": [200, 300],
 			"legfus": [250, 600],
-			"legafus": [500, 1200]
+			"legafus": [600, 1200]
 		},
 		"water": {
 			"legtide": [150, 200],
@@ -46,7 +46,7 @@
 
 	"eps_step": 0.35,
 
-	"buildpower": 1.25,
+	"buildpower": 1.35,
 
 	"excess": -1.0,
 

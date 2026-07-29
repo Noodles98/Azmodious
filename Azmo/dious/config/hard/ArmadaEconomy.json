@@ -9,7 +9,7 @@
 			"armsolar": [200, 300],
 			"armadvsol": [200, 300],
 			"armfus": [250, 600],
-			"armafus": [500, 1800]
+			"armafus": [600, 1800]
 		},
 		"water": {
 			"armtide": [150, 200],
@@ -46,7 +46,7 @@
 
 	"eps_step": 0.35,
 
-	"buildpower": 1.25,
+	"buildpower": 1.35,
 
 	"excess": -1.0,
 
