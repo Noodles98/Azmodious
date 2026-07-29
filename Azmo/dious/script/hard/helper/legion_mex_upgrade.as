@@ -29,12 +29,12 @@ void OnUnitDestroyed(CCircuitUnit@ unit)
 
 bool ShouldReject(IUnitTask@ task, const CCircuitDef@ builderDef)
 {
-	if (task is null || task.GetType() != Task::Type::BUILDER || cast<IBuilderTask>(task).GetBuildType() != Task::BuildType::MEX)
+	if (task is null || task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEX)
 		return false;
 	if (IsLegionDef(builderDef))
 		return false;
 
-	return HasLegionMexNear(cast<IBuilderTask>(task).GetBuildPos());
+	return HasLegionMexNear(task.GetBuildPos());
 }
 
 bool IsLegionDef(const CCircuitDef@ cdef)

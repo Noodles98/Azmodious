@@ -43,7 +43,7 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 		return null;
 
 	if (LegionMexUpgradeFilter::ShouldReject(task, unit.circuitDef)) {
-		AIFloat3 buildPos = cast<IBuilderTask>(task).GetBuildPos();
+		AIFloat3 buildPos = task.GetBuildPos();
 		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
 		return null;
 	}

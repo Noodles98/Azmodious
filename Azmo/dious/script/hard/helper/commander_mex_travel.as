@@ -15,11 +15,11 @@ bool ShouldReject(IUnitTask@ task, CCircuitUnit@ unit)
 		return false;
 	if (!unit.circuitDef.IsRoleAny(Unit::Role::COMM.mask))
 		return false;
-	if (task.GetType() != Task::Type::BUILDER || cast<IBuilderTask>(task).GetBuildType() != Task::BuildType::MEX)
+	if (task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEX)
 		return false;
 
 	const AIFloat3 unitPos = unit.GetPos(ai.frame);
-	const AIFloat3 buildPos = cast<IBuilderTask>(task).GetBuildPos();
+	const AIFloat3 buildPos = task.GetBuildPos();
 	const float dx = buildPos.x - unitPos.x;
 	const float dz = buildPos.z - unitPos.z;
 	const float maxDistance = PRE_FACTORY_MAX_TRAVEL_SECONDS * COMMANDER_TRAVEL_DISTANCE_PER_SECOND;
