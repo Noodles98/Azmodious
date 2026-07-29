@@ -282,15 +282,15 @@
 				"role": ["static"]
 			},
 "legrl": {
-				"role": ["anti_air"],
+				"role": ["anti_air", "static"],
 				"threat": [0.2]
 			},
 "legrhapsis": {
-				"role": ["anti_air"],
+				"role": ["anti_air", "static"],
 				"threat": [0.2]
 			},
 "leglupara": {
-				"role": ["anti_air"],
+				"role": ["anti_air", "static"],
 				"threat": [0.2]
 			},
 "legarad":{
@@ -336,11 +336,11 @@
 				"role": ["super", "static"]
 			},
 "legflak": {
-				"role": ["anti_air"],
+				"role": ["anti_air", "static"],
 				"threat": [0.2]
 			},
 "leglraa": {
-				"role": ["anti_air"],
+				"role": ["anti_air", "static"],
 				"threat": [0.2]
 			},
 "legperdition":{
