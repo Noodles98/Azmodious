@@ -405,8 +405,8 @@
 			},
 "cormstor" : {
 				"role": ["static"],
-				"since": 9000,
-				"limit": 0
+				"since": 2400,
+				"limit": 1
 			},
 "cormakr": {
 				"role": ["static"],
@@ -426,8 +426,8 @@
 			},
 "corestor" : {
 				"role": ["static"],
-				"since": 9000,
-				"limit": 0
+				"since": 900,
+				"limit": 2
 			},
 "cormoho" : {
 				"role": ["static"]

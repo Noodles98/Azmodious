@@ -6,9 +6,9 @@
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [70, 110],
-			"legsolar": [200, 250],
-			"legadvsol": [200, 250],
-			"legfus": [225, 600],
+			"legsolar": [100, 200],
+			"legadvsol": [100, 200],
+			"legfus": [290, 600],
 			"legafus": [600, 1200]
 		},
 		"water": {
@@ -40,7 +40,7 @@
 
 	"calc_mex": false,
 
-	"goal_exec": 48.0,
+	"goal_exec": 60.0,
 
 	"build_mod": 1000.0,
 

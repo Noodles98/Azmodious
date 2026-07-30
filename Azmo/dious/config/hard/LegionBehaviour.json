@@ -369,7 +369,7 @@
 			},
 "legmstor" : {
 				"role": ["static"],
-				"since": 9000,
+				"since": 2400,
 				"limit": 1
 			},
 "legwin": {
@@ -387,7 +387,7 @@
 			},
 "legestor" : {
 				"role": ["static"],
-				"since": 9000,
+				"since": 900,
 				"limit": 2
 			},
 "legmoho" : {
