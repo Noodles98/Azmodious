@@ -3,7 +3,7 @@ namespace TeamRoleTech {
 // Role tuning constants
 const string CONTROL_KEY = "tech_role_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 25 * MINUTE;
+const int LATE_GAME_FRAME = 22 * MINUTE;
 const float EARLY_CONVERT_EFF = 4.6f;
 const float MID_CONVERT_EFF = 8.65f;
 const float LATE_CONVERT_EFF = 15.24;
@@ -22,7 +22,7 @@ const float MID_ASSIST_METAL_RATIO = 0.31f;
 const float LATE_ASSIST_METAL_RATIO = 0.41f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.20f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.25f;
-const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.30f;
+const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.84f;
@@ -37,7 +37,7 @@ const float EARLY_DEFENCE_LANE_SPREAD = 300.0f;
 const float MID_DEFENCE_LANE_SPREAD = 450.0f;
 const float LATE_DEFENCE_LANE_SPREAD = 600.0f;
 const uint MILITARY_SCOUT_CAP = 1;
-const float MILITARY_ATTACK_THRESHOLD = 200.0f;
+const float MILITARY_ATTACK_THRESHOLD = 100.0f;
 const float MILITARY_RAID_MIN_POWER = 90.0f;
 const float MILITARY_RAID_AVG_POWER = 150.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
