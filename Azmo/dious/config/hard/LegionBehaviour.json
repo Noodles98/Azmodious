@@ -379,15 +379,14 @@
 				"role": ["static"]
 			},
 "legadvsol" : {
-				"role": ["static"],
-				"since": 900
+				"role": ["static"]
 			},
 "leggeo" : {
 				"role": ["static"]
 			},
 "legestor" : {
 				"role": ["static"],
-				"since": 900,
+				"since": 600,
 				"limit": 2
 			},
 "legmoho" : {
