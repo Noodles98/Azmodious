@@ -56,7 +56,7 @@
 
 	"build_delay": [[-1.0, 0], [-1.0, 0]],
 
-	"production": [0.8, 0.7, 0.8, 0.8],
+	"production": [0.9, 0.7, 0.8, 0.8],
 
 	"assist": {
 		"legion": "legnanotc"
