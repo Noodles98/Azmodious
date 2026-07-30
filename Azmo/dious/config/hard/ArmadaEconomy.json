@@ -6,10 +6,10 @@
 			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 			// limit = random(<lower limit>..<upper limit>)
 			"armwin": [70, 110],
-			"armsolar": [200, 300],
-			"armadvsol": [200, 300],
-			"armfus": [250, 600],
-			"armafus": [600, 1800]
+			"armsolar": [100, 250],
+			"armadvsol": [100, 250],
+			"armfus": [225, 600],
+			"armafus": [550, 1800]
 		},
 		"water": {
 			"armtide": [150, 200],
@@ -18,7 +18,7 @@
 			"armadvsol": [80, 120],
 			"armuwfus": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [40.0, 1200], [80.0, 2400], [300.0, 7200], [1200.0, 14400]],
+		"factor": [[1.0, 75], [15.0, 600], [40.0, 1200], [120.0, 2400], [400.0, 7200], [1500.0, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,

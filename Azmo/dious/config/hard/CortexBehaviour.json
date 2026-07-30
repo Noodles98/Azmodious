@@ -406,7 +406,7 @@
 "cormstor" : {
 				"role": ["static"],
 				"since": 9000,
-				"limit": 1
+				"limit": 0
 			},
 "cormakr": {
 				"role": ["static"],
@@ -419,8 +419,7 @@
 				"role": ["static"]
 			},
 "coradvsol" : {
-				"role": ["static"],
-				"since": 900
+				"role": ["static"]
 			},
 "corgeo" : {
 				"role": ["static"]
@@ -428,7 +427,7 @@
 "corestor" : {
 				"role": ["static"],
 				"since": 9000,
-				"limit": 2
+				"limit": 0
 			},
 "cormoho" : {
 				"role": ["static"]

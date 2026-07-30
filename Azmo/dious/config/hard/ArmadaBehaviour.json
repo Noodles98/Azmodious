@@ -378,7 +378,7 @@
 "armmstor" : {
 				"role": ["static"],
 				"since": 9000,
-				"limit": 1
+				"limit": 0
 			},
 "armwin": {
 				"role": ["static"]
@@ -387,8 +387,7 @@
 				"role": ["static"]
 			},
 "armadvsol" : {
-				"role": ["static"],
-				"since": 900
+				"role": ["static"]
 			},
 "armgeo": {
 				"role": ["static"],
@@ -396,8 +395,8 @@
 			},
 "armestor" : {
 				"role": ["static"],
-				"since": 900,
-				"limit": 2
+				"since": 9000,
+				"limit": 0
 			},
 "armmoho" : {
 				"role": ["static"]
