@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 			// limit = random(<lower limit>..<upper limit>)
-			"armwin": [80, 110],
-			"armsolar": [100, 200],
-			"armadvsol": [100, 200],
-			"armfus": [190, 600],
-			"armafus": [590, 1800]
+			"armwin": [80, 120],
+			"armsolar": [160, 180],
+			"armadvsol": [220, 260],
+			"armfus": [280, 600],
+			"armafus": [620, 1800]
 		},
 		"water": {
 			"armtide": [150, 200],
