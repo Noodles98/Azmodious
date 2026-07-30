@@ -270,15 +270,15 @@
 			},
 "armrl": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "armferret": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "armcir": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "armdl": {
 				"role": ["static"]
@@ -324,11 +324,11 @@
 			},
 "armflak": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "armmercury": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "armemp":{
 				"role":	["super", "static"]
@@ -347,6 +347,7 @@
 			},
 "armfrt": {
 				"role": ["anti_air", "static"],
+				"threat": [0.05]
 			},
 "armtl": {
 				"role": ["static"]
@@ -362,7 +363,8 @@
 				"role": ["static"]
 			},
 "armfflak": {
-				"role": ["anti_air", "static"]
+				"role": ["anti_air", "static"],
+				"threat": [0.05]
 			},
 "armatl": {
 				"role": ["static"]

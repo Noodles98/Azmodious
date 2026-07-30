@@ -290,15 +290,15 @@
 			},
 "corrl": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "cormadsam": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "corerad": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "corarad":{
 				"role":["static"]
@@ -344,11 +344,11 @@
 			},
 "corflak": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "corscreamer": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "cortron":{
 				"role":	["super", "static"],
@@ -373,7 +373,7 @@
 			},
 "corfrt": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "cortl": {
 				"role": ["static"]
@@ -390,7 +390,7 @@
 			},
 "corenaa": {
 				"role": ["anti_air", "static"],
-				"threat": [0.2]
+				"threat": [0.05]
 			},
 "coratl": {
 				"role": ["static"]
