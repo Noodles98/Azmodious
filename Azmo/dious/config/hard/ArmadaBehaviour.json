@@ -250,7 +250,8 @@
 				"role":["static"]
 			},
 "armjuno":{
-				"role":["super", "static"]	
+				"role":["static"],
+				"attribute": ["super"]
 			},
 "armclaw": {
 				"role": ["static"]	
@@ -269,15 +270,18 @@
 				"on": false
 			},
 "armrl": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armferret": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armcir": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armdl": {
@@ -323,11 +327,13 @@
 				"role": ["super", "static"]
 			},
 "armflak": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armmercury": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armemp":{
@@ -346,7 +352,8 @@
 				"role": ["static"]
 			},
 "armfrt": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armtl": {
@@ -363,7 +370,8 @@
 				"role": ["static"]
 			},
 "armfflak": {
-				"role": ["anti_air", "static"],
+				"role": ["static"],
+				"attribute": ["anti_air"],
 				"threat": [0.05]
 			},
 "armatl": {
@@ -686,10 +694,10 @@
 			},
 "armfig": {
 				"role": ["anti_air", "air"],
-				"limit": 300
+				"limit": 150
 			},
 "armthund": {
-				"role": ["bomber", "assault"]
+				"role": ["bomber", "air"]
 			},
 "armkam": {
 				"role": ["raider", "air"],
@@ -702,7 +710,7 @@
 				"role": ["anti_air", "assault", "air"]
 			},
 "armpnix": {
-				"role": ["bomber", "assault", "air"]
+				"role": ["bomber", "air"]
 			},
 "armbrawl": {
 				"role": ["raider", "air"],
@@ -735,7 +743,8 @@
 				"role": ["skirmish", "air"]
 			},
 "armsfig": {
-				"role": ["skirmish", "air"]
+				"role": ["skirmish", "air"],
+				"limit": 150
 			},
 "armrecl": {
 				"role": ["support"]

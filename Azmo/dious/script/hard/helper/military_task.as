@@ -10,12 +10,24 @@ bool IsMainlineCombat(const CCircuitDef@ cdef)
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)	
 		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::AH.mask);
 }
 
 bool IsMeleeCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsAttrAny(Unit::Attr::MELEE.mask)
+		|| cdef.IsRoleAny(Unit::Role::SUPER.mask);
+}
+
+bool IsScout(const CCircuitDef@ cdef)
+{
+	return cdef.IsRoleAny(Unit::Role::SCOUT.mask);
+}
+
+bool IsDefenceCombat (const CCircuitDef@ cdef)
+{
+	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask);
 }
 
@@ -35,6 +47,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
+		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
 		|| cdef.IsRoleAny(Unit::Role::AA.mask)
 		;
 }
@@ -49,11 +62,11 @@ float GetDefendPromotePower()
 {
 	const string role = TeamRole::GetName();
 	if (role == "tech")
-		return 100.f;
+		return 120.f;
 	if (role == "air")
-		return 80.f;
+		return 150.f;
 	if (role == "front")
-		return 60.f;
+		return 70.f;
 	return 50.f;
 }
 
@@ -68,6 +81,8 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 		return Task::FightType::BOMB;
 	if (cdef.IsRoleAny(Unit::Role::SUPER.mask))
 		return Task::FightType::SUPER;
+	if (cdef.IsRoleAny(Unit::Role::ASSAULT.mask))
+		return Task::FightType::ATTACK;
 	if (cdef.IsRoleAny(Unit::Role::AA.mask))
 		return Task::FightType::AA;
 	if (cdef.IsRoleAny(Unit::Role::AH.mask))
@@ -81,17 +96,21 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 
 	const string role = TeamRole::GetName();
 	if (IsMainlineCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::DEFEND : Task::FightType::ATTACK;
+		return ((role == "tech") || (role == "front")) ? Task::FightType::ATTACK : Task::FightType::RAID;
 	if (IsMeleeCombat(cdef))
 		return ((role == "tech") || (role == "front")) ? Task::FightType::RAID : Task::FightType::ATTACK;
+	if (IsScout(cdef))
+		return ((role == "front") || (role == "tech") || (role == "air")) ? Task::FightType::SCOUT : Task::FightType::RAID;
 	if (IsBacklineCombat(cdef))
 		return ((role == "tech") || (role == "front")) ? Task::FightType::ARTY : Task::FightType::ATTACK;
+	if (IsDefenceCombat(cdef))
+		return ((role == "tech") || (role == "front")) ? Task::FightType::DEFEND : Task::FightType::ATTACK;
 	if (IsSupportCombat(cdef))
 		return ((role == "tech") || (role == "front")) || (role == "air") ? Task::FightType::SUPPORT : Task::FightType::SUPPORT;
 	if (IsAirCombat(cdef))
 		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::BOMB;
 	if (IsAirDefenceCombat(cdef))
-		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::AA;
+		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::DEFEND;
 	return Task::FightType::_SIZE_;
 }
 
