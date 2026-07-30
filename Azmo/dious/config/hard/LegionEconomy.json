@@ -6,9 +6,9 @@
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [70, 110],
-			"legsolar": [200, 300],
-			"legadvsol": [200, 300],
-			"legfus": [250, 600],
+			"legsolar": [200, 250],
+			"legadvsol": [200, 250],
+			"legfus": [225, 600],
 			"legafus": [600, 1200]
 		},
 		"water": {

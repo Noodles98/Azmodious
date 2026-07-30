@@ -9,7 +9,7 @@
 			"armsolar": [100, 250],
 			"armadvsol": [100, 250],
 			"armfus": [225, 600],
-			"armafus": [550, 1800]
+			"armafus": [600, 1800]
 		},
 		"water": {
 			"armtide": [150, 200],
