@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"legwin": [70, 110],
-			"legsolar": [100, 200],
-			"legadvsol": [100, 200],
+			"legwin": [100, 200],
+			"legsolar": [190, 300],
+			"legadvsol": [190, 300],
 			"legfus": [290, 600],
-			"legafus": [600, 1200]
+			"legafus": [590, 1800]
 		},
 		"water": {
 			"legtide": [150, 200],
@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 500.0,
+	"cluster_range": 800.0,
 
 	"geo": {
 		"legion": "leggeo"

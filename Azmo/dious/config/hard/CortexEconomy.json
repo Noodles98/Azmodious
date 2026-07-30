@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"corwin": [70, 110],
-			"corsolar": [100, 200],
-			"coradvsol": [100, 200],
-			"corfus": [190, 400],
-			"corafus": [390, 1800]
+			"corwin": [100, 200],
+			"corsolar": [190, 300],
+			"coradvsol": [190, 300],
+			"corfus": [290, 600],
+			"corafus": [590, 1800]
 		},
 		"water": {
 			"cortide": [150, 200],
@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 600.0,
+	"cluster_range": 800.0,
 
 	"geo": {
 		"cortex": "corgeo"
