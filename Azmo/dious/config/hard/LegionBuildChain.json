@@ -43,8 +43,9 @@
 		// WARNING: Avoid recursion
 		// <category>: factory, nano, store, pylon, energy, geo, defence, bunker, big_gun, radar, sonar, convert, mex, mexup
 		"energy": {
-			"legsolar": {
-				"hub": [[{"unit": "legeconv", "category": "convert", "offset": {"right": 5}, "priority": "normal", "condition": {"energy": true}}]]
+			"legadvsolar": {
+				"hub": [[{"unit": "legeconv", "category": "convert", "offset": {"right": 5}, "priority": "normal", "condition": {"energy": true}}
+				]]
 			},
 			"legfus": {
 				"hub": [[

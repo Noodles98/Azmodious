@@ -96,7 +96,7 @@
 		"singu": {
 			"type": ["rectangle", "engy_high"],
 			"yard": [5, 5],
-			"ignore": ["engy_high", "engy_mid", "engy_low", "def_low", "nano"]
+			"ignore": ["engy_high", "engy_low", "def_low", "nano"]
 		},
 		"pylon": {
 			"type": ["circle", "pylon"],
@@ -118,7 +118,7 @@
 		},
 		"converter": {
 			"type": ["rectangle", "convert"],
-			"yard": [4, 4],
+			"yard": [2, 2],
 			"ignore": ["convert", "engy_mid"]
 		},
 		"def_low": {
