@@ -7,7 +7,7 @@
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [80, 120],
 			"legsolar": [160, 180],
-			"legadvsol": [160, 180],
+			"legadvsol": [220, 260],
 			"legfus": [550, 700],
 			"legafus": [1000, 1800]
 		},

@@ -4,8 +4,8 @@ const int MID_GAME_FRAME = 12 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 
 const float EARLY_PRESSURE = 15.0f;
-const float MEDIUM_PRESSURE = 50.0f;
-const float HEAVY_PRESSURE = 90.0f;
+const float MEDIUM_PRESSURE = 40.0f;
+const float HEAVY_PRESSURE = 80.0f;
 
 bool IsMidGame()
 {

@@ -7,7 +7,7 @@
 			// limit = random(<lower limit>..<upper limit>)
 			"armwin": [80, 120],
 			"armsolar": [160, 180],
-			"armadvsol": [160, 180],
+			"armadvsol": [220, 260],
 			"armfus": [550, 700],
 			"armafus": [1000, 1800]
 		},

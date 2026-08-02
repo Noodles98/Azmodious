@@ -32,7 +32,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise defaults to FRONT; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
 - `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes.
 - `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
-- `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` here.
+- `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. It temporarily rejects distant MEX tasks, then fails open after repeated rejection so the commander cannot idle forever before the first factory. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` and `MAX_REJECT_FRAMES` here.
 - `script/hard/helper/factory_limit.as`: metal-income factory count caps. The first T1 and first T2 factory are free; additional T1 factories require 15 metal income each, and additional T2 factories require 20 metal income each.
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
 - `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise unprofiled maps use a fixed default lane.
@@ -194,7 +194,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - The `config/hard/*BuildChain.json` files explicitly warn against recursive chains; treat chain additions as potentially unsafe until checked.
 - `factory.json` is shared across the allyTeam, so changes there can affect multiple allied AI instances together.
 - `builder.as` persists role-based base constructor IDs; AIR currently keeps 6 constructors at base, TECH keeps 4, FRONT keeps 2, and SEA/default keeps 2.
-- `commander_mex_travel.as` caps commander MEX travel before the first factory using `PRE_FACTORY_MAX_TRAVEL_SECONDS`; `builder.as` declines only out-of-range commander MEX tasks while `aiFactoryMgr.GetFactoryCount() == 0`.
+- `commander_mex_travel.as` caps commander MEX travel before the first factory using `PRE_FACTORY_MAX_TRAVEL_SECONDS`; `builder.as` declines only out-of-range commander MEX tasks while `aiFactoryMgr.GetFactoryCount() == 0`, and the helper fails open after `MAX_REJECT_FRAMES` to avoid repeated-task idle loops.
 
 ## Practical Change Tracking
 
