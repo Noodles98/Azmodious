@@ -223,7 +223,7 @@ float GetEnergyStallRatioWhenMetalEmpty()
 		case Kind::TECH: return TeamRoleTech::GetEnergyStallRatioWhenMetalEmpty();
 		case Kind::SEA: return TeamRoleSea::GetEnergyStallRatioWhenMetalEmpty();
 		case Kind::FRONT: return TeamRoleFront::GetEnergyStallRatioWhenMetalEmpty();
-		default: return 0.60f;
+		default: return 0.82f;
 	}
 }
 
@@ -235,7 +235,7 @@ float GetEnergyStallRatioDefault()
 		case Kind::TECH: return TeamRoleTech::GetEnergyStallRatioDefault();
 		case Kind::SEA: return TeamRoleSea::GetEnergyStallRatioDefault();
 		case Kind::FRONT: return TeamRoleFront::GetEnergyStallRatioDefault();
-		default: return 0.70f;
+		default: return 0.85f;
 	}
 }
 
@@ -247,7 +247,7 @@ float GetAssistMetalRatio()
 		case Kind::TECH: return TeamRoleTech::GetAssistMetalRatio();
 		case Kind::SEA: return TeamRoleSea::GetAssistMetalRatio();
 		case Kind::FRONT: return TeamRoleFront::GetAssistMetalRatio();
-		default: return 0.20f;
+		default: return 0.30f;
 	}
 }
 
@@ -259,7 +259,7 @@ float GetFactorySwitchArmyMultiplier()
 		case Kind::TECH: return TeamRoleTech::GetFactorySwitchArmyMultiplier();
 		case Kind::SEA: return TeamRoleSea::GetFactorySwitchArmyMultiplier();
 		case Kind::FRONT: return TeamRoleFront::GetFactorySwitchArmyMultiplier();
-		default: return 1.20f;
+		default: return 1.25f;
 	}
 }
 

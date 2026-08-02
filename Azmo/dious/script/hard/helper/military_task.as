@@ -93,7 +93,7 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 
 	const string role = TeamRole::GetName();
 	if (IsMainlineCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::ATTACK : Task::FightType::RAID;
+		return ((role == "tech") || (role == "front")) ? Task::FightType::ATTACK : Task::FightType::ATTACK;
 	if (IsMeleeCombat(cdef))
 		return ((role == "tech") || (role == "front")) ? Task::FightType::RAID : Task::FightType::ATTACK;
 	if (IsScout(cdef))

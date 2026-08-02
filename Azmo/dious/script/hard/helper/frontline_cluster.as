@@ -7,7 +7,7 @@ const float CONFIRM_RADIUS = 800.f;
 const float ANCHOR_RADIUS = 1200.f;
 const float PUSH_START_RADIUS = 800.f;
 const float PUSH_MAX_RADIUS = 1000.f;
-const float PUSH_RATIO = 10.0f;
+const float PUSH_RATIO = 15.0f;
 
 bool hasCandidate = false;
 AIFloat3 candidatePos;
