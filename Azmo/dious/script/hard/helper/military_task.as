@@ -1,9 +1,13 @@
 #include "../../unit.as"
 #include "../../task.as"
 #include "role/role.as"
+#include "frontline_cluster.as"
 
 
 namespace MilitaryTaskPolicy {
+
+const int FOG_PUSH_START_FRAME = 1 * MINUTE;
+const uint FOG_PUSH_UNIT_STRIDE = 3;
 
 bool IsMainlineCombat(const CCircuitDef@ cdef)
 {
@@ -69,6 +73,28 @@ float GetDefendPromotePower()
 	return 50.f;
 }
 
+bool IsFogPushCombat(const CCircuitDef@ cdef)
+{
+	return cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
+		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask);
+}
+
+bool ShouldFogPush(CCircuitUnit@ unit, const CCircuitDef@ cdef)
+{
+	if (unit is null || cdef is null)
+		return false;
+	if (ai.frame < FOG_PUSH_START_FRAME)
+		return false;
+	if (TeamRole::GetName() == "air")
+		return false;
+	if (FrontlineCluster::HasStableAnchor())
+		return false;
+	if (!IsFogPushCombat(cdef))
+		return false;
+	return (uint(unit.id) % FOG_PUSH_UNIT_STRIDE) == 0;
+}
+
 Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 {
 	if (cdef is null)
@@ -116,8 +142,11 @@ bool HasPreferredTask(const CCircuitDef@ cdef)
 	return GetPreferredFightType(cdef) != Task::FightType::_SIZE_;
 }
 
-SFightTask MakePreferredTask(const CCircuitDef@ cdef)
+SFightTask MakePreferredTask(CCircuitUnit@ unit, const CCircuitDef@ cdef)
 {
+	if (ShouldFogPush(unit, cdef))
+		return TaskF::Common(Task::FightType::SCOUT);
+
 	const Task::FightType fightType = GetPreferredFightType(cdef);
 	if (fightType == Task::FightType::DEFEND)
 		return TaskF::Defend(Task::FightType::ATTACK, GetDefendPromotePower());

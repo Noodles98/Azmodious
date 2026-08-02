@@ -37,7 +37,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
 - `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise unprofiled maps use a fixed default lane.
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
-- `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super.
+- `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super. It also reserves a limited share of eligible ground combat units for fog-push scout tasks when no stable frontline anchor is known.
 - `script/hard/helper/terrain/terrain_data.as`: terrain class and spread scaling for placement/pathing context.
 - `script/hard/helper/terrain/terrain_runtime.as`: startup terrain manager setup.
 - `script/hard/helper/terrain/terrain_bridge.as`: Lua message parser for runtime terrain hints.
@@ -67,7 +67,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 Start from the narrowest owner for the behavior you want:
 
 - Change what role or attribute a unit has: the faction-specific `config/hard/*Behaviour.json` files, or optional `extraunits.json` / `extrascavunits.json` overlays.
-- Change retreat, target threat, fire state, or per-unit combat overrides: the faction-specific `config/hard/*Behaviour.json` files.
+- Change retreat, target threat, defensive group sizing, fire state, or per-unit combat overrides: the faction-specific `config/hard/*Behaviour.json` files.
 - Change production mix inside a factory: the faction-specific `config/hard/*Factory.json` files.
 - Change which enemy roles trigger a counter-response: the faction-specific `config/hard/*Response.json` file, keeping in mind response keys are role-based and overlapping keys can override each other when multiple profiles load.
 - Change economic pacing, assistant logic, or energy thresholds: the faction-specific `config/hard/*Economy.json` files.
@@ -134,8 +134,8 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 
 Use this when combat units are joining the wrong fight task, defending when they should attack, raiding when they should hold, or falling through to default military behavior.
 
-1. Check the unit's roles and attributes in the relevant `config/hard/*Behaviour.json` faction overlay first. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
-2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery/support, skirmish backline, melee, raiders, and brawler attack units.
+1. Check the unit's roles, attributes, `quota.thr_mod`, and `retreat.fighter` values in the relevant `config/hard/*Behaviour.json` faction overlay first. Defensive group size and attack/retreat commitment are usually config tuning before script routing. `MilitaryTaskPolicy::GetPreferredFightType()` depends on `Unit::Role` masks and the `MELEE`/`SUPPORT` style attributes registered through `script/unit.as`.
+2. Tune role-aware fight-task mapping in `script/hard/helper/military_task.as`. This helper owns the custom priority order for scouts, bombers, supers, AA/AH, artillery/support, skirmish backline, melee, raiders, and brawler attack units. Fog-push probing is controlled there by `FOG_PUSH_START_FRAME` and `FOG_PUSH_UNIT_STRIDE`.
 3. Keep role-specific defensive posture in `GetPreferredFightType()` and `GetDefendPromotePower()`. TECH currently defends more aggressively, AIR defends mainline ground units, SEA has its own defend promotion power, and FRONT defaults to lower promote power.
 4. Keep `script/hard/manager/military.as` as the owner that calls `MilitaryTaskPolicy` before falling back to `aiMilitaryMgr.DefaultMakeTask(...)`. Do not scatter task-selection calls into role helpers unless the manager ownership changes.
 5. If a new unit category needs a new task behavior, add the role/attribute registration and config assignment alongside the `military_task.as` mapping so future role edits can find the full chain.

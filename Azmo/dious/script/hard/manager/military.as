@@ -1,7 +1,6 @@
 #include "../../define.as"
 #include "../helper/military_task.as"
 #include "../helper/defense.as"
-#include "../helper/frontline_cluster.as"
 
 
 namespace Military {
@@ -15,7 +14,7 @@ IUnitTask@ MakeRoleTask(CCircuitUnit@ unit)
 	if (cdef is null || !MilitaryTaskPolicy::HasPreferredTask(cdef))
 		return null;
 
-	return aiMilitaryMgr.Enqueue(MilitaryTaskPolicy::MakePreferredTask(cdef));
+	return aiMilitaryMgr.Enqueue(MilitaryTaskPolicy::MakePreferredTask(unit, cdef));
 }
 
 IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
