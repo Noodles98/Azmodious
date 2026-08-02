@@ -29,14 +29,13 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 
 - `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, build-chain, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
-- `script/hard/helper/ally_slot.as`: discovers allied AI team IDs through `AiSendMessage`, keeps them sorted, and exposes the repeating eight-slot assignment used by role/lane fallbacks.
-- `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise from the shared ally slot; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
+- `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise defaults to FRONT; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
 - `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes.
 - `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
 - `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` here.
 - `script/hard/helper/factory_limit.as`: metal-income factory count caps. The first T1 and first T2 factory are free; additional T1 factories require 15 metal income each, and additional T2 factories require 20 metal income each.
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
-- `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise ally slots are the fallback.
+- `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise unprofiled maps use a fixed default lane.
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
 - `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super.
 - `script/hard/helper/terrain/terrain_data.as`: terrain class and spread scaling for placement/pathing context.
@@ -75,16 +74,15 @@ Start from the narrowest owner for the behavior you want:
 - Change smoothed economy signal behavior (EMA/noise dampening): `script/hard/helper/economy_smooth.as`
 - Change post-build follow-ups like porc, pylon, or hub chains: the faction-specific `config/hard/*BuildChain.json` files.
 - Change build footprint spacing or terrain/build blocking rules: `config/hard/block_map.json`
-- Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`; profile-resolved maps use matched start-spot index modulo the lane count before falling back to ally slots.
+- Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`; profile-resolved maps use matched start-spot index modulo the lane count, while unprofiled maps use the fixed default lane.
 - Change terrain-aware lane/path spread behavior: `script/hard/helper/lane_pathing.as`, `script/hard/helper/terrain/terrain_data.as`
 - Change how lane bias is spread across positions instead of a single team slot: `script/hard/helper/lane.as`
 - Change startup terrain manager setup: `script/hard/helper/terrain/terrain_runtime.as`
 - Change external terrain hints from Lua: `script/hard/helper/terrain/terrain_bridge.as`
 - Change commander hide radius, assist behavior, or morph config: `config/hard/commander.json`
 - Change the first units queued from a new factory: `script/hard/misc/commander.as`
-- Change ally-team discovery, slot ordering, or slot broadcast timing: `script/hard/helper/ally_slot.as`
 - Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated data)
-- Change role resolution, slot fallback, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
+- Change role resolution, default-role behavior, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
 - Change custom military fight-task assignment by role/attribute: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`
 - Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`. AIR also owns the post-T1 advanced-air factory preference used by `TeamRole::FilterFactory()`.
 - Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in the faction-specific `config/hard/*BuildChain.json` files unless a direct script selector is added.
@@ -128,10 +126,9 @@ Use this when economy decisions are too noisy, too passive, or too aggressive.
 Use this when the ally-team composition, factory families, pacing, or tactical constraints need to change.
 
 1. Check map-profile data first. `Factory::AiGetFactoryToBuild()` resolves the profile from the requested starting position; if that has not happened, `Factory::AiUnitAdded()` resolves it from the first factory position. The nearest listed `StartSpot` supplies `preferredRole` and `landLocked`.
-2. A non-empty profile role overrides ally-slot assignment. `TeamRole::Resolve()` maps exactly `air` to AIR, `tech` to TECH, `sea` to SEA and `front` to FRONT; `landLocked` is recorded and logged but has no runtime consumer yet.
-3. When no profile matches, edit ally-slot discovery only in `script/hard/helper/ally_slot.as`. Every AI broadcasts `ALLY_SLOT:<teamId>` every five seconds until ten seconds; IDs are sorted numerically and the local index is reduced modulo 8. Fallback slots 0-1 are AIR, 2-3 are TECH, slot 4 is SEA only when the terrain bridge reports a water map, and all remaining slots are FRONT.
+2. `TeamRole::Resolve()` maps a non-empty profile role: `air` to AIR, `tech` to TECH, `sea` to SEA, and `front` to FRONT. Maps without a profile role default to FRONT; `landLocked` is recorded and logged but has no runtime consumer yet.
 4. Tune per-role, per-stage constants in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`. Stages are Early (<12 min), Mid (12-24 min), and Late (>=24 min). These files own reclaim conversion/energy efficiency, energy-stall thresholds, assistant threshold, factory-switch thresholds and interval, defence gates/spread, and frontline confirmation lifetime.
-5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming comes from the matched map-profile start spot when available, falling back to ally slot diagnostics on unprofiled maps.
+5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming comes from the matched map-profile start spot when available, falling back to a fixed default lane on unprofiled maps.
 
 ### Military Task Editing
 
@@ -179,11 +176,10 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - The profile list in `script/hard/init.as` must stay in sync with the JSON files that exist under `config/hard`.
 - Role and attribute strings used in `behaviour.json` must match the registrations in `script/unit.as`.
 - Factory name constants in `script/hard/manager/factory.as` are reused by opener logic in `script/hard/misc/commander.as` and startup tier tagging in `script/hard/main.as`.
-- Map-profile role data has priority over ally-slot assignment. Imported profiles are registered before generated profiles, and the registry returns the first prefix match; update the imported entry when a map exists in both data sets.
+- Map-profile role data selects specialized team behavior. Imported profiles are registered before generated profiles, and the registry returns the first prefix match; update the imported entry when a map exists in both data sets. Without a profile role, teams use FRONT.
 - The only map role labels currently interpreted as distinct runtime roles are `air`, `tech`, and `sea`. Any other non-empty label resolves as FRONT, unless `TeamRole::Resolve()` is extended.
-- Without a profile role, team role assignment uses each AI's index in the numerically sorted list of discovered allied AI team IDs, then repeats in blocks of 8: slots 0-1 AIR, 2-3 TECH, slot 4 SEA only on a terrain-flagged water map, and slots 4-7 otherwise FRONT. It is not derived from `GetLeadTeamId()`; that value is only retained in diagnostic/fallback side detection.
-- Ally-slot discovery broadcasts for the opening ten seconds. The local team ID is always included, and received messages are still accepted afterward, so role/lane assignment can refresh if a previously unseen lower team ID is reported late.
-- Lane assignment prefers the resolved map-profile start spot, falling back to ally-slot order only when no profile spot is known. Ground movement still uses position-biased lane spreading, and AIR restriction is resolved by role (including map-profile role), not by slot.
+- Without a profile role, team role assignment defaults to FRONT. It is not derived from allied-team slot order or `GetLeadTeamId()`.
+- Lane assignment prefers the resolved map-profile start spot, falling back to a fixed default lane only when no profile spot is known. Ground movement still uses position-biased lane spreading, and AIR restriction is resolved by role (including map-profile role), not by slot.
 - Terrain helper files live under `script/hard/helper/terrain/`; update include paths when moving terrain parsing, runtime setup, or classification helpers.
 - Role helper files live under `script/hard/helper/role/`; manager includes should usually target `script/hard/helper/role/role.as`, not individual role files.
 - Terrain tuning now combines static block-map tuning, heuristic terrain scales, and optional Lua hint overrides via `AiLuaMessage`.

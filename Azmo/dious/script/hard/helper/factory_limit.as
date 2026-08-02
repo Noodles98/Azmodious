@@ -1,7 +1,7 @@
 namespace FactoryLimit {
 
-const float T1_METAL_INCOME_PER_FACTORY = 20.0f;
-const float T2_METAL_INCOME_PER_FACTORY = 25.0f;
+const float T1_METAL_INCOME_PER_FACTORY = 40.0f;
+const float T2_METAL_INCOME_PER_FACTORY = 50.0f;
 const uint FREE_FACTORIES_PER_TIER = 1;
 
 uint GetAllowedCount(bool isT2, float metalIncome)

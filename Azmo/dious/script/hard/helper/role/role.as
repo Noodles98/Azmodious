@@ -1,10 +1,8 @@
-#include "../ally_slot.as"
 #include "air.as"
 #include "tech.as"
 #include "front.as"
 #include "sea.as"
 #include "../lane.as"
-#include "../terrain/terrain_bridge.as"
 #include "../map_profile.as"
 
 
@@ -39,19 +37,13 @@ Kind Resolve()
 		return Kind::FRONT;
 	}
 
-	const int slot = TeamSlot::ResolveSlot();
-	if (slot < 2)
-		return Kind::AIR;
-	if (slot < 4)
-		return Kind::TECH;
-	if ((slot == 4) && TerrainBridge::IsWaterMap())
-		return Kind::SEA;
+	// Profiles own specialized roles.  Maps without a role use the
+	// general-purpose frontline behavior rather than team-slot assignment.
 	return Kind::FRONT;
 }
 
 void Init()
 {
-	TeamSlot::Init();
 	kind = Resolve();
 	TeamLane::SetAirRoleUnrestricted(kind == Kind::AIR);
 	ApplyMilitaryQuota();
@@ -90,7 +82,7 @@ string GetName()
 
 string GetRoleSourceName()
 {
-	return TeamMapProfile::HasPreferredRole() ? "map_profile" : "ally_slot";
+	return TeamMapProfile::HasPreferredRole() ? "map_profile" : "default_front";
 }
 
 void EnsureLogged()
@@ -105,8 +97,7 @@ void EnsureLogged()
 			+ ", laneRestriction: " + TeamLane::GetRestrictionName()
 			+ ", mapRole='" + TeamMapProfile::GetPreferredRole() + "'"
 			+ " (teamId=" + ai.teamId + ", leadTeamId=" + ai.GetLeadTeamId()
-			+ ", skirmishAIId=" + ai.skirmishAIId + ", slot=" + TeamSlot::ResolveSlot()
-			+ ", knownTeams=" + TeamSlot::GetKnownCount() + ")");
+			+ ", skirmishAIId=" + ai.skirmishAIId + ")");
 	}
 }
 
@@ -188,7 +179,6 @@ void OnMilitaryUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 
 void OnSlowUpdate()
 {
-	TeamSlot::OnSlowUpdate();
 	Refresh();
 	switch (kind) {
 		case Kind::AIR: TeamRoleAir::OnSlowUpdate(); break;
@@ -202,7 +192,6 @@ void OnSlowUpdate()
 
 void OnMessage(const string& in data)
 {
-	TeamSlot::OnMessage(data);
 	Refresh();
 	isLogged = false;
 }

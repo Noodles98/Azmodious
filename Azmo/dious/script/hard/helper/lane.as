@@ -1,27 +1,22 @@
-#include "ally_slot.as"
 #include "map_profile.as"
 
 
 namespace TeamLane {
 
 const int LANE_COUNT = 4;
+const int DEFAULT_LANE = 0;
 bool isAirRoleUnrestricted = true;
-
-int ResolveSlot()
-{
-	return TeamSlot::ResolveSlot();
-}
 
 int ResolveLane()
 {
 	if (TeamMapProfile::HasMatchedSpot())
 		return TeamMapProfile::GetMatchedSpotIndex() % LANE_COUNT;
-	return ResolveSlot() % LANE_COUNT;
+	return DEFAULT_LANE;
 }
 
 string GetSourceName()
 {
-	return TeamMapProfile::HasMatchedSpot() ? "map_profile" : "ally_slot";
+	return TeamMapProfile::HasMatchedSpot() ? "map_profile" : "default_lane";
 }
 
 int ResolveBiasLane(const AIFloat3& in pos, float spread)
