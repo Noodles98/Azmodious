@@ -3,7 +3,7 @@
 #include "front.as"
 #include "sea.as"
 #include "../lane.as"
-#include "../map_profile.as"
+#include "../maps/map_profile.as"
 
 
 namespace TeamRole {

@@ -40,7 +40,9 @@ const float MILITARY_ATTACK_THRESHOLD = 85.0f;
 const float MILITARY_RAID_MIN_POWER = 70.0f;
 const float MILITARY_RAID_AVG_POWER = 120.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 1;
-const uint FACTORY_MIN_BUILDER2_COUNT = 1;
+const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
+const uint MID_FACTORY_MIN_BUILDER2_COUNT = 4;
+const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 8;
 const uint FRONTLINE_CONFIRM_HITS = 8;
 const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 60 * SECOND;
@@ -140,7 +142,11 @@ uint GetFactoryMinBuilderCount()
 
 uint GetFactoryMinBuilder2Count()
 {
-	return FACTORY_MIN_BUILDER2_COUNT;
+	switch (GetEconomyStage()) {
+		case EconomyStage::EARLY: return EARLY_FACTORY_MIN_BUILDER2_COUNT;
+		case EconomyStage::MID: return MID_FACTORY_MIN_BUILDER2_COUNT;
+		default: return LATE_FACTORY_MIN_BUILDER2_COUNT;
+	}
 }
 
 void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
@@ -148,12 +154,15 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 	if (sidePrefix == "arm") {
 		allowed.insertLast("armlab");
 		allowed.insertLast("armalab");
+		allowed.insertLast("armshltx");
 	} else if (sidePrefix == "cor") {
 		allowed.insertLast("corlab");
 		allowed.insertLast("coralab");
+		allowed.insertLast("corgant");
 	} else {
 		allowed.insertLast("leglab");
 		allowed.insertLast("legalab");
+		allowed.insertLast("leggant");
 	}
 }
 

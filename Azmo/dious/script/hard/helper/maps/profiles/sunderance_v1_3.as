@@ -19,7 +19,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(5423, 0, 2068), "tech", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(2794, 0, 6105), "tech", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Sunderance V1.3", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Sunderance V1.3", spots, TeamMapProfileTypes::TerrainInfo(0.f, 1000.f, 15.f, false)));
 }
 
 }  // namespace TeamMapProfileData_sunderance_v1_3

@@ -30,7 +30,7 @@
 				"armada": ["armamd", "armsilo", "armvulc", "armemp"]
 			},
 			"weight": [0.20, 0.20, 0.20, 0.15],
-			"condition": [200, 500, 600, 650]
+			"condition": [200, 250, 300, 350]
 		},
 
 		"wall": {
@@ -87,7 +87,6 @@
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "armflak", "category": "defence", "offset": {"front": 150}, "priority": "normal"},
 					{"unit": "armmercury", "category": "defence", "offset": {"front": 150}, "priority": "normal"}
 				]]
 			}

@@ -25,7 +25,7 @@
 				"cortex": ["corfmd", "corsilo", "corbuzz", "corint"]
 			},
 			"weight": [0.20, 0.20, 0.30, 0.30],
-			"condition": [300, 400, 550, 600]
+			"condition": [200, 300, 350, 400]
 		},
 		"wall": {
 			"cortex": ["cordrag", "corfdrag"]
@@ -79,7 +79,6 @@
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
-					{"unit": "corflak", "category": "defence", "offset": {"front": 150}, "priority": "normal"},
 					{"unit": "corscreamer", "category": "defence", "offset": {"front": 150}, "priority": "normal"}
 				]]
 			}

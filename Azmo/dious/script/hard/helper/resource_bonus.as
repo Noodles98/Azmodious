@@ -1,20 +1,20 @@
-namespace ResourceBonus {
+//namespace ResourceBonus {
 
-const float PLANNING_BONUS_FACTOR = 1.0f; //set to 1.0 to prevent inconsistency.
+//const float PLANNING_BONUS_FACTOR = 1.0f; //set to 1.0 to prevent inconsistency.
  
-float NormalizeIncome(float income)
-{
-	return income / PLANNING_BONUS_FACTOR;
-}
+//float NormalizeIncome(float income)
+//{
+//	return income / PLANNING_BONUS_FACTOR;
+//}
 
-float GetPlanningMetalIncome()
-{
-	return NormalizeIncome(aiEconomyMgr.metal.income);
-}
-
-float GetPlanningEnergyIncome()
-{
-	return NormalizeIncome(aiEconomyMgr.energy.income);
-}
-
-}  // namespace ResourceBonus
+//float GetPlanningMetalIncome()
+//{
+//	return NormalizeIncome(aiEconomyMgr.metal.income);
+//}
+//
+//float GetPlanningEnergyIncome()
+//{
+//	return NormalizeIncome(aiEconomyMgr.energy.income);
+//}
+//
+//}  // namespace ResourceBonus

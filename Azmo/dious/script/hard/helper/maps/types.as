@@ -19,9 +19,36 @@ class StartSpot {
 	}
 }
 
+class TerrainInfo {
+	bool present;
+	float minHeight;
+	float maxHeight;
+	float tidalStrength;
+	bool waterMap;
+
+	TerrainInfo()
+	{
+		present = false;
+		minHeight = 0.f;
+		maxHeight = 256.f;
+		tidalStrength = 0.f;
+		waterMap = false;
+	}
+
+	TerrainInfo(float minH, float maxH, float tidal, bool water)
+	{
+		present = true;
+		minHeight = minH;
+		maxHeight = maxH;
+		tidalStrength = tidal;
+		waterMap = water;
+	}
+}
+
 class Profile {
 	string mapNameMatch;
 	array<StartSpot> spots;
+	TerrainInfo terrain;
 
 	Profile()
 	{
@@ -32,6 +59,13 @@ class Profile {
 	{
 		mapNameMatch = mapMatch;
 		spots = startSpots;
+	}
+
+	Profile(const string& in mapMatch, const array<StartSpot>& in startSpots, const TerrainInfo& in terrainInfo)
+	{
+		mapNameMatch = mapMatch;
+		spots = startSpots;
+		terrain = terrainInfo;
 	}
 
 	bool CheckMatch(const string& in mapName) const

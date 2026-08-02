@@ -28,6 +28,16 @@ TeamMapProfileTypes::Profile@ Find(const string& in mapName)
 	return null;
 }
 
+TeamMapProfileTypes::Profile@ FindTerrain(const string& in mapName)
+{
+	for (uint i = 0; i < profiles.length(); ++i) {
+		TeamMapProfileTypes::Profile@ profile = profiles[i];
+		if ((profile !is null) && profile.terrain.present && profile.CheckMatch(mapName))
+			return profile;
+	}
+	return null;
+}
+
 int FindNearestSpotIndex(const AIFloat3& in startPos, const array<TeamMapProfileTypes::StartSpot>& in spots)
 {
 	float best = 1e30f;

@@ -8,7 +8,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(1200, 0, 5500), "front", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(9300, 0, 5500), "air", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Coastlines_Dry_V2.2.1", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Coastlines_Dry_V2.2.1", spots, TeamMapProfileTypes::TerrainInfo(200.f, 750.f, 21.f, false)));
 }
 
 }  // namespace TeamMapProfileData_coastlines_dry_v2_2_1

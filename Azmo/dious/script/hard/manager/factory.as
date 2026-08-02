@@ -2,7 +2,7 @@
 #include "../../unit.as"
 #include "../../task.as"
 #include "../helper/role/role.as"
-#include "../helper/map_profile.as"
+#include "../helper/maps/map_profile.as"
 #include "../helper/factory_limit.as"
 #include "../misc/commander.as"
 #include "economy.as"

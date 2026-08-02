@@ -12,6 +12,16 @@ enum Kind {
 
 Kind Classify(const AIFloat3& in pos)
 {
+	if (TerrainProfile::HasProfile()) {
+		if (TerrainBridge::IsWaterMap() && pos.y < 0.f)
+			return Kind::WATER;
+
+		const float heightRatio = TerrainProfile::GetHeightRatio(pos);
+		if (heightRatio > 0.70f)
+			return Kind::HIGHLAND;
+		return Kind::LOWLAND;
+	}
+
 	if (pos.y < -8.f)
 		return Kind::WATER;
 	if (pos.y > 140.f)

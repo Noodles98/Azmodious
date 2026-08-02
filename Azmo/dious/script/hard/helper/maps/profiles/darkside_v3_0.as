@@ -16,7 +16,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(1900, 0, 3500), "front", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(11150, 0, 8500), "front", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Darkside v3.0", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Darkside v3.0", spots, TeamMapProfileTypes::TerrainInfo(500.f, 900.f, 20.f, false)));
 }
 
 }  // namespace TeamMapProfileData_darkside_v3_0

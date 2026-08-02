@@ -30,7 +30,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/init.as`: declares the loaded config files. Armada/Cortex behaviour, build-chain, economy, factory, and response overlays load by default; Legion, extra units, and scav units are gated by AI/mod options. If you add or rename a config domain, update this array.
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise defaults to FRONT; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
-- `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes.
+- `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes, including staged T2 constructor floors used by factory queues.
 - `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
 - `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. It temporarily rejects distant MEX tasks, then fails open after repeated rejection so the commander cannot idle forever before the first factory. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` and `MAX_REJECT_FRAMES` here.
 - `script/hard/helper/factory_limit.as`: metal-income factory count caps. The first T1 and first T2 factory are free; additional T1 factories require 15 metal income each, and additional T2 factories require 20 metal income each.
@@ -39,9 +39,12 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
 - `script/hard/helper/military_task.as`: role-aware military fight-task policy layered before the engine default task selector. It maps unit roles/attributes to fight tasks such as scout, raid, attack, defend, bomber, artillery, support, AA, AH, and super. It also reserves a limited share of eligible ground combat units for fog-push scout tasks when no stable frontline anchor is known.
 - `script/hard/helper/terrain/terrain_data.as`: terrain class and spread scaling for placement/pathing context.
+- `script/hard/helper/terrain/terrain_profile.as`: resolves terrain metadata from registered map profiles; provides min/max height, tidal, water-map hints, and default build/path spread scales before Lua overrides arrive.
 - `script/hard/helper/terrain/terrain_runtime.as`: startup terrain manager setup.
 - `script/hard/helper/terrain/terrain_bridge.as`: Lua message parser for runtime terrain hints.
+- `script/hard/helper/maps/map_profile.as`: resolves the current map/start position against registered map-profile data.
 - `script/hard/helper/maps/default_profiles.as`: registers imported profiles first, then generated local profiles.
+- `script/hard/helper/maps/types.as`: shared map profile types, including optional `TerrainInfo` metadata for terrain-aware placement/pathing.
 - `script/hard/helper/maps/imported_profiles.as`: curated map/start-spot role data. These profiles win when their map prefix matches because registry lookup returns the first match.
 - `script/hard/helper/maps/profiles/*.as`: generated local map profiles, including extracted start spots and seeded roles. They are used only when no earlier imported profile matches.
 - `script/hard/manager/builder.as`: mostly defaults to engine behavior; applies helper task filters, assigns role-based constructor counts the `BASE` attribute, and persists those IDs. Current targets are AIR 6, TECH 4, FRONT 2, and SEA/default 2.
@@ -75,7 +78,7 @@ Start from the narrowest owner for the behavior you want:
 - Change post-build follow-ups like porc, pylon, or hub chains: the faction-specific `config/hard/*BuildChain.json` files.
 - Change build footprint spacing or terrain/build blocking rules: `config/hard/block_map.json`
 - Change lane assignment and lane restrictions by role: `script/hard/helper/lane.as`; profile-resolved maps use matched start-spot index modulo the lane count, while unprofiled maps use the fixed default lane.
-- Change terrain-aware lane/path spread behavior: `script/hard/helper/lane_pathing.as`, `script/hard/helper/terrain/terrain_data.as`
+- Change terrain-aware lane/path spread behavior: `script/hard/helper/lane_pathing.as`, `script/hard/helper/terrain/terrain_data.as`, `script/hard/helper/terrain/terrain_profile.as`, `script/hard/helper/maps/imported_profiles.as`, `script/hard/helper/maps/profiles/*.as`
 - Change how lane bias is spread across positions instead of a single team slot: `script/hard/helper/lane.as`
 - Change startup terrain manager setup: `script/hard/helper/terrain/terrain_runtime.as`
 - Change external terrain hints from Lua: `script/hard/helper/terrain/terrain_bridge.as`
@@ -84,7 +87,7 @@ Start from the narrowest owner for the behavior you want:
 - Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated data)
 - Change role resolution, default-role behavior, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
 - Change custom military fight-task assignment by role/attribute: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`
-- Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`. AIR also owns the post-T1 advanced-air factory preference used by `TeamRole::FilterFactory()`.
+- Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, staged T2 constructor floors, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`. AIR also owns the post-T1 advanced-air factory preference used by `TeamRole::FilterFactory()`.
 - Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in the faction-specific `config/hard/*BuildChain.json` files unless a direct script selector is added.
 - Change metal-income factory count caps: `script/hard/helper/factory_limit.as`; tier classification and enforcement are wired through `script/hard/manager/factory.as` and `Factory::userData` flags from `script/hard/main.as`.
 - Change factory switch timing or custom factory-side logic: `script/hard/manager/factory.as`
@@ -99,10 +102,11 @@ Start from the narrowest owner for the behavior you want:
 Use this when placement/pathing behavior should react to map shape or scripted map hints.
 
 1. Tune static building/blocking assumptions in `config/hard/block_map.json`.
-2. Tune heuristic terrain classification and spread factors in `script/hard/helper/terrain/terrain_data.as`.
-3. Tune lane path spread integration in `script/hard/helper/lane_pathing.as`.
-4. If runtime map hints are available, update parsing/apply logic in `script/hard/helper/terrain/terrain_bridge.as`.
-5. Keep startup terrain manager setup aligned in `script/hard/helper/terrain/terrain_runtime.as` and ensure `main.as` still calls runtime init.
+2. Tune map-wide static terrain defaults by adding or editing `TeamMapProfileTypes::TerrainInfo` on the matching map profile in `script/hard/helper/maps/imported_profiles.as` or `script/hard/helper/maps/profiles/*.as`.
+3. Tune local terrain classification and spread factors in `script/hard/helper/terrain/terrain_data.as`.
+4. Tune lane path spread integration in `script/hard/helper/lane_pathing.as`.
+5. If runtime map hints are available, update parsing/apply logic in `script/hard/helper/terrain/terrain_bridge.as`; hints override static profile defaults per field.
+6. Keep startup terrain manager setup aligned in `script/hard/helper/terrain/terrain_runtime.as` and ensure `main.as` still calls runtime init.
 
 Expected Lua hint format for bridge updates:
 
@@ -182,14 +186,16 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Lane assignment prefers the resolved map-profile start spot, falling back to a fixed default lane only when no profile spot is known. Ground movement still uses position-biased lane spreading, and AIR restriction is resolved by role (including map-profile role), not by slot.
 - Terrain helper files live under `script/hard/helper/terrain/`; update include paths when moving terrain parsing, runtime setup, or classification helpers.
 - Role helper files live under `script/hard/helper/role/`; manager includes should usually target `script/hard/helper/role/role.as`, not individual role files.
-- Terrain tuning now combines static block-map tuning, heuristic terrain scales, and optional Lua hint overrides via `AiLuaMessage`.
+- Terrain tuning now combines static block-map tuning, terrain metadata attached to map profile registrations, normalized local height classification, and optional Lua hint overrides via `AiLuaMessage`.
 - Adaptive defence gating lives in `script/hard/helper/defense.as`, while actual default defence selection still comes from the faction-specific `config/hard/*BuildChain.json` files and `aiMilitaryMgr.DefaultMakeDefence(...)`.
 - Military combat task assignment first checks `script/hard/helper/military_task.as` for role/attribute-specific intents such as scout, raid, artillery, support, AA, bomber, and super; unknown or generic units still use `aiMilitaryMgr.DefaultMakeTask(...)`.
 - Economy manager relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
 - `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns `BASE` to a role-sized persisted pool of mobile constructors. AIR keeps up to 6, TECH up to 4, and FRONT/SEA/default up to 2. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
 - `Factory::userData` tier flags are assigned in `main.as`, then consumed in `factory.as`; if you add a new factory tier concept, both places must change.
+- `factory.as` forces constructor queues through `TeamRole::GetFactoryMinBuilderCount()` and `TeamRole::GetFactoryMinBuilder2Count()`. T2 constructor floors are staged per role so mid/late factories keep producing advanced build power.
 - `factory_limit.as` caps additional factory construction by metal income after the first free factory of each tier; `factory.as` returns no factory candidate when the selected T1/T2 tier is already capped.
 - AIR factory selection is two-layered: `script/hard/helper/role/air.as` decides when T1/T2 air plants are allowed and when an existing T1 should promote the next factory pick to advanced air, while `script/hard/helper/role/role.as` applies that preference after the engine default factory choice. This is separate from per-unit `limit` values in `config/hard/*Behaviour.json`.
+- FRONT and TECH role factory allow-lists include each faction's land T3 gantry (`armshltx`, `corgant`, `leggant`); the gantries remain limited by existing behaviour/build-chain/factory config and T3 tagging in `main.as`.
 - The profile generator seeds roles from extracted start spots plus metadata heuristics (`minHeight`, `tidalStrength`, and map-name water hints), while `imported_profiles.as` preserves curated pre-existing role labels. Generation must not silently overwrite curated imported assignments.
 - The `config/hard/*BuildChain.json` files explicitly warn against recursive chains; treat chain additions as potentially unsafe until checked.
 - `factory.json` is shared across the allyTeam, so changes there can affect multiple allied AI instances together.
@@ -226,7 +232,7 @@ The fastest path for most future edits is:
 
 ## Map Profile Notes
 
-- Resolution for map profiles lives in `script/hard/helper/map_profile.as`.
+- Resolution for map profiles lives in `script/hard/helper/maps/map_profile.as`.
 - `Resolve()` finds the first registered map-name prefix match, chooses its nearest start spot, and records that spot's preferred role plus land-lock state.
 - `default_profiles.as` registers `imported_profiles.as` before `profiles/all_profiles.as`; first-match lookup means imported data overrides generated data for the same map prefix.
 - The profile files under `script/hard/helper/maps/profiles/` are generated from metadata JSON and are hand-edited, but the authoritative curated overrides belong in `imported_profiles.as`.

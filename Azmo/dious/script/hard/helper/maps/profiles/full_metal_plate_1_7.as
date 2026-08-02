@@ -20,7 +20,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(9500, 0, 2550), "sea", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(2550, 0, 9650), "sea", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Full Metal Plate", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Full Metal Plate", spots, TeamMapProfileTypes::TerrainInfo(-220.f, 780.f, 1.f, false)));
 }
 
 }  // namespace TeamMapProfileData_full_metal_plate_1_7

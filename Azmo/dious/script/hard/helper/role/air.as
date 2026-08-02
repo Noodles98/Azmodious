@@ -41,11 +41,13 @@ const float EARLY_DEFENCE_LANE_SPREAD = 1200.0f;
 const float MID_DEFENCE_LANE_SPREAD = 1500.0f;
 const float LATE_DEFENCE_LANE_SPREAD = 1800.0f;
 const uint MILITARY_SCOUT_CAP = 2;
-const float MILITARY_ATTACK_THRESHOLD = 250.0f;
-const float MILITARY_RAID_MIN_POWER = 150.0f;
+const float MILITARY_ATTACK_THRESHOLD = 150.0f;
+const float MILITARY_RAID_MIN_POWER = 75.0f;
 const float MILITARY_RAID_AVG_POWER = 225.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
-const uint FACTORY_MIN_BUILDER2_COUNT = 2;
+const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
+const uint MID_FACTORY_MIN_BUILDER2_COUNT = 6;
+const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 15;
 const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
@@ -149,7 +151,11 @@ uint GetFactoryMinBuilderCount()
 
 uint GetFactoryMinBuilder2Count()
 {
-	return FACTORY_MIN_BUILDER2_COUNT;
+	switch (GetEconomyStage()) {
+		case EconomyStage::EARLY: return EARLY_FACTORY_MIN_BUILDER2_COUNT;
+		case EconomyStage::MID: return MID_FACTORY_MIN_BUILDER2_COUNT;
+		default: return LATE_FACTORY_MIN_BUILDER2_COUNT;
+	}
 }
 
 // Bomber swarm control

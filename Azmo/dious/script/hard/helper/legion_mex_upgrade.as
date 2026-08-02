@@ -29,7 +29,7 @@ void OnUnitDestroyed(CCircuitUnit@ unit)
 
 bool ShouldReject(IUnitTask@ task, const CCircuitDef@ builderDef)
 {
-	if (task is null || task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEX)
+	if (task is null || task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEXUP)
 		return false;
 	if (IsLegionDef(builderDef))
 		return false;

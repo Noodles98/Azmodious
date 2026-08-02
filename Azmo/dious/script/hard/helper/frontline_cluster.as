@@ -3,11 +3,11 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 800.f;
-const float ANCHOR_RADIUS = 1200.f;
-const float PUSH_START_RADIUS = 800.f;
-const float PUSH_MAX_RADIUS = 1000.f;
-const float PUSH_RATIO = 15.0f;
+const float CONFIRM_RADIUS = 500.f;
+const float ANCHOR_RADIUS = 900.f;
+const float PUSH_START_RADIUS = 500.f;
+const float PUSH_MAX_RADIUS = 900.f;
+const float PUSH_RATIO = 6.5f;
 
 bool hasCandidate = false;
 AIFloat3 candidatePos;
@@ -105,7 +105,7 @@ AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 	if (HasStableAnchor() && DistSq2D(pos, anchorPos) <= anchorRadiusSq) {
 		anchorPos = BlendTowards(anchorPos, pos, 4);
 		anchorFrame = ai.frame;
-		return LanePathing::BiasMovePos(PushTowardsPressure(anchorPos, pos), laneSpread);
+		return LanePathing::BiasBuildPos(PushTowardsPressure(anchorPos, pos), laneSpread);
 	}
 
 	if (!hasCandidate
@@ -125,7 +125,7 @@ AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 		return LanePathing::BiasMovePos(anchorPos, laneSpread);
 	}
 
-	return LanePathing::BiasMovePos(candidatePos, laneSpread);
+	return LanePathing::BiasBuildPos(candidatePos, laneSpread);
 }
 
 }  // namespace FrontlineCluster

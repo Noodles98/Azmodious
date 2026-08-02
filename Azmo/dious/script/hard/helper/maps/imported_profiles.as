@@ -10,7 +10,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(5100, 0, 1200), "air", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(5000, 0, 4800), "air", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("AcidicQuarry", acidic_quarrySpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("AcidicQuarry", acidic_quarrySpots, TeamMapProfileTypes::TerrainInfo(-97.f, 353.f, 0.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> all_that_glittersSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(668, 0, 755), "front", false), // P1
@@ -30,7 +30,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(1859, 0, 8256), "front", false),  // P15
 		TeamMapProfileTypes::StartSpot(AIFloat3(697, 0, 8224), "front", false),  // P16
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("All That Glitters", all_that_glittersSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("All That Glitters", all_that_glittersSpots, TeamMapProfileTypes::TerrainInfo(100.f, 800.f, 0.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> ancient_bastion_remakeSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(4000, 0, 1500), "front", false),
@@ -43,7 +43,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(4100, 0, 6600), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10700, 0, 4300), "air", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Ancient Bastion Remake", ancient_bastion_remakeSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Ancient Bastion Remake", ancient_bastion_remakeSpots, TeamMapProfileTypes::TerrainInfo(100.f, 710.f, 18.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> eight_horsesSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(795, 0, 211), "front", false),
@@ -63,7 +63,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(11541, 0, 8370), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(11289, 0, 9831), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Eight Horses", eight_horsesSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Eight Horses", eight_horsesSpots, TeamMapProfileTypes::TerrainInfo(-360.f, 920.f, 23.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> flats_and_forestsSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(631, 0, 364), "front", false),
@@ -83,7 +83,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(10191, 0, 1565), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(11627, 0, 681), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Flats and Forests", flats_and_forestsSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Flats and Forests", flats_and_forestsSpots, TeamMapProfileTypes::TerrainInfo(100.f, 550.f, 15.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> forgeSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(2100, 0, 1600), "front", false),
@@ -103,7 +103,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(7100, 0, 7600), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(7200, 0, 8400), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Forge", forgeSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Forge", forgeSpots, TeamMapProfileTypes::TerrainInfo(-190.f, 615.f, 0.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> glacial_gapSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(490, 0, 1140), "tech", false),
@@ -123,7 +123,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(12618, 0, 5800), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(13454, 0, 6850), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Glacial Gap", glacial_gapSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Glacial Gap", glacial_gapSpots, TeamMapProfileTypes::TerrainInfo(-205.f, 585.f, 23.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> koom_valleySpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(410, 0, 730), "front", false),
@@ -141,7 +141,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(10700, 0, 6000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10400, 0, 7500), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Koom Valley", koom_valleySpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Koom Valley", koom_valleySpots, TeamMapProfileTypes::TerrainInfo(400.f, 1240.f, 21.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> mediterraneumSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(1300, 0, 1200), "air", false),
@@ -172,7 +172,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(9800, 0, 15800), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(15200, 0, 15500), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Mediterraneum_V1", mediterraneumSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Mediterraneum_V1", mediterraneumSpots, TeamMapProfileTypes::TerrainInfo(-122.f, 878.f, 15.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> raptor_craterSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(10200, 0, 400), "front", false),
@@ -224,7 +224,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(11000, 0, 14200), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(12800, 0, 12500), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Serene Caldera", serene_calderaSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Serene Caldera", serene_calderaSpots, TeamMapProfileTypes::TerrainInfo(-125.f, 275.f, 23.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> shore_to_shoreSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(560, 0, 730), "tech", false),
@@ -240,7 +240,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(13250, 0, 1740), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(13250, 0, 2700), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Shore_to_Shore_V3", shore_to_shoreSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Shore_to_Shore_V3", shore_to_shoreSpots, TeamMapProfileTypes::TerrainInfo(-94.f, 1006.f, 20.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> sinkhole_networkSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(8200, 0, 2300), "front", false),
@@ -252,7 +252,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(9300, 0, 6300), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(8000, 0, 7800), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Sinkhole Network", sinkhole_networkSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Sinkhole Network", sinkhole_networkSpots, TeamMapProfileTypes::TerrainInfo(100.f, 600.f, 0.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> supreme_isthmusSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(711, 0, 7218), "sea", false),
@@ -272,7 +272,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(7925, 0, 2500), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(7492, 0, 1220), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Supreme Isthmus", supreme_isthmusSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Supreme Isthmus", supreme_isthmusSpots, TeamMapProfileTypes::TerrainInfo(-148.f, 655.f, 21.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> swirly_rockSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(3200, 0, 550), "front", false),
@@ -292,7 +292,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(10000, 0, 6000), "front", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(10500, 0, 6200), "front", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Swirly Rock", swirly_rockSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Swirly Rock", swirly_rockSpots, TeamMapProfileTypes::TerrainInfo(0.f, 1000.f, 20.f, false)));
 
 	array<TeamMapProfileTypes::StartSpot> tempestSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(600, 0, 600), "front", false),
@@ -312,7 +312,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(4200, 0, 7600), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(5700, 0, 7600), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Tempest", tempestSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Tempest", tempestSpots, TeamMapProfileTypes::TerrainInfo(-245.f, 755.f, 18.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> tundra_continentsSpots = {
 		TeamMapProfileTypes::StartSpot(AIFloat3(300, 0, 460), "sea", true),
@@ -332,7 +332,7 @@ void RegisterAll()
 		TeamMapProfileTypes::StartSpot(AIFloat3(8200, 0, 10900), "sea", false),
 		TeamMapProfileTypes::StartSpot(AIFloat3(9000, 0, 11400), "sea", false),
 	};
-	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Tundra Continents", tundra_continentsSpots));
+	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Tundra Continents", tundra_continentsSpots, TeamMapProfileTypes::TerrainInfo(-90.f, 360.f, 15.f, true)));
 
 }
 

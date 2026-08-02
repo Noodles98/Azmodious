@@ -8,6 +8,7 @@ namespace TerrainRuntime {
 // placement/pathing systems can use a wider ally-zone horizon.
 void Init()
 {
+	TerrainProfile::Resolve();
 	aiTerrainMgr.SetAllyZoneRange(900);
 }
 

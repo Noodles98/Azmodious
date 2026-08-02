@@ -8,7 +8,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(3010, 0, 4690), "sea", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(3113, 0, 430), "front", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Flooded_Valley_V5", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Flooded_Valley_V5", spots, TeamMapProfileTypes::TerrainInfo(-90.f, 375.f, 14.f, true)));
 }
 
 }  // namespace TeamMapProfileData_flooded_valley_v5

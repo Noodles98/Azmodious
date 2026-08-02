@@ -1,7 +1,12 @@
+#include "terrain_profile.as"
+
 namespace TerrainBridge {
 
 bool hasHint = false;
 bool isWaterMap = false;
+bool hasBuildHint = false;
+bool hasPathHint = false;
+bool hasWaterHint = false;
 float buildScale = 1.0f;
 float pathScale = 1.0f;
 int allyZone = -1;
@@ -32,10 +37,12 @@ void ApplyHintToken(const string& in token)
 	if (key == "build_pct") {
 		const int pct = parseInt(value);
 		buildScale = Clamp(float(pct) * 0.01f, 0.35f, 2.20f);
+		hasBuildHint = true;
 		hasHint = true;
 	} else if (key == "path_pct") {
 		const int pct = parseInt(value);
 		pathScale = Clamp(float(pct) * 0.01f, 0.35f, 2.20f);
+		hasPathHint = true;
 		hasHint = true;
 	} else if (key == "ally_zone") {
 		allyZone = parseInt(value);
@@ -45,6 +52,7 @@ void ApplyHintToken(const string& in token)
 		}
 	} else if (key == "water_map") {
 		isWaterMap = ParseBoolFlag(value);
+		hasWaterHint = true;
 		hasHint = true;
 	}
 }
@@ -64,21 +72,23 @@ bool OnLuaMessage(const string& in data)
 
 float GetBuildScale()
 {
-	if (isWaterMap)
-		return buildScale * 0.82f;
-	return buildScale;
+	const float scale = hasBuildHint ? buildScale : TerrainProfile::GetBuildScale();
+	if (IsWaterMap())
+		return scale * 0.82f;
+	return scale;
 }
 
 float GetPathScale()
 {
-	if (isWaterMap)
-		return pathScale * 0.72f;
-	return pathScale;
+	const float scale = hasPathHint ? pathScale : TerrainProfile::GetPathScale();
+	if (IsWaterMap())
+		return scale * 0.72f;
+	return scale;
 }
 
 bool IsWaterMap()
 {
-	return isWaterMap;
+	return hasWaterHint ? isWaterMap : TerrainProfile::IsWaterMap();
 }
 
 }  // namespace TerrainBridge

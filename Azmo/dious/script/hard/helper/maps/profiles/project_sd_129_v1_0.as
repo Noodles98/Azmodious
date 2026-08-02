@@ -36,7 +36,7 @@ void Register()
     TeamMapProfileTypes::StartSpot(AIFloat3(8900, 0, 3300), "front", false),
     TeamMapProfileTypes::StartSpot(AIFloat3(5390, 0, 10750), "front", false),
     };
-    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Project SD-129 v1.0", spots));
+    TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Project SD-129 v1.0", spots, TeamMapProfileTypes::TerrainInfo(-25.f, 500.f, 0.f, false)));
 }
 
 }  // namespace TeamMapProfileData_project_sd_129_v1_0
