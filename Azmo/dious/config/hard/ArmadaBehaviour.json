@@ -21,7 +21,7 @@
 			"slack_mod": {
 				"all": 0.05,  // threat map 64-elmos slack multiplier for all units
 				"static": 0.05,  // additional 64-elmo-cells for static units
-				"speed": [0.1, 0.2]  // [<64elmo_cells_speed_mod>, <max_64elmo_cells>]
+				"speed": [0.1, 0.1]  // [<64elmo_cells_speed_mod>, <max_64elmo_cells>]
 			},
 			"num_batch": 5, //repeat unit build if response factory build is called
 			"anti_cap": 2.0  // probability 0.0~1.0 of AntiCapture action
@@ -144,19 +144,27 @@
 			// ===== Armada factories and mobile factory units =====
 "armlab": {
 				"role": ["static"],
-				"build_speed": 4.0
+				"attribute": ["support"],
+				"limit": 1,
+				"build_mod": 1000.0,
+				"build_speed": 15.0  //bp 100
 			},
 "armalab": {
 				"role": ["static"],
-				"limit": 2,
-				"build_speed": 10.0
+				"attribute": ["support"],
+				"limit": 1,
+				"build_mod": 1000.0,
+				"build_speed": 30.0 // bp 300
 			},
 "armvp": {
 				"role": ["static"],
-				"build_speed": 5.0
+				"attribute": ["support"],
+				"build_mod": 1000.0,
+				"build_speed": 15.0 // bp 100
 			},
 "armavp": {
 				"role": ["static"],
+				"attribute": ["support"],
 				"limit": 2,
 				"build_speed": 10.0
 			},
@@ -193,7 +201,7 @@
 				"build_speed": 10.0
 			},
 "armplat": {
-				"role": ["builder"],
+				"role": ["static"],
 				"attribute": ["support"],
 				"build_speed": 8.0
 			},

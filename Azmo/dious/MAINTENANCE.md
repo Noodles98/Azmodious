@@ -34,7 +34,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes.
 - `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
 - `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` here.
-- `script/hard/helper/command_delay.as`: shared command-throttle helper keyed by role/channel.
+- `script/hard/helper/factory_limit.as`: metal-income factory count caps. The first T1 and first T2 factory are free; additional T1 factories require 15 metal income each, and additional T2 factories require 20 metal income each.
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
 - `script/hard/helper/lane.as`: deterministic lane assignment used to spread team behavior; map-profile start spots provide lanes when resolved, otherwise ally slots are the fallback.
 - `script/hard/helper/lane_pathing.as`: lane-biased positioning with terrain-aware scaling.
@@ -88,7 +88,7 @@ Start from the narrowest owner for the behavior you want:
 - Change custom military fight-task assignment by role/attribute: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`
 - Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`. AIR also owns the post-T1 advanced-air factory preference used by `TeamRole::FilterFactory()`.
 - Change adaptive defence gating by game time, metal income, or enemy pressure: `script/hard/helper/defense.as`; keep actual defence unit order in the faction-specific `config/hard/*BuildChain.json` files unless a direct script selector is added.
-- Change shared command throttling behavior for role command bursts: `script/hard/helper/command_delay.as`
+- Change metal-income factory count caps: `script/hard/helper/factory_limit.as`; tier classification and enforcement are wired through `script/hard/manager/factory.as` and `Factory::userData` flags from `script/hard/main.as`.
 - Change factory switch timing or custom factory-side logic: `script/hard/manager/factory.as`
 - Change builder-specific custom behavior, allied mex-claim rejection, or base constructor retention: `script/hard/manager/builder.as`; role targets are exposed by `TeamRole::GetBaseConstructorCount()` in `script/hard/helper/role/role.as`. Change pre-factory commander mex travel limits in `script/hard/helper/commander_mex_travel.as`.
 - Change startup `BASE` tagging for static economy structures: `script/hard/main.as`
@@ -132,7 +132,6 @@ Use this when the ally-team composition, factory families, pacing, or tactical c
 3. When no profile matches, edit ally-slot discovery only in `script/hard/helper/ally_slot.as`. Every AI broadcasts `ALLY_SLOT:<teamId>` every five seconds until ten seconds; IDs are sorted numerically and the local index is reduced modulo 8. Fallback slots 0-1 are AIR, 2-3 are TECH, slot 4 is SEA only when the terrain bridge reports a water map, and all remaining slots are FRONT.
 4. Tune per-role, per-stage constants in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`. Stages are Early (<12 min), Mid (12-24 min), and Late (>=24 min). These files own reclaim conversion/energy efficiency, energy-stall thresholds, assistant threshold, factory-switch thresholds and interval, defence gates/spread, and frontline confirmation lifetime.
 5. Edit lane exemptions/restrictions in `script/hard/helper/lane.as`. Restriction now follows resolved role: AIR is unrestricted, while non-AIR roles use lane biasing. Lane index naming comes from the matched map-profile start spot when available, falling back to ally slot diagnostics on unprofiled maps.
-6. If role commands are bursty, use role wrappers `IsCommandReady(...)` and `CommitCommandDelay(...)` with role/channel keys.
 
 ### Military Task Editing
 
@@ -191,9 +190,9 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Adaptive defence gating lives in `script/hard/helper/defense.as`, while actual default defence selection still comes from the faction-specific `config/hard/*BuildChain.json` files and `aiMilitaryMgr.DefaultMakeDefence(...)`.
 - Military combat task assignment first checks `script/hard/helper/military_task.as` for role/attribute-specific intents such as scout, raid, artillery, support, AA, bomber, and super; unknown or generic units still use `aiMilitaryMgr.DefaultMakeTask(...)`.
 - Economy manager relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
-- Shared role command throttling is provided by `script/hard/helper/command_delay.as` and consumed via role wrappers.
 - `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns `BASE` to a role-sized persisted pool of mobile constructors. AIR keeps up to 6, TECH up to 4, and FRONT/SEA/default up to 2. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
 - `Factory::userData` tier flags are assigned in `main.as`, then consumed in `factory.as`; if you add a new factory tier concept, both places must change.
+- `factory_limit.as` caps additional factory construction by metal income after the first free factory of each tier; `factory.as` returns no factory candidate when the selected T1/T2 tier is already capped.
 - AIR factory selection is two-layered: `script/hard/helper/role/air.as` decides when T1/T2 air plants are allowed and when an existing T1 should promote the next factory pick to advanced air, while `script/hard/helper/role/role.as` applies that preference after the engine default factory choice. This is separate from per-unit `limit` values in `config/hard/*Behaviour.json`.
 - The profile generator seeds roles from extracted start spots plus metadata heuristics (`minHeight`, `tidalStrength`, and map-name water hints), while `imported_profiles.as` preserves curated pre-existing role labels. Generation must not silently overwrite curated imported assignments.
 - The `config/hard/*BuildChain.json` files explicitly warn against recursive chains; treat chain additions as potentially unsafe until checked.

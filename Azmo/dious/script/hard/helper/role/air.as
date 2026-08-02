@@ -3,7 +3,6 @@ namespace TeamRoleAir {
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
-const string CONTROL_KEY = "air_bomber_control";
 const int MID_GAME_FRAME = 7 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
@@ -201,15 +200,11 @@ void RecomputeBomberControl()
 	const bool isRelease = bomberIds.length() >= MIN_BOMBER_SWARM;
 	const uint escortLimit = bomberIds.length() * MAX_ESCORTS_PER_BOMBER;
 	const uint activeEscorts = (escortIds.length() < escortLimit) ? escortIds.length() : escortLimit;
-	if (!RoleCommandDelay::IsReady(CONTROL_KEY)) {
-		return;
-	}
 
 	for (uint i = 0; i < bomberIds.length(); ++i)
 		ai.UnitControl(bomberIds[i], isRelease);
 	for (uint i = 0; i < escortIds.length(); ++i)
 		ai.UnitControl(escortIds[i], (i < activeEscorts) ? isRelease : true);
-	RoleCommandDelay::Commit(CONTROL_KEY);
 
 	if (isRelease != isBomberReleased) {
 		isBomberReleased = isRelease;
@@ -259,23 +254,9 @@ void OnMilitaryUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 
 void OnSlowUpdate()
 {
-	if (RoleCommandDelay::HasReadyPending(CONTROL_KEY))
-		RecomputeBomberControl();
 }
 
-// Command timing and factory selection
-bool IsCommandReady(const string& in keySuffix = "")
-{
-	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
-	return RoleCommandDelay::IsReady(key);
-}
-
-void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommandDelay::DEFAULT_DELAY)
-{
-	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
-	RoleCommandDelay::Commit(key, delay);
-}
-
+// Factory selection
 bool ShouldAllowAdvancedAir()
 {
 	return (ai.frame >= ADV_AIR_MIN_FRAME)

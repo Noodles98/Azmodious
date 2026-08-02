@@ -1,5 +1,4 @@
 #include "../ally_slot.as"
-#include "../command_delay.as"
 #include "air.as"
 #include "tech.as"
 #include "front.as"
@@ -350,7 +349,7 @@ int GetFrontlineAnchorExpire()
 	}
 }
 
-// Command timing and factory filtering
+// Factory filtering
 bool IsAllowedFactory(const string& in name)
 {
 	Refresh();
@@ -361,30 +360,6 @@ bool IsAllowedFactory(const string& in name)
 			return true;
 	}
 	return false;
-}
-
-bool IsCommandReady(const string& in keySuffix = "")
-{
-	Refresh();
-	switch (kind) {
-		case Kind::AIR: return TeamRoleAir::IsCommandReady(keySuffix);
-		case Kind::TECH: return TeamRoleTech::IsCommandReady(keySuffix);
-		case Kind::SEA: return TeamRoleSea::IsCommandReady(keySuffix);
-		case Kind::FRONT: return TeamRoleFront::IsCommandReady(keySuffix);
-		default: return true;
-	}
-}
-
-void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommandDelay::DEFAULT_DELAY)
-{
-	Refresh();
-	switch (kind) {
-		case Kind::AIR: TeamRoleAir::CommitCommandDelay(keySuffix, delay); break;
-		case Kind::TECH: TeamRoleTech::CommitCommandDelay(keySuffix, delay); break;
-		case Kind::SEA: TeamRoleSea::CommitCommandDelay(keySuffix, delay); break;
-		case Kind::FRONT: TeamRoleFront::CommitCommandDelay(keySuffix, delay); break;
-		default: break;
-	}
 }
 
 CCircuitDef@ FilterFactory(CCircuitDef@ facDef, bool isStart)

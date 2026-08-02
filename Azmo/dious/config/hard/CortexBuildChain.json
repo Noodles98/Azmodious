@@ -10,7 +10,7 @@
 			"cortex": ["corllt",  "cortl", "corrl", "corhllt", "corhlt", "corjuno", "cormaw", "cormadsam", "corerad", "corvipe", "coratl",
 					   "corflak", "cortoast", "cordoom", "corpun", "corfmd", "cortarg", "corgate", "corscreamer", "cornanotc", "corint", "corbuzz", "cortron"]
 		},
-		"land":  [0, 2, 3, 3, 4, 3, 7, 12, 12, 15, 13, 18, 17, 18, 20, 22, 20, 19, 19, 20, 20, 18, 17, 17, 22, 12, 12, 21, 12, 12, 12],
+		"land":  [0, 2, 3, 3, 4, 3, 7, 5, 12, 12, 15, 13, 18, 17, 18, 20, 22, 20, 19, 19, 20, 20, 18, 17, 17, 22, 12, 12, 21, 12, 12, 12],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
 		"prevent": 1,
 		"amount": {
@@ -22,10 +22,10 @@
 		"base": [[3, 420], [10, 1200], [14, 1300], [15, 1320], [12, 1800]],
 		"superweapon": {
 			"unit": {
-				"cortex": ["corfmd", "corsilo"]
+				"cortex": ["corfmd", "corsilo", "corbuzz", "corint"]
 			},
-			"weight": [0.40, 0.60],
-			"condition": [200, 500]
+			"weight": [0.20, 0.20, 0.30, 0.30],
+			"condition": [300, 400, 550, 600]
 		},
 		"wall": {
 			"cortex": ["cordrag", "corfdrag"]
@@ -47,38 +47,38 @@
 			},
 			"coradvsol": {
 				"hub": [[
-					{"unit": "cormmkr", "category": "convert", "offset": [80, 80]}
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
 				]]
 			},
 			"cortide": {
 				"hub": [[
-					{"unit": "corfmkr", "category": "convert", "offset": [80, 80], "condition": {"energy": true}}
+					{"unit": "corfmkr", "category": "convert", "offset": [80, 80], "priority": "normal"}
 				]]
 			},
 			"corfus": {
 				"hub": [[
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 5}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 10}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 15}, "priority": "normal"},
-					{"unit": "cormmkr", "category": "convert", "offset": {"right": 20}},
-					{"unit": "cormmkr", "category": "convert", "offset": {"right": 20}},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 25}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 20}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 25}, "priority": "normal"},
 					{"unit": "corflak", "category": "defence", "offset": {"front": 120}, "condition": {"air": true}}
 				]]
 			},
 			"corafus": {
 				"hub": [[
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 5}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 10}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 15}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"front": 25}, "priority": "normal"},
-					{"unit": "cormmkr", "category": "convert", "offset": [120, 120]},
-					{"unit": "cormmkr", "category": "convert", "offset": [120, -120]},
-					{"unit": "cormmkr", "category": "convert", "offset": [150, 120]},
-					{"unit": "cormmkr", "category": "convert", "offset": [120, 150]},
-					{"unit": "cormmkr", "category": "convert", "offset": [150, 150]},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 20}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"right": 25}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
 					{"unit": "corflak", "category": "defence", "offset": {"front": 150}, "priority": "normal"},
 					{"unit": "corscreamer", "category": "defence", "offset": {"front": 150}, "priority": "normal"}
 				]]
@@ -86,19 +86,22 @@
 		},
 		"geo": {
 			"corgeo": {
-				"hub": [[{"unit": "corhllt", "category": "defence", "offset": {"front": 64}}]]
+				"hub": [[{"unit": "corhllt", "category": "defence", "offset": {"front": 64}, "priority": "normal"}]]
 			}
 		},
 		"defence": {
 			"cordoom" : {
 				"hub": [[
-					{"unit": "corjamt", "category": "defence", "offset": {"back": 80}, "condition": {"chance": 0.8}},
-					{"unit": "corgate", "category": "defence", "offset": {"back": 160}, "condition": {"chance": 0.8}}
+					{"unit": "cornanotc", "category": "nano", "offset": {"back": 50}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"back": 50}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "corjamt", "category": "defence", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "corgate", "category": "defence", "offset": {"back": 95}, "priority": "normal"}
 				]]
 			},
 			"corllt": {
 				"hub": [[
-					{"unit": "cornanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal", "condition": {"energy": true}}
+					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"}
 				]]
 			},
 			"cortoast": {
@@ -129,7 +132,7 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "corfus", "category": "energy", "offset": {"right": 5}, "priority": "normal"}
+					{"unit": "corfus", "category": "energy", "offset": {"right": 90}, "priority": "normal"}
 				]]
 			},
 			"corvp": {
@@ -148,7 +151,7 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "corfus", "category": "energy", "offset": {"right": 5}, "priority": "normal"}
+					{"unit": "corfus", "category": "energy", "offset": {"right": 90}, "priority": "normal"}
 				]]
 			},
 			"corap": {
@@ -163,13 +166,13 @@
 			},
 			"coraap": {
 				"hub": [[
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "priority": "normal"},
-					{"unit": "corfus", "category": "energy", "offset": {"right": 5}, "priority": "normal"}
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "cornanotc", "category": "nano","offset": {"back": 10}, "priority": "normal"},
+					{"unit": "corfus", "category": "energy", "offset": {"right": 90}, "priority": "normal"}
 				]]
 			},
 			"corgant": {

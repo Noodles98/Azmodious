@@ -3,6 +3,7 @@
 #include "../../task.as"
 #include "../helper/role/role.as"
 #include "../helper/map_profile.as"
+#include "../helper/factory_limit.as"
 #include "../misc/commander.as"
 #include "economy.as"
 
@@ -47,6 +48,8 @@ string leglab  ("leglab");
 string legalab ("legalab");
 string legvp   ("legvp");
 string legavp  ("legavp");
+string legsy   ("legsy");
+string legasy  ("legasy");
 string legap   ("legap");
 string legaap  ("legaap");
 string leggant ("leggant");
@@ -60,6 +63,54 @@ bool IsT1LandFactory(const string& in name)
 {
 	return (name == armlab) || (name == corlab) || (name == leglab)
 		|| (name == armvp) || (name == corvp) || (name == legvp);
+}
+
+bool IsKnownT1FactoryName(const string& in name)
+{
+	return (name == armlab) || (name == corlab) || (name == leglab)
+		|| (name == armvp) || (name == corvp) || (name == legvp)
+		|| (name == armsy) || (name == corsy) || (name == legsy)
+		|| (name == armap) || (name == corap) || (name == legap);
+}
+
+bool IsTier2Factory(const CCircuitDef@ facDef)
+{
+	return (facDef !is null) && ((userData[facDef.id].attr & Attr::T2) != 0);
+}
+
+bool IsTier1Factory(const CCircuitDef@ facDef)
+{
+	if (facDef is null)
+		return false;
+	const int attr = userData[facDef.id].attr;
+	return ((attr & (Attr::T2 | Attr::T3 | Attr::T4)) == 0) && IsKnownT1FactoryName(facDef.GetName());
+}
+
+uint CountFactoriesByTier(bool isT2)
+{
+	uint count = 0;
+	for (Id defId = 1, defCount = ai.GetDefCount(); defId <= defCount; ++defId) {
+		CCircuitDef@ cdef = ai.GetCircuitDef(defId);
+		if (cdef is null)
+			continue;
+		if (isT2 ? IsTier2Factory(cdef) : IsTier1Factory(cdef))
+			count += uint(cdef.count);
+	}
+	return count;
+}
+
+bool IsFactoryIncomeAllowed(const CCircuitDef@ facDef)
+{
+	if (facDef is null)
+		return true;
+	if ((userData[facDef.id].attr & (Attr::T3 | Attr::T4)) != 0)
+		return true;
+
+	const bool isT2 = IsTier2Factory(facDef);
+	if (!isT2 && !IsTier1Factory(facDef))
+		return true;
+
+	return FactoryLimit::IsAllowed(isT2, CountFactoriesByTier(isT2), aiEconomyMgr.metal.income);
 }
 
 bool EnqueueRoleIfAvailable(const CCircuitDef@ facDef, const AIFloat3& in pos,
@@ -261,6 +312,11 @@ bool AiIsSwitchTime(int lastSwitchFrame)
 
 bool AiIsSwitchAllowed(CCircuitDef@ facDef)
 {
+	if (!IsFactoryIncomeAllowed(facDef)) {
+		aiFactoryMgr.isAssistRequired = Economy::isSwitchAssist = false;
+		return false;
+	}
+
 	const float armyMultiplier = TeamRole::GetFactorySwitchArmyMultiplier();
 	const float metalMultiplier = TeamRole::GetFactorySwitchMetalMultiplier();
 	const float metalCurrent = Economy::GetSmoothedMetalCurrent(aiEconomyMgr.metal.current);
@@ -278,7 +334,10 @@ CCircuitDef@ AiGetFactoryToBuild(const AIFloat3& in pos, bool isStart, bool isRe
 	TeamRole::EnsureLogged();
 
 	CCircuitDef@ facDef = aiFactoryMgr.DefaultGetFactoryToBuild(pos, isStart, isReset);
-	return TeamRole::FilterFactory(facDef, isStart);
+	@facDef = TeamRole::FilterFactory(facDef, isStart);
+	if (!IsFactoryIncomeAllowed(facDef))
+		return null;
+	return facDef;
 }
 
 /* --- Utils --- */

@@ -97,7 +97,7 @@ void AiMain()
 	// Example of user-assigned custom attributes
 	array<string> names = {Factory::armalab, Factory::coralab, Factory::armavp, Factory::coravp,
 		Factory::armaap, Factory::coraap, Factory::armasy, Factory::corasy,
-		Factory::legalab, Factory::legavp, Factory::legaap};
+		Factory::legalab, Factory::legavp, Factory::legasy, Factory::legaap};
 	for (uint i = 0; i < names.length(); ++i) {
 		CCircuitDef@ cdef = ai.GetCircuitDef(names[i]);
 		if (cdef !is null)

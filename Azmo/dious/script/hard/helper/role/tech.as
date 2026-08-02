@@ -1,7 +1,6 @@
 namespace TeamRoleTech {
 
 // Role tuning constants
-const string CONTROL_KEY = "tech_role_control";
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 22 * MINUTE;
 const float EARLY_CONVERT_EFF = 4.6f;
@@ -209,19 +208,6 @@ int GetFrontlineConfirmWindow()
 int GetFrontlineAnchorExpire()
 {
 	return FRONTLINE_ANCHOR_EXPIRE;
-}
-
-// Command timing
-bool IsCommandReady(const string& in keySuffix = "")
-{
-	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
-	return RoleCommandDelay::IsReady(key);
-}
-
-void CommitCommandDelay(const string& in keySuffix = "", int delay = RoleCommandDelay::DEFAULT_DELAY)
-{
-	const string key = (keySuffix.length() == 0) ? CONTROL_KEY : CONTROL_KEY + "_" + keySuffix;
-	RoleCommandDelay::Commit(key, delay);
 }
 
 }  // namespace TeamRoleTech

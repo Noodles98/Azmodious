@@ -8,7 +8,7 @@ namespace TerrainRuntime {
 // placement/pathing systems can use a wider ally-zone horizon.
 void Init()
 {
-	aiTerrainMgr.SetAllyZoneRange(650);
+	aiTerrainMgr.SetAllyZoneRange(900);
 }
 
 bool OnLuaMessage(const string& in data)

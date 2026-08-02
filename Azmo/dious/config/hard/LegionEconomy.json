@@ -7,9 +7,9 @@
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [80, 120],
 			"legsolar": [160, 180],
-			"legadvsol": [220, 260],
-			"legfus": [280, 600],
-			"legafus": [620, 1800]
+			"legadvsol": [160, 180],
+			"legfus": [550, 700],
+			"legafus": [1000, 1800]
 		},
 		"water": {
 			"legtide": [150, 200],
@@ -18,7 +18,7 @@
 			"legadvsol": [80, 120],
 			"leganavalfusion": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [40.0, 1200], [90.0, 1800], [500.0, 3000], [2500.0, 14400]],
+		"factor": [[1.0, 75], [15.0, 600], [45.0, 1200], [90.0, 1800], [500.0, 3000], [2500.0, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,
@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 1200.0,
+	"cluster_range": 1000.0,
 
 	"geo": {
 		"legion": "leggeo"
@@ -46,7 +46,7 @@
 
 	"eps_step": 0.45,
 
-	"buildpower": 1.55,
+	"buildpower": 1.35,
 
 	"excess": -1.0,
 
