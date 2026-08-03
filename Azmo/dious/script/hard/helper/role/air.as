@@ -3,7 +3,7 @@ namespace TeamRoleAir {
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
-const int MID_GAME_FRAME = 7 * MINUTE;
+const int MID_GAME_FRAME = 9 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 12.0f;

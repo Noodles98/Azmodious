@@ -12,8 +12,8 @@
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
 				"attack": [0.35, 0.60],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | keep <1 so attacks commit instead of wavering
 				"defence": [0.60, 0.85],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
-				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
-				"static": 1.05,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
+				"mobile": 0.90,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
+				"static": 0.95,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
 				"comm": 0.05   // because of power of dgun
 			},
 			// anti-air threat threshold, air factories will stop production when AA threat exceeds
