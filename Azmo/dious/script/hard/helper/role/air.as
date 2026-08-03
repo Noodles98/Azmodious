@@ -164,7 +164,7 @@ bool IsEscortFighter(const CCircuitUnit@ unit)
 	const CCircuitDef@ cdef = unit.circuitDef;
 	if (cdef.IsRoleAny(Unit::Role::BOMBER.mask))
 		return false;
-	return cdef.IsRoleAny(Unit::Role::AA.mask);
+	return cdef.IsRoleAny(Unit::Role::AA.mask) || cdef.IsRoleAny(Unit::Role::ASSAULT.mask);
 }
 
 void RefreshAlive(array<Id>& inout ids)
