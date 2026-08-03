@@ -10,7 +10,7 @@
 			"raid": [20.0, 85.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 160.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
-				"attack": [0.35, 0.60],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | keep <1 so attacks commit instead of wavering
+				"attack": [0.35, 0.55],//"attack": [0.6, 0.8],  // [<min>, <max>] enemy threat multiplier for target selection of attack task |  values <1 makes enemy group seem less of an thread for ai => ai attacks stronger groups than it own | keep <1 so attacks commit instead of wavering
 				"defence": [0.60, 0.85],//"defence": [0.3, 0.5],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
 				"mobile": 0.90,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
 				"static": 0.95,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
