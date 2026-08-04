@@ -12,6 +12,7 @@ const int ENERGY_SPACE_RECLAIM_START_FRAME = 18 * MINUTE;
 const int ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME = 30 * MINUTE;
 const int ENERGY_SPACE_RECLAIM_TIMEOUT = 90 * SECOND;
 const float ENERGY_SPACE_RECLAIM_RADIUS = 128.f;
+const float ADVANCED_SOLAR_RECLAIM_MIN_ENERGY_INCOME = 500.f;
 
 void Clear()
 {
@@ -111,9 +112,25 @@ bool IsSpaceHungryBuild(int buildType)
 	}
 }
 
+bool HasUnit(const string& in name)
+{
+	const CCircuitDef@ cdef = ai.GetCircuitDef(name);
+	return (cdef !is null) && (cdef.count > 0);
+}
+
+bool HasFusionEconomy()
+{
+	return HasUnit("armfus") || HasUnit("corfus") || HasUnit("legfus")
+		|| HasUnit("armafus") || HasUnit("corafus") || HasUnit("legafus");
+}
+
 bool ShouldReclaimAdvancedSolar(IUnitTask@ task)
 {
 	if (task is null || ai.frame < ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME)
+		return false;
+	if (aiEconomyMgr.energy.income < ADVANCED_SOLAR_RECLAIM_MIN_ENERGY_INCOME)
+		return false;
+	if (!HasFusionEconomy())
 		return false;
 	return task.GetBuildType() == Task::BuildType::ENERGY;
 }
