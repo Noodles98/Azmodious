@@ -9,7 +9,7 @@ array<Id> pendingEnergyReclaimIds;
 array<int> pendingEnergyReclaimFrames;
 
 const int ENERGY_SPACE_RECLAIM_START_FRAME = 18 * MINUTE;
-const int ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME = 25 * MINUTE;
+const int ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME = 30 * MINUTE;
 const int ENERGY_SPACE_RECLAIM_TIMEOUT = 90 * SECOND;
 const float ENERGY_SPACE_RECLAIM_RADIUS = 128.f;
 

@@ -6,10 +6,10 @@
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
 			"corwin": [80, 120],
-			"corsolar": [160, 180],
-			"coradvsol": [220, 260],
-			"corfus": [550, 700],
-			"corafus": [1000, 1800]
+			"corsolar": [140, 180],
+			"coradvsol": [200, 240],
+			"corfus": [260, 400],
+			"corafus": [420, 2000]
 		},
 		"water": {
 			"cortide": [150, 200],
