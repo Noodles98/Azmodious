@@ -4,7 +4,7 @@ namespace TeamRoleAir {
 const uint MIN_BOMBER_SWARM = 10;
 const int BOMBER_GROUP_RELEASE_INTERVAL = 5 * SECOND;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
-const int MID_GAME_FRAME = 13 * MINUTE;
+const int MID_GAME_FRAME = 9 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 14.0f;

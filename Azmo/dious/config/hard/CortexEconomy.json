@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"corwin": [120, 160],
-			"corsolar": [200, 240],
-			"coradvsol": [260, 280],
-			"corfus": [240, 600],
-			"corafus": [700, 2000]
+			"corwin": [160, 200],
+			"corsolar": [160, 200],
+			"coradvsol": [140, 180],
+			"corfus": [200, 400],
+			"corafus": [400, 2000]
 		},
 		"water": {
 			"cortide": [150, 200],

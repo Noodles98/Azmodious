@@ -7,7 +7,7 @@ const uint FREE_FACTORIES_PER_TIER = 2;
 uint GetAllowedCount(bool isT2, float metalIncome)
 {
 	const float incomePerFactory = isT2 ? T2_METAL_INCOME_PER_FACTORY : T1_METAL_INCOME_PER_FACTORY;
-	if (metalIncome <= 6.0f)
+	if (metalIncome <= 0.0f)
 		return FREE_FACTORIES_PER_TIER;
 	return FREE_FACTORIES_PER_TIER + uint(metalIncome / incomePerFactory);
 }
