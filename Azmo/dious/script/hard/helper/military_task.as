@@ -6,7 +6,7 @@
 
 namespace MilitaryTaskPolicy {
 
-const int FOG_PUSH_START_FRAME = 1 * MINUTE;
+const int FOG_PUSH_START_FRAME = 2 * MINUTE;
 const uint FOG_PUSH_UNIT_STRIDE = 3;
 
 bool IsMainlineCombat(const CCircuitDef@ cdef)
@@ -15,6 +15,7 @@ bool IsMainlineCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
+		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::AH.mask);
 }
 

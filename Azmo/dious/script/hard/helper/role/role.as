@@ -370,6 +370,14 @@ CCircuitDef@ FilterFactory(CCircuitDef@ facDef, bool isStart)
 	return (fallback !is null) ? fallback : facDef;
 }
 
+bool ShouldRejectFactoryPosition(const CCircuitDef@ facDef, const AIFloat3& in pos, bool isStart)
+{
+	Refresh();
+	if (kind == Kind::AIR)
+		return TeamRoleAir::ShouldRejectFactoryPosition(facDef, pos, isStart);
+	return false;
+}
+
 void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
 {
 	Refresh();

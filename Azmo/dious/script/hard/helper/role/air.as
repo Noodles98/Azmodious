@@ -4,22 +4,22 @@ namespace TeamRoleAir {
 const uint MIN_BOMBER_SWARM = 10;
 const int BOMBER_GROUP_RELEASE_INTERVAL = 5 * SECOND;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
-const int MID_GAME_FRAME = 9 * MINUTE;
+const int MID_GAME_FRAME = 13 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
 const int ADV_AIR_FORCE_FRAME = 8 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 14.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
-const float EARLY_CONVERT_EFF = 6.45f;
+const float EARLY_CONVERT_EFF = 12.51f;
 const float MID_CONVERT_EFF = 14.56f;
 const float LATE_CONVERT_EFF = 17.50f;
 const float EARLY_CONVERT_ENERGY_EFF = 19.66f;
 const float MID_CONVERT_ENERGY_EFF = 20.15f;
 const float LATE_CONVERT_ENERGY_EFF = 21.11f;
 
-const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.75f;
-const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.78f;
-const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.82f;
+const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.63f;
+const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.68f;
+const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.75f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
 const float MID_ENERGY_STALL_DEFAULT = 0.85f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.82f;
@@ -51,13 +51,17 @@ const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
 const uint MID_FACTORY_MIN_BUILDER2_COUNT = 4;
 const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
 const uint FRONTLINE_CONFIRM_HITS = 10;
-const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
+const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
+const float FIRST_ADV_AIR_MAX_BASE_DISTANCE = 900.0f;
+const float FIRST_ADV_AIR_MAX_BASE_DISTANCE_SQ = FIRST_ADV_AIR_MAX_BASE_DISTANCE * FIRST_ADV_AIR_MAX_BASE_DISTANCE;
 
 array<Id> bomberIds;
 array<Id> escortIds;
 uint releasedBomberGroupCount = 0;
 int nextBomberGroupReleaseFrame = 0;
+bool hasBasicAirFactoryAnchor = false;
+AIFloat3 basicAirFactoryAnchor;
 
 // Economy stage helpers
 enum EconomyStage {
@@ -297,6 +301,11 @@ string GetBasicFactoryName(const string& in sidePrefix)
 	return "legap";
 }
 
+bool IsBasicFactoryName(const string& in name)
+{
+	return (name == "armap") || (name == "corap") || (name == "legap");
+}
+
 string GetAdvancedFactoryName(const string& in sidePrefix)
 {
 	if (sidePrefix == "arm")
@@ -306,16 +315,29 @@ string GetAdvancedFactoryName(const string& in sidePrefix)
 	return "legaap";
 }
 
-CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facDef, bool isStart)
+bool IsAdvancedFactoryName(const string& in name)
 {
-	if (isStart || !ShouldAllowAdvancedAir())
-		return facDef;
+	return (name == "armaap") || (name == "coraap") || (name == "legaap");
+}
+
+bool ShouldPreferAdvancedFactory(const string& in sidePrefix)
+{
+	if (!ShouldAllowAdvancedAir())
+		return false;
 
 	CCircuitDef@ basicDef = ai.GetCircuitDef(GetBasicFactoryName(sidePrefix));
 	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
-	if ((basicDef !is null) && (advancedDef !is null)
-		&& (basicDef.count > 0) && (advancedDef.count == 0)
-		&& advancedDef.IsAvailable(ai.frame))
+	return (basicDef !is null) && (advancedDef !is null)
+		&& (basicDef.count > 0) && (advancedDef.count == 0);
+}
+
+CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facDef, bool isStart)
+{
+	if (isStart || !ShouldPreferAdvancedFactory(sidePrefix))
+		return facDef;
+
+	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
+	if ((advancedDef !is null) && advancedDef.IsAvailable(ai.frame))
 	{
 		return advancedDef;
 	}
@@ -326,20 +348,41 @@ CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facD
 void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)
 {
 	const bool allowAdvancedAir = ShouldAllowAdvancedAir();
+	const bool preferAdvancedAir = ShouldPreferAdvancedFactory(sidePrefix);
 
 	if (sidePrefix == "arm") {
-		allowed.insertLast("armap");
+		if (!preferAdvancedAir)
+			allowed.insertLast("armap");
 		if (allowAdvancedAir)
 			allowed.insertLast("armaap");
 	} else if (sidePrefix == "cor") {
-		allowed.insertLast("corap");
+		if (!preferAdvancedAir)
+			allowed.insertLast("corap");
 		if (allowAdvancedAir)
 			allowed.insertLast("coraap");
 	} else {
-		allowed.insertLast("legap");
+		if (!preferAdvancedAir)
+			allowed.insertLast("legap");
 		if (allowAdvancedAir)
 			allowed.insertLast("legaap");
 	}
+}
+
+bool ShouldRejectFactoryPosition(const CCircuitDef@ facDef, const AIFloat3& in pos, bool isStart)
+{
+	if (isStart || facDef is null || !hasBasicAirFactoryAnchor)
+		return false;
+	if (!IsAdvancedFactoryName(facDef.GetName()) || facDef.count > 0)
+		return false;
+
+	const float dx = pos.x - basicAirFactoryAnchor.x;
+	const float dz = pos.z - basicAirFactoryAnchor.z;
+	if ((dx * dx + dz * dz) <= FIRST_ADV_AIR_MAX_BASE_DISTANCE_SQ)
+		return false;
+
+	AiLog("[Air] rejecting first T2 air factory forward position at (" + int(pos.x) + "," + int(pos.z)
+		+ "), anchor=(" + int(basicAirFactoryAnchor.x) + "," + int(basicAirFactoryAnchor.z) + ")");
+	return true;
 }
 
 int MakeSwitchInterval()
@@ -349,6 +392,12 @@ int MakeSwitchInterval()
 
 void OnFactoryAdded(CCircuitUnit@ unit)
 {
+	if (unit is null || unit.circuitDef is null)
+		return;
+	if (!hasBasicAirFactoryAnchor && IsBasicFactoryName(unit.circuitDef.GetName())) {
+		basicAirFactoryAnchor = unit.GetPos(ai.frame);
+		hasBasicAirFactoryAnchor = true;
+	}
 }
 
 // Defence and frontline shaping

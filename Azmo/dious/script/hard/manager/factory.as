@@ -335,6 +335,8 @@ CCircuitDef@ AiGetFactoryToBuild(const AIFloat3& in pos, bool isStart, bool isRe
 
 	CCircuitDef@ facDef = aiFactoryMgr.DefaultGetFactoryToBuild(pos, isStart, isReset);
 	@facDef = TeamRole::FilterFactory(facDef, isStart);
+	if (TeamRole::ShouldRejectFactoryPosition(facDef, pos, isStart))
+		return null;
 	if (!IsFactoryIncomeAllowed(facDef))
 		return null;
 	return facDef;
