@@ -145,27 +145,28 @@
 "armlab": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 1,
+				"limit": 2,
 				"build_mod": 1000.0,
 				"build_speed": 15.0  //bp 100
 			},
 "armalab": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 1,
+				"limit": 3,
 				"build_mod": 1000.0,
 				"build_speed": 30.0 // bp 300
 			},
 "armvp": {
 				"role": ["static"],
 				"attribute": ["support"],
+				"limit": 2,
 				"build_mod": 1000.0,
 				"build_speed": 15.0 // bp 100
 			},
 "armavp": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 2,
+				"limit": 3,
 				"build_speed": 10.0
 			},
 "armhp": {
@@ -193,11 +194,11 @@
 "armap": {
 				"role": ["static"],
 				"build_speed": 5.0,
-				"limit": 2
+				"limit": 4
 			},
 "armaap": {
 				"role": ["static"],
-				"limit": 5,
+				"limit": 8,
 				"build_speed": 10.0
 			},
 "armplat": {
@@ -215,7 +216,7 @@
 "armshltx": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 1,
+				"limit": 2,
 				"midposoffset": [0, 0, -16],
 				"build_speed": 10.0
 			},

@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"legwin": [80, 120],
-			"legsolar": [140, 180],
-			"legadvsol": [200, 260],
-			"legfus": [280, 420],
-			"legafus": [440, 2000]
+			"legwin": [120, 160],
+			"legsolar": [200, 240],
+			"legadvsol": [280, 320],
+			"legfus": [360, 560],
+			"legafus": [660, 2000]
 		},
 		"water": {
 			"legtide": [150, 200],

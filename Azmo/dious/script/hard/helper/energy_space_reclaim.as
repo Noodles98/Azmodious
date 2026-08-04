@@ -23,14 +23,14 @@ void Clear()
 bool IsT1SpaceEnergy(const string& in name)
 {
 	return (name == "armwin") || (name == "corwin") || (name == "legwin")
-		|| (name == "armsolar") || (name == "corsolar") || (name == "legsolar")
-		|| (name == "armmakr") || (name == "cormakr") || (name == "legeconv");
+		|| (name == "armsolar") || (name == "corsolar") || (name == "legsolar");
 }
 
 bool IsAdvancedSolar(const string& in name)
 {
 	return (name == "armadvsol") || (name == "coradvsol")
-		|| (name == "legadvsol") || (name == "legadvsolar");
+		|| (name == "legadvsol") || (name == "legadvsolar")
+        || (name == "armmakr") || (name == "cormakr") || (name == "legeconv");
 }
 
 bool IsReclaimableEnergy(const string& in name)

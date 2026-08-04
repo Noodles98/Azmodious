@@ -30,7 +30,7 @@
 //			"size": [7, 7],  // default: size of a unit
 
 			// Spacer, blocker_size = size + yard
-			"yard": [12, 16]  // default: [0, 0]
+			"yard": [8, 16]  // default: [0, 0]
 
 			// Integer radius of a blocker or description string.
 			// Available string values: explosion, expl_ally = [radius ~ 1 player .. radius/2 ~ 4+ players]
@@ -45,16 +45,16 @@
 		"fac_bot": {
 			"type": ["rectangle", "factory"],
 			"offset": [-5, 5],
-			"yard": [12, 16]
+			"yard": [8, 16]
 		},
 		"fac_bot_pass": {
 			"type": ["rectangle", "factory"],
 			"offset": [-5, 5],
-			"yard": [12, 16]
+			"yard": [8, 16]
 		},
 		"fac_air": {
 			"type": ["rectangle", "factory"],
-			"yard": [6, 18]
+			"yard": [6, 12]
 		},
 		"fac_water": {
 			"type": ["rectangle", "factory"],
@@ -91,12 +91,12 @@
 		"fusion": {
 			"type": ["rectangle", "engy_mid"],
 			"yard": [3, 3],
-			"ignore": ["engy_mid", "engy_low", "def_low", "nano"]
+			"ignore": ["engy_mid", "def_low", "nano"]
 		},
 		"singu": {
 			"type": ["rectangle", "engy_high"],
 			"yard": [5, 5],
-			"ignore": ["engy_high", "engy_low", "def_low", "nano"]
+			"ignore": ["engy_high", "def_low", "nano"]
 		},
 		"pylon": {
 			"type": ["circle", "pylon"],
@@ -119,7 +119,7 @@
 		"converter": {
 			"type": ["rectangle", "convert"],
 			"yard": [2, 2],
-			"ignore": ["convert", "engy_mid"]
+			"ignore": ["convert", "engy_mid", "engy_high"]
 		},
 		"def_low": {
 			"type": ["circle", "def_low"],

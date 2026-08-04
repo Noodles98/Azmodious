@@ -153,7 +153,7 @@
 "coralab": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 2,
+				"limit": 3,
 				"midposoffset": [0, 0, -4],
 				"build_speed": 10.0
 			},
@@ -161,6 +161,7 @@
 				"role": ["static"],
 				"attribute": ["support"],
 				"build_mod": 1000.0,
+				"limit": 2,
 				"build_speed": 15.0 // bp 100
 			},
 "coravp": {
@@ -204,11 +205,11 @@
 "corap": {
 				"role": ["static"],
 				"build_speed": 5.0,
-				"limit": 2
+				"limit": 4
 			},
 "coraap": {
 				"role": ["static"],
-				"limit": 5,
+				"limit": 8,
 				"build_speed": 10.0
 			},
 "corplat": {
@@ -227,7 +228,7 @@
 "corgant": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 1,
+				"limit": 2,
 				"build_speed": 10.0
 				
 			},
