@@ -6,9 +6,9 @@ const int LATE_GAME_FRAME = 22 * MINUTE;
 const float EARLY_CONVERT_EFF = 4.6f;
 const float MID_CONVERT_EFF = 8.65f;
 const float LATE_CONVERT_EFF = 15.24;
-const float EARLY_CONVERT_ENERGY_EFF = 20.21f;
-const float MID_CONVERT_ENERGY_EFF = 23.24f;
-const float LATE_CONVERT_ENERGY_EFF = 30.25f;
+const float EARLY_CONVERT_ENERGY_EFF = 19.45f;
+const float MID_CONVERT_ENERGY_EFF = 20.31f;
+const float LATE_CONVERT_ENERGY_EFF = 21.12f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.85f;

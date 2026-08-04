@@ -12,9 +12,9 @@ const float ADV_AIR_MIN_METAL_RATIO = 0.15f;
 const float EARLY_CONVERT_EFF = 6.45f;
 const float MID_CONVERT_EFF = 9.45f;
 const float LATE_CONVERT_EFF = 17.50f;
-const float EARLY_CONVERT_ENERGY_EFF = 21.35f;
-const float MID_CONVERT_ENERGY_EFF = 24.25f;
-const float LATE_CONVERT_ENERGY_EFF = 30.25f;
+const float EARLY_CONVERT_ENERGY_EFF = 19.66f;
+const float MID_CONVERT_ENERGY_EFF = 20.15f;
+const float LATE_CONVERT_ENERGY_EFF = 21.11f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.75f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.78f;
