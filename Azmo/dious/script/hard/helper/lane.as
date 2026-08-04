@@ -7,16 +7,29 @@ const int LANE_COUNT = 4;
 const int DEFAULT_LANE = 0;
 bool isAirRoleUnrestricted = true;
 
+int NormalizeLane(int lane)
+{
+	if (lane < 0)
+		lane = -lane;
+	return lane % LANE_COUNT;
+}
+
+int ResolveAiLaneIdentity()
+{
+	return NormalizeLane(ai.teamId + ai.skirmishAIId);
+}
+
 int ResolveLane()
 {
+	const int aiLane = ResolveAiLaneIdentity();
 	if (TeamMapProfile::HasMatchedSpot())
-		return TeamMapProfile::GetMatchedSpotIndex() % LANE_COUNT;
-	return DEFAULT_LANE;
+		return NormalizeLane(TeamMapProfile::GetMatchedSpotIndex() + aiLane);
+	return NormalizeLane(DEFAULT_LANE + aiLane);
 }
 
 string GetSourceName()
 {
-	return TeamMapProfile::HasMatchedSpot() ? "map_profile" : "default_lane";
+	return TeamMapProfile::HasMatchedSpot() ? "map_profile+ai_identity" : "ai_identity";
 }
 
 int ResolveBiasLane(const AIFloat3& in pos, float spread)
@@ -24,10 +37,7 @@ int ResolveBiasLane(const AIFloat3& in pos, float spread)
 	const float cellSize = (spread > 0.f) ? (spread * 1.f) : 512.f;
 	const int cellX = int(pos.x / cellSize);
 	const int cellZ = int(pos.z / cellSize);
-	int lane = (cellX * 31) + (cellZ * 17) + ai.teamId;
-	if (lane < 0)
-		lane = -lane;
-	return lane % LANE_COUNT;
+	return NormalizeLane((cellX * 31) + (cellZ * 31) + ResolveLane());
 }
 
 bool IsRestricted()

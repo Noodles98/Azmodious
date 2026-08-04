@@ -45,7 +45,7 @@ bool ShouldReject(IUnitTask@ task, CCircuitUnit@ unit)
 	}
 	if (!unit.circuitDef.IsRoleAny(Unit::Role::COMM.mask))
 		return false;
-	if (task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEX) {
+	if (task.GetType() != Task::Type::BUILDER || task.GetBuildType() != Task::BuildType::MEXUP) {
 		ClearRejectedMex();
 		return false;
 	}

@@ -305,6 +305,12 @@ SFightTask Common(Task::FightType type)
 	@ti.vip = null;
 	return ti;
 }
+SFightTask Committed(Task::FightType type)
+{
+	SFightTask ti = Common(type);
+	ti.check = Task::FightType::_SIZE_;  // NONE
+	return ti;
+}
 SFightTask Guard(CCircuitUnit@ vip)
 {
 	SFightTask ti;

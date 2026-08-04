@@ -7,7 +7,7 @@
 namespace MilitaryTaskPolicy {
 
 const int FOG_PUSH_START_FRAME = 2 * MINUTE;
-const uint FOG_PUSH_UNIT_STRIDE = 3;
+const uint FOG_PUSH_UNIT_STRIDE = 5;
 
 bool IsMainlineCombat(const CCircuitDef@ cdef)
 {
@@ -56,8 +56,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
-		|| cdef.IsRoleAny(Unit::Role::AA.mask)
-		;
+		|| cdef.IsRoleAny(Unit::Role::AA.mask);
 }
 bool IsAirDefenceCombat(const CCircuitDef@ cdef)
 {
@@ -70,12 +69,12 @@ float GetDefendPromotePower()
 {
 	const string role = TeamRole::GetName();
 	if (role == "tech")
-		return 120.f;
+		return 75.f;
 	if (role == "air")
-		return 150.f;
+		return 60.f;
 	if (role == "front")
-		return 70.f;
-	return 50.f;
+		return 45.f;
+	return 40.f;
 }
 
 bool IsFogPushCombat(const CCircuitDef@ cdef)
@@ -104,6 +103,16 @@ bool ShouldFogPush(CCircuitUnit@ unit, const CCircuitDef@ cdef)
 	return (uint(unit.id) % FOG_PUSH_UNIT_STRIDE) == 0;
 }
 
+Task::FightType GetLaneBiasedAttackType(const CCircuitDef@ cdef, const string& in role)
+{
+	const int lane = TeamLane::ResolveLane();
+	if ((role == "front") && ((lane == 0) || (lane == 3)) && cdef.IsRoleAny(Unit::Role::ARTY.mask))
+		return Task::FightType::ARTY;
+	if ((role == "tech") && ((lane == 0) || (lane == 3)) && cdef.IsRoleAny(Unit::Role::ARTY.mask))
+		return Task::FightType::ARTY;
+	return Task::FightType::ATTACK;
+}
+
 Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 {
 	if (cdef is null)
@@ -128,9 +137,9 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 
 	const string role = TeamRole::GetName();
 	if (IsMainlineCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::ATTACK : Task::FightType::ATTACK;
+		return GetLaneBiasedAttackType(cdef, role);
 	if (IsMeleeCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::RAID : Task::FightType::ATTACK;
+		return GetLaneBiasedAttackType(cdef, role);
 	if (IsScout(cdef))
 		return ((role == "front") || (role == "tech") || (role == "air")) ? Task::FightType::SCOUT : Task::FightType::SCOUT;
 	if (IsBacklineCombat(cdef))
@@ -158,7 +167,9 @@ SFightTask MakePreferredTask(CCircuitUnit@ unit, const CCircuitDef@ cdef)
 
 	const Task::FightType fightType = GetPreferredFightType(cdef);
 	if (fightType == Task::FightType::DEFEND)
-		return TaskF::Defend(Task::FightType::ATTACK, GetDefendPromotePower());
+		return TaskF::Defend(Task::FightType::DEFEND, GetDefendPromotePower());
+	if (fightType == Task::FightType::ATTACK)
+		return TaskF::Committed(Task::FightType::ATTACK);
 	return TaskF::Common(fightType);
 }
 
