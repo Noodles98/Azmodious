@@ -85,7 +85,7 @@ bool IsFogPushCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
-		||cdef.IsRoleAny(Unit::Role::MELEE.mask);
+		||cdef.IsRoleAny(Unit::Attr::MELEE.mask);
 }
 
 bool ShouldFogPush(CCircuitUnit@ unit, const CCircuitDef@ cdef)
