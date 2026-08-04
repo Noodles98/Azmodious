@@ -8,7 +8,8 @@ array<Id> reclaimableEnergyIds;
 array<Id> pendingEnergyReclaimIds;
 array<int> pendingEnergyReclaimFrames;
 
-const int ENERGY_SPACE_RECLAIM_START_FRAME = 20 * MINUTE;
+const int ENERGY_SPACE_RECLAIM_START_FRAME = 18 * MINUTE;
+const int ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME = 25 * MINUTE;
 const int ENERGY_SPACE_RECLAIM_TIMEOUT = 90 * SECOND;
 const float ENERGY_SPACE_RECLAIM_RADIUS = 128.f;
 
@@ -22,7 +23,19 @@ void Clear()
 bool IsT1SpaceEnergy(const string& in name)
 {
 	return (name == "armwin") || (name == "corwin") || (name == "legwin")
-		|| (name == "armsolar") || (name == "corsolar") || (name == "legsolar");
+		|| (name == "armsolar") || (name == "corsolar") || (name == "legsolar")
+		|| (name == "armmakr") || (name == "cormakr") || (name == "legeconv");
+}
+
+bool IsAdvancedSolar(const string& in name)
+{
+	return (name == "armadvsol") || (name == "coradvsol")
+		|| (name == "legadvsol") || (name == "legadvsolar");
+}
+
+bool IsReclaimableEnergy(const string& in name)
+{
+	return IsT1SpaceEnergy(name) || IsAdvancedSolar(name);
 }
 
 bool ContainsId(const array<Id>& in ids, Id unitId)
@@ -38,7 +51,7 @@ void Track(CCircuitUnit@ unit)
 {
 	if (unit is null || unit.circuitDef is null)
 		return;
-	if (!IsT1SpaceEnergy(unit.circuitDef.GetName()))
+	if (!IsReclaimableEnergy(unit.circuitDef.GetName()))
 		return;
 	if (!ContainsId(reclaimableEnergyIds, unit.id))
 		reclaimableEnergyIds.insertLast(unit.id);
@@ -104,6 +117,13 @@ bool IsSpaceHungryBuild(int buildType)
 	}
 }
 
+bool ShouldReclaimAdvancedSolar(IUnitTask@ task)
+{
+	if (task is null || ai.frame < ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME)
+		return false;
+	return task.GetBuildType() == Task::BuildType::ENERGY;
+}
+
 bool CanReclaim(IUnitTask@ task)
 {
 	if (task is null || task.GetType() != Task::Type::BUILDER)
@@ -115,11 +135,8 @@ bool CanReclaim(IUnitTask@ task)
 	return IsSpaceHungryBuild(task.GetBuildType());
 }
 
-IUnitTask@ MakeTask(IUnitTask@ task)
+IUnitTask@ MakeReclaimTask(IUnitTask@ task, bool reclaimAdvancedSolar)
 {
-	if (!CanReclaim(task))
-		return null;
-
 	const AIFloat3 buildPos = task.GetBuildPos();
 	const float radiusSq = ENERGY_SPACE_RECLAIM_RADIUS * ENERGY_SPACE_RECLAIM_RADIUS;
 	for (int i = int(reclaimableEnergyIds.length()) - 1; i >= 0; --i) {
@@ -129,6 +146,10 @@ IUnitTask@ MakeTask(IUnitTask@ task)
 			continue;
 		}
 		if (IsPending(energy.id))
+			continue;
+
+		const string energyName = energy.circuitDef.GetName();
+		if (IsAdvancedSolar(energyName) != reclaimAdvancedSolar)
 			continue;
 
 		const AIFloat3 energyPos = energy.GetPos(ai.frame);
@@ -142,10 +163,24 @@ IUnitTask@ MakeTask(IUnitTask@ task)
 			return null;
 
 		MarkPending(energy.id);
-		AiLog("[Builder] reclaiming " + energy.circuitDef.GetName() + " to clear late-game base space");
+		AiLog("[Builder] reclaiming " + energyName + " to clear late-game base space");
 		return reclaimTask;
 	}
 
+	return null;
+}
+
+IUnitTask@ MakeTask(IUnitTask@ task)
+{
+	if (!CanReclaim(task))
+		return null;
+
+	IUnitTask@ reclaimTask = MakeReclaimTask(task, false);
+	if (reclaimTask !is null)
+		return reclaimTask;
+
+	if (ShouldReclaimAdvancedSolar(task))
+		return MakeReclaimTask(task, true);
 	return null;
 }
 
