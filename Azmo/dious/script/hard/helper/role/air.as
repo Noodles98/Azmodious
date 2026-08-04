@@ -2,12 +2,13 @@ namespace TeamRoleAir {
 
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
-const int BOMBER_GROUP_RELEASE_INTERVAL = 5 * SECOND;
+const int BOMBER_GROUP_RELEASE_INTERVAL = 10 * SECOND;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
-const int MID_GAME_FRAME = 13 * MINUTE;
+const int MID_GAME_FRAME = 15 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
-const int ADV_AIR_FORCE_FRAME = 7 * MINUTE;
+const int ADV_AIR_FORCE_FRAME = 9 * MINUTE;
+const int T3_FACTORY_MIN_FRAME = 30 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 14.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
 const float EARLY_CONVERT_EFF = 12.51f;
@@ -23,17 +24,17 @@ const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.75f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.88f;
 const float MID_ENERGY_STALL_DEFAULT = 0.85f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.82f;
-const float EARLY_ASSIST_METAL_RATIO = 0.20f;
-const float MID_ASSIST_METAL_RATIO = 0.35f;
+const float EARLY_ASSIST_METAL_RATIO = 0.25f;
+const float MID_ASSIST_METAL_RATIO = 0.65f;
 const float LATE_ASSIST_METAL_RATIO = 0.80f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.20f;
 const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.20f;
-const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.93f;
+const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
+const float EARLY_DEFENCE_THREAT_MIN = 10.0f;
 const float MID_DEFENCE_THREAT_MIN = 35.0f;
 const float LATE_DEFENCE_THREAT_MIN = 64.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 10.f;
@@ -53,7 +54,7 @@ const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
 const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
-const float FIRST_ADV_AIR_MAX_BASE_DISTANCE = 900.0f;
+const float FIRST_ADV_AIR_MAX_BASE_DISTANCE = 450.0f;
 const float FIRST_ADV_AIR_MAX_BASE_DISTANCE_SQ = FIRST_ADV_AIR_MAX_BASE_DISTANCE * FIRST_ADV_AIR_MAX_BASE_DISTANCE;
 
 array<Id> bomberIds;
@@ -163,6 +164,16 @@ uint GetFactoryMinBuilder2Count()
 		case EconomyStage::MID: return MID_FACTORY_MIN_BUILDER2_COUNT;
 		default: return LATE_FACTORY_MIN_BUILDER2_COUNT;
 	}
+}
+
+bool IsScoutRushEnabled()
+{
+	return false;
+}
+
+uint GetScoutRushCount()
+{
+	return 0;
 }
 
 // Bomber swarm control
@@ -320,6 +331,29 @@ bool IsAdvancedFactoryName(const string& in name)
 	return (name == "armaap") || (name == "coraap") || (name == "legaap");
 }
 
+string GetT3FactoryName(const string& in sidePrefix)
+{
+	if (sidePrefix == "arm")
+		return "armshltx";
+	if (sidePrefix == "cor")
+		return "corgant";
+	return "leggant";
+}
+
+bool IsT3FactoryName(const string& in name)
+{
+	return (name == "armshltx") || (name == "corgant") || (name == "leggant");
+}
+
+bool ShouldAllowT3Factory(const string& in sidePrefix)
+{
+	if (ai.frame < T3_FACTORY_MIN_FRAME)
+		return false;
+
+	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
+	return (advancedDef !is null) && (advancedDef.count > 0);
+}
+
 bool ShouldPreferAdvancedFactory(const string& in sidePrefix)
 {
 	if (!ShouldAllowAdvancedAir())
@@ -349,22 +383,29 @@ void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefi
 {
 	const bool allowAdvancedAir = ShouldAllowAdvancedAir();
 	const bool preferAdvancedAir = ShouldPreferAdvancedFactory(sidePrefix);
+	const bool allowT3 = ShouldAllowT3Factory(sidePrefix);
 
 	if (sidePrefix == "arm") {
 		if (!preferAdvancedAir)
 			allowed.insertLast("armap");
 		if (allowAdvancedAir)
 			allowed.insertLast("armaap");
+		if (allowT3)
+			allowed.insertLast("armshltx");
 	} else if (sidePrefix == "cor") {
 		if (!preferAdvancedAir)
 			allowed.insertLast("corap");
 		if (allowAdvancedAir)
 			allowed.insertLast("coraap");
+		if (allowT3)
+			allowed.insertLast("corgant");
 	} else {
 		if (!preferAdvancedAir)
 			allowed.insertLast("legap");
 		if (allowAdvancedAir)
 			allowed.insertLast("legaap");
+		if (allowT3)
+			allowed.insertLast("leggant");
 	}
 }
 
@@ -387,7 +428,7 @@ bool ShouldRejectFactoryPosition(const CCircuitDef@ facDef, const AIFloat3& in p
 
 int MakeSwitchInterval()
 {
-	return AiRandom(480, 600) * SECOND;
+	return AiRandom(520, 600) * SECOND;
 }
 
 void OnFactoryAdded(CCircuitUnit@ unit)

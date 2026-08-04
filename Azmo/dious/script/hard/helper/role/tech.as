@@ -2,10 +2,10 @@ namespace TeamRoleTech {
 
 // Role tuning constants
 const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 22 * MINUTE;
-const float EARLY_CONVERT_EFF = 4.6f;
-const float MID_CONVERT_EFF = 8.65f;
-const float LATE_CONVERT_EFF = 15.24;
+const int LATE_GAME_FRAME = 25 * MINUTE;
+const float EARLY_CONVERT_EFF = 6.52f;
+const float MID_CONVERT_EFF = 12.34f;
+const float LATE_CONVERT_EFF = 15.73f;
 const float EARLY_CONVERT_ENERGY_EFF = 19.45f;
 const float MID_CONVERT_ENERGY_EFF = 20.31f;
 const float LATE_CONVERT_ENERGY_EFF = 21.12f;
@@ -16,17 +16,17 @@ const float LATE_ENERGY_STALL_WHEN_METAL_EMPTY = 0.81f;
 const float EARLY_ENERGY_STALL_DEFAULT = 0.82f;
 const float MID_ENERGY_STALL_DEFAULT = 0.84f;
 const float LATE_ENERGY_STALL_DEFAULT = 0.92f;
-const float EARLY_ASSIST_METAL_RATIO = 0.22f;
-const float MID_ASSIST_METAL_RATIO = 0.31f;
-const float LATE_ASSIST_METAL_RATIO = 0.41f;
+const float EARLY_ASSIST_METAL_RATIO = 0.25f;
+const float MID_ASSIST_METAL_RATIO = 0.55f;
+const float LATE_ASSIST_METAL_RATIO = 0.85f;
 const float EARLY_FACTORY_SWITCH_ARMY_MULT = 1.20f;
 const float MID_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float LATE_FACTORY_SWITCH_ARMY_MULT = 1.25f;
 const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
-const float MID_FACTORY_SWITCH_METAL_MULT = 0.88f;
-const float LATE_FACTORY_SWITCH_METAL_MULT = 0.84f;
+const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
+const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
+const float EARLY_DEFENCE_THREAT_MIN = 10.0f;
 const float MID_DEFENCE_THREAT_MIN = 35.0f;
 const float LATE_DEFENCE_THREAT_MIN = 66.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 11.0f;
@@ -43,6 +43,7 @@ const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
 const uint MID_FACTORY_MIN_BUILDER2_COUNT = 7;
 const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
+const uint SCOUT_RUSH_COUNT = 10;
 const uint FRONTLINE_CONFIRM_HITS = 12;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
@@ -147,6 +148,16 @@ uint GetFactoryMinBuilder2Count()
 		case EconomyStage::MID: return MID_FACTORY_MIN_BUILDER2_COUNT;
 		default: return LATE_FACTORY_MIN_BUILDER2_COUNT;
 	}
+}
+
+bool IsScoutRushEnabled()
+{
+	return true;
+}
+
+uint GetScoutRushCount()
+{
+	return SCOUT_RUSH_COUNT;
 }
 
 void FillAllowedFactories(array<string>& out allowed, const string& in sidePrefix)

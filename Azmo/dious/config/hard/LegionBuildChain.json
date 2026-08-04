@@ -24,7 +24,7 @@
 			"unit": {
 				"legion": ["legabm", "legsilo", "legstarfall", "legperdition", "leglrpc"]
 			},
-			"weight": [0.15, 0.15, 0.25, 0.20, 0.25],
+			"weight": [0.20, 0.20, 0.20, 0.20, 0.20],
 			"condition": [250, 250, 350, 300, 300]
 		},
 

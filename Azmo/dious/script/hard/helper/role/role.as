@@ -148,6 +148,26 @@ uint GetFactoryMinBuilder2Count()
 	}
 }
 
+bool IsScoutRushEnabled()
+{
+	Refresh();
+	switch (kind) {
+		case Kind::TECH: return TeamRoleTech::IsScoutRushEnabled();
+		case Kind::FRONT: return TeamRoleFront::IsScoutRushEnabled();
+		default: return false;
+	}
+}
+
+uint GetScoutRushCount()
+{
+	Refresh();
+	switch (kind) {
+		case Kind::TECH: return TeamRoleTech::GetScoutRushCount();
+		case Kind::FRONT: return TeamRoleFront::GetScoutRushCount();
+		default: return 0;
+	}
+}
+
 uint GetBaseConstructorCount()
 {
 	Refresh();

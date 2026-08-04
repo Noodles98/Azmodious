@@ -8,11 +8,11 @@ array<Id> reclaimableEnergyIds;
 array<Id> pendingEnergyReclaimIds;
 array<int> pendingEnergyReclaimFrames;
 
-const int ENERGY_SPACE_RECLAIM_START_FRAME = 18 * MINUTE;
+const int ENERGY_SPACE_RECLAIM_START_FRAME = 20 * MINUTE;
 const int ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME = 30 * MINUTE;
 const int ENERGY_SPACE_RECLAIM_TIMEOUT = 90 * SECOND;
 const float ENERGY_SPACE_RECLAIM_RADIUS = 128.f;
-const float ADVANCED_SOLAR_RECLAIM_MIN_ENERGY_INCOME = 500.f;
+const float ADVANCED_SOLAR_RECLAIM_MIN_ENERGY_INCOME = 750.f;
 
 void Clear()
 {

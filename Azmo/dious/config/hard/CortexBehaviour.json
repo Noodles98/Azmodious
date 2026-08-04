@@ -10,10 +10,10 @@
 			"raid": [25.0, 95.0],  // [<min>, <avg>] power of raider squad 2.5,48
 			"attack": 130.0,  // min power of attack group ---- was 40
 			"thr_mod": {				//AI attacks everything with final threat (after all calculations) <= 1
-				"attack": [0.35, 0.55],
-				"defence": [0.60, 0.85],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
-				"mobile": 0.90,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
-				"static": 0.95,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
+				"attack": [0.35, 0.45],
+				"defence": [0.55, 0.70],  // [<min>, <max>] enemy threat modifier for group size calculation of defence task; higher values reduce overreaction to small pokes
+				"mobile": 1.05,  // initial modifier for power of attack group based on mobile enemy threat; org=1.05
+				"static": 1.0,  // initial modifier for power of attack group based on static enemy threat; org= 1.2
 				"comm": 0.05   // because of power of dgun
 			},
 			// anti-air threat threshold, air factories will stop production when AA threat exceeds
@@ -31,7 +31,7 @@
 		"retreat": {
 			"builder": [0.8, 0.89, 1.0],  // [<min default>, <max default>, <UnitDef modifier>] for all builders
 			"fighter": [0.25, 0.40, 1.0],  // [<min default>, <max default>, <UnitDef modifier>] for all not-builder units; lower values keep attack groups committed longer
-			"shield": [0.25, 0.55]  // [<empty>, <full>] shield power
+			"shield": [0.25, 0.45]  // [<empty>, <full>] shield power
 		},
 	
 	
@@ -204,6 +204,8 @@
 			},
 "coraap": {
 				"role": ["builder"],
+				"attribute": ["support"],
+				"build_mod": 1000.0,
 				"build_speed": 10.0
 			},
 "corplat": {
@@ -222,7 +224,6 @@
 "corgant": {
 				"role": ["static"],
 				"attribute": ["support"],
-				"limit": 2,
 				"build_speed": 10.0
 				
 			},

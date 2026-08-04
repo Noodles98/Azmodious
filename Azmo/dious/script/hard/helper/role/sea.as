@@ -26,7 +26,7 @@ const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.80f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.86f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.90f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 5.0f;
+const float EARLY_DEFENCE_THREAT_MIN = 10.0f;
 const float MID_DEFENCE_THREAT_MIN = 48.0f;
 const float LATE_DEFENCE_THREAT_MIN = 64.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 11.0f;
@@ -130,6 +130,16 @@ uint GetFactoryMinBuilder2Count()
 		case EconomyStage::MID: return MID_FACTORY_MIN_BUILDER2_COUNT;
 		default: return LATE_FACTORY_MIN_BUILDER2_COUNT;
 	}
+}
+
+bool IsScoutRushEnabled()
+{
+	return false;
+}
+
+uint GetScoutRushCount()
+{
+	return 0;
 }
 
 float GetEnergyStallRatioWhenMetalEmpty()

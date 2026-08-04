@@ -57,7 +57,6 @@ string leggant ("leggant");
 int switchInterval = TeamRole::MakeSwitchInterval();
 bool isScoutRushFinished = false;
 int scoutRushFactoryId = -1;
-const uint SCOUT_RUSH_COUNT = 2;
 
 bool IsT1LandFactory(const string& in name)
 {
@@ -179,7 +178,7 @@ IUnitTask@ EnqueueScoutRush(CCircuitUnit@ unit)
 {
 	if (isScoutRushFinished || unit is null)
 		return null;
-	if (TeamRole::GetName() != "front")
+	if (!TeamRole::IsScoutRushEnabled())
 		return null;
 
 	const CCircuitDef@ facDef = unit.circuitDef;
@@ -201,7 +200,8 @@ IUnitTask@ EnqueueScoutRush(CCircuitUnit@ unit)
 
 	const AIFloat3 pos = unit.GetPos(ai.frame);
 	IUnitTask@ last = null;
-	for (uint i = 0; i < SCOUT_RUSH_COUNT; ++i) {
+	const uint scoutRushCount = TeamRole::GetScoutRushCount();
+	for (uint i = 0; i < scoutRushCount; ++i) {
 		@last = aiFactoryMgr.Enqueue(TaskS::Recruit(
 			Task::RecruitType::FIREPOWER, Task::Priority::HIGH, scoutDef, pos, 64.f));
 	}

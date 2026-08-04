@@ -52,7 +52,7 @@ bool ShouldBuildT1MediumAA(const string& in side)
 bool ShouldBuildT1LightTurret(const string& in side)
 {
 	return HasPressure(EARLY_PRESSURE)
-		|| CanAfford(14.0f);
+		|| CanAfford(10.0f);
 }
 
 bool ShouldBuildT1MediumTurret(const string& in side)

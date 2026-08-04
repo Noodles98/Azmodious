@@ -62,8 +62,6 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"right": 20}, "priority": "normal"},
-					{"unit": "cornanotc", "category": "nano", "offset": {"right": 25}, "priority": "normal"},
 					{"unit": "corflak", "category": "defence", "offset": {"front": 120}, "condition": {"air": true}}
 				]]
 			},

@@ -68,11 +68,9 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 20}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 25}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "armflak", "category": "defence", "offset": {"front": 120}, "condition": {"air": true}}
+					{"unit": "armflak", "category": "defence", "offset": {"front": 120}, "priority": "normal"}
 				]]
 			},
 			"armafus": {
@@ -80,8 +78,6 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 20}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 25}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
@@ -108,6 +104,9 @@
 			"armanni": {
 				"hub": [[
 					{"unit": "armjamt", "category": "defence", "offset": {"back": 80}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armgate", "category": "defence", "offset": {"back": 160}, "priority": "normal"}
 				]]
 			},
