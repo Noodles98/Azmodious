@@ -103,13 +103,7 @@ void MarkPending(Id unitId)
 bool IsSpaceHungryBuild(int buildType)
 {
 	switch (buildType) {
-	case Task::BuildType::FACTORY:
-	case Task::BuildType::NANO:
-	case Task::BuildType::PYLON:
 	case Task::BuildType::ENERGY:
-	case Task::BuildType::DEFENCE:
-	case Task::BuildType::BUNKER:
-	case Task::BuildType::BIG_GUN:
 	case Task::BuildType::CONVERT:
 		return true;
 	default:

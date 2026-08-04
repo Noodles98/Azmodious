@@ -21,6 +21,7 @@ bool IsMainlineCombat(const CCircuitDef@ cdef)
 bool IsMeleeCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsAttrAny(Unit::Attr::MELEE.mask)
+		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SUPER.mask);
 }
 
@@ -32,7 +33,8 @@ bool IsScout(const CCircuitDef@ cdef)
 bool IsDefenceCombat (const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
-		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask);
+		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 
 bool IsBacklineCombat(const CCircuitDef@ cdef)
@@ -79,7 +81,11 @@ bool IsFogPushCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
-		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask);
+		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
+		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
+		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
+		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
+		||cdef.IsRoleAny(Unit::Role::MELEE.mask);
 }
 
 bool ShouldFogPush(CCircuitUnit@ unit, const CCircuitDef@ cdef)

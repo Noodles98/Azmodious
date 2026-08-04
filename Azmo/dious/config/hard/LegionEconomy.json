@@ -7,9 +7,9 @@
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [120, 160],
 			"legsolar": [200, 240],
-			"legadvsol": [280, 320],
-			"legfus": [360, 560],
-			"legafus": [660, 2000]
+			"legadvsol": [260, 280],
+			"legfus": [300, 600],
+			"legafus": [700, 2000]
 		},
 		"water": {
 			"legtide": [150, 200],
