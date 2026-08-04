@@ -192,9 +192,9 @@
 			}
 		},
 		"mex": {
-			"cormex": {"porc": true},
-			"cormoho": {"porc": true},
-			"coruwmme": {"porc": true}
+			"cormex": {"porc": false},
+			"cormoho": {"porc": false},
+			"coruwmme": {"porc": false}
 		},
 		"store": {
 			"coruwadvms": {

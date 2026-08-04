@@ -1,4 +1,5 @@
 #include "../helper/commander_mex_travel.as"
+#include "../helper/energy_space_reclaim.as"
 #include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
 
@@ -47,6 +48,10 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
 		return null;
 	}
+
+	IUnitTask@ reclaimTask = EnergySpaceReclaim::MakeTask(task);
+	if (reclaimTask !is null)
+		return reclaimTask;
 	return task;
 }
 
@@ -132,6 +137,7 @@ void AiTaskRemoved(IUnitTask@ task, bool done)
 void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 {
 	const CCircuitDef@ cdef = unit.circuitDef;
+	EnergySpaceReclaim::Track(unit);
 	if (usage != Unit::UseAs::BUILDER || cdef.IsRoleAny(Unit::Role::COMM.mask))
 		return;
 
@@ -145,21 +151,25 @@ void OnMessage(const string& in data)
 void UnitFinished(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitFinished(unit);
+	EnergySpaceReclaim::Track(unit);
 }
 
 void UnitDestroyed(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitDestroyed(unit);
+	EnergySpaceReclaim::Forget(unit.id);
 }
 
 void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 {
 	RemoveBaseConstructor(unit.id);
+	EnergySpaceReclaim::Forget(unit.id);
 }
 
 void AiLoad(IStream& istream)
 {
 	baseBuilderIds.resize(0);
+	EnergySpaceReclaim::Clear();
 	for (uint i = 0; i < 6; ++i) {
 		Id unitId = -1;
 		istream >> unitId;

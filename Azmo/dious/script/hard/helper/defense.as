@@ -39,7 +39,7 @@ bool CanAfford(float metalIncome)
 
 bool ShouldBuildT1LightAA(const string& in side)
 {
-	return (ai.frame >= 5 * MINUTE && CanAfford(10.0f))
+	return (ai.frame >= 3 * MINUTE && CanAfford(10.0f))
 		|| HasPressure(EARLY_PRESSURE);
 }
 
@@ -63,7 +63,7 @@ bool ShouldBuildT1MediumTurret(const string& in side)
 
 bool ShouldBuildT1Arty(const string& in side)
 {
-	return (IsMidGame() && CanAfford(18.0f))
+	return (IsMidGame() && CanAfford(20.0f))
 		|| HasPressure(MEDIUM_PRESSURE);
 }
 

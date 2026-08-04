@@ -492,31 +492,29 @@
 			// ===== Cortex constructors =====
 "corck": {
 				"role": ["builder"],
-				//"attribute": ["solo"],
-				"limit": 12,
+				"limit": 15,
 				"build_speed": 4.0
 			},
 "corack": {
 				"role": ["builderT2"],
-				"attribute": ["solo"],
-				"limit": 10,
+				"limit": 15,
 				"build_speed": 9.0  
 			},
 "corfast": {
 				"role": ["builder"],
-				"limit": 10,
+				"limit": 15,
 				"build_speed": 7.0,
 				"since": 1500
 			},
 "corcv": {
 				"role": ["builder"],
-				"limit": 10,
+				"limit": 15,
 				"build_speed": 4.5  //bp 90,
 			},
 "cormuskrat": {
 				"role": ["builder"],
 				"attribute": ["solo"],
-				"limit": 6,
+				"limit": 10,
 				"build_speed": 4.0
 			},
 "cormlv": {

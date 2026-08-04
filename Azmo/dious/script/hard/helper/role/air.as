@@ -2,6 +2,7 @@ namespace TeamRoleAir {
 
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
+const int BOMBER_GROUP_RELEASE_INTERVAL = 15 * SECOND;
 const uint MAX_ESCORTS_PER_BOMBER = 1;
 const int MID_GAME_FRAME = 9 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
@@ -9,11 +10,11 @@ const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 12.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.15f;
 const float EARLY_CONVERT_EFF = 6.45f;
-const float MID_CONVERT_EFF = 8.31f;
-const float LATE_CONVERT_EFF = 15.35f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.15f;
-const float MID_CONVERT_ENERGY_EFF = 21.25f;
-const float LATE_CONVERT_ENERGY_EFF = 22.01f;
+const float MID_CONVERT_EFF = 9.45f;
+const float LATE_CONVERT_EFF = 17.50f;
+const float EARLY_CONVERT_ENERGY_EFF = 21.35f;
+const float MID_CONVERT_ENERGY_EFF = 24.25f;
+const float LATE_CONVERT_ENERGY_EFF = 30.25f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.75f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.78f;
@@ -46,15 +47,16 @@ const float MILITARY_RAID_MIN_POWER = 75.0f;
 const float MILITARY_RAID_AVG_POWER = 225.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
 const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
-const uint MID_FACTORY_MIN_BUILDER2_COUNT = 6;
-const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 15;
+const uint MID_FACTORY_MIN_BUILDER2_COUNT = 4;
+const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
 const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 45 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
 array<Id> bomberIds;
 array<Id> escortIds;
-bool isBomberReleased = true;
+uint releasedBomberGroupCount = 0;
+int nextBomberGroupReleaseFrame = 0;
 
 // Economy stage helpers
 enum EconomyStage {
@@ -203,19 +205,29 @@ void RecomputeBomberControl()
 	RefreshAlive(bomberIds);
 	RefreshAlive(escortIds);
 
-	const bool isRelease = bomberIds.length() >= MIN_BOMBER_SWARM;
-	const uint escortLimit = bomberIds.length() * MAX_ESCORTS_PER_BOMBER;
+	const uint readyBomberGroups = bomberIds.length() / MIN_BOMBER_SWARM;
+	if (releasedBomberGroupCount > readyBomberGroups)
+		releasedBomberGroupCount = readyBomberGroups;
+
+	const uint previousReleasedGroups = releasedBomberGroupCount;
+	if ((readyBomberGroups > releasedBomberGroupCount) && (ai.frame >= nextBomberGroupReleaseFrame)) {
+		++releasedBomberGroupCount;
+		nextBomberGroupReleaseFrame = ai.frame + BOMBER_GROUP_RELEASE_INTERVAL;
+	}
+
+	const uint releasedBomberCount = releasedBomberGroupCount * MIN_BOMBER_SWARM;
+	const uint escortLimit = releasedBomberCount * MAX_ESCORTS_PER_BOMBER;
 	const uint activeEscorts = (escortIds.length() < escortLimit) ? escortIds.length() : escortLimit;
 
 	for (uint i = 0; i < bomberIds.length(); ++i)
-		ai.UnitControl(bomberIds[i], isRelease);
+		ai.UnitControl(bomberIds[i], i < releasedBomberCount);
 	for (uint i = 0; i < escortIds.length(); ++i)
-		ai.UnitControl(escortIds[i], (i < activeEscorts) ? isRelease : true);
+		ai.UnitControl(escortIds[i], true);
 
-	if (isRelease != isBomberReleased) {
-		isBomberReleased = isRelease;
-		AiLog("Air bomber hold " + (isRelease ? "released" : "active")
+	if (releasedBomberGroupCount != previousReleasedGroups) {
+		AiLog("Air bomber groups released=" + releasedBomberGroupCount + "/" + readyBomberGroups
 			+ " (bombers=" + bomberIds.length()
+			+ ", releasedBombers=" + releasedBomberCount
 			+ ", escorts=" + activeEscorts + "/" + escortIds.length()
 			+ ", min=" + MIN_BOMBER_SWARM + ")");
 	}
@@ -260,6 +272,7 @@ void OnMilitaryUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 
 void OnSlowUpdate()
 {
+	RecomputeBomberControl();
 }
 
 // Factory selection

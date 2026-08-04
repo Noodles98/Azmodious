@@ -49,6 +49,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::BOMBER.mask)
 		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
+		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
@@ -58,6 +59,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 bool IsAirDefenceCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
+		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 

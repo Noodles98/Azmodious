@@ -5,7 +5,7 @@
 namespace CommanderMexTravel {
 
 const float PRE_FACTORY_MAX_TRAVEL_SECONDS = 10.f;
-const float COMMANDER_TRAVEL_DISTANCE_PER_SECOND = 80.f;
+const float COMMANDER_TRAVEL_DISTANCE_PER_SECOND = 70.f;
 const int MAX_REJECT_FRAMES = 5 * SECOND;
 
 int rejectedCommanderId = -1;

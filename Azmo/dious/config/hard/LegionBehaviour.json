@@ -432,25 +432,22 @@
 			// ===== Legion constructors =====
 "legck": {
 				"role": ["builder"],
-				//"attribute": ["solo"],
-				"limit": 12,
+				"limit": 15,
 				"build_speed": 3.75
 			},
 "legack": {
 				"role": ["builderT2"],
-				"attribute": ["solo"],
-				"limit": 10,
+				"limit": 15,
 				"build_speed": 9.0  
 			},
 "legcv": {
 				"role": ["builder"],
-				"limit": 10,
+				"limit": 15,
 				"build_speed": 4.5  //bp 90,
 			},
 "legotter": {
 				"role": ["builder"],
-				"attribute": ["solo"],
-				"limit": 6,
+				"limit": 15,
 				"build_speed": 4.0
 			},
 "legmlv": {
@@ -459,7 +456,6 @@
 			},
 "legacv": {
 				"role": ["builderT2"],
-				"attribute": ["solo"],
 				"limit": 15,
 				"build_speed": 12.5  //bp 250
 			},
@@ -478,7 +474,6 @@
 			},
 "legaca": {
 				"role": ["builder", "air"],
-				"attribute": ["solo"],
 				"retreat": 0.6,
 				"limit": 15,
 				"build_speed": 5.0

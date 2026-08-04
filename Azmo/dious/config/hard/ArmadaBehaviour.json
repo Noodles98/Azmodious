@@ -471,7 +471,7 @@
 "armack": {
 				"role": ["builderT2"],
 				"attribute": ["solo"],
-				"limit": 10,
+				"limit": 20,
 				"build_speed": 10.0  //bp 180
 			},
 "armfark": {
@@ -481,7 +481,7 @@
 			},
 "armcv": {
 				"role": ["builder"],
-				"limit": 10,
+				"limit": 20,
 				"build_speed": 7.0  //bp 90,
 			},
 "armbeaver": {
@@ -492,7 +492,7 @@
 "armacv": {
 				"role": ["builderT2"],
 				"attribute": ["solo"],
-				"limit": 10,
+				"limit": 20,
 				"build_speed": 10.0  //bp 250
 			},
 "armconsul": {
@@ -504,20 +504,19 @@
 "armca": {
 				"role": ["builder", "air"],
 				"retreat": 0.6,
-				"limit": 25,
+				"limit": 20,
 				"build_speed": 5.0  //bp 60,
 			},
 "armaca": {
 				"role": ["builder", "air"],
-				"attribute": ["solo"],
 				"retreat": 0.6,
-				"limit": 2,
+				"limit": 15,
 				"build_speed": 10.0  //bp 100
 			},
 "armcs": {
 				"role": ["builder"],
 				"retreat": 0.6,
-				"limit": 6,
+				"limit": 10,
 				"build_speed": 7  //bp 125,
 			},
 "armacsub": {
