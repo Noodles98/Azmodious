@@ -7,6 +7,7 @@ const uint MAX_ESCORTS_PER_BOMBER = 1;
 const int MID_GAME_FRAME = 9 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
+const int ADV_AIR_FORCE_FRAME = 10 * MINUTE;
 const float ADV_AIR_MIN_METAL_INCOME = 14.0f;
 const float ADV_AIR_MIN_METAL_RATIO = 0.10f;
 const float EARLY_CONVERT_EFF = 6.45f;
@@ -278,6 +279,9 @@ void OnSlowUpdate()
 // Factory selection
 bool ShouldAllowAdvancedAir()
 {
+	if (ai.frame >= ADV_AIR_FORCE_FRAME)
+		return true;
+
 	return (ai.frame >= ADV_AIR_MIN_FRAME)
 		&& (aiEconomyMgr.metal.income >= ADV_AIR_MIN_METAL_INCOME)
 		&& (EconomySmooth::GetMetalRatio() >= ADV_AIR_MIN_METAL_RATIO)
