@@ -8,7 +8,7 @@
 			"corwin": [120, 160],
 			"corsolar": [200, 240],
 			"coradvsol": [260, 280],
-			"corfus": [300, 600],
+			"corfus": [240, 600],
 			"corafus": [700, 2000]
 		},
 		"water": {

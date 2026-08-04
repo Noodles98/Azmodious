@@ -8,7 +8,7 @@
 			"armwin": [120, 160],
 			"armsolar": [200, 240],
 			"armadvsol": [260, 280],
-			"armfus": [300, 600],
+			"armfus": [240, 600],
 			"armafus": [700, 2000]
 		},
 		"water": {
