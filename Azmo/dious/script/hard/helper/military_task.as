@@ -56,6 +56,7 @@ bool IsAirCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
+		|| cdef.IsRoleAny(Unit::Role::AH.mask)
 		|| cdef.IsRoleAny(Unit::Role::AA.mask);
 }
 bool IsAirDefenceCombat(const CCircuitDef@ cdef)

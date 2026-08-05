@@ -1,4 +1,5 @@
 #include "../helper/commander_mex_travel.as"
+#include "../helper/factory_exit_reclaim.as"
 #include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
 #include "../helper/t1_factory_reclaim.as"
@@ -48,6 +49,10 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 		AiLog("[MexUp] rejected cross-faction Legion mex upgrade at (" + int(buildPos.x) + "," + int(buildPos.z) + ")");
 		return null;
 	}
+
+	IUnitTask@ exitReclaimTask = FactoryExitReclaim::MakeTask(task);
+	if (exitReclaimTask !is null)
+		return exitReclaimTask;
 
 	IUnitTask@ factoryReclaimTask = T1FactoryReclaim::MakeTask(task);
 	if (factoryReclaimTask !is null)
@@ -150,14 +155,17 @@ void OnMessage(const string& in data)
 void UnitFinished(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitFinished(unit);
+	FactoryExitReclaim::Track(unit);
 	T1FactoryReclaim::Track(unit);
 }
 
 void UnitDestroyed(CCircuitUnit@ unit)
 {
 	LegionMexUpgradeFilter::OnUnitDestroyed(unit);
-	if (unit !is null)
+	if (unit !is null) {
+		FactoryExitReclaim::Forget(unit.id);
 		T1FactoryReclaim::Forget(unit.id);
+	}
 }
 
 void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
