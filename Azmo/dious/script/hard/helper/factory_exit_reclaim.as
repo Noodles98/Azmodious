@@ -40,9 +40,20 @@ bool IsFactoryName(const string& in name)
 		|| (name == "armplat") || (name == "corplat") || (name == "legplat");
 }
 
+bool IsAirFactoryName(const string& in name)
+{
+	return (name == "armap") || (name == "corap") || (name == "legap")
+		|| (name == "armaap") || (name == "coraap") || (name == "legaap");
+}
+
+bool IsExitFactoryName(const string& in name)
+{
+	return IsFactoryName(name) && !IsAirFactoryName(name);
+}
+
 bool IsFactory(CCircuitUnit@ unit)
 {
-	return (unit !is null) && (unit.circuitDef !is null) && IsFactoryName(unit.circuitDef.GetName());
+	return (unit !is null) && (unit.circuitDef !is null) && IsExitFactoryName(unit.circuitDef.GetName());
 }
 
 bool IsBlockingStructure(CCircuitUnit@ unit)
