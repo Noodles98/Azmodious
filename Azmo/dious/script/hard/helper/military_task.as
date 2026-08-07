@@ -7,7 +7,7 @@
 namespace MilitaryTaskPolicy {
 
 const int FOG_PUSH_START_FRAME = 2 * MINUTE;
-const uint FOG_PUSH_UNIT_STRIDE = 5;
+const uint FOG_PUSH_UNIT_STRIDE = 3;
 
 bool IsMainlineCombat(const CCircuitDef@ cdef)
 {
@@ -16,14 +16,14 @@ bool IsMainlineCombat(const CCircuitDef@ cdef)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
+		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
 		|| cdef.IsRoleAny(Unit::Role::AH.mask);
 }
 
 bool IsMeleeCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsAttrAny(Unit::Attr::MELEE.mask)
-		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
-		|| cdef.IsRoleAny(Unit::Role::SUPER.mask);
+		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 
 bool IsScout(const CCircuitDef@ cdef)
@@ -35,6 +35,9 @@ bool IsDefenceCombat (const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
+		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
+		|| cdef.IsRoleAny(Unit::Role::AH.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 
@@ -71,11 +74,11 @@ float GetDefendPromotePower()
 {
 	const string role = TeamRole::GetName();
 	if (role == "tech")
-		return 75.f;
+		return 50.f;
 	if (role == "air")
-		return 60.f;
+		return 20.f;
 	if (role == "front")
-		return 45.f;
+		return 30.f;
 	return 40.f;
 }
 

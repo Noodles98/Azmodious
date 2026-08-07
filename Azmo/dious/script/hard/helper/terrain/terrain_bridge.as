@@ -82,7 +82,7 @@ float GetPathScale()
 {
 	const float scale = hasPathHint ? pathScale : TerrainProfile::GetPathScale();
 	if (IsWaterMap())
-		return scale * 0.72f;
+		return scale * 0.85f;
 	return scale;
 }
 

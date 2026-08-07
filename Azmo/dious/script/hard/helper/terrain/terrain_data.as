@@ -17,7 +17,7 @@ Kind Classify(const AIFloat3& in pos)
 			return Kind::WATER;
 
 		const float heightRatio = TerrainProfile::GetHeightRatio(pos);
-		if (heightRatio > 0.70f)
+		if (heightRatio > 0.75f)
 			return Kind::HIGHLAND;
 		return Kind::LOWLAND;
 	}
@@ -33,8 +33,8 @@ float GetPathSpreadScale(const AIFloat3& in pos)
 {
 	const float baseScale = TerrainBridge::GetPathScale();
 	switch (Classify(pos)) {
-		case Kind::WATER: return 0.45f * baseScale;
-		case Kind::HIGHLAND: return 0.70f * baseScale;
+		case Kind::WATER: return 0.55f * baseScale;
+		case Kind::HIGHLAND: return 0.80f * baseScale;
 		default: return 1.0f * baseScale;
 	}
 }

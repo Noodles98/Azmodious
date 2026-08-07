@@ -3,9 +3,9 @@ namespace TeamRoleTech {
 // Role tuning constants
 const int MID_GAME_FRAME = 10 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
-const float EARLY_CONVERT_EFF = 6.52f;
-const float MID_CONVERT_EFF = 12.34f;
-const float LATE_CONVERT_EFF = 15.73f;
+const float EARLY_CONVERT_EFF = 11.44f;
+const float MID_CONVERT_EFF = 14.73f;
+const float LATE_CONVERT_EFF = 17.25f;
 const float EARLY_CONVERT_ENERGY_EFF = 19.45f;
 const float MID_CONVERT_ENERGY_EFF = 20.31f;
 const float LATE_CONVERT_ENERGY_EFF = 21.12f;

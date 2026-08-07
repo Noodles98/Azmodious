@@ -3,11 +3,11 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 300.f;
-const float ANCHOR_RADIUS = 450.f;
+const float CONFIRM_RADIUS = 200.f;
+const float ANCHOR_RADIUS = 300.f;
 const float ANCHOR_MERGE_RADIUS = 300.f;
-const float PUSH_START_RADIUS = 450.f;
-const float PUSH_MAX_RADIUS = 650.f;
+const float PUSH_START_RADIUS = 350.f;
+const float PUSH_MAX_RADIUS = 500.f;
 const float PUSH_RATIO = 5.25f;
 const uint MAX_FRONTLINE_ANCHORS = 2;
 
@@ -171,7 +171,7 @@ bool GetAttackFocus(const AIFloat3& in fromPos, AIFloat3& out focusPos)
 	return true;
 }
 
-AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
+void ObservePressure(const AIFloat3& in pos)
 {
 	PruneExpiredAnchors();
 
@@ -181,13 +181,13 @@ AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 	if (nearbyAnchor >= 0) {
 		anchorPositions[uint(nearbyAnchor)] = BlendTowards(anchorPositions[uint(nearbyAnchor)], pos, 4);
 		anchorFrames[uint(nearbyAnchor)] = ai.frame;
-		return LanePathing::BiasBuildPos(PushTowardsPressure(anchorPositions[uint(nearbyAnchor)], pos), laneSpread);
+		return;
 	}
 
 	int candidateIndex = FindNearestCandidate(pos);
 	if (candidateIndex < 0) {
 		ResetCandidate(pos);
-		return LanePathing::BiasMovePos(pos, laneSpread);
+		return;
 	}
 
 	const uint index = uint(candidateIndex);
@@ -199,10 +199,34 @@ AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 		const AIFloat3 anchorPos = candidatePositions[index];
 		SetAnchor(anchorPos);
 		RemoveCandidate(index);
-		return LanePathing::BiasMovePos(anchorPos, laneSpread);
+		return;
 	}
 
-	return LanePathing::BiasBuildPos(candidatePositions[index], laneSpread);
+	return;
+}
+
+bool GetDefenceFocus(const AIFloat3& in fromPos, float laneSpread, AIFloat3& out focusPos)
+{
+	PruneExpiredAnchors();
+	if (!HasStableAnchor())
+		return false;
+
+	int anchorIndex = FindNearestAnchor(fromPos, 999999.f);
+	if (anchorIndex < 0)
+		anchorIndex = 0;
+
+	const AIFloat3 anchorPos = anchorPositions[uint(anchorIndex)];
+	focusPos = LanePathing::BiasBuildPos(anchorPos, laneSpread);
+	return true;
+}
+
+AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
+{
+	AIFloat3 anchorPos;
+	if (GetDefenceFocus(pos, laneSpread, anchorPos))
+		return anchorPos;
+
+	return LanePathing::BiasMovePos(pos, laneSpread);
 }
 
 }  // namespace FrontlineCluster

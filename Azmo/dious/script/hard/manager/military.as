@@ -14,6 +14,12 @@ IUnitTask@ MakeRoleTask(CCircuitUnit@ unit)
 	if (cdef is null || !MilitaryTaskPolicy::HasPreferredTask(cdef))
 		return null;
 
+	if ((TeamRole::GetName() != "air")
+			&& (aiEnemyMgr.mobileThreat > 0.f)
+			&& MilitaryTaskPolicy::IsMainlineCombat(cdef)) {
+		FrontlineCluster::ObservePressure(unit.GetPos(ai.frame));
+	}
+
 	return aiMilitaryMgr.Enqueue(MilitaryTaskPolicy::MakePreferredTask(unit, cdef));
 }
 
@@ -58,7 +64,7 @@ void AiMakeDefence(int cluster, const AIFloat3& in pos)
 	if (!TeamRole::ShouldMakeDefence() && !DefenseHelpers::ShouldMakeAnyDefence(side))
 		return;
 
-	const AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());
+	AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());
 	aiMilitaryMgr.DefaultMakeDefence(cluster, lanePos);
 }
 

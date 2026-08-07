@@ -3,7 +3,7 @@ namespace TeamRoleAir {
 // Role tuning constants
 const uint MIN_BOMBER_SWARM = 10;
 const int BOMBER_GROUP_RELEASE_INTERVAL = 10 * SECOND;
-const uint MAX_ESCORTS_PER_BOMBER = 1;
+const uint MAX_ESCORTS_PER_BOMBER = 2;
 const int MID_GAME_FRAME = 15 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
 const int ADV_AIR_MIN_FRAME = 7 * MINUTE;
@@ -54,7 +54,7 @@ const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
 const uint FRONTLINE_CONFIRM_HITS = 10;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
-const float FIRST_ADV_AIR_MAX_BASE_DISTANCE = 450.0f;
+const float FIRST_ADV_AIR_MAX_BASE_DISTANCE = 700.0f;
 const float FIRST_ADV_AIR_MAX_BASE_DISTANCE_SQ = FIRST_ADV_AIR_MAX_BASE_DISTANCE * FIRST_ADV_AIR_MAX_BASE_DISTANCE;
 
 array<Id> bomberIds;
@@ -331,6 +331,14 @@ bool IsAdvancedFactoryName(const string& in name)
 	return (name == "armaap") || (name == "coraap") || (name == "legaap");
 }
 
+bool HasAnyAirFactory(const string& in sidePrefix)
+{
+	CCircuitDef@ basicDef = ai.GetCircuitDef(GetBasicFactoryName(sidePrefix));
+	CCircuitDef@ advancedDef = ai.GetCircuitDef(GetAdvancedFactoryName(sidePrefix));
+	return ((basicDef !is null) && (basicDef.count > 0))
+		|| ((advancedDef !is null) && (advancedDef.count > 0));
+}
+
 string GetT3FactoryName(const string& in sidePrefix)
 {
 	if (sidePrefix == "arm")
@@ -367,6 +375,12 @@ bool ShouldPreferAdvancedFactory(const string& in sidePrefix)
 
 CCircuitDef@ PickPreferredFactory(const string& in sidePrefix, CCircuitDef@ facDef, bool isStart)
 {
+	if (!HasAnyAirFactory(sidePrefix)) {
+		CCircuitDef@ basicDef = ai.GetCircuitDef(GetBasicFactoryName(sidePrefix));
+		if ((basicDef !is null) && basicDef.IsAvailable(ai.frame))
+			return basicDef;
+	}
+
 	if (isStart || !ShouldPreferAdvancedFactory(sidePrefix))
 		return facDef;
 

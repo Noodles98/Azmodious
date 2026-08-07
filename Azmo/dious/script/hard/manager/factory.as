@@ -335,8 +335,17 @@ CCircuitDef@ AiGetFactoryToBuild(const AIFloat3& in pos, bool isStart, bool isRe
 
 	CCircuitDef@ facDef = aiFactoryMgr.DefaultGetFactoryToBuild(pos, isStart, isReset);
 	@facDef = TeamRole::FilterFactory(facDef, isStart);
-	if (TeamRole::ShouldRejectFactoryPosition(facDef, pos, isStart))
+	if (TeamRole::ShouldRejectFactoryPosition(facDef, pos, isStart)) {
+		if ((TeamRole::GetName() == "air") && (facDef !is null) && TeamRoleAir::IsAdvancedFactoryName(facDef.GetName())) {
+			const string sidePrefix = TeamRole::GetFactorySidePrefix(facDef.GetName());
+			CCircuitDef@ fallback = ai.GetCircuitDef(TeamRoleAir::GetBasicFactoryName(sidePrefix));
+			if ((fallback !is null) && fallback.IsAvailable(ai.frame) && IsFactoryIncomeAllowed(fallback)) {
+				AiLog("[Factory] fallback to basic air factory after advanced-air position rejection");
+				return fallback;
+			}
+		}
 		return null;
+	}
 	if (!IsFactoryIncomeAllowed(facDef))
 		return null;
 	return facDef;

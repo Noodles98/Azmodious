@@ -3,9 +3,9 @@ namespace TeamRoleFront {
 // Role tuning constants
 const int MID_GAME_FRAME = 11 * MINUTE;
 const int LATE_GAME_FRAME = 25 * MINUTE;
-const float EARLY_CONVERT_EFF = 6.51f;
-const float MID_CONVERT_EFF = 9.12f;
-const float LATE_CONVERT_EFF = 13.55f;
+const float EARLY_CONVERT_EFF = 9.33f;
+const float MID_CONVERT_EFF = 13.41f;
+const float LATE_CONVERT_EFF = 16.27f;
 const float EARLY_CONVERT_ENERGY_EFF = 19.55f;
 const float MID_CONVERT_ENERGY_EFF = 20.15f;
 const float LATE_CONVERT_ENERGY_EFF = 21.21f;
