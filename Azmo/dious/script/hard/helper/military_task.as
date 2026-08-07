@@ -63,6 +63,7 @@ bool IsAirDefenceCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::AA.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 
@@ -168,9 +169,13 @@ SFightTask MakePreferredTask(CCircuitUnit@ unit, const CCircuitDef@ cdef)
 
 	const Task::FightType fightType = GetPreferredFightType(cdef);
 	if (fightType == Task::FightType::DEFEND)
-		return TaskF::Defend(Task::FightType::DEFEND, GetDefendPromotePower());
-	if (fightType == Task::FightType::ATTACK)
+		return TaskF::Defend(Task::FightType::ATTACK, GetDefendPromotePower());
+	if (fightType == Task::FightType::ATTACK) {
+		AIFloat3 focusPos;
+		if ((TeamRole::GetName() != "air") && FrontlineCluster::GetAttackFocus(unit.GetPos(ai.frame), focusPos))
+			return TaskF::PositionedCommitted(Task::FightType::ATTACK, focusPos);
 		return TaskF::Committed(Task::FightType::ATTACK);
+	}
 	return TaskF::Common(fightType);
 }
 

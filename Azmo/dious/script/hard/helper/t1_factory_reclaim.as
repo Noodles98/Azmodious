@@ -133,8 +133,11 @@ bool IsDeferrableBuildTask(IUnitTask@ task)
 		return true;
 	if (task.GetType() != Task::Type::BUILDER)
 		return false;
+	IBuilderTask@ taskB = cast<IBuilderTask>(task);
+	if (taskB is null)
+		return false;
 
-	switch (task.GetBuildType()) {
+	switch (taskB.GetBuildType()) {
 	case Task::BuildType::ENERGY:
 	case Task::BuildType::CONVERT:
 	case Task::BuildType::STORE:

@@ -5,11 +5,11 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"legwin": [160, 200],
-			"legsolar": [160, 200],
-			"legadvsol": [140, 180],
-			"legfus": [200, 400],
-			"legafus": [400, 2000]
+			"legwin": [200, 300],
+			"legsolar": [200, 300],
+			"legadvsol": [140, 260],
+			"legfus": [250, 600],
+			"legafus": [550, 2000]
 		},
 		"water": {
 			"legtide": [150, 200],
@@ -18,7 +18,7 @@
 			"legadvsol": [80, 120],
 			"leganavalfusion": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [45.0, 1200], [90.0, 1800], [500.0, 3000], [2500.0, 14400]],
+		"factor": [[1.0, 75], [15.0, 600], [45.0, 1200], [120.0, 1800], [500.0, 3000], [2500.0, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,
@@ -40,7 +40,7 @@
 
 	"calc_mex": false,
 
-	"goal_exec": 48.0,
+	"goal_exec": 60.0,
 
 	"build_mod": 1000.0,
 

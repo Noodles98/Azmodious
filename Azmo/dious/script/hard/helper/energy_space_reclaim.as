@@ -128,27 +128,38 @@ bool ShouldReclaimAdvancedSolar(IUnitTask@ task)
 {
 	if (task is null || ai.frame < ADVANCED_SOLAR_SPACE_RECLAIM_START_FRAME)
 		return false;
+	if (task.GetType() != Task::Type::BUILDER)
+		return false;
+	IBuilderTask@ taskB = cast<IBuilderTask>(task);
+	if (taskB is null)
+		return false;
 	if (aiEconomyMgr.energy.income < ADVANCED_SOLAR_RECLAIM_MIN_ENERGY_INCOME)
 		return false;
 	if (!HasFusionEconomy())
 		return false;
-	return task.GetBuildType() == Task::BuildType::ENERGY;
+	return taskB.GetBuildType() == Task::BuildType::ENERGY;
 }
 
 bool CanReclaim(IUnitTask@ task)
 {
 	if (task is null || task.GetType() != Task::Type::BUILDER)
 		return false;
+	IBuilderTask@ taskB = cast<IBuilderTask>(task);
+	if (taskB is null)
+		return false;
 	if (ai.frame < ENERGY_SPACE_RECLAIM_START_FRAME)
 		return false;
 	if (aiEconomyMgr.isEnergyEmpty || aiEconomyMgr.isEnergyStalling)
 		return false;
-	return IsSpaceHungryBuild(task.GetBuildType());
+	return IsSpaceHungryBuild(taskB.GetBuildType());
 }
 
 IUnitTask@ MakeReclaimTask(IUnitTask@ task, bool reclaimAdvancedSolar)
 {
-	const AIFloat3 buildPos = task.GetBuildPos();
+	IBuilderTask@ taskB = cast<IBuilderTask>(task);
+	if (taskB is null)
+		return null;
+	const AIFloat3 buildPos = taskB.GetBuildPos();
 	const float radiusSq = ENERGY_SPACE_RECLAIM_RADIUS * ENERGY_SPACE_RECLAIM_RADIUS;
 	for (int i = int(reclaimableEnergyIds.length()) - 1; i >= 0; --i) {
 		CCircuitUnit@ energy = ai.GetTeamUnit(reclaimableEnergyIds[uint(i)]);

@@ -631,7 +631,8 @@
 				"attribute": ["melee"]
 			},
 "armthor":{ //thor
-				"role":["super"]
+				"role":["heavy"],
+				"attribute": ["melee"]
 			},
 "armmlv": {
 				"role": ["support"]

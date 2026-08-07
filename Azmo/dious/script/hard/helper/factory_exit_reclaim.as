@@ -1,7 +1,6 @@
 #include "../../unit.as"
 #include "../../task.as"
 
-
 namespace FactoryExitReclaim {
 
 array<Id> factoryIds;
@@ -56,13 +55,38 @@ bool IsFactory(CCircuitUnit@ unit)
 	return (unit !is null) && (unit.circuitDef !is null) && IsExitFactoryName(unit.circuitDef.GetName());
 }
 
+bool IsEconomyStructureName(const string& in name)
+{
+	return (name == "armwin") || (name == "corwin") || (name == "legwin")
+		|| (name == "armsolar") || (name == "corsolar") || (name == "legsolar")
+		|| (name == "armadvsol") || (name == "coradvsol") || (name == "legadvsol")
+		|| (name == "armfus") || (name == "corfus") || (name == "legfus")
+		|| (name == "armafus") || (name == "corafus") || (name == "legafus")
+		|| (name == "armmakr") || (name == "cormakr") || (name == "legeconv")
+		|| (name == "armmmkr") || (name == "cormmkr") || (name == "legadveconv")
+		|| (name.find("mex") != -1)
+		|| (name.find("moho") != -1)
+		|| (name.find("geo") != -1)
+		|| (name.find("solar") != -1)
+		|| (name.find("advsol") != -1)
+		|| (name.find("fus") != -1)
+		|| (name.find("conv") != -1)
+		|| (name.find("stor") != -1)
+		|| (name.find("store") != -1)
+		|| (name.find("mkr") != -1);
+}
+
 bool IsBlockingStructure(CCircuitUnit@ unit)
 {
 	if (unit is null || unit.circuitDef is null)
 		return false;
 	if (unit.circuitDef.IsMobile())
 		return false;
-	return !IsFactoryName(unit.circuitDef.GetName());
+
+	const string name = unit.circuitDef.GetName();
+	if (IsFactoryName(name) || IsEconomyStructureName(name))
+		return false;
+	return true;
 }
 
 void Track(CCircuitUnit@ unit)
@@ -133,8 +157,11 @@ bool IsDeferrableBuildTask(IUnitTask@ task)
 		return true;
 	if (task.GetType() != Task::Type::BUILDER)
 		return false;
+	IBuilderTask@ taskB = cast<IBuilderTask>(task);
+	if (taskB is null)
+		return false;
 
-	switch (task.GetBuildType()) {
+	switch (taskB.GetBuildType()) {
 	case Task::BuildType::ENERGY:
 	case Task::BuildType::CONVERT:
 	case Task::BuildType::STORE:

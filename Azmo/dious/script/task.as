@@ -303,6 +303,7 @@ SFightTask Common(Task::FightType type)
 	ti.promote = type;
 	ti.power = 0.f;
 	@ti.vip = null;
+	ti.hasPosition = false;
 	return ti;
 }
 SFightTask Committed(Task::FightType type)
@@ -311,11 +312,26 @@ SFightTask Committed(Task::FightType type)
 	ti.check = Task::FightType::_SIZE_;  // NONE
 	return ti;
 }
+SFightTask Positioned(Task::FightType type, const AIFloat3& in position)
+{
+	SFightTask ti = Common(type);
+	ti.hasPosition = true;
+	ti.position = position;
+	return ti;
+}
+SFightTask PositionedCommitted(Task::FightType type, const AIFloat3& in position)
+{
+	SFightTask ti = Committed(type);
+	ti.hasPosition = true;
+	ti.position = position;
+	return ti;
+}
 SFightTask Guard(CCircuitUnit@ vip)
 {
 	SFightTask ti;
 	ti.type = Task::FightType::GUARD;
 	@ti.vip = vip;
+	ti.hasPosition = false;
 	return ti;
 }
 SFightTask Defend(Task::FightType promote, float power)
@@ -325,6 +341,8 @@ SFightTask Defend(Task::FightType promote, float power)
 	ti.check = Task::FightType::_SIZE_;  // NONE
 	ti.promote = promote;
 	ti.power = power;
+	@ti.vip = null;
+	ti.hasPosition = false;
 	return ti;
 }
 SFightTask Defend(Task::FightType check, Task::FightType promote, float power)
@@ -334,6 +352,8 @@ SFightTask Defend(Task::FightType check, Task::FightType promote, float power)
 	ti.check = check;
 	ti.promote = promote;
 	ti.power = power;
+	@ti.vip = null;
+	ti.hasPosition = false;
 	return ti;
 }
 

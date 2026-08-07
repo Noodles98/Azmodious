@@ -4,19 +4,19 @@
 namespace FrontlineCluster {
 
 const float CONFIRM_RADIUS = 300.f;
-const float ANCHOR_RADIUS = 500.f;
-const float PUSH_START_RADIUS = 300.f;
-const float PUSH_MAX_RADIUS = 500.f;
-const float PUSH_RATIO = 10.25f;
+const float ANCHOR_RADIUS = 450.f;
+const float ANCHOR_MERGE_RADIUS = 300.f;
+const float PUSH_START_RADIUS = 450.f;
+const float PUSH_MAX_RADIUS = 650.f;
+const float PUSH_RATIO = 5.25f;
+const uint MAX_FRONTLINE_ANCHORS = 2;
 
-bool hasCandidate = false;
-AIFloat3 candidatePos;
-uint candidateHits = 0;
-int candidateFrame = 0;
+array<AIFloat3> candidatePositions;
+array<uint> candidateHits;
+array<int> candidateFrames;
 
-bool hasAnchor = false;
-AIFloat3 anchorPos;
-int anchorFrame = 0;
+array<AIFloat3> anchorPositions;
+array<int> anchorFrames;
 
 float DistSq2D(const AIFloat3& in a, const AIFloat3& in b)
 {
@@ -27,7 +27,7 @@ float DistSq2D(const AIFloat3& in a, const AIFloat3& in b)
 
 AIFloat3 BlendTowards(const AIFloat3& in into, const AIFloat3& in pos, uint count)
 {
-	const float inv = -1.f / float(count);
+	const float inv = 1.f / float(count);
 	AIFloat3 blended = into;
 	blended.x += (pos.x - blended.x) * inv;
 	blended.y += (pos.y - blended.y) * inv;
@@ -61,71 +61,148 @@ AIFloat3 PushTowardsPressure(const AIFloat3& in anchor, const AIFloat3& in press
 	return pushed;
 }
 
+int FindNearestAnchor(const AIFloat3& in pos, float radius)
+{
+	const float radiusSq = radius * radius;
+	float bestDistSq = radiusSq;
+	int bestIndex = -1;
+	for (uint i = 0; i < anchorPositions.length(); ++i) {
+		const float distSq = DistSq2D(pos, anchorPositions[i]);
+		if (distSq <= bestDistSq) {
+			bestDistSq = distSq;
+			bestIndex = int(i);
+		}
+	}
+	return bestIndex;
+}
+
+int FindNearestCandidate(const AIFloat3& in pos)
+{
+	const float confirmRadiusSq = CONFIRM_RADIUS * CONFIRM_RADIUS;
+	float bestDistSq = confirmRadiusSq;
+	int bestIndex = -1;
+	for (uint i = 0; i < candidatePositions.length(); ++i) {
+		if (ai.frame - candidateFrames[i] > TeamRole::GetFrontlineConfirmWindow())
+			continue;
+		const float distSq = DistSq2D(pos, candidatePositions[i]);
+		if (distSq <= bestDistSq) {
+			bestDistSq = distSq;
+			bestIndex = int(i);
+		}
+	}
+	return bestIndex;
+}
+
+int FindOldestAnchor()
+{
+	int oldestIndex = 0;
+	for (uint i = 1; i < anchorFrames.length(); ++i) {
+		if (anchorFrames[i] < anchorFrames[uint(oldestIndex)])
+			oldestIndex = int(i);
+	}
+	return oldestIndex;
+}
+
+void RemoveCandidate(uint index)
+{
+	candidatePositions.removeAt(index);
+	candidateHits.removeAt(index);
+	candidateFrames.removeAt(index);
+}
+
+void PruneExpiredAnchors()
+{
+	for (int i = int(anchorPositions.length()) - 1; i >= 0; --i) {
+		if (ai.frame - anchorFrames[uint(i)] > TeamRole::GetFrontlineAnchorExpire()) {
+			anchorPositions.removeAt(uint(i));
+			anchorFrames.removeAt(uint(i));
+		}
+	}
+}
+
 void ResetCandidate(const AIFloat3& in pos)
 {
-	hasCandidate = true;
-	candidatePos = pos;
-	candidateHits = 1;
-	candidateFrame = ai.frame;
+	if (candidatePositions.length() >= MAX_FRONTLINE_ANCHORS)
+		RemoveCandidate(0);
+	candidatePositions.insertLast(pos);
+	candidateHits.insertLast(1);
+	candidateFrames.insertLast(ai.frame);
 }
 
 void SetAnchor(const AIFloat3& in pos)
 {
-	if (hasAnchor) {
-		anchorPos = BlendTowards(anchorPos, pos, 3);
-	} else {
-		anchorPos = pos;
-		hasAnchor = true;
-		AiLog("Frontline anchor established at lane " + TeamLane::GetName()
-			+ " (restriction=" + TeamLane::GetRestrictionName() + ")");
+	PruneExpiredAnchors();
+
+	const int nearbyAnchor = FindNearestAnchor(pos, ANCHOR_MERGE_RADIUS);
+	if (nearbyAnchor >= 0) {
+		anchorPositions[uint(nearbyAnchor)] = BlendTowards(anchorPositions[uint(nearbyAnchor)], pos, 3);
+		anchorFrames[uint(nearbyAnchor)] = ai.frame;
+		return;
 	}
-	anchorFrame = ai.frame;
-	hasCandidate = false;
-	candidateHits = 0;
+
+	if (anchorPositions.length() < MAX_FRONTLINE_ANCHORS) {
+		anchorPositions.insertLast(pos);
+		anchorFrames.insertLast(ai.frame);
+	} else {
+		const uint replaceIndex = uint(FindOldestAnchor());
+		anchorPositions[replaceIndex] = pos;
+		anchorFrames[replaceIndex] = ai.frame;
+	}
+
+	AiLog("Frontline anchor established at lane " + TeamLane::GetName()
+		+ " (restriction=" + TeamLane::GetRestrictionName()
+		+ ", anchors=" + anchorPositions.length() + ")");
 }
 
 bool HasStableAnchor()
 {
-	if (!hasAnchor)
+	PruneExpiredAnchors();
+	return anchorPositions.length() > 0;
+}
+
+bool GetAttackFocus(const AIFloat3& in fromPos, AIFloat3& out focusPos)
+{
+	if (!HasStableAnchor())
 		return false;
-	if (ai.frame - anchorFrame > TeamRole::GetFrontlineAnchorExpire()) {
-		hasAnchor = false;
-		return false;
-	}
+	int anchorIndex = FindNearestAnchor(fromPos, 999999.f);
+	if (anchorIndex < 0)
+		anchorIndex = 0;
+	focusPos = LanePathing::BiasMovePos(anchorPositions[uint(anchorIndex)], TeamRole::GetDefenceLaneSpread());
 	return true;
 }
 
 AIFloat3 UpdateAndGetPos(const AIFloat3& in pos, float laneSpread)
 {
-	const float confirmRadiusSq = CONFIRM_RADIUS * CONFIRM_RADIUS;
-	const float anchorRadiusSq = ANCHOR_RADIUS * ANCHOR_RADIUS;
-	const uint minConfirmHits = TeamRole::GetFrontlineConfirmHits();
-	const int confirmWindow = TeamRole::GetFrontlineConfirmWindow();
+	PruneExpiredAnchors();
 
-	if (HasStableAnchor() && DistSq2D(pos, anchorPos) <= anchorRadiusSq) {
-		anchorPos = BlendTowards(anchorPos, pos, 4);
-		anchorFrame = ai.frame;
-		return LanePathing::BiasBuildPos(PushTowardsPressure(anchorPos, pos), laneSpread);
+	const uint minConfirmHits = TeamRole::GetFrontlineConfirmHits();
+	const int nearbyAnchor = FindNearestAnchor(pos, ANCHOR_MERGE_RADIUS);
+
+	if (nearbyAnchor >= 0) {
+		anchorPositions[uint(nearbyAnchor)] = BlendTowards(anchorPositions[uint(nearbyAnchor)], pos, 4);
+		anchorFrames[uint(nearbyAnchor)] = ai.frame;
+		return LanePathing::BiasBuildPos(PushTowardsPressure(anchorPositions[uint(nearbyAnchor)], pos), laneSpread);
 	}
 
-	if (!hasCandidate
-		|| (ai.frame - candidateFrame > confirmWindow)
-		|| (DistSq2D(pos, candidatePos) > confirmRadiusSq))
-	{
+	int candidateIndex = FindNearestCandidate(pos);
+	if (candidateIndex < 0) {
 		ResetCandidate(pos);
 		return LanePathing::BiasMovePos(pos, laneSpread);
 	}
 
-	++candidateHits;
-	candidateFrame = ai.frame;
-	candidatePos = BlendTowards(candidatePos, pos, candidateHits);
+	const uint index = uint(candidateIndex);
+	++candidateHits[index];
+	candidateFrames[index] = ai.frame;
+	candidatePositions[index] = BlendTowards(candidatePositions[index], pos, candidateHits[index]);
 
-	if (candidateHits >= minConfirmHits) {
-		SetAnchor(candidatePos);
+	if (candidateHits[index] >= minConfirmHits) {
+		const AIFloat3 anchorPos = candidatePositions[index];
+		SetAnchor(anchorPos);
+		RemoveCandidate(index);
 		return LanePathing::BiasMovePos(anchorPos, laneSpread);
 	}
 
-	return LanePathing::BiasBuildPos(candidatePos, laneSpread);
+	return LanePathing::BiasBuildPos(candidatePositions[index], laneSpread);
 }
 
 }  // namespace FrontlineCluster
