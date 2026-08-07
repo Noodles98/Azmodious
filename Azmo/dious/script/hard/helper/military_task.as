@@ -22,8 +22,7 @@ bool IsMainlineCombat(const CCircuitDef@ cdef)
 
 bool IsMeleeCombat(const CCircuitDef@ cdef)
 {
-	return cdef.IsAttrAny(Unit::Attr::MELEE.mask)
-		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
+	return cdef.IsAttrAny(Unit::Attr::MELEE.mask);
 }
 
 bool IsScout(const CCircuitDef@ cdef)
@@ -108,16 +107,6 @@ bool ShouldFogPush(CCircuitUnit@ unit, const CCircuitDef@ cdef)
 	return (uint(unit.id) % FOG_PUSH_UNIT_STRIDE) == 0;
 }
 
-Task::FightType GetLaneBiasedAttackType(const CCircuitDef@ cdef, const string& in role)
-{
-	const int lane = TeamLane::ResolveLane();
-	if ((role == "front") && ((lane == 0) || (lane == 3)) && cdef.IsRoleAny(Unit::Role::ARTY.mask))
-		return Task::FightType::ARTY;
-	if ((role == "tech") && ((lane == 0) || (lane == 3)) && cdef.IsRoleAny(Unit::Role::ARTY.mask))
-		return Task::FightType::ARTY;
-	return Task::FightType::ATTACK;
-}
-
 Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 {
 	if (cdef is null)
@@ -142,9 +131,9 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 
 	const string role = TeamRole::GetName();
 	if (IsMainlineCombat(cdef))
-		return GetLaneBiasedAttackType(cdef, role);
+		return ((role == "tech") || (role == "front")) ? Task::FightType::ATTACK : Task::FightType::RAID;
 	if (IsMeleeCombat(cdef))
-		return GetLaneBiasedAttackType(cdef, role);
+		return ((role == "tech") || (role == "front")) ? Task::FightType::MELEE : Task::FightType::ATTACK;
 	if (IsScout(cdef))
 		return ((role == "front") || (role == "tech") || (role == "air")) ? Task::FightType::SCOUT : Task::FightType::SCOUT;
 	if (IsBacklineCombat(cdef))
@@ -156,7 +145,7 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 	if (IsAirCombat(cdef))
 		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::BOMB;
 	if (IsAirDefenceCombat(cdef))
-		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::DEFEND;
+		return (role == "air") ? Task::FightType::DEFEND : Task::FightType::ATTACK;
 	return Task::FightType::_SIZE_;
 }
 

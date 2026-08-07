@@ -4,12 +4,13 @@
 namespace FrontlineCluster {
 
 const float CONFIRM_RADIUS = 200.f;
-const float ANCHOR_RADIUS = 300.f;
-const float ANCHOR_MERGE_RADIUS = 300.f;
-const float PUSH_START_RADIUS = 350.f;
-const float PUSH_MAX_RADIUS = 500.f;
+const float ANCHOR_RADIUS = 400.f;
+const float ANCHOR_MERGE_RADIUS = 350.f;
+const float PUSH_START_RADIUS = 300.f;
+const float PUSH_MAX_RADIUS = 650.f;
 const float PUSH_RATIO = 5.25f;
 const uint MAX_FRONTLINE_ANCHORS = 2;
+const int ENEMY_MEMORY_EXPIRE = 90 * SECOND;
 
 array<AIFloat3> candidatePositions;
 array<uint> candidateHits;
@@ -17,6 +18,28 @@ array<int> candidateFrames;
 
 array<AIFloat3> anchorPositions;
 array<int> anchorFrames;
+
+bool hasLastKnownEnemyPos = false;
+AIFloat3 lastKnownEnemyPos;
+int lastKnownEnemyFrame = -1;
+
+void RememberEnemyPos(const AIFloat3& in pos)
+{
+	hasLastKnownEnemyPos = true;
+	lastKnownEnemyPos = pos;
+	lastKnownEnemyFrame = ai.frame;
+}
+
+bool HasFreshEnemyMemory()
+{
+	if (!hasLastKnownEnemyPos)
+		return false;
+	if (ai.frame - lastKnownEnemyFrame > ENEMY_MEMORY_EXPIRE) {
+		hasLastKnownEnemyPos = false;
+		return false;
+	}
+	return true;
+}
 
 float DistSq2D(const AIFloat3& in a, const AIFloat3& in b)
 {
@@ -162,8 +185,12 @@ bool HasStableAnchor()
 
 bool GetAttackFocus(const AIFloat3& in fromPos, AIFloat3& out focusPos)
 {
-	if (!HasStableAnchor())
-		return false;
+	if (!HasStableAnchor()) {
+		if (!HasFreshEnemyMemory())
+			return false;
+		focusPos = LanePathing::BiasMovePos(lastKnownEnemyPos, TeamRole::GetDefenceLaneSpread());
+		return true;
+	}
 	int anchorIndex = FindNearestAnchor(fromPos, 999999.f);
 	if (anchorIndex < 0)
 		anchorIndex = 0;
@@ -174,6 +201,7 @@ bool GetAttackFocus(const AIFloat3& in fromPos, AIFloat3& out focusPos)
 void ObservePressure(const AIFloat3& in pos)
 {
 	PruneExpiredAnchors();
+	RememberEnemyPos(pos);
 
 	const uint minConfirmHits = TeamRole::GetFrontlineConfirmHits();
 	const int nearbyAnchor = FindNearestAnchor(pos, ANCHOR_MERGE_RADIUS);

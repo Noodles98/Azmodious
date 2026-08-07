@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 1000.0,
+	"cluster_range": 560.0,
 
 	"geo": {
 		"armada": "armgeo"

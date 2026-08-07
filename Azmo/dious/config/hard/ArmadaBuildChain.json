@@ -29,8 +29,8 @@
 			"unit": {
 				"armada": ["armamd", "armsilo", "armvulc"]
 			},
-			"weight": [0.25, 0.40, 0.35],
-			"condition": [250, 250, 300, 300]
+			"weight": [0.15, 0.35, 0.35],
+			"condition": [300, 275, 450]
 		},
 
 		"wall": {

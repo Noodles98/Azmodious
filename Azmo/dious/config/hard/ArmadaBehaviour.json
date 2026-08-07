@@ -613,7 +613,7 @@
 
 			// ===== Armada striders and experimental combat =====
 "armmar": { //rauder
-				"role": ["raider", "heavy"]
+				"role": ["assault", "heavy"]
 			},
 "armlun": { //hovertank
 				"role": ["skirmish", "heavy"]
@@ -632,7 +632,7 @@
 			},
 "armthor":{ //thor
 				"role":["heavy"],
-				"attribute": ["melee"]
+				"attribute": ["riot"]
 			},
 "armmlv": {
 				"role": ["support"]
