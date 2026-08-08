@@ -66,6 +66,7 @@ bool IsAirDefenceCombat(const CCircuitDef@ cdef)
 	return cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RAIDER.mask)
 		|| cdef.IsRoleAny(Unit::Role::AA.mask)
+		|| cdef.IsRoleAny(Unit::Role::AH.mask)
 		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask);
 }
 
@@ -84,10 +85,9 @@ float GetDefendPromotePower()
 bool IsFogPushCombat(const CCircuitDef@ cdef)
 {
 	return cdef.IsRoleAny(Unit::Role::RAIDER.mask)
+		|| cdef.IsRoleAny(Unit::Role::SCOUT.mask)
 		|| cdef.IsRoleAny(Unit::Role::RIOT.mask)
 		|| cdef.IsRoleAny(Unit::Role::ASSAULT.mask)
-		|| cdef.IsRoleAny(Unit::Role::HEAVY.mask)
-		|| cdef.IsRoleAny(Unit::Role::SUPER.mask)
 		|| cdef.IsRoleAny(Unit::Role::SKIRM.mask)
 		||cdef.IsRoleAny(Unit::Attr::MELEE.mask);
 }

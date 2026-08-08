@@ -5,8 +5,8 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"legwin": [200, 300],
-			"legsolar": [200, 300],
+			"legwin": [250, 375],
+			"legsolar": [250, 375],
 			"legadvsol": [140, 260],
 			"legfus": [250, 600],
 			"legafus": [550, 2000]
@@ -42,7 +42,7 @@
 
 	"goal_exec": 60.0,
 
-	"build_mod": 1000.0,
+	"build_mod": 1800.0,
 
 	"eps_step": 0.45,
 

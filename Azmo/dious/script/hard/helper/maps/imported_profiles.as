@@ -66,7 +66,7 @@ void RegisterAll()
 	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Eight Horses", eight_horsesSpots, TeamMapProfileTypes::TerrainInfo(-360.f, 920.f, 23.f, true)));
 
 	array<TeamMapProfileTypes::StartSpot> esker_creekSpots = {
-		// TODO: Add curated start spots/roles when authoritative map-config positions are available.
+		// TODO: Add curated start spots/roles when map-config positions are available.
 	};
 	TeamMapProfileRegistry::Register(TeamMapProfileTypes::Profile("Esker_Creek", esker_creekSpots, TeamMapProfileTypes::TerrainInfo(-293.f, 997.f, 23.f, true)));
 

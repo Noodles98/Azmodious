@@ -194,7 +194,7 @@
 			}
 		},
 		"mex": {
-			"legmex": {"porc": false},
+			"legmex": {"porc": true},
 			"legmoho": {"porc": false},
 			"leganavalmex": {"porc": false}
 		}

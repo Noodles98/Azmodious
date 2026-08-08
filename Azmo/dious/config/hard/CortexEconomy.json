@@ -5,8 +5,8 @@
 		"land": {
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
-			"corwin": [200, 300],
-			"corsolar": [200, 300],
+			"corwin": [250, 375],
+			"corsolar": [250, 375],
 			"coradvsol": [140, 260],
 			"corfus": [250, 600],
 			"corafus": [550, 2000]
@@ -42,7 +42,7 @@
 
 	"goal_exec": 60.0,
 
-	"build_mod": 1000.0,
+	"build_mod": 1800.0,
 
 	"eps_step": 0.45,
 

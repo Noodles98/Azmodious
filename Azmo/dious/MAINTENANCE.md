@@ -31,7 +31,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/main.as`: startup mutations on unit defs and ad hoc factory tier tagging via `Factory::userData`.
 - `script/hard/helper/role/role.as`: resolves AIR/TECH/SEA/FRONT from a map-profile start-spot role when available, otherwise defaults to FRONT; it also routes role-specific factory restrictions, economy tuning, defence policy, and hooks.
 - `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`: per-role helper files for special playstyle changes, including staged T2 constructor floors used by factory queues. AIR's constructor floor and converter/energy efficiency constants are the primary knobs for making air less mex-heavy and more energy/converter-heavy; AIR also batches bomber release through `MIN_BOMBER_SWARM` and `BOMBER_GROUP_RELEASE_INTERVAL` so available bomber groups can receive separate orders.
-- `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. These currently use game time, metal income, and enemy mobile threat, then let the default military manager choose/place the actual defence from config.
+- `script/hard/helper/defense.as`: adaptive defence gate helpers modeled as `ShouldBuild...` checks. Basic LLT/light-AA permission opens after the first factory so factory and T1 mex anchors can receive early coverage; stronger defences remain gated by game time, metal income, and enemy mobile threat. The default military manager still chooses/places the actual defence from config.
 - `script/hard/helper/commander_mex_travel.as`: pre-factory commander MEX travel cap helper used by the builder manager. It temporarily rejects distant MEX tasks, then fails open after repeated rejection so the commander cannot idle forever before the first factory. Tune `PRE_FACTORY_MAX_TRAVEL_SECONDS` and `MAX_REJECT_FRAMES` here.
 - `script/hard/helper/factory_limit.as`: metal-income factory count caps. The first T1 and first T2 factory are free; additional T1 factories require 15 metal income each, and additional T2 factories require 20 metal income each.
 - `script/hard/helper/economy_smooth.as`: smoothed economy readings used by economy decisions.
@@ -65,7 +65,7 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `config/hard/extrascavunits.json`: optional player scav-unit behaviour overlay loaded when `scavunitsforplayers=1`.
 - `config/hard/block_map.json`: terrain analysis and building footprint/blocking classes.
 - `config/hard/ArmadaBuildChain.json`, `config/hard/CortexBuildChain.json`, `config/hard/LegionBuildChain.json`: faction-specific build-finished follow-up chains, porc rules, and side-specific defence/build helpers. The old shared `config/hard/build_chain.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
-- Mex entries in the active faction `*BuildChain.json` files keep `"porc": false` so porcupine/defence clusters do not anchor around mex positions; frontline defence placement is shaped through `script/hard/manager/military.as` and `script/hard/helper/frontline_cluster.as`.
+- T1 land mex entries in the active faction `*BuildChain.json` files use `"porc": true` so they can anchor cheap early defence after the first factory. Advanced, underwater, and special mex variants remain `false`; frontline placement is still shaped through `script/hard/manager/military.as` and `script/hard/helper/frontline_cluster.as`.
 - `config/hard/commander.json`: commander hide/assist/morph policy.
 - `config/hard/ArmadaEconomy.json`, `config/hard/CortexEconomy.json`, `config/hard/LegionEconomy.json`: faction-specific energy and mex pacing, buildpower ratios, clustering, assistance, and production thresholds. The old shared `config/hard/unused/economy.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
 - `config/hard/ArmadaFactory.json`, `config/hard/CortexFactory.json`, `config/hard/LegionFactory.json`: faction-specific factory selection and unit production probability tables. The old shared `config/hard/unused/factory.json` is retained as source/reference but is no longer loaded by `hard/init.as`.
@@ -124,12 +124,13 @@ Use this when economy decisions are too noisy, too passive, or too aggressive.
 
 1. Tune thresholds and production pacing in the relevant `config/hard/*Economy.json` faction overlays.
 2. For energy-generator mix changes, also check `config/hard/*Behaviour.json` caps and `since` gates; a unit limit or delay can override otherwise valid economy thresholds.
-3. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
-4. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
-5. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
-6. For allied mex conflicts, keep `calc_mex` and ally-shared `mex_max` aligned across all loaded `config/hard/*Economy.json` faction overlays, and verify every faction's mex variants are listed in `config/hard/block_map.json`.
-7. Arm/Cortex cross-upgrading Legion mexes is filtered in `script/hard/helper/legion_mex_upgrade.as`, with `script/hard/manager/builder.as` only forwarding unit-finished/destroyed events and rejected returned `MEXUP` tasks.
-8. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
+3. Tune constructor concentration with `economy.build_mod` in each faction `*Economy.json`; larger values make normal build tasks stop accepting additional mobile build power sooner. Per-unit `build_mod` values in `*Behaviour.json` override the global value and are the preferred control for expensive constructor magnets such as fusion and advanced fusion. Native assignment uses `goal_build_time = build_mod / metal_income`, so high late-game income still permits more builders unless these values scale accordingly.
+4. Tune smoothing behavior in `script/hard/helper/economy_smooth.as`.
+5. Verify consumers in `script/hard/manager/economy.as` are using smoothed values for stall/assist decisions.
+6. Tune `script/hard/helper/resource_bonus.as` when the in-game AI bonus changes. Script income gates should use `ResourceBonus::GetPlanningMetalIncome()` instead of raw `aiEconomyMgr.metal.income`.
+7. For allied mex conflicts, keep `calc_mex` and ally-shared `mex_max` aligned across all loaded `config/hard/*Economy.json` faction overlays, and verify every faction's mex variants are listed in `config/hard/block_map.json`.
+8. Arm/Cortex cross-upgrading Legion mexes is filtered in `script/hard/helper/legion_mex_upgrade.as`, with `script/hard/manager/builder.as` only forwarding unit-finished/destroyed events and rejected returned `MEXUP` tasks.
+9. Tune role-specific economy multipliers/threshold wrappers in `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, and `script/hard/helper/role/front.as`.
 
 ### Role Selection and Tuning
 
@@ -202,6 +203,7 @@ Use this when the AI is building too little, too much, or the wrong tier of stat
 - Enemy visibility semantics are bridged from native `CEnemyInfo`: use LOS for confirmed vision and radar for contact-only tracking. Keep this distinction in script policy to avoid collapsing radar pings into full-vision assumptions.
 - Frontline anchorpoint and unit-position behavior is DLL-driven for positioned attacks: `SFightTask.hasPosition`/`position` carries the native placement contract, while `script/hard/helper/frontline_cluster.as` only feeds the AI's local anchor-selection policy. Do not re-implement the DLL-side positioning semantics in script.
 - Economy manager relies on smoothed signals for key stall/assist behavior to reduce spike-driven thrashing.
+- Mobile constructors are distributed by native task build-power saturation, not by a script-side unit-count cap. The active faction economy configs use global `build_mod: 1800`; fusion structures override to `2400`, and advanced fusions override to `4000`, reducing late-game pileups while still allowing income-scaled assistance.
 - `main.as` assigns `BASE` to named static economy structures at startup; `builder.as` assigns `BASE` to a role-sized persisted pool of mobile constructors. AIR keeps up to 6, TECH up to 4, and FRONT/SEA/default up to 2. These are separate from `economy.cluster_range` and `block_map.json` footprint rules, but all three influence economy layout.
 - `Factory::userData` tier flags are assigned in `main.as`, then consumed in `factory.as`; if you add a new factory tier concept, both places must change.
 - `factory.as` forces constructor queues through `TeamRole::GetFactoryMinBuilderCount()` and `TeamRole::GetFactoryMinBuilder2Count()`. T2 constructor floors are staged per role so mid/late factories keep producing advanced build power.

@@ -406,10 +406,12 @@
 				"role": ["static"]
 			},
 "legfus" : {
-				"role": ["static"]
+				"role": ["static"],
+				"build_mod": 2400.0
 			},
 "legafus" : {
 				"role": ["static"],
+				"build_mod": 4000.0,
 				"since": 1500
 			},
 "legadvestore" : {

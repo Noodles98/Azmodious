@@ -433,6 +433,7 @@
 			},
 "armfus" : {
 				"role": ["static"],
+				"build_mod": 2400.0,
 				"cooldown": 3
 			},
 "armckfus" : {
@@ -440,6 +441,7 @@
 			},
 "armafus" : {
 				"role": ["static"],
+				"build_mod": 4000.0,
 				"since": 1500
 			},
 "armuwfus" : {
@@ -686,7 +688,7 @@
 				"attribute": ["support"]
 			},
 "armseer": {
-				"role": ["assault"],
+				"role": ["scout"],
 				"attribute": ["support"],
 				"limit": 1
 			},

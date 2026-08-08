@@ -3,9 +3,9 @@ namespace DefenseHelpers {
 const int MID_GAME_FRAME = 15 * MINUTE;
 const int LATE_GAME_FRAME = 30 * MINUTE;
 
-const float EARLY_PRESSURE = 30.0f;
-const float MEDIUM_PRESSURE = 60.0f;
-const float HEAVY_PRESSURE = 120.0f;
+const float EARLY_PRESSURE = 15.0f;
+const float MEDIUM_PRESSURE = 75.0f;
+const float HEAVY_PRESSURE = 200.0f;
 
 bool IsMidGame()
 {
@@ -37,9 +37,15 @@ bool CanAfford(float metalIncome)
 	return GetMetalIncome() >= metalIncome;
 }
 
+bool HasFactory()
+{
+	return aiFactoryMgr.GetFactoryCount() > 0;
+}
+
 bool ShouldBuildT1LightAA(const string& in side)
 {
-	return (ai.frame >= 3 * MINUTE && CanAfford(10.0f))
+	return HasFactory()
+		|| (ai.frame >= 3 * MINUTE && CanAfford(10.0f))
 		|| HasPressure(EARLY_PRESSURE);
 }
 
@@ -51,7 +57,8 @@ bool ShouldBuildT1MediumAA(const string& in side)
 
 bool ShouldBuildT1LightTurret(const string& in side)
 {
-	return HasPressure(EARLY_PRESSURE)
+	return HasFactory()
+		|| HasPressure(EARLY_PRESSURE)
 		|| CanAfford(10.0f);
 }
 

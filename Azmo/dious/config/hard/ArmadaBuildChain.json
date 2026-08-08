@@ -198,7 +198,7 @@
 			}
 		},
 		"mex": {
-			"armmex": {"porc": false},
+			"armmex": {"porc": true},
 			"armmoho": {"porc": false},
 			"armuwmme": {"porc": false}
 		},

@@ -190,7 +190,7 @@
 			}
 		},
 		"mex": {
-			"cormex": {"porc": false},
+			"cormex": {"porc": true},
 			"cormoho": {"porc": false},
 			"coruwmme": {"porc": false}
 		},

@@ -438,10 +438,12 @@
 			},
 "corfus" : {
 				"role": ["static"],
+				"build_mod": 2400.0,
 				"cooldown": 3
 			},
 "corafus" : {
 				"role": ["static"],
+				"build_mod": 4000.0,
 				"since": 1500,
 				"cooldown": 3
 			},
