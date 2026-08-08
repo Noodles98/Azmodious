@@ -320,8 +320,10 @@ bool AiIsSwitchAllowed(CCircuitDef@ facDef)
 	const float armyMultiplier = TeamRole::GetFactorySwitchArmyMultiplier();
 	const float metalMultiplier = TeamRole::GetFactorySwitchMetalMultiplier();
 	const float metalCurrent = Economy::GetSmoothedMetalCurrent(aiEconomyMgr.metal.current);
+	const uint factoryCount = aiFactoryMgr.GetFactoryCount();
 	const bool isOK = (aiMilitaryMgr.armyCost > armyMultiplier * facDef.costM * aiFactoryMgr.GetFactoryCount())
-		|| (metalCurrent > facDef.costM * metalMultiplier);
+		|| (metalCurrent > facDef.costM * metalMultiplier)
+		|| FactoryLimit::HasSwitchIncome(IsTier2Factory(facDef), factoryCount, aiEconomyMgr.metal.income);
 	aiFactoryMgr.isAssistRequired = Economy::isSwitchAssist = !isOK;
 	return isOK;
 }

@@ -198,7 +198,13 @@
 			}
 		},
 		"mex": {
-			"armmex": {"porc": true},
+			"armmex": {
+				"porc": false,
+				"hub": [[
+					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
+				]]
+			},
 			"armmoho": {"porc": false},
 			"armuwmme": {"porc": false}
 		},

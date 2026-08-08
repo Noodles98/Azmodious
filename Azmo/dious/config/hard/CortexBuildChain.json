@@ -190,7 +190,13 @@
 			}
 		},
 		"mex": {
-			"cormex": {"porc": true},
+			"cormex": {
+				"porc": false,
+				"hub": [[
+					{"unit": "corllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "corrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
+				]]
+			},
 			"cormoho": {"porc": false},
 			"coruwmme": {"porc": false}
 		},

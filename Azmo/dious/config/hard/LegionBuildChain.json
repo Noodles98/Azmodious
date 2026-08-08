@@ -194,7 +194,13 @@
 			}
 		},
 		"mex": {
-			"legmex": {"porc": true},
+			"legmex": {
+				"porc": false,
+				"hub": [[
+					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "legrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
+				]]
+			},
 			"legmoho": {"porc": false},
 			"leganavalmex": {"porc": false}
 		}
