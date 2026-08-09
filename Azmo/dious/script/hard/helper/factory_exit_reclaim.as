@@ -180,9 +180,27 @@ bool IsInFactoryExit(CCircuitUnit@ factory, CCircuitUnit@ blocker)
 	const AIFloat3 blockerPos = blocker.GetPos(ai.frame);
 	const float dx = blockerPos.x - factoryPos.x;
 	const float dz = blockerPos.z - factoryPos.z;
-	return (dx >= -FACTORY_EXIT_HALF_WIDTH) && (dx <= FACTORY_EXIT_HALF_WIDTH)
-		&& (dz >= FACTORY_EXIT_FRONT_OFFSET - FACTORY_EXIT_CENTER_PAD)
-		&& (dz <= FACTORY_EXIT_FRONT_OFFSET + FACTORY_EXIT_DEPTH + FACTORY_EXIT_CENTER_PAD);
+	float lateral = dx;
+	float forward = dz;
+	switch (factory.GetBuildingFacing()) {
+	case 1:  // East (+X)
+		lateral = dz;
+		forward = dx;
+		break;
+	case 2:  // North (-Z)
+		lateral = -dx;
+		forward = -dz;
+		break;
+	case 3:  // West (-X)
+		lateral = -dz;
+		forward = -dx;
+		break;
+	default:  // South (+Z)
+		break;
+	}
+	return (lateral >= -FACTORY_EXIT_HALF_WIDTH) && (lateral <= FACTORY_EXIT_HALF_WIDTH)
+		&& (forward >= FACTORY_EXIT_FRONT_OFFSET - FACTORY_EXIT_CENTER_PAD)
+		&& (forward <= FACTORY_EXIT_FRONT_OFFSET + FACTORY_EXIT_DEPTH + FACTORY_EXIT_CENTER_PAD);
 }
 
 bool BlocksAnyFactoryExit(CCircuitUnit@ blocker)

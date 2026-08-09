@@ -1,5 +1,5 @@
-#include "../helper/commander_mex_travel.as"
 #include "../helper/factory_exit_reclaim.as"
+#include "../helper/commander_mex_travel.as"
 #include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
 #include "../helper/t1_factory_reclaim.as"

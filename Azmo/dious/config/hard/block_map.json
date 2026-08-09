@@ -24,7 +24,7 @@
 
 			// Unit of measurement: 1 size/yard/radius = SQUARE_SIZE * 2 = 16 elmos, integer.
 			// Offset in South facing
-			"offset": [-5, 5],  // default: [0, 0]
+			"offset": [0, 5],  // default: [0, 0]
 
 			// Size of a blocker without yard
 //			"size": [7, 7],  // default: size of a unit
@@ -44,12 +44,12 @@
 		},
 		"fac_bot": {
 			"type": ["rectangle", "factory"],
-			"offset": [-5, 5],
+			"offset": [0, 5],
 			"yard": [8, 16]
 		},
 		"fac_bot_pass": {
 			"type": ["rectangle", "factory"],
-			"offset": [-5, 5],
+			"offset": [0, 5],
 			"yard": [8, 16]
 		},
 		"fac_air": {
@@ -63,7 +63,7 @@
 		},
 		"fac_strider": {
 			"type": ["rectangle", "factory"],
-			"offset": [-10, 24],
+			"offset": [0, 24],
 			"yard": [10, 10]
 		},
 		"solar": {
@@ -174,8 +174,8 @@
 		"fac_bot": ["armlab", "armalab", "corlab", "coralab", "leglab", "legalab"],
 		"fac_bot_pass": ["armhp", "armfhp", "corhp", "corfhp"],
 		"fac_air": ["armap", "corap", "legap", "armaap", "coraap", "legaap"],
-		"fac_water": ["armsy", "armasy", "armamsub", "armplat", "corsy", "corasy", "coramsub", "corplat", "legamsub", "legplat"],
-		"fac_strider": ["armshltx", "armshltxuw", "corgant", "corgantuw", "leggant"],
+		"fac_water": ["armsy", "armasy", "armamsub", "armplat", "corsy", "corasy", "coramsub", "corplat", "legsy", "legasy", "legamsub", "legplat"],
+		"fac_strider": ["armshltx", "armshltxuw", "corgant", "corgantuw", "leggant", "leggantuw"],
 		"solar": ["armsolar", "corsolar", "legsolar"],
 		"wind": ["armwin", "corwin", "legwin", "armtide", "cortide"],
 		"geo": ["armgeo", "corgeo", "leggeo"],
