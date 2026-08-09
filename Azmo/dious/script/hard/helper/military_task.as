@@ -137,15 +137,15 @@ Task::FightType GetPreferredFightType(const CCircuitDef@ cdef)
 	if (IsScout(cdef))
 		return ((role == "front") || (role == "tech") || (role == "air")) ? Task::FightType::SCOUT : Task::FightType::SCOUT;
 	if (IsBacklineCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::ARTY : Task::FightType::ATTACK;
+		return ((role == "tech") || (role == "front")) ? Task::FightType::ARTY : Task::FightType::ARTY;
 	if (IsDefenceCombat(cdef))
-		return ((role == "tech") || (role == "front")) ? Task::FightType::DEFEND : Task::FightType::ATTACK;
+		return ((role == "tech") || (role == "front")) ? Task::FightType::DEFEND : Task::FightType::DEFEND;
 	if (IsSupportCombat(cdef))
 		return ((role == "tech") || (role == "front")) || (role == "air") ? Task::FightType::SUPPORT : Task::FightType::SUPPORT;
 	if (IsAirCombat(cdef))
 		return (role == "air") ? Task::FightType::ATTACK : Task::FightType::BOMB;
 	if (IsAirDefenceCombat(cdef))
-		return (role == "air") ? Task::FightType::DEFEND : Task::FightType::ATTACK;
+		return (role == "air") ? Task::FightType::DEFEND : Task::FightType::DEFEND;
 	return Task::FightType::_SIZE_;
 }
 
