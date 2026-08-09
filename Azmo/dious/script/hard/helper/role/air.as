@@ -63,6 +63,7 @@ uint releasedBomberGroupCount = 0;
 int nextBomberGroupReleaseFrame = 0;
 bool hasBasicAirFactoryAnchor = false;
 AIFloat3 basicAirFactoryAnchor;
+IUnitTask@ advancedAirPlacementTask = null;
 
 // Economy stage helpers
 enum EconomyStage {
@@ -440,6 +441,29 @@ bool ShouldRejectFactoryPosition(const CCircuitDef@ facDef, const AIFloat3& in p
 	return true;
 }
 
+IUnitTask@ RequestAdvancedFactoryNearAnchor(CCircuitDef@ facDef)
+{
+	if (facDef is null || !hasBasicAirFactoryAnchor)
+		return null;
+	if (advancedAirPlacementTask !is null)
+		return advancedAirPlacementTask;
+
+	@advancedAirPlacementTask = aiBuilderMgr.Enqueue(TaskB::Factory(
+		Task::Priority::HIGH, facDef, basicAirFactoryAnchor, null,
+		FIRST_ADV_AIR_MAX_BASE_DISTANCE));
+	if (advancedAirPlacementTask !is null) {
+		AiLog("[Air] requested replacement T2 air factory position near anchor=("
+			+ int(basicAirFactoryAnchor.x) + "," + int(basicAirFactoryAnchor.z) + ")");
+	}
+	return advancedAirPlacementTask;
+}
+
+void OnBuilderTaskRemoved(IUnitTask@ task)
+{
+	if (task is advancedAirPlacementTask)
+		@advancedAirPlacementTask = null;
+}
+
 int MakeSwitchInterval()
 {
 	return AiRandom(520, 600) * SECOND;
@@ -449,6 +473,8 @@ void OnFactoryAdded(CCircuitUnit@ unit)
 {
 	if (unit is null || unit.circuitDef is null)
 		return;
+	if (IsAdvancedFactoryName(unit.circuitDef.GetName()))
+		@advancedAirPlacementTask = null;
 	if (!hasBasicAirFactoryAnchor && IsBasicFactoryName(unit.circuitDef.GetName())) {
 		basicAirFactoryAnchor = unit.GetPos(ai.frame);
 		hasBasicAirFactoryAnchor = true;

@@ -113,6 +113,7 @@ void AiTaskAdded(IUnitTask@ task)
 
 void AiTaskRemoved(IUnitTask@ task, bool done)
 {
+	TeamRoleAir::OnBuilderTaskRemoved(task);
 // 	if (task.GetType() != Task::Type::BUILDER)
 // 		return;
 // 	switch (task.GetBuildType()) {
