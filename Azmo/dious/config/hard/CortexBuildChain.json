@@ -6,11 +6,11 @@
 
 	"porcupine": {
 		"unit": {
-		//             0          1        2        3          4         5          6        7            8          9          10
-			"cortex": ["corbeamer",  "cortl", "corrl", "corhbeamer", "corhlt", "corjuno", "cormaw", "cormadsam", "corerad", "corvipe", "coratl",
-					   "corflak", "cortoast", "cordoom", "corpun", "corfmd", "cortarg", "corgate", "corscreamer", "cornanotc", "corint", "corbuzz", "cortron"]
+		//             		0          1        2       	 3         	 4         5          6      	  7           	 8       	   9          10
+			"cortex": ["corllt",  "cortl", 	  "corrl", 	 "corhbeamer", "corhlt", "corjamt", "cormaw",  "cormadsam",   "corerad",   "corvipe",  "coratl",
+					   "corflak", "cortoast", "cordoom", "corpun", 	   "corfmd", "cortarg", "corgate", "corscreamer", "cornanotc", "corint",   "corbuzz", "cortron"]
 		},
-		"land":  [0, 2, 3, 3, 4, 3, 7, 5, 12, 12, 15, 13, 18, 17, 18, 20, 22, 20, 19, 19, 20, 20, 18, 17, 17, 22, 12, 12, 21, 12, 12, 12],
+		"land":  [0, 2, 5, 19, 3, 19, 6, 14, 19, 14, 8, 19, 19, 17, 15, 19, 19, 19, 13, 13, 20, 20, 21, 21],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
 		"prevent": 1,
 		"amount": {
@@ -18,14 +18,14 @@
 			"factor": [48.0, 32.0],
 			"map": [10, 20]
 		},
-		"point_range": 900.0,
-		"base": [[3, 420], [10, 1200], [14, 1300], [15, 1320], [12, 1800]],
+		"point_range": 750.0,
+		"base": [[3, 300], [3, 420], [11, 600], [15, 1500], [17, 1800], [16, 1800]],
 		"superweapon": {
 			"unit": {
 				"cortex": ["corfmd", "corsilo", "corbuzz", "corint"]
 			},
 			"weight": [0.20, 0.20, 0.30, 0.30],
-			"condition": [300, 250, 500, 400]
+			"condition": [200, 200, 350, 350]
 		},
 		"wall": {
 			"cortex": ["cordrag", "corfdrag"]
