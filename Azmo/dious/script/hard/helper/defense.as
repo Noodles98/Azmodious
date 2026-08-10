@@ -1,12 +1,17 @@
 namespace DefenseHelpers {
 
-const int MID_GAME_FRAME = 15 * MINUTE;
-const int LATE_GAME_FRAME = 30 * MINUTE;
+const int EARLY_GAME_FRAME = 1 * MINUTE;
+const int MID_GAME_FRAME = 18 * MINUTE;
+const int LATE_GAME_FRAME = 35 * MINUTE;
 
 const float EARLY_PRESSURE = 10.0f;
-const float MEDIUM_PRESSURE = 40.0f;
-const float HEAVY_PRESSURE = 75.0f;
+const float MEDIUM_PRESSURE = 30.0f;
+const float HEAVY_PRESSURE = 65.0f;
 
+bool IsEarlyGame()
+{
+	return ai.frame >= EARLY_GAME_FRAME;
+}
 bool IsMidGame()
 {
 	return ai.frame >= MID_GAME_FRAME;
@@ -45,33 +50,33 @@ bool HasFactory()
 bool ShouldBuildT1LightAA(const string& in side)
 {
 	return HasFactory()
-		|| (ai.frame >= 3 * MINUTE && CanAfford(10.0f))
+		|| (IsEarlyGame() && CanAfford(8.0f))
 		|| HasPressure(EARLY_PRESSURE);
 }
 
 bool ShouldBuildT1MediumAA(const string& in side)
 {
-	return (IsMidGame() && CanAfford(22.0f))
-		|| HasPressure(MEDIUM_PRESSURE);
+	return (IsEarlyGame() && CanAfford(16.0f))
+		|| (HasPressure(EARLY_PRESSURE) && CanAfford(12.0f));
 }
 
 bool ShouldBuildT1LightTurret(const string& in side)
 {
 	return HasFactory()
-		|| HasPressure(EARLY_PRESSURE)
-		|| CanAfford(10.0f);
+		|| (IsEarlyGame() && CanAfford(8.0f))
+		|| (HasPressure(EARLY_PRESSURE) && CanAfford(8.0f));
 }
 
 bool ShouldBuildT1MediumTurret(const string& in side)
 {
-	return (IsMidGame() && CanAfford(25.0f))
-		|| HasPressure(MEDIUM_PRESSURE);
+	return (IsEarlyGame() && CanAfford(19.0f))
+		|| (HasPressure(MEDIUM_PRESSURE) && CanAfford(14.0f));
 }
 
 bool ShouldBuildT1Arty(const string& in side)
 {
-	return (IsMidGame() && CanAfford(20.0f))
-		|| HasPressure(MEDIUM_PRESSURE);
+	return (IsEarlyGame() && CanAfford(22.0f))
+		|| (HasPressure(MEDIUM_PRESSURE) && CanAfford(16.0f));
 }
 
 bool ShouldBuildT1Torp(const string& in side)
@@ -81,36 +86,38 @@ bool ShouldBuildT1Torp(const string& in side)
 
 bool ShouldBuildT2FlakAA(const string& in side)
 {
-	return (IsMidGame() && CanAfford(18.0f))
-		|| (IsLateGame() && HasPressure(MEDIUM_PRESSURE));
+	return (IsMidGame() && CanAfford(25.0f))
+		|| (HasPressure(MEDIUM_PRESSURE) && CanAfford(16.0f));
 }
 
 bool ShouldBuildT2RangeAA(const string& in side)
 {
-	return (IsLateGame() && CanAfford(32.0f))
-		|| (IsMidGame() && HasPressure(HEAVY_PRESSURE));
+	return (IsLateGame() && CanAfford(60.0f))
+		|| (HasPressure(HEAVY_PRESSURE) && CanAfford(35.0f));
 }
 
 bool ShouldBuildT2MediumTurret(const string& in side)
 {
-	return (IsMidGame() && CanAfford(32.0f))
-		|| HasPressure(HEAVY_PRESSURE);
+	return (IsMidGame() && CanAfford(26.0f))
+		|| (HasPressure(MEDIUM_PRESSURE) && CanAfford(18.0f));
 }
 
 bool ShouldBuildT2Arty(const string& in side)
 {
-	return (IsLateGame() && CanAfford(50.0f))
-		|| (IsMidGame() && HasPressure(HEAVY_PRESSURE));
+	return (IsLateGame() && CanAfford(65.0f))
+		|| (HasPressure(HEAVY_PRESSURE) && CanAfford(35.0f));
 }
 
 bool ShouldBuildLRPC(const string& in side)
 {
-	return IsLateGame() && CanAfford(65.0f);
+	return (IsLateGame() && CanAfford(80.0f))
+		|| (HasPressure(HEAVY_PRESSURE) && CanAfford(55.0f));
 }
 
 bool ShouldBuildLRPCHeavy(const string& in side)
 {
-	return IsLateGame() && CanAfford(80.0f);
+	return (IsLateGame() && CanAfford(120.0f))
+		|| (HasPressure(HEAVY_PRESSURE) && CanAfford(80.0f));
 }
 
 bool ShouldMakeAnyDefence(const string& in side)

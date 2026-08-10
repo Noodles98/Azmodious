@@ -132,13 +132,13 @@ void EnqueueFallbackOpeners(const CCircuitDef@ facDef, const AIFloat3& in pos)
 	bool hasCombat = EnqueueRoleIfAvailable(facDef, pos,
 		RT::RAIDER, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 2)
 		|| EnqueueRoleIfAvailable(facDef, pos,
-			RT::SKIRM, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 2)
+			RT::SKIRM, Task::RecruitType::FIREPOWER, Task::Priority::NORMAL, 2)
 		|| EnqueueRoleIfAvailable(facDef, pos,
 			RT::RAIDER, Task::RecruitType::FIREPOWER, Task::Priority::NORMAL, 1)
 		|| EnqueueRoleIfAvailable(facDef, pos,
-			RT::BOMBER, Task::RecruitType::FIREPOWER, Task::Priority::LOW, 1)
+			RT::BOMBER, Task::RecruitType::FIREPOWER, Task::Priority::NORMAL, 1)
 		|| EnqueueRoleIfAvailable(facDef, pos,
-			RT::SCOUT, Task::RecruitType::FIREPOWER, Task::Priority::HIGH, 1);
+			RT::SCOUT, Task::RecruitType::FIREPOWER, Task::Priority::NORMAL, 1);
 
 	if (!hasBuilder && !hasCombat) {
 		AiLog("Factory opener fallback failed for " + facDef.GetName());

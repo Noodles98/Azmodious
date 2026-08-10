@@ -24,7 +24,7 @@
 			"unit": {
 				"cortex": ["corfmd", "corsilo", "corbuzz", "corint"]
 			},
-			"weight": [0.20, 0.20, 0.30, 0.30],
+			"weight": [0.15, 0.20, 0.30, 0.30],
 			"condition": [200, 200, 350, 350]
 		},
 		"wall": {
@@ -107,7 +107,7 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "corsilo", "category": "superweapon", "offset": {"right": 20}, "priority": "normal", "condition": 250}
+					{"unit": "corsilo", "category": "superweapon", "offset": {"right": 20}, "priority": "normal", "condition": 200}
 				]]
 			},
 			"cortoast": {

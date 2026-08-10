@@ -29,7 +29,7 @@
 			"unit": {
 				"armada": ["armamd", "armsilo", "armvulc", "armbrtha"]
 			},
-			"weight": [0.20, 0.30, 0.30, 0.20],
+			"weight": [0.15, 0.30, 0.30, 0.20],
 			"condition": [200, 200, 350, 400]
 		},
 
