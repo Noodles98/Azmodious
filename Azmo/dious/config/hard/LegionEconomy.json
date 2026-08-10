@@ -6,7 +6,7 @@
 			// "<energy_def>": [<lower limit>, <upper limit>]
 			// limit = random(<lower limit>..<upper limit>)
 			"legwin": [250, 375],
-			"legsolar": [250, 375],
+			"legsolar": [140, 260],
 			"legadvsol": [140, 260],
 			"legfus": [250, 600],
 			"legafus": [550, 2000]
@@ -18,7 +18,7 @@
 			"legadvsol": [80, 120],
 			"leganavalfusion": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [45.0, 1200], [120.0, 1800], [500.0, 3000], [2500.0, 14400]],
+		"factor": [[1.0, 75], [15.0, 600], [35.0, 1200], [85.0, 1800], [300.0, 3000], [1000.0, 14400]],
 		"min_income": 6,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,
@@ -44,13 +44,13 @@
 
 	"build_mod": 1800.0,
 
-	"eps_step": 0.45,
+	"eps_step": 0.35,
 
-	"buildpower": 1.35,
+	"buildpower": 1.20,
 
 	"excess": -1.0,
 
-	"ms_pull": [[0.53, 0.0], [0.64, 0.34]],
+	"ms_pull": [[0.45, 0.0], [0.52, 0.34]],
 
 	"mex_max": [1.0, false],
 

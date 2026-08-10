@@ -116,8 +116,6 @@
 					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
 					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
 			},
@@ -127,8 +125,6 @@
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 10}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 10}, "priority": "normal"},
 					{"unit": "legfus", "category": "energy", "offset": {"back": 40}, "priority": "normal"}
 				]]
 			},
@@ -137,9 +133,7 @@
 					{"unit": "leglht", "category": "defence", "offset": {"front": 5}, "priority": "normal"},
 					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
 			},
 			"legavp": {
@@ -148,8 +142,6 @@
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 10}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
 					{"unit": "legfus", "category": "energy", "offset": {"back": 40}, "priority": "normal"},
 					{"unit": "legestore", "category": "store", "offset": {"back": 40}, "priority": "normal"}
 				]]
@@ -158,8 +150,6 @@
 				"hub": [[
 					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
 					{"unit": "legrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -170,8 +160,6 @@
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 10}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "legfus", "category": "energy", "offset": {"back": 40}, "priority": "normal"},
 					{"unit": "legestore", "category": "store", "offset": {"back": 40}, "priority": "normal"}
 				]]
@@ -183,13 +171,7 @@
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 15}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"left": 20}, "priority": "normal"},
 					{"unit": "legnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 15}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
-					{"unit": "legnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"}
+					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
 				]]
 			}
 		},

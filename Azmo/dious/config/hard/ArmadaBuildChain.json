@@ -7,7 +7,7 @@
 	"porcupine": {
 		"unit": {
 		//              0          1         2          3            4         5          6         7         8            9        10
-			"armada": ["armllt",  "armtl",  "armrl",   "armbeamer", "armhlt", "armjuno", "armclaw", "armcir", "armferret", "armpb", "armatl",
+			"armada": ["armbeamer",  "armtl",  "armrl",   "armbeamer", "armhlt", "armjuno", "armclaw", "armcir", "armferret", "armpb", "armatl",
 					   "armflak", "armamb", "armanni", "armguard",  "armamd", "armtarg", "armgate", "armmercury", "armnanotc", "armbrtha", "armvulc", "armemp"]
 		},
 		// Actual number of defences per cluster bounded by income - the order of defenses that should be build with numbers as above.
@@ -40,7 +40,7 @@
 			"armada": ["armeyes"]
 		},
 		"default": {
-			"armada": "armllt"
+			"armada": "armbeamer"
 		}
 	},
 
@@ -50,7 +50,7 @@
 		"energy": {
 			"armsolar": {
 				"hub": [[
-					{"unit": "armmakr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
+					{"unit": "armmakr", "category": "convert", "offset": {"back": 20}, "priority": "normal", "condition": {"energy": true}}
 				]]
 			},
 			"armadvsol": {
@@ -67,23 +67,21 @@
 				"hub": [[
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "armflak", "category": "defence", "offset": {"front": 120}, "priority": "normal"}
+					{"unit": "armflak", "category": "defence", "offset": {"front": 120}, "priority": "normal", "condition": {"air": true}}
 				]]
 			},
 			"armafus": {
 				"hub": [[
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 15}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "armmmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "armmercury", "category": "defence", "offset": {"front": 150}, "priority": "normal"}
+					{"unit": "armmercury", "category": "defence", "offset": {"front": 150}, "priority": "normal", "condition": {"air": true}}
 				]]
 			}
 		},
@@ -91,14 +89,23 @@
 			"armgeo": {
 				"hub": [[
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 64}}
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 64}, "priority": "normal"}
 					]]
 			}
 		},
 		"defence": {
-			"armllt": {
+			"armbeamer": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal", "condition": {"energy": true}}
+				]]
+			},
+			"armamd": {
+				"hub": [[
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armsilo", "category": "superweapon", "offset": {"right": 15}, "priority": "normal", "condition": 250}
 				]]
 			},
 			"armanni": {
@@ -107,14 +114,11 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "armgate", "category": "defence", "offset": {"back": 160}, "priority": "normal"}
+					{"unit": "armgate", "category": "defence", "offset": {"back": 160}, "priority": "normal", "condition": {"enery": true}}
 				]]
 			},
 			"armamb": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "priority": "normal"}
 				]]
 			}
@@ -122,12 +126,10 @@
 		"factory": {
 			"armlab": {
 				"hub": [[
-					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
 				]]
 			},
 			"armalab": {
@@ -136,15 +138,13 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
+					{"unit": "armfus", "category": "energy", "offset": {"back": 90}, "priority": "normal"}
 				]]
 			},
 			"armvp": {
 				"hub": [[
-					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal", "condition": {"air": true}},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -155,16 +155,13 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
+					{"unit": "armfus", "category": "energy", "offset": {"back": 90}, "priority": "normal"}
 				]]
 			},
 			"armap": {
 				"hub": [[
-					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal", "condition": {"air": true}},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -175,9 +172,7 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
+					{"unit": "armfus", "category": "energy", "offset": {"back": 90}, "priority": "normal"}
 				]]
 			},
 			"armshltx": {
@@ -187,13 +182,7 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"right": 5}, "priority": "normal"}
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"}
 				]]
 			}
 		},
@@ -201,8 +190,8 @@
 			"armmex": {
 				"porc": false,
 				"hub": [[
-					{"unit": "armllt", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
+					{"unit": "armrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}
 				]]
 			},
 			"armmoho": {"porc": false},
