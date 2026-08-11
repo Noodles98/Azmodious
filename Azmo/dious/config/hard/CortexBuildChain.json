@@ -18,7 +18,7 @@
 			"factor": [48.0, 32.0],
 			"map": [10, 20]
 		},
-		"point_range": 750.0,
+		"point_range": 825.0,
 		"base": [[3, 300], [3, 420], [11, 600], [15, 1500], [17, 1800], [16, 1800]],
 		"superweapon": {
 			"unit": {
@@ -44,7 +44,7 @@
 		"energy": {
 			"corsolar": {
 				"hub": [[
-					{"unit": "cormakr", "category": "convert", "offset": {"back": 20}, "priority": "normal", "condition": {"energy": true}}
+					{"unit": "cormakr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
 				]]
 			},
 			"coradvsol": {
@@ -107,7 +107,7 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "corsilo", "category": "superweapon", "offset": {"right": 20}, "priority": "normal", "condition": 200}
+					{"unit": "corsilo", "category": "defence", "offset": {"right": 20}, "priority": "normal"}
 				]]
 			},
 			"cortoast": {
@@ -121,7 +121,7 @@
 			"corlab": {
 				"hub": [[
 					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"left": 20}, "priority": "normal"},
+					{"unit": "corrl", "category": "defence", "offset": {"left": 20}, "priority": "normal", "condition": {"air": true}},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
 				]]
@@ -138,7 +138,7 @@
 			"corvp": {
 				"hub": [[
 					{"unit": "corbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"front": 15}, "priority": "normal"},
+					{"unit": "corrl", "category": "defence", "offset": {"front": 15}, "priority": "normal", "condition": {"air": true}},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -155,7 +155,7 @@
 			"corap": {
 				"hub": [[
 					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"left": 15}, "priority": "normal"},
+					{"unit": "corrl", "category": "defence", "offset": {"left": 15}, "priority": "normal", "condition": {"air": true}},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]

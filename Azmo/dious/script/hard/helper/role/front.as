@@ -1,14 +1,12 @@
 namespace TeamRoleFront {
 
 // Role tuning constants
-const int MID_GAME_FRAME = 11 * MINUTE;
-const int LATE_GAME_FRAME = 25 * MINUTE;
+const int MID_GAME_FRAME = 16 * MINUTE;
+const int LATE_GAME_FRAME = 26 * MINUTE;
 const float EARLY_CONVERT_EFF = 9.33f;
 const float MID_CONVERT_EFF = 13.41f;
 const float LATE_CONVERT_EFF = 16.27f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
-const float MID_CONVERT_ENERGY_EFF = 20.0f;
-const float LATE_CONVERT_ENERGY_EFF = 20.0f;
+const float CONVERT_ENERGY_EFF = 20.0f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.60f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.62f;
@@ -26,9 +24,9 @@ const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 10.0f;
-const float MID_DEFENCE_THREAT_MIN = 35.0f;
-const float LATE_DEFENCE_THREAT_MIN = 90.0f;
+const float EARLY_DEFENCE_THREAT_MIN = 3.0f;
+const float MID_DEFENCE_THREAT_MIN = 18.0f;
+const float LATE_DEFENCE_THREAT_MIN = 36.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 8.0f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 22.0f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 28.0f;
@@ -115,15 +113,15 @@ void ApplyEconomyBias()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			aiEconomyMgr.reclConvertEff = EARLY_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = EARLY_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		case EconomyStage::MID:
 			aiEconomyMgr.reclConvertEff = MID_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = MID_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		default:
 			aiEconomyMgr.reclConvertEff = LATE_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = LATE_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 	}
 }

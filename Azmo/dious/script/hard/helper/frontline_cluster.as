@@ -8,8 +8,8 @@ const float ANCHOR_RADIUS = 600.f;
 const float ANCHOR_MERGE_RADIUS = 300.f;
 const float PUSH_START_RADIUS = 450.f;
 const float PUSH_MAX_RADIUS = 650.f;
-const float PUSH_RATIO = 1.25f;
-const uint MAX_FRONTLINE_ANCHORS = 2;
+const float PUSH_RATIO = 3.15f;
+const uint MAX_FRONTLINE_ANCHORS = 3;
 const int ENEMY_MEMORY_EXPIRE = 120 * SECOND;
 
 array<AIFloat3> candidatePositions;

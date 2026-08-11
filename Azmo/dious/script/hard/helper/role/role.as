@@ -172,9 +172,9 @@ uint GetBaseConstructorCount()
 {
 	Refresh();
 	switch (kind) {
-		case Kind::AIR: return 10;
-		case Kind::TECH: return 8;
-		case Kind::FRONT: return 4;
+		case Kind::AIR: return 4;
+		case Kind::TECH: return 3;
+		case Kind::FRONT: return 3;
 		default: return 2;
 	}
 }

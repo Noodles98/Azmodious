@@ -22,7 +22,7 @@
 				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
 			},
 
-			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
+			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached
 			"side": "armada"
 		},
 		"corcom": {
@@ -43,7 +43,7 @@
 				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
 			},
 
-			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
+			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached
 			"side": "cortex"
 		},
 		"legcom": {
@@ -64,7 +64,7 @@
 				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
 			},
 
-			"assist_fac": 1,  // commander assists factory with high priority till number of constructors reached
+			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached
 			"side": "legion"
 		}
 	}

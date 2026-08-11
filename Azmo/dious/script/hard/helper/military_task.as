@@ -74,11 +74,11 @@ float GetDefendPromotePower()
 {
 	const string role = TeamRole::GetName();
 	if (role == "tech")
-		return 50.f;
+		return 140.f;
 	if (role == "air")
-		return 20.f;
+		return 110.f;
 	if (role == "front")
-		return 30.f;
+		return 120.f;
 	return 40.f;
 }
 

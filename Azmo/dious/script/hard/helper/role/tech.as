@@ -1,8 +1,8 @@
 namespace TeamRoleTech {
 
 // Role tuning constants
-const int MID_GAME_FRAME = 10 * MINUTE;
-const int LATE_GAME_FRAME = 25 * MINUTE;
+const int MID_GAME_FRAME = 14 * MINUTE;
+const int LATE_GAME_FRAME = 24 * MINUTE;
 const float EARLY_CONVERT_EFF = 11.44f;
 const float MID_CONVERT_EFF = 14.73f;
 const float LATE_CONVERT_EFF = 17.25f;
@@ -26,9 +26,9 @@ const float EARLY_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float MID_FACTORY_SWITCH_METAL_MULT = 0.90f;
 const float LATE_FACTORY_SWITCH_METAL_MULT = 0.87f;
 
-const float EARLY_DEFENCE_THREAT_MIN = 10.0f;
-const float MID_DEFENCE_THREAT_MIN = 35.0f;
-const float LATE_DEFENCE_THREAT_MIN = 66.0f;
+const float EARLY_DEFENCE_THREAT_MIN = 4.0f;
+const float MID_DEFENCE_THREAT_MIN = 18.0f;
+const float LATE_DEFENCE_THREAT_MIN = 38.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 11.0f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 15.0f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 20.0f;

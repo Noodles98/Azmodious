@@ -6,9 +6,7 @@ const int LATE_GAME_FRAME = 22 * MINUTE;
 const float EARLY_CONVERT_EFF = 1.95f;
 const float MID_CONVERT_EFF = 2.0f;
 const float LATE_CONVERT_EFF = 2.35f;
-const float EARLY_CONVERT_ENERGY_EFF = 18.5f;
-const float MID_CONVERT_ENERGY_EFF = 20.1f;
-const float LATE_CONVERT_ENERGY_EFF = 22.3f;
+const float CONVERT_ENERGY_EFF = 20.0f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.70f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.74f;
@@ -97,15 +95,15 @@ void ApplyEconomyBias()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			aiEconomyMgr.reclConvertEff = EARLY_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = EARLY_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		case EconomyStage::MID:
 			aiEconomyMgr.reclConvertEff = MID_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = MID_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		default:
 			aiEconomyMgr.reclConvertEff = LATE_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = LATE_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 	}
 }
