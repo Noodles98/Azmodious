@@ -182,7 +182,7 @@
 		},
 		"mex": {
 			"cormex": {
-				"porc": false,
+				"porc": true,
 				"hub": [[
 					{"unit": "corbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
 					{"unit": "corrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}

@@ -177,7 +177,7 @@
 		},
 		"mex": {
 			"legmex": {
-				"porc": false,
+				"porc": true,
 				"hub": [[
 					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
 					{"unit": "legrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}

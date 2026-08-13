@@ -187,7 +187,7 @@
 		},
 		"mex": {
 			"armmex": {
-				"porc": false,
+				"porc": true,
 				"hub": [[
 					{"unit": "armbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
 					{"unit": "armrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}
