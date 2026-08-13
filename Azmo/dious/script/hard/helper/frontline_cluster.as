@@ -8,7 +8,7 @@ const float ANCHOR_RADIUS = 500.f;
 const float ANCHOR_MERGE_RADIUS = 350.f;
 const float PUSH_START_RADIUS = 450.f;
 const float PUSH_MAX_RADIUS = 650.f;
-const float PUSH_RATIO = 4.16f;
+const float PUSH_RATIO = 4.22f;
 const uint MAX_FRONTLINE_ANCHORS = 3;
 const int ENEMY_MEMORY_EXPIRE = 90 * SECOND;
 

@@ -49,7 +49,7 @@
 			},
 			"coradvsol": {
 				"hub": [[
-					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal", "condition": {"energy": true}}
+					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
 				]]
 			},
 			"cortide": {
@@ -63,7 +63,7 @@
 					{"unit": "cornanotc", "category": "nano", "offset": {"right": 10}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 20}, "priority": "normal"},
-					{"unit": "corflak", "category": "defence", "offset": {"front": 120}, "condition": {"air": true}}
+					{"unit": "corflak", "category": "defence", "offset": {"front": 120}, "condition": {"air": true}, "priority": "normal"}
 				]]
 			},
 			"corafus": {
@@ -99,7 +99,7 @@
 			},
 			"corbeamer": {
 				"hub": [[
-					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "normal"}
+					{"unit": "cornanotc", "category": "nano", "offset": {"back": 20}, "priority": "low"}
 				]]
 			},
 			"corfmd": {
@@ -185,7 +185,7 @@
 				"porc": false,
 				"hub": [[
 					{"unit": "corbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
+					{"unit": "corrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}
 				]]
 			},
 			"cormoho": {"porc": false},

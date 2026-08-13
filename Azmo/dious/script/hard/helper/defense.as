@@ -1,7 +1,7 @@
 namespace DefenseHelpers {
 
-const float EXTRA_DEFENCE_PRESSURE_MIN = 25.0f;
-const float EXTRA_DEFENCE_METAL_INCOME_MIN = 20.0f;
+const float EXTRA_DEFENCE_PRESSURE_MIN = 16.0f;
+const float EXTRA_DEFENCE_METAL_INCOME_MIN = 16.0f;
 
 bool ShouldBuildExtraDefence()
 {

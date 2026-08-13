@@ -134,7 +134,6 @@
 			"armalab": {
 				"hub": [[
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 5}, "priority": "normal"},
