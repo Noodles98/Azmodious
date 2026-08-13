@@ -8,7 +8,7 @@ array<Id> reclaimableFactoryIds;
 array<Id> pendingFactoryReclaimIds;
 array<int> pendingFactoryReclaimFrames;
 
-const int T1_FACTORY_RECLAIM_START_FRAME = 24 * MINUTE;
+const int T1_FACTORY_RECLAIM_START_FRAME = 22 * MINUTE;
 const int T1_FACTORY_RECLAIM_TIMEOUT = 120 * SECOND;
 const uint MIN_ADVANCED_FACTORY_COUNT = 2;
 const uint KEEP_T1_FACTORY_COUNT = 0;

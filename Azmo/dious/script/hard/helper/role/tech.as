@@ -6,9 +6,7 @@ const int LATE_GAME_FRAME = 24 * MINUTE;
 const float EARLY_CONVERT_EFF = 11.44f;
 const float MID_CONVERT_EFF = 14.73f;
 const float LATE_CONVERT_EFF = 17.25f;
-const float EARLY_CONVERT_ENERGY_EFF = 20.0f;
-const float MID_CONVERT_ENERGY_EFF = 20.0f;
-const float LATE_CONVERT_ENERGY_EFF = 20.0f;
+const float CONVERT_ENERGY_EFF = 20.0f;
 
 const float EARLY_ENERGY_STALL_WHEN_METAL_EMPTY = 0.88f;
 const float MID_ENERGY_STALL_WHEN_METAL_EMPTY = 0.85f;
@@ -32,19 +30,19 @@ const float LATE_DEFENCE_THREAT_MIN = 38.0f;
 const float EARLY_DEFENCE_METAL_INCOME_MIN = 11.0f;
 const float MID_DEFENCE_METAL_INCOME_MIN = 15.0f;
 const float LATE_DEFENCE_METAL_INCOME_MIN = 20.0f;
-const float EARLY_DEFENCE_LANE_SPREAD = 300.0f;
-const float MID_DEFENCE_LANE_SPREAD = 450.0f;
-const float LATE_DEFENCE_LANE_SPREAD = 620.0f;
+const float EARLY_DEFENCE_LANE_SPREAD = 700.0f;
+const float MID_DEFENCE_LANE_SPREAD = 775.0f;
+const float LATE_DEFENCE_LANE_SPREAD = 900.0f;
 const uint MILITARY_SCOUT_CAP = 3;
 const float MILITARY_ATTACK_THRESHOLD = 70.0f;
 const float MILITARY_RAID_MIN_POWER = 60.0f;
 const float MILITARY_RAID_AVG_POWER = 105.0f;
 const uint FACTORY_MIN_BUILDER_COUNT = 2;
-const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 2;
-const uint MID_FACTORY_MIN_BUILDER2_COUNT = 7;
-const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 10;
+const uint EARLY_FACTORY_MIN_BUILDER2_COUNT = 1;
+const uint MID_FACTORY_MIN_BUILDER2_COUNT = 3;
+const uint LATE_FACTORY_MIN_BUILDER2_COUNT = 5;
 const uint SCOUT_RUSH_COUNT = 10;
-const uint FRONTLINE_CONFIRM_HITS = 12;
+const uint FRONTLINE_CONFIRM_HITS = 4;
 const int FRONTLINE_CONFIRM_WINDOW = 60 * SECOND;
 const int FRONTLINE_ANCHOR_EXPIRE = 120 * SECOND;
 
@@ -115,15 +113,15 @@ void ApplyEconomyBias()
 	switch (GetEconomyStage()) {
 		case EconomyStage::EARLY:
 			aiEconomyMgr.reclConvertEff = EARLY_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = EARLY_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		case EconomyStage::MID:
 			aiEconomyMgr.reclConvertEff = MID_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = MID_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 		default:
 			aiEconomyMgr.reclConvertEff = LATE_CONVERT_EFF;
-			aiEconomyMgr.reclEnergyEff = LATE_CONVERT_ENERGY_EFF;
+			aiEconomyMgr.reclEnergyEff = CONVERT_ENERGY_EFF;
 			break;
 	}
 }

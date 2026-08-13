@@ -59,7 +59,7 @@ void AiUpdateEconomy()
 	}
 	// NOTE: Default energy-to-metal conversion TeamRulesParam "mmLevel" = 0.75
 	// Require real surplus, not just a briefly full battery, before requesting converters.
-	aiEconomyMgr.isEnergyFull = (energyRatio > 0.88f) && (energyBalance > 0.f);
+	aiEconomyMgr.isEnergyFull = (energyRatio > 0.88f) && (energyBalance > 0.84f);
 
 	// Consume switch-assist as a one-update signal; Factory::AiIsSwitchAllowed
 	// will re-assert it on subsequent failed switch checks.

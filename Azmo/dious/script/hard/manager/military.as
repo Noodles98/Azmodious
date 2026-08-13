@@ -60,8 +60,7 @@ void AiSave(OStream& ostream)
 
 void AiMakeDefence(int cluster, const AIFloat3& in pos)
 {
-	const string side = TeamRole::DetectSidePrefix();
-	if (!TeamRole::ShouldMakeDefence() && !DefenseHelpers::ShouldMakeAnyDefence(side))
+	if (!FrontlineCluster::HasStableAnchor() || !DefenseHelpers::ShouldBuildExtraDefence())
 		return;
 
 	AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());

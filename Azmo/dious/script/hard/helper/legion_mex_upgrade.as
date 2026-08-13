@@ -32,7 +32,7 @@ bool ShouldReject(IUnitTask@ task, const CCircuitDef@ builderDef)
 	if (task is null || task.GetType() != Task::Type::BUILDER)
 		return false;
 	IBuilderTask@ taskB = cast<IBuilderTask>(task);
-	if (taskB is null || taskB.GetBuildType() != Task::BuildType::MEXUP)
+	if (taskB is null || taskB.GetBuildType() != Task::BuildType::MEX)
 		return false;
 	if (IsLegionDef(builderDef))
 		return false;
