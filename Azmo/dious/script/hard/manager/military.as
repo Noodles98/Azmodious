@@ -1,6 +1,5 @@
 #include "../../define.as"
 #include "../helper/military_task.as"
-#include "../helper/defense.as"
 
 
 namespace Military {
@@ -60,7 +59,7 @@ void AiSave(OStream& ostream)
 
 void AiMakeDefence(int cluster, const AIFloat3& in pos)
 {
-	if (!FrontlineCluster::HasStableAnchor())
+	if (!FrontlineCluster::HasStableAnchor() || (TeamRole::ShouldMakeDefence()))
 		return;
 
 	AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());
