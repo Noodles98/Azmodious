@@ -122,13 +122,13 @@
 			"ignore": ["convert", "engy_mid", "engy_high"]
 		},
 		"def_low": {
-			"type": ["circle", "def_low"],
-			"radius": 5,  // 80 / (SQUARE_SIZE * 2)
-			"ignore": ["engy_mid", "engy_high", "engy_low", "nano"]
+			"type": ["rectangle", "def_low"],
+			"yard": [2, 2],  // 80 / (SQUARE_SIZE * 2)
+			"ignore": ["engy_mid", "engy_high", "engy_low", "mex", "nano"]
 		},
 		"caretaker": {
 			"type": ["rectangle", "nano"],
-			"ignore": ["mex", "def_low", "engy_mid", "engy_high"]
+			"ignore": ["mex", "def_low", "engy_low", "engy_mid", "engy_high"]
 		},
 		"superweapon": {
 			"type": ["circle", "special"],
@@ -149,7 +149,7 @@
 		},
 		"small": {
 			"type": ["rectangle", "unknown"],
-			"yard": [4, 4],
+			"yard": [3, 3],
 			"not_ignore": ["factory", "def_low", "terra"]
 		},
 		"wall": {
@@ -158,7 +158,7 @@
 		},
 		"_default_": {
 			"type": ["rectangle", "unknown"],
-			"yard": [6, 6],
+			"yard": [3, 3],
 			"ignore": ["engy_high"]
 		}
 	},
@@ -176,17 +176,17 @@
 		"fac_air": ["armap", "corap", "legap", "armaap", "coraap", "legaap"],
 		"fac_water": ["armsy", "armasy", "armamsub", "armplat", "corsy", "corasy", "coramsub", "corplat", "legsy", "legasy", "legamsub", "legplat"],
 		"fac_strider": ["armshltx", "armshltxuw", "corgant", "corgantuw", "leggant", "leggantuw"],
-		"solar": ["armsolar", "corsolar", "legsolar"],
+		"solar": ["armsolar", "corsolar", "legsolar", "armadvsol", "coradvsol", "legadvsol"],
 		"wind": ["armwin", "corwin", "legwin", "armtide", "cortide"],
 		"geo": ["armgeo", "corgeo", "leggeo"],
 		"geo2": ["armageo", "corageo", "legageo"],
-		"fusion": ["armadvsol", "coradvsol", "legadvsol"],
-		"singu": ["armfus", "armuwfus", "armckfus", "armafus", "corfus", "coruwfus", "corafus", "legfus", "legafus"],
+		"fusion": ["armfus", "corfus", "legfus"],
+		"singu": ["armuwfus", "armckfus", "armafus", "coruwfus", "corafus", "legafus"],
 		"store": ["armmstor", "armestor", "cormstor", "corestor", "legmstor", "legestor"],
 		"mex": ["armmex", "cormex", "legmex", "armuwmex", "coruwmex", "leganavalmex"],
 		"mex2": ["armmoho", "cormoho", "legmoho", "armuwmme", "coruwmme", "legmohoconct"],
 		"converter": ["armmakr", "cormakr", "legeconv", "armmmkr", "cormmkr", "legadveconv", "armfmkr", "corfmkr", "armuwmmm", "coruwmmm"],
-		"def_low": ["armllt", "armclaw", "corllt", "cormaw", "leglht", "legdtr"],
+		"def_low": ["armllt", "armbeamer", "armrl", "armclaw", "corllt", "corbeamer", "corrl", "cormaw", "leglht", "legdtr"],
 		"caretaker": ["armnanotc", "armnanotcplat", "cornanotc", "cornanotcplat", "legnanotc", "legnanotcplat"],
 		"small": ["armrad", "corrad", "legrad", "armfrad", "corfrad"],
 		"wall": ["armdrag", "cordrag", "legdrag"]

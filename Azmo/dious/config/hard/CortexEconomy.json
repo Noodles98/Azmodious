@@ -7,9 +7,9 @@
 			// limit = random(<lower limit>..<upper limit>)
 			"corwin": [250, 375],
 			"corsolar": [200, 300],
-			"coradvsol": [180, 260],
-			"corfus": [250, 600],
-			"corafus": [550, 2000]
+			"coradvsol": [280, 320],
+			"corfus": [320, 800],
+			"corafus": [850, 2000]
 		},
 		"water": {
 			"cortide": [150, 200],

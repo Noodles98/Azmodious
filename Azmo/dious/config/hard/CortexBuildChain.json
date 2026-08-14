@@ -8,9 +8,9 @@
 		"unit": {
 		//             		0          1        2       	 3         	 4         5          6      	  7           	 8       	   9          10
 			"cortex": ["corllt",  "cortl", 	  "corrl", 	 "corhbeamer", "corhlt", "corjamt", "cormaw",  "cormadsam",   "corerad",   "corvipe",  "coratl",
-					   "corflak", "cortoast", "cordoom", "corpun", 	   "corfmd", "cortarg", "corgate", "corscreamer", "cornanotc", "corint",   "corbuzz", "cortron"]
+					   "corflak", "cortoast", "cordoom", "corpun", 	   "corshroud", "cortarg", "corgate", "corscreamer", "cornanotc", "corint",   "corbuzz"]
 		},
-		"land":  [0, 2, 5, 19, 3, 19, 6, 14, 19, 14, 8, 19, 19, 17, 15, 19, 19, 19, 13, 13, 20, 20, 21, 21],
+		"land":  [0, 2, 5, 19, 3, 19, 6, 14, 19, 14, 8, 19, 19, 17, 15, 19, 16, 19, 13, 13, 20, 20, 21, 21],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
 		"prevent": 2,
 		"amount": {
