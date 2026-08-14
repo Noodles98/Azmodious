@@ -59,8 +59,8 @@ void AiSave(OStream& ostream)
 
 void AiMakeDefence(int cluster, const AIFloat3& in pos)
 {
-	if (!FrontlineCluster::HasStableAnchor() || (TeamRole::ShouldMakeDefence()))
-		return;
+	if (!TeamRole::ShouldMakeDefence())
+		return ;
 
 	AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());
 	aiMilitaryMgr.DefaultMakeDefence(cluster, lanePos);
