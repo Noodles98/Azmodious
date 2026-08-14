@@ -30,7 +30,7 @@
 				"armada": ["armamd", "armsilo", "armvulc", "armbrtha"]
 			},
 			"weight": [0.15, 0.30, 0.30, 0.20],
-			"condition": [200, 200, 250, 250]
+			"condition": [200, 180, 165, 165]
 		},
 
 		"wall": {
