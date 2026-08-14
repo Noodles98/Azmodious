@@ -73,7 +73,7 @@
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
 					{"unit": "cormmkr", "category": "convert", "offset": {"back": 80}, "priority": "normal"},
-					{"unit": "corscreamer", "category": "defence", "offset": {"front": 150}, "priority": "normal", "condition": {"air": true}}
+					{"unit": "corscreamer", "category": "defence", "offset": {"front": 150}, "priority": "normal"}
 				]]
 			}
 		},
@@ -118,8 +118,8 @@
 		"factory": {
 			"corlab": {
 				"hub": [[
-					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"left": 20}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "now"},
+					{"unit": "corrl", "category": "defence", "offset": {"left": 20}, "priority": "now"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
 				]]
@@ -135,8 +135,8 @@
 			},
 			"corvp": {
 				"hub": [[
-					{"unit": "corbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"front": 15}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "corbeamer", "category": "defence", "offset": {"front": 20}, "priority": "now"},
+					{"unit": "corrl", "category": "defence", "offset": {"front": 15}, "priority": "now"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -152,8 +152,8 @@
 			},
 			"corap": {
 				"hub": [[
-					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"left": 15}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "corbeamer", "category": "defence", "offset": {"front": 30}, "priority": "now"},
+					{"unit": "corrl", "category": "defence", "offset": {"left": 15}, "priority": "now"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "cornanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]

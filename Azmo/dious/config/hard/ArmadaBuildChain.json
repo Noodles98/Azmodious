@@ -11,7 +11,7 @@
 					   "armflak", "armamb", "armanni", "armguard",  "armveil", "armtarg", "armgate", "armmercury", "armnanotc", "armbrtha", "armvulc"]
 		},
 		// Actual number of defences per cluster bounded by income - the order of defenses that should be build with numbers as above.
-		"land":  [0, 2, 5, 19, 3, 19, 6, 14, 19, 14, 8, 19, 19, 17, 16, 13, 13, 20, 20, 21, 21],
+		"land":  [3, 2, 5, 19, 14, 19, 6, 14, 19, 14, 8, 19, 19, 17, 16, 13, 13, 20, 17, 20, 21, 21],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
 		"prevent": 2,
 		"amount": {
@@ -19,10 +19,10 @@
 			"factor": [48.0, 32.0],
 			"map": [10, 20]
 		},
-		"point_range": 750.0,
+		"point_range": 900.0,
 
 		"base": [
-			[3, 300], [3, 420], [11, 600], [15, 1500], [17, 1800], [16, 1800], [17, 2100], [13, 2200]
+			[3, 300], [5, 420], [11, 660], [15, 1500], [17, 1800], [16, 1900], [17, 2100], [13, 2200]
 		],
 
 		"superweapon": {
@@ -30,7 +30,7 @@
 				"armada": ["armamd", "armsilo", "armvulc", "armbrtha"]
 			},
 			"weight": [0.15, 0.30, 0.30, 0.20],
-			"condition": [225, 200, 350, 400]
+			"condition": [200, 200, 250, 250]
 		},
 
 		"wall": {
@@ -111,7 +111,7 @@
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "armgate", "category": "defence", "offset": {"back": 160}, "priority": "normal", "condition": {"enery": true}}
+					{"unit": "armgate", "category": "defence", "offset": {"back": 160}, "priority": "normal"}
 				]]
 			},
 			"armamb": {
@@ -123,8 +123,8 @@
 		"factory": {
 			"armlab": {
 				"hub": [[
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 25}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 30}, "priority": "now"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 25}, "priority": "now"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
 				]]
@@ -140,8 +140,8 @@
 			},
 			"armvp": {
 				"hub": [[
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 30}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 25}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 30}, "priority": "now"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 25}, "priority": "now"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]
@@ -157,8 +157,8 @@
 			},
 			"armap": {
 				"hub": [[
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "normal", "condition": {"air": true}},
+					{"unit": "armbeamer", "category": "defence", "offset": {"front": 20}, "priority": "now"},
+					{"unit": "armrl", "category": "defence", "offset": {"front": 20}, "priority": "now"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"},
 					{"unit": "armnanotc", "category": "nano", "offset": {"left": 5}, "priority": "normal"}
 				]]

@@ -3,14 +3,14 @@
 
 namespace FrontlineCluster {
 
-const float CONFIRM_RADIUS = 350.f;
-const float ANCHOR_RADIUS = 420.f;
+const float CONFIRM_RADIUS = 400.f;
+const float ANCHOR_RADIUS = 475.f;
 const float ANCHOR_MERGE_RADIUS = 350.f;
 const float PUSH_START_RADIUS = 415.f;
 const float PUSH_MAX_RADIUS = 565.f;
-const float PUSH_RATIO = 0.75f;
+const float PUSH_RATIO = 8.24f;
 const uint MAX_FRONTLINE_ANCHORS = 3;
-const int ENEMY_MEMORY_EXPIRE = 180 * SECOND;
+const int ENEMY_MEMORY_EXPIRE = 120 * SECOND;
 
 array<AIFloat3> candidatePositions;
 array<uint> candidateHits;
