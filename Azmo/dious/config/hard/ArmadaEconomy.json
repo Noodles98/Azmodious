@@ -6,7 +6,7 @@
 			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 			// limit = random(<lower limit>..<upper limit>)
 			"armwin": [250, 375],
-			"armsolar": [250, 375],
+			"armsolar": [200, 300],
 			"armadvsol": [180, 260],
 			"armfus": [250, 600],
 			"armafus": [550, 2000]
@@ -18,7 +18,7 @@
 			"armadvsol": [80, 120],
 			"armuwfus": [320, 480]
 		},
-		"factor": [[1.0, 75], [15.0, 600], [35.0, 1200], [85.0, 1800], [300.0, 3000], [1000.0, 14400]],
+		"factor": [[1.0, 120], [15.0, 600], [25.0, 1200], [55.0, 1800], [150.0, 3000], [1000.0, 14400]],
 		"min_income": 5,
 		"cost_ratio": 0.05,
 		"em_ratio": 0.08,
@@ -26,7 +26,7 @@
 		"pylon": []
 	},
 
-	"cluster_range": 560.0,
+	"cluster_range": 500.0,
 
 	"geo": {
 		"armada": "armgeo"
@@ -50,7 +50,7 @@
 
 	"excess": -1.0,
 
-	"ms_pull": [[0.45, 0.0], [0.52, 0.34]],
+	"ms_pull": [[0.52, 0.0], [0.56, 0.34]],
 
 	"mex_max": [1.0, false],
 

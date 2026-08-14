@@ -64,7 +64,7 @@ namespace TaskB {
 
 SBuildTask Common(Task::BuildType type, Task::Priority priority,
 		CCircuitDef@ buildDef, const AIFloat3& in position,
-		float shake = SQUARE_SIZE * 32,  // Alter/randomize position by offset
+		float shake = SQUARE_SIZE * 64,  // Alter/randomize position by offset
 		bool isActive = true,  // Should task go to general queue or remain detached?
 		int timeout = ASSIGN_TIMEOUT)
 {

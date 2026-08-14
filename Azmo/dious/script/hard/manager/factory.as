@@ -244,6 +244,7 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 	TeamRole::ApplyEconomyBias();
 
 	const CCircuitDef@ facDef = unit.circuitDef;
+	bool replacesOpenerConstructor = EnqueueConstructorMinimum(unit) !is null;
 	EnqueueScoutRush(unit);
 	if (userData[facDef.id].attr & Attr::T3 != 0) {
 		// if (ai.teamId != ai.GetLeadTeamId()) then this change affects only target selection,
@@ -259,7 +260,7 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 		return;
 
 	const AIFloat3 pos = unit.GetPos(ai.frame);
-	uint queued = 0;
+	uint queued = replacesOpenerConstructor ? 1 : 0;
 	for (uint i = 0, icount = opener.length(); i < icount; ++i) {
 		CCircuitDef@ buildDef = aiFactoryMgr.GetRoleDef(facDef, opener[i].role);
 		if ((buildDef is null) || !buildDef.IsAvailable(ai.frame))
@@ -267,14 +268,20 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 
 		Task::Priority priority;
 		Task::RecruitType recruit;
-		if (opener[i].role == Unit::Role::BUILDER.type) {
+		if ((opener[i].role == Unit::Role::BUILDER.type)
+				|| (opener[i].role == Unit::Role::BUILDER2.type)) {
 			priority = Task::Priority::NORMAL;
 			recruit  = Task::RecruitType::BUILDPOWER;
 		} else {
 			priority = Task::Priority::HIGH;
 			recruit  = Task::RecruitType::FIREPOWER;
 		}
-		for (uint j = 0, jcount = opener[i].count; j < jcount; ++j) {
+		uint first = 0;
+		if (replacesOpenerConstructor && (recruit == Task::RecruitType::BUILDPOWER)) {
+			first = 1;
+			replacesOpenerConstructor = false;
+		}
+		for (uint j = first, jcount = opener[i].count; j < jcount; ++j) {
 			aiFactoryMgr.Enqueue(TaskS::Recruit(recruit, priority, buildDef, pos, 64.f));
 			++queued;
 		}

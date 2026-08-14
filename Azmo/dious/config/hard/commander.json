@@ -6,7 +6,7 @@
 	"unit": {
 		"armcom": {
 			// Choice importance, 0 by default
-			"importance": 0.7,
+			"importance": 1.0,
 
 			// Morph params
 			"upgrade": {
@@ -27,7 +27,7 @@
 		},
 		"corcom": {
 			// Choice importance, 0 by default
-			"importance": 0.7,
+			"importance": 1.0,
 
 			// Morph params
 			"upgrade": {
@@ -48,7 +48,7 @@
 		},
 		"legcom": {
 			// Choice importance, 0 by default
-			"importance": 0.7,
+			"importance": 1.0,
 
 			// Morph params
 			"upgrade": {

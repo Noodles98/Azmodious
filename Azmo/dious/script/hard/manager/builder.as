@@ -146,7 +146,7 @@ void AiTaskRemoved(IUnitTask@ task, bool done)
 void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 {
 	const CCircuitDef@ cdef = unit.circuitDef;
-	if (usage != Unit::UseAs::BUILDER || cdef.IsRoleAny(Unit::Role::COMM.mask))
+	if (usage != Unit::UseAs::BUILDER)
 		return;
 
 	AssignBaseConstructor(unit);

@@ -19,7 +19,7 @@
 
 	// ===== Cortex bot labs =====
 "corlab": {
-		"importance": [0.8, 0.1],
+		"importance": [1.0, 0.1],
 		"require_energy": false,
 		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corck", "corak", "cornecro", "corstorm", "corthud", "corcrash"],
@@ -51,7 +51,7 @@
 
 	// ===== Cortex vehicle plants =====
 "corvp": {
-		"importance": [0.8, 0.1],
+		"importance": [1.0, 0.1],
 		"require_energy": false,
 		"income_tier": [10, 20, 30, 40, 50],
 		"unit":      ["corcv", "cormuskrat", "cormlv", "corfav", "corgator", "corgarp", "corraid", "corlevlr", "corwolv", "cormist"],
@@ -112,7 +112,7 @@
 
 	// ===== Cortex air plants =====
 "corap": {
-		"importance": [0.8, 0.1],
+		"importance": [1.0, 0.1],
 		"require_energy": false,
 		"income_tier": [30],
 		"unit":      ["corca", "corveng", "corfink", "corshad", "corbw"],
