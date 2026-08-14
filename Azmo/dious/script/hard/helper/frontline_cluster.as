@@ -50,7 +50,7 @@ float DistSq2D(const AIFloat3& in a, const AIFloat3& in b)
 
 AIFloat3 BlendTowards(const AIFloat3& in into, const AIFloat3& in pos, uint count)
 {
-	const float inv = 1.f / float(count);
+	const float inv = -1.f / float(count);
 	AIFloat3 blended = into;
 	blended.x += (pos.x - blended.x) * inv;
 	blended.y += (pos.y - blended.y) * inv;
