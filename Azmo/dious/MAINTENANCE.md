@@ -49,10 +49,11 @@ Keep this guide updated when adding major helpers, manager overrides, config dom
 - `script/hard/helper/terrain/terrain_runtime.as`: startup terrain manager setup.
 - `script/hard/helper/terrain/terrain_bridge.as`: Lua message parser for runtime terrain hints.
 - `script/hard/helper/maps/map_profile.as`: resolves the current map/start position against registered map-profile data.
-- `script/hard/helper/maps/default_profiles.as`: registers imported profiles first, then local profiles.
+- `script/hard/helper/maps/default_profiles.as`: registers the single generated metadata registry.
 - `script/hard/helper/maps/types.as`: shared map profile types, including optional `TerrainInfo` metadata for terrain-aware placement/pathing.
-- `script/hard/helper/maps/imported_profiles.as`: curated map/start-spot role data. These profiles win when their map prefix matches because registry lookup returns the first match.
-- `script/hard/helper/maps/profiles/*.as`: local map profiles, including extracted start spots and seeded roles. They are used only when no earlier imported profile matches.
+- `script/hard/helper/maps/imported_profiles.as`: curated map/start-spot role data used as source input for the metadata generator.
+- `script/hard/helper/maps/profiles/*.as`: local map profiles used as source input for the metadata generator.
+- `script/hard/helper/maps/metadata_profiles.as`: generated combined registry. It embeds curated/local profiles first, then archive-derived `mapinfo.lua` fallback starts that default to FRONT.
 - `script/hard/manager/builder.as`: Applies helper task filters, Delegates late-game T1 wind/solar space reclaim from `script/hard/helper/energy_space_reclaim.as`, T1 factory reclaim and exit space gating in `script/hard/helper/t1_factory_reclaim.as` and `script/hard/helper/factory_exit_reclaim.as`.  Assign role-based constructor counts from `BASE` attribute in `script/hard/helper/role/role.as`, and persists those IDs. Current base constructor targets are AIR 4, TECH 3, FRONT 3, and SEA/default 2.
 - `script/hard/manager/economy.as`: computes stall/full flags and decides whether factories should require assistants.
 - `script/hard/manager/factory.as`: factory task delegation, opener queue seeding, factory switch timing, and T2/T3 metadata. New factories queue their required first constructor before scout-rush and opener units so the commander's configured high-priority factory assist applies to that build; the matching constructor entry is removed from the selected opener to preserve its composition.
@@ -91,7 +92,7 @@ Start from the narrowest owner for the behavior you want:
 - Change external terrain hints from Lua: `script/hard/helper/terrain/terrain_bridge.as`
 - Change commander hide radius, assist behavior, or morph config: `config/hard/commander.json`
 - Change the first units queued from a new factory: `script/hard/misc/commander.as`
-- Change map/start-position role assignments: `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (generated data)
+- Change map/start-position role assignments in `script/hard/helper/maps/imported_profiles.as` (curated data) or `script/hard/helper/maps/profiles/*.as` (local data), then regenerate `metadata_profiles.as` with `tools/generate_map_metadata_profiles.ps1`.
 - Change role resolution, default-role behavior, role dispatch, or allowed factory families: `script/hard/helper/role/role.as`
 - Change custom military fight-task assignment by role/attribute/lane/frontline anchor: `script/hard/helper/military_task.as`, wired through `script/hard/manager/military.as`; positioned committed attacks should use the native `SFightTask.hasPosition`/`position` binding, and any new frontline anchorpoint or unit-position behavior should be treated as a DLL-owned contract rather than a script-only approximation.
 - Change Air/Tech/Sea/Front stage tuning (economy bias, stall/assist thresholds, factory-switch multipliers, staged T2 constructor floors, scout-rush count, military attack/raid group thresholds, defence gates, frontline confirmation, or factory timing): `script/hard/helper/role/air.as`, `script/hard/helper/role/tech.as`, `script/hard/helper/role/sea.as`, `script/hard/helper/role/front.as`. FRONT and TECH expose the factory scout-rush policy consumed by `script/hard/manager/factory.as`. AIR also owns the post-T1 advanced-air factory preference used by `TeamRole::FilterFactory()`; AIR now forces a first basic air factory until one air factory exists, `ADV_AIR_FORCE_FRAME` hard-enables the T2 air factory path, once one T1 air factory exists the basic air factory is removed from AIR's allowed list until the first T2 air factory is built, `FIRST_ADV_AIR_MAX_BASE_DISTANCE` keeps that first T2 air factory near the first T1 air factory, and `T3_FACTORY_MIN_FRAME` gates AIR access to each faction's land T3 gantry after an advanced air factory exists. If that first advanced-air position is rejected for being too far from the anchor, `factory.as` queues one replacement factory task centered on the T1 anchor with the same distance as its placement search radius.
@@ -250,7 +251,7 @@ The fastest path for most future edits is:
 
 - Resolution for map profiles lives in `script/hard/helper/maps/map_profile.as`.
 - `Resolve()` finds the first registered map-name prefix match, chooses its nearest start spot, and records that spot's preferred role plus land-lock state.
-- `default_profiles.as` registers `imported_profiles.as` before `profiles/all_profiles.as`; first-match lookup means imported data overrides data for the same map prefix.
-- The profile files under `script/hard/helper/maps/profiles/` are from metadata JSON and are hand-edited, but the authoritative curated overrides belong in `imported_profiles.as`.
+- `default_profiles.as` registers only `metadata_profiles.as`. The generator embeds `imported_profiles.as` followed by `profiles/*.as`, then adds archive fallbacks only when no curated/local profile prefix matches.
+- The profile files under `script/hard/helper/maps/profiles/` and `imported_profiles.as` remain editable source data; regenerate the combined registry after changing either.
 - A profile entry is `StartSpot(AIFloat3(x, 0, z), "role", landLocked)`. Keep spot coordinates aligned with the map's real start positions because selection is nearest-position, not array-index based.
 - `landLocked` is currently retained for diagnostics only. It does not alter role selection, lanes, factory selection, or pathing.

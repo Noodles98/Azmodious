@@ -17,9 +17,9 @@
 			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
 			"hide": {
 				"time": 900,  // seconds
-				"threat": 80,
+				"threat": 40,
 				"air": false,
-				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
+				"task_rad": [3000.0, 400.0]  // [<peace_radius>, <danger_radius>]
 			},
 
 			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached
@@ -38,9 +38,9 @@
 			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
 			"hide": {
 				"time": 900,  // seconds
-				"threat": 80,
+				"threat": 40,
 				"air": false,
-				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
+				"task_rad": [3000.0, 400.0]  // [<peace_radius>, <danger_radius>]
 			},
 
 			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached
@@ -59,9 +59,9 @@
 			// Commander hides if ("time" elapsed) and ("threat" exceeds value or enemy has "air")
 			"hide": {
 				"time": 900,  // seconds
-				"threat": 80,
+				"threat": 40,
 				"air": false,
-				"task_rad": [3500.0, 500.0]  // [<peace_radius>, <danger_radius>]
+				"task_rad": [3000.0, 400.0]  // [<peace_radius>, <danger_radius>]
 			},
 
 			"assist_fac": 2,  // commander assists factory with high priority till number of constructors reached

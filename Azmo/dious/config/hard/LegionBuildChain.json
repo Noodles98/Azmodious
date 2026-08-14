@@ -25,7 +25,7 @@
 				"legion": ["legabm", "legsilo", "legstarfall", "legperdition", "leglrpc"]
 			},
 			"weight": [0.20, 0.20, 0.20, 0.20, 0.20],
-			"condition": [300, 250, 800, 400, 500]
+			"condition": [160, 160, 250, 180, 200]
 		},
 
 		"wall": {

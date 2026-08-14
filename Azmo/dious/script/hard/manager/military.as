@@ -59,7 +59,10 @@ void AiSave(OStream& ostream)
 
 void AiMakeDefence(int cluster, const AIFloat3& in pos)
 {
-	if (!TeamRole::ShouldMakeDefence())
+	if (!(TeamRole::ShouldMakeDefence()))
+		return ;
+
+	if (!FrontlineCluster::HasStableAnchor())
 		return ;
 
 	AIFloat3 lanePos = FrontlineCluster::UpdateAndGetPos(pos, TeamRole::GetDefenceLaneSpread());

@@ -21,8 +21,8 @@
 		"factor": [[1.0, 120], [15.0, 600], [25.0, 1200], [55.0, 1800], [150.0, 3000], [1000.0, 14400]],
 		"min_income": 5,
 		"cost_ratio": 0.05,
-		"em_ratio": 0.08,
-		"link_inc": 10.0,
+		"em_ratio": 0.07,
+		"link_inc": 12.0,
 		"pylon": []
 	},
 
@@ -40,17 +40,17 @@
 
 	"calc_mex": false,
 
-	"goal_exec": 48.0,
+	"goal_exec": 42.0,
 
 	"build_mod": 1000.0,
 
-	"eps_step": 0.35,
+	"eps_step": 0.45,
 
 	"buildpower": 1.20,
 
 	"excess": -1.0,
 
-	"ms_pull": [[0.45, 0.0], [0.52, 0.34]],
+	"ms_pull": [[0.52, 0.0], [0.61, 0.34]],
 
 	"mex_max": [1.0, false],
 
