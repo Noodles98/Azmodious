@@ -6,7 +6,7 @@
 			// "<energy_def>": [<lower limit>, <upper limit>, <m-income>, <e-income>, <efficiency>]
 			// limit = random(<lower limit>..<upper limit>)
 			"armwin": [250, 375],
-			"armsolar": [200, 300],
+			"armsolar": [250, 375],
 			"armadvsol": [180, 260],
 			"armfus": [250, 600],
 			"armafus": [550, 2000]

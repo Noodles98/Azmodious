@@ -43,9 +43,7 @@
 		// <category>: factory, nano, store, pylon, energy, geo, defence, bunker, big_gun, radar, sonar, convert, mex, mexup
 		"energy": {
 			"corsolar": {
-				"hub": [[
-					{"unit": "cormakr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
-				]]
+				"hub": [[]]
 			},
 			"coradvsol": {
 				"hub": [[
@@ -183,10 +181,7 @@
 		"mex": {
 			"cormex": {
 				"porc": true,
-				"hub": [[
-					{"unit": "corbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
-					{"unit": "corrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}
-				]]
+				"hub": [[]]
 			},
 			"cormoho": {"porc": false},
 			"coruwmme": {"porc": false}

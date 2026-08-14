@@ -442,6 +442,7 @@
 "armafus" : {
 				"role": ["static"],
 				"build_mod": 4000.0,
+				"cooldown": 3,
 				"since": 1500
 			},
 "armuwfus" : {

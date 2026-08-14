@@ -87,9 +87,7 @@
 		},
 		"defence": {
 			"leglht": {
-				"hub": [[
-					{"unit": "legnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"}
-				]]
+				"hub": [[]]
 			},
 			"legbastion" : {
 				"hub": [[
@@ -178,10 +176,7 @@
 		"mex": {
 			"legmex": {
 				"porc": true,
-				"hub": [[
-					{"unit": "leglht", "category": "defence", "offset": {"front": 20}, "priority": "normal"},
-					{"unit": "legrl", "category": "defence", "offset": {"back": 20}, "priority": "normal"}
-				]]
+				"hub": [[]]
 			},
 			"legmoho": {"porc": false},
 			"leganavalmex": {"porc": false}

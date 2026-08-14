@@ -49,9 +49,7 @@
 		// <category>: factory, nano, store, pylon, energy, geo, defence, bunker, big_gun, radar, sonar, convert, mex, mexup
 		"energy": {
 			"armsolar": {
-				"hub": [[
-					{"unit": "armmakr", "category": "convert", "offset": {"back": 20}, "priority": "normal"}
-				]]
+				"hub": [[]]
 			},
 			"armadvsol": {
 				"hub": [[
@@ -188,10 +186,7 @@
 		"mex": {
 			"armmex": {
 				"porc": true,
-				"hub": [[
-					{"unit": "armbeamer", "category": "defence", "offset": {"front": 25}, "priority": "normal"},
-					{"unit": "armrl", "category": "defence", "offset": {"back": 20}, "priority": "normal", "condition": {"air": true}}
-				]]
+				"hub": [[]]
 			},
 			"armmoho": {"porc": false},
 			"armuwmme": {"porc": false}
