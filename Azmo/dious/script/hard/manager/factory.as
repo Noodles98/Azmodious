@@ -3,6 +3,7 @@
 #include "../../task.as"
 #include "../helper/role/role.as"
 #include "../helper/maps/map_profile.as"
+#include "../helper/commander_factory_assist.as"
 #include "../helper/factory_limit.as"
 #include "../misc/commander.as"
 #include "economy.as"
@@ -159,16 +160,22 @@ IUnitTask@ EnqueueConstructorMinimum(CCircuitUnit@ unit)
 	if ((buildDef2 !is null) && buildDef2.IsAvailable(ai.frame)
 		&& (uint(buildDef2.count) < TeamRole::GetFactoryMinBuilder2Count()))
 	{
-		return aiFactoryMgr.Enqueue(TaskS::Recruit(
+		IUnitTask@ task = aiFactoryMgr.Enqueue(TaskS::Recruit(
 			Task::RecruitType::BUILDPOWER, Task::Priority::HIGH, buildDef2, pos, 64.f));
+		if (task !is null)
+			CommanderFactoryAssist::Track(unit, buildDef2);
+		return task;
 	}
 
 	CCircuitDef@ buildDef = aiFactoryMgr.GetRoleDef(facDef, RT::BUILDER);
 	if ((buildDef !is null) && buildDef.IsAvailable(ai.frame)
 		&& (uint(buildDef.count) < TeamRole::GetFactoryMinBuilderCount()))
 	{
-		return aiFactoryMgr.Enqueue(TaskS::Recruit(
+		IUnitTask@ task = aiFactoryMgr.Enqueue(TaskS::Recruit(
 			Task::RecruitType::BUILDPOWER, Task::Priority::HIGH, buildDef, pos, 64.f));
+		if (task !is null)
+			CommanderFactoryAssist::Track(unit, buildDef);
+		return task;
 	}
 
 	return null;
@@ -293,8 +300,10 @@ void AiUnitAdded(CCircuitUnit@ unit, Unit::UseAs usage)
 
 void AiUnitRemoved(CCircuitUnit@ unit, Unit::UseAs usage)
 {
-	if (usage == Unit::UseAs::FACTORY)
+	if (usage == Unit::UseAs::FACTORY) {
+		CommanderFactoryAssist::ForgetFactory(unit.id);
 		TeamRole::ApplyEconomyBias();
+	}
 }
 
 void AiLoad(IStream& istream)

@@ -1,4 +1,5 @@
 #include "../helper/factory_exit_reclaim.as"
+#include "../helper/commander_factory_assist.as"
 #include "../helper/commander_mex_travel.as"
 #include "../helper/legion_mex_upgrade.as"
 #include "../helper/role/role.as"
@@ -39,6 +40,10 @@ IUnitTask@ AiMakeTask(CCircuitUnit@ unit)
 // 			break;
 // 		}
 // 	}
+	IUnitTask@ commanderAssistTask = CommanderFactoryAssist::MakeTask(unit);
+	if (commanderAssistTask !is null)
+		return commanderAssistTask;
+
 //  return task;
 	IUnitTask@ task = aiBuilderMgr.DefaultMakeTask(unit);
 	if (CommanderMexTravel::ShouldReject(task, unit))
@@ -158,6 +163,7 @@ void OnMessage(const string& in data)
 
 void UnitFinished(CCircuitUnit@ unit)
 {
+	CommanderFactoryAssist::OnUnitFinished(unit);
 	LegionMexUpgradeFilter::OnUnitFinished(unit);
 	FactoryExitReclaim::Track(unit);
 	T1FactoryReclaim::Track(unit);
