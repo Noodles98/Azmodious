@@ -86,9 +86,9 @@
 		"geo": {
 			"armgeo": {
 				"hub": [[
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
-					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					{"unit": "armbeamer", "category": "defence", "offset": {"front": 64}, "priority": "normal"}
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
+					{"unit": "armnanotc", "category": "nano", "offset": {"back": 10}, "priority": "normal"},
 					]]
 			}
 		},
@@ -184,11 +184,8 @@
 			}
 		},
 		"mex": {
-			"armmex": {
-				"porc": true,
-				"hub": [[]]
-			},
-			"armmoho": {"porc": false},
+			"armmex": {"porc": true},
+			"armmoho": {"porc": true},
 			"armuwmme": {"porc": false}
 		},
 		"store": {

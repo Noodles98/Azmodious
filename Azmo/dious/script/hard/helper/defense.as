@@ -1,12 +1,12 @@
 namespace DefenseHelpers {
 
-const float EXTRA_DEFENCE_PRESSURE_MIN = 16.0f;
-const float EXTRA_DEFENCE_METAL_INCOME_MIN = 16.0f;
-
 bool ShouldBuildExtraDefence()
 {
-	return (aiEnemyMgr.mobileThreat >= EXTRA_DEFENCE_PRESSURE_MIN)
-		&& (aiEconomyMgr.metal.income >= EXTRA_DEFENCE_METAL_INCOME_MIN);
+	// The role policy deliberately uses OR: an early sighting needs a cheap
+	// response even before the economy reaches its normal expansion income.
+	// Do not add a global affordability gate here; it previously overrode all
+	// role thresholds and delayed every response until the attack was underway.
+	return TeamRole::ShouldMakeDefence();
 }
 
 }  // namespace DefenseHelpers

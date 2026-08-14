@@ -12,7 +12,7 @@
 		},
 		"land":  [0, 2, 5, 19, 3, 19, 6, 14, 19, 14, 8, 19, 19, 17, 15, 19, 19, 19, 13, 13, 20, 20, 21, 21],
 		"water": [1, 1, 19, 1, 4, 9, 10, 9, 10],
-		"prevent": 1,
+		"prevent": 2,
 		"amount": {
 			"offset": [-2.0, 2.0],
 			"factor": [48.0, 32.0],
@@ -179,10 +179,7 @@
 			}
 		},
 		"mex": {
-			"cormex": {
-				"porc": true,
-				"hub": [[]]
-			},
+			"cormex": {"porc": true},
 			"cormoho": {"porc": false},
 			"coruwmme": {"porc": false}
 		},
