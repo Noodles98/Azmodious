@@ -42,7 +42,7 @@
 
 	"goal_exec": 60.0,
 
-	"build_mod": 1800.0,
+	"build_mod": 100.0,
 
 	"eps_step": 0.35,
 

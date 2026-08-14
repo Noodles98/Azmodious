@@ -10,7 +10,7 @@ const float PUSH_START_RADIUS = 415.f;
 const float PUSH_MAX_RADIUS = 565.f;
 const float PUSH_RATIO = 4.22f;
 const uint MAX_FRONTLINE_ANCHORS = 3;
-const int ENEMY_MEMORY_EXPIRE = 90 * SECOND;
+const int ENEMY_MEMORY_EXPIRE = 180 * SECOND;
 
 array<AIFloat3> candidatePositions;
 array<uint> candidateHits;
